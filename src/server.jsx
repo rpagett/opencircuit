@@ -33,30 +33,22 @@ function dispatchReactRoute(req, res) {
     }
     else if (renderProps) {
       const routerComponent = renderToString(<RouterContext { ...renderProps } />);
-      const HTML = `
-        <html>
+      const HTML = `<html>
         <head>
-
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
           <title>OpenCircuit</title>
-
           <link rel="stylesheet" href="/css/app.min.css" />
           <link rel="shortcut icon" href="/assets/img/favicon.ico" />
         </head>
         <body>
-
           <div className="container-fluid" id="react-container">
-            ${routerComponent}
-          </div>
-
-          <script type="text/javascript" src="/js/vendor.js" />
-          <script type="text/javascript" src="/js/bundle.js" />
-          <script type="text/javascript" src="/js/bootstrap.js" />
-
+          <div>${routerComponent}</div></div>
+          <script type="text/javascript" src="/js/vendor.js"></script>
+          <script type="text/javascript" src="/js/bundle.js"></script>
+          <script type="text/javascript" src="/js/bootstrap.js"></script>
         </body>
-        </html>
-      `;
+        </html>`;
 
       res.status(200).send(HTML);
     }

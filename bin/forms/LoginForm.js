@@ -36,7 +36,7 @@ var LoginForm = function (_React$Component) {
       // AJAX Login logic here
       console.log("We'll also do some validation.");
       console.log(e);
-      e.stopPropagation();
+      e.preventDefault();
       return;
     }
   }, {

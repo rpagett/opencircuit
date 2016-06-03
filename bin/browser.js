@@ -12,4 +12,4 @@ var _routes = require('./routing/routes');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_routes.AppRouter, null), document);
+_reactDom2.default.render(_react2.default.createElement(_routes.AppRouter, null), document.getElementById('react-container'));

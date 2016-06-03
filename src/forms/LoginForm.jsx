@@ -6,7 +6,7 @@ export default class LoginForm extends React.Component {
     // AJAX Login logic here
     console.log("We'll also do some validation.");
     console.log(e);
-    e.stopPropagation();
+    e.preventDefault();
     return;
   }
 

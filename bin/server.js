@@ -44,7 +44,10 @@ function dispatchReactRoute(req, res) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      res.status(200).send((0, _server.renderToString)(_react2.default.createElement(_reactRouter.RouterContext, renderProps)));
+      var routerComponent = (0, _server.renderToString)(_react2.default.createElement(_reactRouter.RouterContext, renderProps));
+      var HTML = '<html>\n        <head>\n          <meta charSet="UTF-8" />\n          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />\n          <title>OpenCircuit</title>\n          <link rel="stylesheet" href="/css/app.min.css" />\n          <link rel="shortcut icon" href="/assets/img/favicon.ico" />\n        </head>\n        <body>\n          <div className="container-fluid" id="react-container">\n          <div>' + routerComponent + '</div></div>\n          <script type="text/javascript" src="/js/vendor.js"></script>\n          <script type="text/javascript" src="/js/bundle.js"></script>\n          <script type="text/javascript" src="/js/bootstrap.js"></script>\n        </body>\n        </html>';
+
+      res.status(200).send(HTML);
     } else {
       res.status(404).send('Not found');
     }
