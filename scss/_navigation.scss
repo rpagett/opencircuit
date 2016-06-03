@@ -1,0 +1,14 @@
+@include media-breakpoint-down(sm) {
+  .navbar-nav .nav-item + .nav-item {
+    margin-left: 0
+  }
+  .navbar-nav .nav-item {
+    //float: none;
+    display: block;
+  }
+}
+
+.nav-logo {
+  height: 3rem;
+  padding-left: .6rem;
+}

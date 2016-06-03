@@ -1,0 +1,31 @@
+.bg-nav {
+  background-color: #EEEEEE;
+}
+
+.content-container {
+  width: 100%;
+  min-height: 100%;
+}
+
+.app-container {
+  min-height: 100%;
+}
+
+.vcenter-parent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.light-shadow {
+  box-shadow: 0 0 .5rem #676767;
+}
+
+body {
+  //background-image: url('/assets/img/contemporary_china.png');
+  font-family: Lato, Helvetica, sans-serif;
+  background: repeating-linear-gradient(-45deg, #F1F1F1, #F1F1F1 .3rem, white .5rem, white 1.5rem);
+  min-height: 100%;
+  height: 100% !important;
+}
