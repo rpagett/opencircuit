@@ -5,17 +5,22 @@
 .content-container {
   width: 100%;
   min-height: 100%;
+  padding: 1rem;
+  padding-top: 6rem;
+  background-color: #FBFBFB;
 }
 
 .app-container {
   min-height: 100%;
 }
 
-.vcenter-parent {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+@include media-breakpoint-up(sm) {
+  .vcenter-parent {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .light-shadow {
@@ -28,4 +33,8 @@ body {
   background: repeating-linear-gradient(-45deg, #F1F1F1, #F1F1F1 .3rem, white .5rem, white 1.5rem);
   min-height: 100%;
   height: 100% !important;
+}
+
+.auth-card {
+  padding: .8rem;
 }

@@ -13,11 +13,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _components = require('../helpers/components');
+var _Icon = require('../components/helpers/Icon');
+
+var _Icon2 = _interopRequireDefault(_Icon);
 
 var _LoginForm = require('../forms/LoginForm');
-
-var _LoginForm2 = _interopRequireDefault(_LoginForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48,7 +48,7 @@ var Login = exports.Login = function (_React$Component) {
           _react2.default.createElement('img', { className: 'card-img-top', src: '/assets/img/NavbarLogo.png' }),
           _react2.default.createElement(
             'div',
-            { className: 'container-fluid card-info card-inverse', style: { 'padding': '.8rem' } },
+            { className: 'container-fluid card-info card-inverse auth-card' },
             _react2.default.createElement(
               'strong',
               { className: 'h5' },
@@ -59,7 +59,7 @@ var Login = exports.Login = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'card-block' },
-          _react2.default.createElement(_LoginForm2.default, null)
+          _react2.default.createElement(_LoginForm.LoginForm, null)
         ),
         _react2.default.createElement(
           'div',
@@ -69,21 +69,21 @@ var Login = exports.Login = function (_React$Component) {
             { className: 'row' },
             _react2.default.createElement(
               'div',
-              { className: 'col-sm-6' },
+              { className: 'col-xs-12 col-sm-6 pull-xs-center' },
               _react2.default.createElement(
                 _reactRouter.Link,
                 { to: '/auth/register', className: 'btn btn-link' },
-                _react2.default.createElement(_components.Icon, { shape: 'plus' }),
+                _react2.default.createElement(_Icon2.default, { shape: 'plus' }),
                 ' Register Account'
               )
             ),
             _react2.default.createElement(
               'div',
-              { className: 'col-sm-6' },
+              { className: 'col-xs-12 col-sm-6 pull-xs-center' },
               _react2.default.createElement(
                 _reactRouter.Link,
                 { to: '/auth/recover', className: 'btn btn-link' },
-                _react2.default.createElement(_components.Icon, { shape: 'question' }),
+                _react2.default.createElement(_Icon2.default, { shape: 'question' }),
                 ' Forgot Password'
               )
             )

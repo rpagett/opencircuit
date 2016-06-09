@@ -1,30 +1,13 @@
 $enable_flex: true;
 @import '_variables.scss';
-@import "../node_modules/bootstrap/scss/bootstrap-flex";
-@import "../node_modules/tether/dist/css/tether";
+@import '../node_modules/bootstrap/scss/bootstrap-flex';
+@import '../node_modules/tether/dist/css/tether';
 
-@import "./_navigation.scss";
-@import "./_containers.scss";
-@import "./_fonts.scss";
+@import './_navigation.scss';
+@import './_containers.scss';
+@import './_fonts.scss';
+@import './_forms.scss';
+@import './_progress-button';
 
-$fa_font_path: "../assets/fonts/";
-@import "../node_modules/font-awesome/scss/font-awesome";
-
-.content-container {
-  padding: 1rem;
-  padding-top: 6rem;
-  background-color: #FBFBFB;
-}
-
-.flex-nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.flex-nav > .nav-link {
-  padding-top: .7rem;
-  padding-left: .7rem;
-  font-family: Montserrat;
-  font-size: 1rem;
-}
+$fa_font_path: '../assets/fonts/';
+@import '../node_modules/font-awesome/scss/font-awesome';

@@ -13,6 +13,7 @@ var babelify = require('babelify');
 var dependencies = [
   'react',
   'react-dom',
+  'react-addons-css-transition-group',
   './node_modules/tether/dist/js/tether.min.js'
 ];
 // keep a count of the times a task refires
@@ -78,16 +79,16 @@ function bundleApp(isProduction) {
     })
   }
 
-  gulp.src([
-      'node_modules/jquery/dist/jquery.min.js',
-      'node_modules/tether/dist/js/tether.min.js',
-      'node_modules/bootstrap/dist/js/bootstrap.min.js'],
-    {base: './node_modules/'})
-    .pipe(plugins.concat('bootstrap.js'))
-    .on('error', gutil.log)
-    .pipe(plugins.uglify())
-    .pipe(plugins.rename('bootstrap.js'))
-    .pipe(gulp.dest('./dist/js/'));
+  //gulp.src([
+  //    'node_modules/jquery/dist/jquery.min.js',
+  //    'node_modules/tether/dist/js/tether.min.js',
+  //    'node_modules/bootstrap/dist/js/bootstrap.min.js'],
+  //  {base: './node_modules/'})
+  //  .pipe(plugins.concat('bootstrap.js'))
+  //  .on('error', gutil.log)
+  //  .pipe(plugins.uglify())
+  //  .pipe(plugins.rename('bootstrap.js'))
+  //  .pipe(gulp.dest('./dist/js/'));
 
   gulp.src('./src/**/*.jsx')
     .pipe(plugins.babel({
@@ -107,8 +108,7 @@ function bundleApp(isProduction) {
     .bundle()
     .on('error', gutil.log)
     .pipe(source('bundle.js'))
-    .pipe(gulp.dest('./dist/js/'))
-    .pipe(plugins.notify('Finished building.'));
+    .pipe(gulp.dest('./dist/js/'));
 }
 
 var dest = 'dist/';

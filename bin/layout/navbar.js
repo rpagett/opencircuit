@@ -12,7 +12,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _components = require('../helpers/components');
+var _Icon = require('../components/helpers/Icon');
+
+var _Icon2 = _interopRequireDefault(_Icon);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40,7 +42,7 @@ var NavBar = function (_React$Component) {
         _react2.default.createElement(
           'button',
           { className: 'navbar-toggler hidden-sm-up pull-xs-right', type: 'button', 'data-toggle': 'collapse', 'data-target': '#collapsingNav' },
-          _react2.default.createElement(_components.Icon, { shape: 'bars' })
+          _react2.default.createElement(_Icon2.default, { shape: 'bars' })
         ),
         _react2.default.createElement(
           'div',
@@ -63,8 +65,20 @@ var NavBar = function (_React$Component) {
               _react2.default.createElement(
                 _reactRouter.Link,
                 { to: '/', className: 'nav-item nav-link pull-xs-none' },
-                _react2.default.createElement(_components.Icon, { shape: 'home' }),
-                ' Dashboard'
+                _react2.default.createElement(_Icon2.default, { shape: 'home' }),
+                '  ',
+                'Dashboard'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              { className: 'nav-item pull-xs-none' },
+              _react2.default.createElement(
+                _reactRouter.Link,
+                { to: '/events', className: 'nav-item nav-link pull-xs-none' },
+                _react2.default.createElement(_Icon2.default, { shape: 'trophy' }),
+                '  ',
+                'Events'
               )
             )
           )

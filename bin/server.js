@@ -4,6 +4,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _redux = require('redux');
+
+var _reactRedux = require('react-redux');
+
 var _server = require('react-dom/server');
 
 var _connectFlash = require('connect-flash');
@@ -14,26 +18,94 @@ var _expressSession = require('express-session');
 
 var _expressSession2 = _interopRequireDefault(_expressSession);
 
+var _bodyParser = require('body-parser');
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _mongoose = require('mongoose');
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _passport = require('passport');
+
+var _passport2 = _interopRequireDefault(_passport);
+
+var _passportLocal = require('passport-local');
+
+var _passportLocal2 = _interopRequireDefault(_passportLocal);
+
 var _reactRouter = require('react-router');
 
 var _routes = require('./routing/routes');
+
+var _redux2 = require('./redux');
+
+var _AuthActions = require('./actions/AuthActions');
+
+var _UserModel = require('./models/UserModel');
+
+var _UserModel2 = _interopRequireDefault(_UserModel);
+
+var _AuthRouter = require('./routing/AuthRouter');
+
+var _AuthRouter2 = _interopRequireDefault(_AuthRouter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var express = require('express');
 var app = express();
 
+// Frameworks and Dependencies
+
+var MongoStore = require('connect-mongo')(_expressSession2.default);
+var notifier = require('node-notifier');
+
+// Client Routing
+
+
+// Models and Repos
+
+
+// API Endpoints
+
+
 app.use(express.static('dist'));
 
+_mongoose2.default.connect('mongodb://localhost/opencircuit');
+
+app.use(_bodyParser2.default.json());
+app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use((0, _expressSession2.default)({
-  genid: function genid(req) {
-    return require('crypto').randomBytes(48).toString('hex');
-  },
   secret: 'asdlfkj243@#R@#POFSDfic',
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: _mongoose2.default.connection
+  })
 }));
 app.use((0, _connectFlash2.default)());
+
+_passport2.default.use(_UserModel2.default.createStrategy());
+
+_passport2.default.serializeUser(function (user, done) {
+  console.log('SERIALIZING');
+  done(null, user.id);
+});
+
+_passport2.default.deserializeUser(function (user_id, done) {
+  console.log('DESERIALIZING! ID is ', user_id);
+  _UserModel2.default.findById(user_id, function (err, user) {
+    if (err) {
+      return done(err);
+    }
+    done(null, user);
+  });
+});
+
+app.use(_passport2.default.initialize());
+app.use(_passport2.default.session());
+
+var appStore = (0, _redux.createStore)(_redux2.appReducers);
 
 function dispatchReactRoute(req, res) {
   // Note that req.url here should be the full URL path from
@@ -44,8 +116,13 @@ function dispatchReactRoute(req, res) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      var routerComponent = (0, _server.renderToString)(_react2.default.createElement(_reactRouter.RouterContext, renderProps));
-      var HTML = '<html>\n        <head>\n          <meta charSet="UTF-8" />\n          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />\n          <title>OpenCircuit</title>\n          <link rel="stylesheet" href="/css/app.min.css" />\n          <link rel="shortcut icon" href="/assets/img/favicon.ico" />\n        </head>\n        <body>\n          <div className="container-fluid" id="react-container">\n          <div>' + routerComponent + '</div></div>\n          <script type="text/javascript" src="/js/vendor.js"></script>\n          <script type="text/javascript" src="/js/bundle.js"></script>\n          <script type="text/javascript" src="/js/bootstrap.js"></script>\n        </body>\n        </html>';
+      var routerComponent = (0, _server.renderToString)(_react2.default.createElement(
+        _reactRedux.Provider,
+        { store: appStore },
+        _react2.default.createElement(_reactRouter.RouterContext, renderProps)
+      ));
+      var preloadedState = appStore.getState();
+      var HTML = '<html>\n        <head>\n          <meta charSet="UTF-8" />\n          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />\n          <title>OpenCircuit</title>\n          <link rel="stylesheet" href="/css/app.min.css" />\n          <link rel="shortcut icon" href="/assets/img/favicon.ico" />\n        </head>\n        <body>\n          <div className="container-fluid" id="react-container">\n            <div>' + routerComponent + '</div>\n          </div>\n          <script>\n            window.__PRELOADED_STATE__ = ' + JSON.stringify(preloadedState) + '\n          </script>\n          <script type="text/javascript" src="/js/vendor.js"></script>\n          <script type="text/javascript" src="/js/bundle.js"></script>\n        </body>\n        </html>';
 
       res.status(200).send(HTML);
     } else {
@@ -54,10 +131,36 @@ function dispatchReactRoute(req, res) {
   });
 }
 
+app.get('/maketheuser', function (req, res) {
+  _UserModel2.default.register(new _UserModel2.default({ email: 'riley@opencircuit.us' }), 'estiondf', function (err) {
+    if (err) {
+      console.log('error while user register!', err);
+      return next(err);
+    }
+
+    console.log('user registered!');
+
+    res.redirect('/');
+  });
+});
+
+app.use('/auth', _AuthRouter2.default);
+
 app.get('*', function (req, res) {
+  console.log(req.session);
+  if (req.user) {
+    appStore.dispatch((0, _AuthActions.loginUser)(req.user));
+  }
   dispatchReactRoute(req, res, _routes.AppRoutes);
 });
 
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
+
+  notifier.notify({
+    'title': 'OpenCircuit',
+    'message': 'Server is running with a new build.',
+    'icon': './dist/assets/img/favicon.ico',
+    'sound': 'Glass'
+  });
 });

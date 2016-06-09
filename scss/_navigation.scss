@@ -1,14 +1,23 @@
-@include media-breakpoint-down(sm) {
-  .navbar-nav .nav-item + .nav-item {
-    margin-left: 0
-  }
-  .navbar-nav .nav-item {
-    //float: none;
-    display: block;
-  }
-}
+//@include media-breakpoint-down(xs) {
+//  .navbar-nav .nav-item + .nav-item {
+//    margin-left: 0
+//  }
+//}
 
 .nav-logo {
   height: 3rem;
   padding-left: .6rem;
+}
+
+.flex-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-nav > .nav-link {
+  padding-top: .7rem;
+  padding-left: .7rem;
+  font-family: Montserrat;
+  font-size: 1rem;
 }

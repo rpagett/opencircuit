@@ -1,19 +1,73 @@
 import React from 'react';
-import { ValidatedForm, FormInput } from './components';
+import Formsy from 'formsy-react';
+import fetch from 'isomorphic-fetch';
+import { withRouter } from 'react-router';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-export default class LoginForm extends React.Component {
-  submit(e) {
-    // AJAX Login logic here
+import * as AuthActions from '../actions/AuthActions';
+import { FormInput, SubmitButton } from './components';
+import ProgressButton from '../components/helpers/ProgressButton';
+
+class _LoginForm extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      canSubmit: false,
+      buttonState: 'error'
+    }
+  }
+
+  submit(data, reset, errors) {
     console.log("We'll also do some validation.");
-    console.log(e);
-    e.preventDefault();
+    console.log(data);
+
+    this.setState({ buttonState: 'loading' });
+    fetch('/auth/login', {
+      credentials: 'same-origin',
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+      })
+    })
+    .then( response => {
+      return response.json();
+    })
+    .then( res => {
+      if (res.success == false) {
+        this.setState({ buttonState: 'error' });
+        return errors({
+          password: res.message
+        });
+      }
+      else if (res.success == true) {
+        this.setState({ buttonState: 'success' });
+        this.props.dispatchLogin(res.user);
+        this.props.router.push('/');
+      }
+      console.log(res);
+    });
+
     return;
   }
 
   render() {
     return (
-      <form
-        onSubmit={ this.submit }
+      <Formsy.Form
+        onValidSubmit={ this.submit.bind(this) }
+        onValid={ () => {
+          this.setState({ buttonState: '' });
+        }}
+        onInvalid={ () => {
+          this.setState({ buttonState: 'error' });
+        }}
+        noValidate="true"
       >
         <FormInput
           name="email"
@@ -24,8 +78,8 @@ export default class LoginForm extends React.Component {
           validationErrors={{
             isEmail: 'This doesn’t look like a valid email address.'
           }}
-          defaultValue=""
-          required=""
+          //defaultValue=""
+          required
         />
 
         <FormInput
@@ -33,16 +87,35 @@ export default class LoginForm extends React.Component {
           label="Password"
           inputType="password"
           placeholder="Enter your password."
-          defaultValue=""
-          required=""
+          validationHook="change"
+          //defaultValue=""
+          required
         />
 
         <div className="form-group row">
-          <button className="btn btn-success btn-block" type="submit">
+          <ProgressButton
+            type="submit"
+            ref="submit"
+            state={ this.state.buttonState }
+          >
             Log In
-          </button>
+          </ProgressButton>
         </div>
-      </form>
+      </Formsy.Form>
     );
   }
 };
+
+const mapStateToProps = (state, ownProps) => {
+  return { }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchLogin: (user) => {
+      dispatch(AuthActions.loginUser(user))
+    }
+  }
+}
+
+export const LoginForm = withRouter(connect(mapStateToProps, mapDispatchToProps)(_LoginForm));

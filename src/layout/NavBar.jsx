@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, IndexLink } from 'react-router';
-import { Icon } from '../helpers/components';
+import Icon from '../components/helpers/Icon';
 
 class NavBar extends React.Component {
   render() {
@@ -11,6 +11,7 @@ class NavBar extends React.Component {
         </button>
         <div className="collapse navbar-toggleable-xs navPadding" id="collapsingNav">
           <ul className="nav navbar-nav flex-nav">
+
             <li className="nav-item pull-xs-none">
               <Link to="/">
                 <img src="/assets/img/NavbarLogo.png" alt="OpenCircuit" className="nav-logo" />
@@ -19,9 +20,16 @@ class NavBar extends React.Component {
 
             <li className="nav-item pull-xs-none">
               <Link to="/" className="nav-item nav-link pull-xs-none">
-                <Icon shape="home" /> Dashboard
+                <Icon shape="home" />{'  '}Dashboard
               </Link>
             </li>
+
+            <li className="nav-item pull-xs-none">
+              <Link to="/events" className="nav-item nav-link pull-xs-none">
+                <Icon shape="trophy" />{'  '}Events
+              </Link>
+            </li>
+
           </ul>
         </div>
       </nav>
