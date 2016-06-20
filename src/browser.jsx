@@ -20,3 +20,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('react-container')
 );
+
+document.getElementById('injected-state').innerHTML = '';

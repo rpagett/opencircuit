@@ -1,13 +1,12 @@
 export const loginUser = (user) => {
   return {
     type: 'LOGIN_USER',
-    token: user._id
+    user: user
   }
 }
 
-export const logoutUser = (user) => {
+export const logoutUser = () => {
   return {
     type: 'LOGOUT_USER',
-    token: user._id
   }
 }

@@ -9,7 +9,7 @@ import * as AuthActions from '../actions/AuthActions';
 import { FormInput, SubmitButton } from './components';
 import ProgressButton from '../components/helpers/ProgressButton';
 
-class _LoginForm extends React.Component {
+class _RegistrationForm extends React.Component {
   constructor() {
     super();
 
@@ -36,23 +36,23 @@ class _LoginForm extends React.Component {
         password: data.password,
       })
     })
-    .then( response => {
-      return response.json();
-    })
-    .then( res => {
-      if (res.success == false) {
-        this.setState({ buttonState: 'error' });
-        return errors({
-          password: res.message
-        });
-      }
-      else if (res.success == true) {
-        this.setState({ buttonState: 'success' });
-        this.props.dispatchLogin(res.user);
-        this.props.router.push('/');
-      }
-      console.log(res);
-    });
+      .then( response => {
+        return response.json();
+      })
+      .then( res => {
+        if (res.success == false) {
+          this.setState({ buttonState: 'error' });
+          return errors({
+            password: res.message
+          });
+        }
+        else if (res.success == true) {
+          this.setState({ buttonState: 'success' });
+          this.props.dispatchLogin(res.user);
+          this.props.router.push('/');
+        }
+        console.log(res);
+      });
 
     return;
   }
@@ -112,11 +112,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchLogin: (user) => {
-      dispatch(AuthActions.loginUser(user))
-    }
+    //dispatchLogin: (user) => {
+    //  dispatch(AuthActions.loginUser(user))
+    //}
   }
 }
 
-const LoginForm = withRouter(connect(mapStateToProps, mapDispatchToProps)(_LoginForm));
-export default LoginForm;
+const RegistrationForm = withRouter(connect(mapStateToProps, mapDispatchToProps)(_RegistrationForm));
+export default RegistrationForm;

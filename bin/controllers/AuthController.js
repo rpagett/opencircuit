@@ -8,10 +8,6 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
-var _passport = require('passport');
-
-var _passport2 = _interopRequireDefault(_passport);
-
 var _UserModel = require('../models/UserModel');
 
 var _UserModel2 = _interopRequireDefault(_UserModel);

@@ -6,13 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 var loginUser = exports.loginUser = function loginUser(user) {
   return {
     type: 'LOGIN_USER',
-    token: user._id
+    user: user
   };
 };
 
-var logoutUser = exports.logoutUser = function logoutUser(user) {
+var logoutUser = exports.logoutUser = function logoutUser() {
   return {
-    type: 'LOGOUT_USER',
-    token: user._id
+    type: 'LOGOUT_USER'
   };
 };

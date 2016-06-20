@@ -93,7 +93,7 @@ function dispatchReactRoute(req, res) {
           <div className="container-fluid" id="react-container">
             <div>${routerComponent}</div>
           </div>
-          <script>
+          <script id="injected-state">
             window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
           </script>
           <script type="text/javascript" src="/js/vendor.js"></script>

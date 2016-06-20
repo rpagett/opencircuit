@@ -1,8 +1,8 @@
 import Express from 'express';
 
-import EventController from './UserController';
+import EventController from './EventController';
 
-let router = Express.router();
+let router = Express.Router();
 
 router.use('/events/', EventController);
 

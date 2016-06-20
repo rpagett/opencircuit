@@ -31,3 +31,5 @@ _reactDom2.default.render(_react2.default.createElement(
   { store: appStore },
   _react2.default.createElement(_routes.AppRouter, null)
 ), document.getElementById('react-container'));
+
+document.getElementById('injected-state').innerHTML = '';
