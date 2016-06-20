@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 
 import { AppRouter } from './routing/routes';
 import { appReducers } from './redux';
-import { expandUser } from './actions/AuthActions';
 
 // Bootstrap for Browserify
 global.jQuery = require('jquery');
@@ -14,8 +13,6 @@ require('bootstrap');
 
 const preloadedState = window.__PRELOADED_STATE__
 const appStore = createStore(appReducers, preloadedState)
-
-//appStore.dispatch(expandUser(appStore.getState().auth.token));
 
 ReactDOM.render(
   <Provider store={ appStore }>

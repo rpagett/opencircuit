@@ -1,5 +1,4 @@
 import Express from 'express';
-import Passport from 'passport';
 
 import User from '../models/UserModel';
 import { loginUser } from '../actions/AuthActions';

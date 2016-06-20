@@ -25,7 +25,8 @@ import { loginUser } from './actions/AuthActions';
 import User from './models/UserModel';
 
 // API Endpoints
-import AuthRouter from './routing/AuthRouter';
+import AuthController from './controllers/AuthController';
+import APIDispatch from './controllers/APIDispatch';
 
 app.use(express.static('dist'));
 
@@ -121,7 +122,8 @@ app.get('/maketheuser', (req, res) => {
   });
 });
 
-app.use('/auth', AuthRouter);
+app.use('/api', APIDispatch);
+app.use('/auth', AuthController);
 
 app.get('*', (req, res) => {
   console.log(req.session);

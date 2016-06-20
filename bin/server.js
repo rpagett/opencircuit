@@ -46,9 +46,13 @@ var _UserModel = require('./models/UserModel');
 
 var _UserModel2 = _interopRequireDefault(_UserModel);
 
-var _AuthRouter = require('./routing/AuthRouter');
+var _AuthController = require('./controllers/AuthController');
 
-var _AuthRouter2 = _interopRequireDefault(_AuthRouter);
+var _AuthController2 = _interopRequireDefault(_AuthController);
+
+var _APIDispatch = require('./controllers/APIDispatch');
+
+var _APIDispatch2 = _interopRequireDefault(_APIDispatch);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -144,7 +148,8 @@ app.get('/maketheuser', function (req, res) {
   });
 });
 
-app.use('/auth', _AuthRouter2.default);
+app.use('/api', _APIDispatch2.default);
+app.use('/auth', _AuthController2.default);
 
 app.get('*', function (req, res) {
   console.log(req.session);
