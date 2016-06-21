@@ -12,9 +12,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
+var _reactRedux = require('react-redux');
+
 var _Icon = require('../helpers/Icon');
 
 var _Icon2 = _interopRequireDefault(_Icon);
+
+var _gravatars = require('../helpers/gravatars');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24,8 +28,63 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var NavBar = function (_React$Component) {
-  _inherits(NavBar, _React$Component);
+var _UserDropdown = function (_React$Component) {
+  _inherits(_UserDropdown, _React$Component);
+
+  function _UserDropdown() {
+    _classCallCheck(this, _UserDropdown);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_UserDropdown).apply(this, arguments));
+  }
+
+  _createClass(_UserDropdown, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'nav-item right dropdown' },
+        _react2.default.createElement(
+          'a',
+          { className: 'user-dropdown nav-link dropdown-toggle', 'data-toggle': 'dropdown', href: '#', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+          _react2.default.createElement(_gravatars.MiniGravatar, { email: this.props.user.email }),
+          '  ' + this.props.user.formattedName
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'dropdown-menu' },
+          _react2.default.createElement(
+            'a',
+            { className: 'dropdown-item', href: '#' },
+            'View Profile'
+          ),
+          _react2.default.createElement('div', { className: 'dropdown-divider' }),
+          _react2.default.createElement(
+            'a',
+            { className: 'dropdown-item', href: '/auth/logout' },
+            'Log Out'
+          )
+        )
+      );
+    }
+  }]);
+
+  return _UserDropdown;
+}(_react2.default.Component);
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    user: state.auth.user
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+
+var UserDropdown = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_UserDropdown);
+
+var NavBar = function (_React$Component2) {
+  _inherits(NavBar, _React$Component2);
 
   function NavBar() {
     _classCallCheck(this, NavBar);
@@ -48,10 +107,10 @@ var NavBar = function (_React$Component) {
           'div',
           { className: 'collapse navbar-toggleable-xs navPadding', id: 'collapsingNav' },
           _react2.default.createElement(
-            'ul',
+            'div',
             { className: 'nav navbar-nav flex-nav' },
             _react2.default.createElement(
-              'li',
+              'div',
               { className: 'nav-item' },
               _react2.default.createElement(
                 _reactRouter.Link,
@@ -60,29 +119,29 @@ var NavBar = function (_React$Component) {
               )
             ),
             _react2.default.createElement(
-              'li',
+              'div',
               { className: 'nav-item' },
               _react2.default.createElement(
                 _reactRouter.Link,
-                { to: '/', className: 'nav-link' },
+                { to: '/', className: 'nav-link', activeClassName: 'active' },
                 _react2.default.createElement(_Icon2.default, { shape: 'home' }),
                 '  ',
                 'Dashboard'
               )
             ),
             _react2.default.createElement(
-              'li',
+              'div',
               { className: 'nav-item' },
               _react2.default.createElement(
                 _reactRouter.Link,
-                { to: '/events', className: 'nav-link' },
+                { to: '/events', className: 'nav-link', activeClassName: 'active' },
                 _react2.default.createElement(_Icon2.default, { shape: 'trophy' }),
                 '  ',
                 'Events'
               )
             ),
             _react2.default.createElement(
-              'li',
+              'div',
               { className: 'nav-item dropdown' },
               _react2.default.createElement(
                 'a',
@@ -116,16 +175,8 @@ var NavBar = function (_React$Component) {
                   'Separated link'
                 )
               )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'nav-item pull-sm-right pull-xs-none' },
-            _react2.default.createElement(
-              _reactRouter.Link,
-              { to: '/auth/logout', className: 'nav-link' },
-              'Logout'
-            )
+            ),
+            _react2.default.createElement(UserDropdown, null)
           )
         )
       );

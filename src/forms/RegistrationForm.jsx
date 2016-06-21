@@ -96,7 +96,7 @@ class _RegistrationForm extends React.Component {
         />
 
         <FormInput
-          name="password-verify"
+          name="password_verify"
           label="Verify Password"
           inputType="password"
           placeholder="Enter your password again."
@@ -110,7 +110,7 @@ class _RegistrationForm extends React.Component {
         <hr />
 
         <FormInput
-          name="first-name"
+          name="first_name"
           label="First Name"
           inputType="text"
           validationHook="change"
@@ -130,7 +130,7 @@ class _RegistrationForm extends React.Component {
         />
 
         <FormInput
-          name="last-name"
+          name="last_name"
           label="Last Name"
           inputType="text"
           validationHook="change"
@@ -154,7 +154,7 @@ class _RegistrationForm extends React.Component {
         />
 
         <FormInput
-          name="address-2"
+          name="address_2"
           label="Address 2 (opt.)"
           inputType="text"
         />

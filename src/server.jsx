@@ -36,7 +36,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(session({
   secret: 'asdlfkj243@#R@#POFSDfic',
-  resave: true,
+  resave: false,
   saveUninitialized: false,
   store: new MongoStore({
     mongooseConnection: Mongoose.connection

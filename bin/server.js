@@ -81,7 +81,7 @@ app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use((0, _expressSession2.default)({
   secret: 'asdlfkj243@#R@#POFSDfic',
-  resave: true,
+  resave: false,
   saveUninitialized: false,
   store: new MongoStore({
     mongooseConnection: _mongoose2.default.connection

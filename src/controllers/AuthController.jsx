@@ -34,10 +34,11 @@ router.post('/register', (req, res) => {
   const rules = {
     'email': 'required|email',
     'password': 'required',
-    'password-verify': 'required|same:password',
-    'first-name': ['required', 'regex:^[a-zA-Z\.\s]+$'],
+    'password_verify': 'required|same:password',
+    'first_name': ['required', 'regex:^[a-zA-Z\.\s]+$'],
     'mi': 'max:1',
-    'last-name': ['required', 'regex:^[a-zA-Z\-\s]+$'],
+    'last_name': ['required', 'regex:^[a-zA-Z\-\s]+$'],
+    'phone': 'required',
     'street': 'required',
     'city': 'required',
     'state': 'required|min:2|max:2|alpha',
@@ -45,8 +46,8 @@ router.post('/register', (req, res) => {
   };
 
   const messages = {
-    'first-name.regex': 'Your first name may only contain letters and spaces.',
-    'last-name.regex': 'Your last name may only contain letters, spaces, and dashes.',
+    'first_name.regex': 'Your first name may only contain letters and spaces.',
+    'last_name.regex': 'Your last name may only contain letters, spaces, and dashes.',
     'zip.regex': 'Please supply a 5-digit ZIP.'
   };
 
@@ -55,7 +56,7 @@ router.post('/register', (req, res) => {
   Indicative
     .validate(data, rules, messages)
     .then(() => {
-      return User.register(new User({email: req.body.email}), req.body.password, (err, user) => {
+      User.register(new User({email: req.body.email}), req.body.password, (err, user) => {
         if (err) {
           res.send({
             success: false,
@@ -64,12 +65,26 @@ router.post('/register', (req, res) => {
         }
         else {
           console.log('user registered!');
-          req.login(user, function (err) {
-            res.send({
-              success: true,
-              user: user
+
+          const {first_name, mi, last_name, phone, street, address_2, city, state, zip} = req.body;
+          user.first_name = first_name;
+          user.mi = mi;
+          user.last_name = last_name;
+          user.phone = phone;
+          user.street = street;
+          user.address_2 = address_2;
+          user.city = city;
+          user.state = state;
+          user.zip = zip;
+
+          user.save().then((user) => {
+            req.login(user, function (err) {
+              res.send({
+                success: true,
+                user: user
+              });
             });
-          });
+          })
         }
       });
     })
@@ -85,8 +100,10 @@ router.post('/register', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/auth/login');
+  req.session.destroy(() => {
+    req.logout();
+    res.redirect('/auth/login');
+  });
 });
 
 export default router;

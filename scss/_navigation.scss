@@ -21,7 +21,7 @@
     float: none;
   }
 
-  li.dropdown.open > .dropdown-menu {
+  .dropdown.open > .dropdown-menu {
     margin: 0 1rem 1rem 1rem;
   }
 
@@ -34,6 +34,11 @@
   .collapse {
     display: block !important;
   }
+}
+
+.nav-item.right {
+  margin-left: auto !important;
+  padding-right: 1rem;
 }
 
 .dropdown .dropdown-menu {
@@ -52,6 +57,10 @@
 .dropdown.open .dropdown-menu {
   max-height: 100rem;
   opacity: 1;
+}
+
+.user-dropdown {
+  color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .nav-logo {

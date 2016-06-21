@@ -2,20 +2,35 @@ import Mongoose from 'mongoose';
 import PassportLocalMongoose from 'passport-local-mongoose';
 
 const UserSchema = new Mongoose.Schema({
-  first_name:     String,
-  last_name:      String,
-  middle_initial: String,
+  first_name: String,
+  last_name: String,
+  mi: String,
+  phone: String,
+  street: String,
+  address_2: String,
+  city: String,
+  state: {
+    type: String,
+    minlength: 2,
+    maxlength: 5,
+  },
+  zip: {
+    type: String,
+    minlength: 5,
+    maxlength: 5
+  }
 }, {
-  timestamps:     true
+  timestamps: true,
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
 });
 
 UserSchema.virtual('formattedName').get(function() {
-  if (this.middle_initial) {
-    return this.first_name + ' ' + this.middle_initial +
-      '. ' + this.last_name;
-  }
-
-  return this.first_name + ' ' + this.last_name;
+  return this.first_name + ' ' + (this.mi ? this.mi + '. ' : '') + this.last_name;
 });
 
 UserSchema.plugin(PassportLocalMongoose, {

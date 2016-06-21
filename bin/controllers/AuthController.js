@@ -50,10 +50,11 @@ router.post('/register', function (req, res) {
   var rules = {
     'email': 'required|email',
     'password': 'required',
-    'password-verify': 'required|same:password',
-    'first-name': ['required', 'regex:^[a-zA-Z\.\s]+$'],
+    'password_verify': 'required|same:password',
+    'first_name': ['required', 'regex:^[a-zA-Z\.\s]+$'],
     'mi': 'max:1',
-    'last-name': ['required', 'regex:^[a-zA-Z\-\s]+$'],
+    'last_name': ['required', 'regex:^[a-zA-Z\-\s]+$'],
+    'phone': 'required',
     'street': 'required',
     'city': 'required',
     'state': 'required|min:2|max:2|alpha',
@@ -61,15 +62,15 @@ router.post('/register', function (req, res) {
   };
 
   var messages = {
-    'first-name.regex': 'Your first name may only contain letters and spaces.',
-    'last-name.regex': 'Your last name may only contain letters, spaces, and dashes.',
+    'first_name.regex': 'Your first name may only contain letters and spaces.',
+    'last_name.regex': 'Your last name may only contain letters, spaces, and dashes.',
     'zip.regex': 'Please supply a 5-digit ZIP.'
   };
 
   var data = req.body;
 
   _indicative2.default.validate(data, rules, messages).then(function () {
-    return _UserModel2.default.register(new _UserModel2.default({ email: req.body.email }), req.body.password, function (err, user) {
+    _UserModel2.default.register(new _UserModel2.default({ email: req.body.email }), req.body.password, function (err, user) {
       if (err) {
         res.send({
           success: false,
@@ -77,10 +78,34 @@ router.post('/register', function (req, res) {
         });
       } else {
         console.log('user registered!');
-        req.login(user, function (err) {
-          res.send({
-            success: true,
-            user: user
+
+        var _req$body = req.body;
+        var first_name = _req$body.first_name;
+        var mi = _req$body.mi;
+        var last_name = _req$body.last_name;
+        var phone = _req$body.phone;
+        var street = _req$body.street;
+        var address_2 = _req$body.address_2;
+        var city = _req$body.city;
+        var state = _req$body.state;
+        var zip = _req$body.zip;
+
+        user.first_name = first_name;
+        user.mi = mi;
+        user.last_name = last_name;
+        user.phone = phone;
+        user.street = street;
+        user.address_2 = address_2;
+        user.city = city;
+        user.state = state;
+        user.zip = zip;
+
+        user.save().then(function (user) {
+          req.login(user, function (err) {
+            res.send({
+              success: true,
+              user: user
+            });
           });
         });
       }
@@ -97,8 +122,10 @@ router.post('/register', function (req, res) {
 });
 
 router.get('/logout', function (req, res) {
-  req.logout();
-  res.redirect('/auth/login');
+  req.session.destroy(function () {
+    req.logout();
+    res.redirect('/auth/login');
+  });
 });
 
 exports.default = router;

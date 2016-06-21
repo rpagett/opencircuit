@@ -10,32 +10,32 @@ import * as AuthView from '../views/AuthViews';
 
 export function getAppRoutes(store) {
 
-  function authOnly(nextState, replaceState) {
+  function authOnly(nextState, replace) {
     const authUser = store.getState().auth.user;
 
     if (!authUser) {
-      replaceState(null, '/auth/login');
+      replace('/auth/login');
     }
   }
 
-  function guestOnly(nextState, replaceState) {
+  function guestOnly(nextState, replace) {
     const authUser = store.getState().auth.user;
 
     if (authUser) {
-      replaceState(null, '/');
+      replace('/');
     }
   }
 
   const AppRoutes = (
     <Route path="/" component={ AppTemplate }>
 
-      <Route component={ App }>
+      <Route component={ App } onEnter={ authOnly }>
         <IndexRoute component={ RootView.Home }/>
         <Route path="about" component={ RootView.About }/>
       </Route>
 
       <Route path="/auth" component={ AuthTemplate }>
-        <Route path="login" component={ AuthView.Login }/>
+        <Route path="login" component={ AuthView.Login } onEnter={ guestOnly } />
         <Route path="register" component={ AuthView.Register }/>
       </Route>
 

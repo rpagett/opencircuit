@@ -138,7 +138,7 @@ var _RegistrationForm = function (_React$Component) {
           required: true
         }),
         _react2.default.createElement(_components.FormInput, {
-          name: 'password-verify',
+          name: 'password_verify',
           label: 'Verify Password',
           inputType: 'password',
           placeholder: 'Enter your password again.',
@@ -150,7 +150,7 @@ var _RegistrationForm = function (_React$Component) {
         }),
         _react2.default.createElement('hr', null),
         _react2.default.createElement(_components.FormInput, {
-          name: 'first-name',
+          name: 'first_name',
           label: 'First Name',
           inputType: 'text',
           validationHook: 'change',
@@ -168,7 +168,7 @@ var _RegistrationForm = function (_React$Component) {
           validationError: 'The initial must be a letter.'
         }),
         _react2.default.createElement(_components.FormInput, {
-          name: 'last-name',
+          name: 'last_name',
           label: 'Last Name',
           inputType: 'text',
           validationHook: 'change',
@@ -189,7 +189,7 @@ var _RegistrationForm = function (_React$Component) {
           required: true
         }),
         _react2.default.createElement(_components.FormInput, {
-          name: 'address-2',
+          name: 'address_2',
           label: 'Address 2 (opt.)',
           inputType: 'text'
         }),

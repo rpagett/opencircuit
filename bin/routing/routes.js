@@ -47,19 +47,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function getAppRoutes(store) {
 
-  function authOnly(nextState, replaceState) {
+  function authOnly(nextState, replace) {
     var authUser = store.getState().auth.user;
 
     if (!authUser) {
-      replaceState(null, '/auth/login');
+      replace('/auth/login');
     }
   }
 
-  function guestOnly(nextState, replaceState) {
+  function guestOnly(nextState, replace) {
     var authUser = store.getState().auth.user;
 
     if (authUser) {
-      replaceState(null, '/');
+      replace('/');
     }
   }
 
@@ -68,14 +68,14 @@ function getAppRoutes(store) {
     { path: '/', component: _AppTemplate2.default },
     _react2.default.createElement(
       _reactRouter.Route,
-      { component: _app2.default },
+      { component: _app2.default, onEnter: authOnly },
       _react2.default.createElement(_reactRouter.IndexRoute, { component: RootView.Home }),
       _react2.default.createElement(_reactRouter.Route, { path: 'about', component: RootView.About })
     ),
     _react2.default.createElement(
       _reactRouter.Route,
       { path: '/auth', component: _AuthTemplate2.default },
-      _react2.default.createElement(_reactRouter.Route, { path: 'login', component: AuthView.Login }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'login', component: AuthView.Login, onEnter: guestOnly }),
       _react2.default.createElement(_reactRouter.Route, { path: 'register', component: AuthView.Register })
     )
   );
