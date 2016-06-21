@@ -135,7 +135,7 @@ var ProgressButton = _react2.default.createClass({
     );
   },
   handleClick: function handleClick(e) {
-    if ((this.props.shouldAllowClickOnLoading || this.state.currentState !== 'loading') && this.state.currentState !== 'disabled') {
+    if ((this.props.shouldAllowClickOnLoading || this.state.currentState !== 'loading') && this.state.currentState !== 'disabled' && this.state.currentState !== 'error') {
       var ret = this.props.onClick(e);
       this.loading(ret);
     } else {

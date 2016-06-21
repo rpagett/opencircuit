@@ -6,8 +6,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as AuthActions from '../actions/AuthActions';
-import { FormInput, SubmitButton } from './components';
-import ProgressButton from '../components/helpers/ProgressButton';
+import { FormInput } from './components';
+import ProgressButton from '../helpers/ProgressButton';
 
 class _LoginForm extends React.Component {
   constructor() {

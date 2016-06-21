@@ -17,7 +17,7 @@ const notifier = require('node-notifier');
 
 // Client Routing
 import { createRoutes, match, RouterContext } from 'react-router';
-import { AppRoutes } from './routing/routes';
+import { getAppRoutes } from './routing/routes';
 
 // Models and Repos
 import { appReducers } from './redux';
@@ -64,10 +64,15 @@ app.use(Passport.session());
 
 const appStore = createStore(appReducers);
 
-function dispatchReactRoute(req, res) {
+app.use((req, res, next) => {
+  res.store = appStore;
+  next();
+});
+
+function dispatchReactRoute(req, res, appRoutes) {
   // Note that req.url here should be the full URL path from
   // the original request, including the query string.
-  match({ routes: AppRoutes, location: req.url }, (error, redirectLocation, renderProps) => {
+  match({ routes: appRoutes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
       res.status(500).send(error.message)
     }
@@ -81,7 +86,8 @@ function dispatchReactRoute(req, res) {
         </Provider>
       );
       const preloadedState = appStore.getState();
-      const HTML = `<html>
+      const HTML = `<!DOCTYPE html>
+        <html>
         <head>
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -130,7 +136,7 @@ app.get('*', (req, res) => {
   if (req.user) {
     appStore.dispatch(loginUser(req.user));
   }
-  dispatchReactRoute(req, res, AppRoutes);
+  dispatchReactRoute(req, res, getAppRoutes(res.store));
 });
 
 app.listen(8080, function () {

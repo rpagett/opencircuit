@@ -3,9 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AppRouter = exports.AppRoutes = undefined;
+exports.AppRouter = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+exports.getAppRoutes = getAppRoutes;
 
 var _react = require('react');
 
@@ -43,21 +45,43 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var AppRoutes = exports.AppRoutes = _react2.default.createElement(
-  _reactRouter.Route,
-  { path: '/', component: _AppTemplate2.default },
-  _react2.default.createElement(
+function getAppRoutes(store) {
+
+  function authOnly(nextState, replaceState) {
+    var authUser = store.getState().auth.user;
+
+    if (!authUser) {
+      replaceState(null, '/auth/login');
+    }
+  }
+
+  function guestOnly(nextState, replaceState) {
+    var authUser = store.getState().auth.user;
+
+    if (authUser) {
+      replaceState(null, '/');
+    }
+  }
+
+  var AppRoutes = _react2.default.createElement(
     _reactRouter.Route,
-    { component: _app2.default },
-    _react2.default.createElement(_reactRouter.IndexRoute, { component: RootView.Home }),
-    _react2.default.createElement(_reactRouter.Route, { path: 'about', component: RootView.About })
-  ),
-  _react2.default.createElement(
-    _reactRouter.Route,
-    { path: '/auth', component: _AuthTemplate2.default },
-    _react2.default.createElement(_reactRouter.Route, { path: 'login', component: AuthView.Login })
-  )
-);
+    { path: '/', component: _AppTemplate2.default },
+    _react2.default.createElement(
+      _reactRouter.Route,
+      { component: _app2.default },
+      _react2.default.createElement(_reactRouter.IndexRoute, { component: RootView.Home }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'about', component: RootView.About })
+    ),
+    _react2.default.createElement(
+      _reactRouter.Route,
+      { path: '/auth', component: _AuthTemplate2.default },
+      _react2.default.createElement(_reactRouter.Route, { path: 'login', component: AuthView.Login }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'register', component: AuthView.Register })
+    )
+  );
+
+  return AppRoutes;
+}
 
 var AppRouter = exports.AppRouter = function (_React$Component) {
   _inherits(AppRouter, _React$Component);
@@ -74,7 +98,7 @@ var AppRouter = exports.AppRouter = function (_React$Component) {
       return _react2.default.createElement(
         _reactRouter.Router,
         { history: _reactRouter.browserHistory },
-        AppRoutes
+        getAppRoutes(this.props.reduxStore)
       );
     }
   }]);

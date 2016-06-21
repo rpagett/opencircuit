@@ -111,10 +111,15 @@ app.use(_passport2.default.session());
 
 var appStore = (0, _redux.createStore)(_redux2.appReducers);
 
-function dispatchReactRoute(req, res) {
+app.use(function (req, res, next) {
+  res.store = appStore;
+  next();
+});
+
+function dispatchReactRoute(req, res, appRoutes) {
   // Note that req.url here should be the full URL path from
   // the original request, including the query string.
-  (0, _reactRouter.match)({ routes: _routes.AppRoutes, location: req.url }, function (error, redirectLocation, renderProps) {
+  (0, _reactRouter.match)({ routes: appRoutes, location: req.url }, function (error, redirectLocation, renderProps) {
     if (error) {
       res.status(500).send(error.message);
     } else if (redirectLocation) {
@@ -126,7 +131,7 @@ function dispatchReactRoute(req, res) {
         _react2.default.createElement(_reactRouter.RouterContext, renderProps)
       ));
       var preloadedState = appStore.getState();
-      var HTML = '<html>\n        <head>\n          <meta charSet="UTF-8" />\n          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />\n          <title>OpenCircuit</title>\n          <link rel="stylesheet" href="/css/app.min.css" />\n          <link rel="shortcut icon" href="/assets/img/favicon.ico" />\n        </head>\n        <body>\n          <div className="container-fluid" id="react-container">\n            <div>' + routerComponent + '</div>\n          </div>\n          <script id="injected-state">\n            window.__PRELOADED_STATE__ = ' + JSON.stringify(preloadedState) + '\n          </script>\n          <script type="text/javascript" src="/js/vendor.js"></script>\n          <script type="text/javascript" src="/js/bundle.js"></script>\n        </body>\n        </html>';
+      var HTML = '<!DOCTYPE html>\n        <html>\n        <head>\n          <meta charSet="UTF-8" />\n          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />\n          <title>OpenCircuit</title>\n          <link rel="stylesheet" href="/css/app.min.css" />\n          <link rel="shortcut icon" href="/assets/img/favicon.ico" />\n        </head>\n        <body>\n          <div className="container-fluid" id="react-container">\n            <div>' + routerComponent + '</div>\n          </div>\n          <script id="injected-state">\n            window.__PRELOADED_STATE__ = ' + JSON.stringify(preloadedState) + '\n          </script>\n          <script type="text/javascript" src="/js/vendor.js"></script>\n          <script type="text/javascript" src="/js/bundle.js"></script>\n        </body>\n        </html>';
 
       res.status(200).send(HTML);
     } else {
@@ -156,7 +161,7 @@ app.get('*', function (req, res) {
   if (req.user) {
     appStore.dispatch((0, _AuthActions.loginUser)(req.user));
   }
-  dispatchReactRoute(req, res, _routes.AppRoutes);
+  dispatchReactRoute(req, res, (0, _routes.getAppRoutes)(res.store));
 });
 
 app.listen(8080, function () {

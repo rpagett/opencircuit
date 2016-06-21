@@ -2,24 +2,30 @@
   background-color: #EEEEEE;
 }
 
+html, body, .content-container, .app-container, .vcenter-parent, #react-container {
+  height: 100%;
+  min-height: 100% !important;
+}
+
 .content-container {
   width: 100%;
-  min-height: 100%;
   padding: 1rem;
   padding-top: 6rem;
   background-color: #FBFBFB;
 }
 
-.app-container {
-  min-height: 100%;
-}
 
-@include media-breakpoint-up(sm) {
+@include media-breakpoint-up(md) {
   .vcenter-parent {
-    height: 100%;
+    padding-top: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  .registration-box {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 }
 
@@ -37,4 +43,15 @@ body {
 
 .auth-card {
   padding: .8rem;
+}
+
+hr {
+  width: 50%;
+  align: center;
+  margin-top: .5rem;
+  margin-bottom: 1.1rem;
+  height: .1rem;
+  border: 0;
+  background: $brand-info;
+  background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, $brand-info));
 }

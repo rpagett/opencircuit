@@ -12,7 +12,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _Icon = require('../components/helpers/Icon');
+var _Icon = require('../helpers/Icon');
 
 var _Icon2 = _interopRequireDefault(_Icon);
 
@@ -52,7 +52,7 @@ var NavBar = function (_React$Component) {
             { className: 'nav navbar-nav flex-nav' },
             _react2.default.createElement(
               'li',
-              { className: 'nav-item pull-xs-none' },
+              { className: 'nav-item' },
               _react2.default.createElement(
                 _reactRouter.Link,
                 { to: '/' },
@@ -61,10 +61,10 @@ var NavBar = function (_React$Component) {
             ),
             _react2.default.createElement(
               'li',
-              { className: 'nav-item pull-xs-none' },
+              { className: 'nav-item' },
               _react2.default.createElement(
                 _reactRouter.Link,
-                { to: '/', className: 'nav-item nav-link pull-xs-none' },
+                { to: '/', className: 'nav-link' },
                 _react2.default.createElement(_Icon2.default, { shape: 'home' }),
                 '  ',
                 'Dashboard'
@@ -72,14 +72,59 @@ var NavBar = function (_React$Component) {
             ),
             _react2.default.createElement(
               'li',
-              { className: 'nav-item pull-xs-none' },
+              { className: 'nav-item' },
               _react2.default.createElement(
                 _reactRouter.Link,
-                { to: '/events', className: 'nav-item nav-link pull-xs-none' },
+                { to: '/events', className: 'nav-link' },
                 _react2.default.createElement(_Icon2.default, { shape: 'trophy' }),
                 '  ',
                 'Events'
               )
+            ),
+            _react2.default.createElement(
+              'li',
+              { className: 'nav-item dropdown' },
+              _react2.default.createElement(
+                'a',
+                { className: 'nav-link dropdown-toggle', 'data-toggle': 'dropdown', href: '#', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+                _react2.default.createElement(_Icon2.default, { shape: 'cog' }),
+                '  ',
+                'Manage'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'dropdown-menu' },
+                _react2.default.createElement(
+                  'a',
+                  { className: 'dropdown-item', href: '#' },
+                  'Circuit'
+                ),
+                _react2.default.createElement(
+                  'a',
+                  { className: 'dropdown-item', href: '#' },
+                  'Users'
+                ),
+                _react2.default.createElement(
+                  'a',
+                  { className: 'dropdown-item', href: '#' },
+                  'Etc.'
+                ),
+                _react2.default.createElement('div', { className: 'dropdown-divider' }),
+                _react2.default.createElement(
+                  'a',
+                  { className: 'dropdown-item', href: '#' },
+                  'Separated link'
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'nav-item pull-sm-right pull-xs-none' },
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/auth/logout', className: 'nav-link' },
+              'Logout'
             )
           )
         )

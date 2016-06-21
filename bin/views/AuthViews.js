@@ -13,7 +13,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _Icon = require('../components/helpers/Icon');
+var _Icon = require('../helpers/Icon');
 
 var _Icon2 = _interopRequireDefault(_Icon);
 
@@ -47,50 +47,54 @@ var Login = exports.Login = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'card text-xs-center light-shadow' },
+        { className: 'vcenter-parent col-xs-12 col-md-offset-2 col-md-8' },
         _react2.default.createElement(
           'div',
-          { className: 'card-header', style: { 'padding': '0rem' } },
-          _react2.default.createElement('img', { className: 'card-img-top', src: '/assets/img/NavbarLogo.png' }),
+          { className: 'card text-xs-center light-shadow' },
           _react2.default.createElement(
             'div',
-            { className: 'container-fluid card-info card-inverse auth-card' },
-            _react2.default.createElement(
-              'strong',
-              { className: 'h5' },
-              'Log In'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'card-block' },
-          _react2.default.createElement(_LoginForm2.default, null)
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'card-footer' },
-          _react2.default.createElement(
-            'div',
-            { className: 'row' },
+            { className: 'card-header', style: { 'padding': '0rem' } },
+            _react2.default.createElement('img', { className: 'card-img-top', src: '/assets/img/NavbarLogo.png' }),
             _react2.default.createElement(
               'div',
-              { className: 'col-xs-12 col-sm-6 pull-xs-center' },
+              { className: 'container-fluid card-info card-inverse auth-card' },
               _react2.default.createElement(
-                _reactRouter.Link,
-                { to: '/auth/register', className: 'btn btn-link' },
-                _react2.default.createElement(_Icon2.default, { shape: 'plus' }),
-                ' Register Account'
+                'strong',
+                { className: 'h5' },
+                'Log In'
               )
-            ),
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-block' },
+            _react2.default.createElement(_LoginForm2.default, null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-footer' },
             _react2.default.createElement(
               'div',
-              { className: 'col-xs-12 col-sm-6 pull-xs-center' },
+              { className: 'row' },
               _react2.default.createElement(
-                _reactRouter.Link,
-                { to: '/auth/recover', className: 'btn btn-link' },
-                _react2.default.createElement(_Icon2.default, { shape: 'question' }),
-                ' Forgot Password'
+                'div',
+                { className: 'col-xs-12 col-sm-6 pull-xs-center' },
+                _react2.default.createElement(
+                  _reactRouter.Link,
+                  { to: '/auth/register', className: 'btn btn-link' },
+                  _react2.default.createElement(_Icon2.default, { shape: 'plus' }),
+                  ' Register Account'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'col-xs-12 col-sm-6 pull-xs-center' },
+                _react2.default.createElement(
+                  _reactRouter.Link,
+                  { to: '/auth/recover', className: 'btn btn-link' },
+                  _react2.default.createElement(_Icon2.default, { shape: 'question' }),
+                  ' Forgot Password'
+                )
               )
             )
           )
@@ -116,52 +120,33 @@ var Register = exports.Register = function (_React$Component2) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'card text-xs-center light-shadow' },
+        { className: 'vcenter-parent registration-box col-xs-12 col-md-offset-2 col-md-8' },
         _react2.default.createElement(
           'div',
-          { className: 'card-header', style: { 'padding': '0rem' } },
-          _react2.default.createElement('img', { className: 'card-img-top', src: '/assets/img/NavbarLogo.png' }),
+          { className: 'card text-xs-center light-shadow' },
           _react2.default.createElement(
             'div',
-            { className: 'container-fluid card-info card-inverse auth-card' },
+            { className: 'card-header', style: { 'padding': '0rem' } },
+            _react2.default.createElement('img', { className: 'card-img-top', src: '/assets/img/NavbarLogo.png' }),
             _react2.default.createElement(
-              'strong',
-              { className: 'h5' },
-              'Register an Account'
+              'div',
+              { className: 'container-fluid card-info card-inverse auth-card' },
+              _react2.default.createElement(
+                'strong',
+                { className: 'h5' },
+                'Register an Account'
+              )
             )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'card-block' },
-          _react2.default.createElement(_RegistrationForm2.default, null)
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'card-footer' },
+          ),
           _react2.default.createElement(
             'div',
-            { className: 'row' },
-            _react2.default.createElement(
-              'div',
-              { className: 'col-xs-12 col-sm-6 pull-xs-center' },
-              _react2.default.createElement(
-                _reactRouter.Link,
-                { to: '/auth/register', className: 'btn btn-link' },
-                _react2.default.createElement(_Icon2.default, { shape: 'plus' }),
-                ' Register Account'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'col-xs-12 col-sm-6 pull-xs-center' },
-              _react2.default.createElement(
-                _reactRouter.Link,
-                { to: '/auth/recover', className: 'btn btn-link' },
-                _react2.default.createElement(_Icon2.default, { shape: 'question' }),
-                ' Forgot Password'
-              )
-            )
+            { className: 'card-block' },
+            _react2.default.createElement(_RegistrationForm2.default, null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-footer' },
+            _react2.default.createElement('div', { className: 'row' })
           )
         )
       );

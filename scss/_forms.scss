@@ -3,23 +3,24 @@
   @extends .danger-text;
   font-size: .8rem;
   padding-top: .3rem;
+  transition: opacity 500ms ease-in;
   //opacity: 0;
 }
 
-.validationerror-enter {
-  opacity: 0.01;
+.Select-control {
+  border: 0;
+  padding: 0;
+  height: 1rem;
 }
 
-.validationerror-enter.validationerror-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
+.Select-control:hover {
+  box-shadow: 0;
 }
 
-.validationerror-leave {
-  opacity: 1;
+.Select-value {
+  line-height: 1.7rem;
 }
 
-.validationerror-leave.validationerror-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+.Select-input {
+  height: 1.9rem;
 }

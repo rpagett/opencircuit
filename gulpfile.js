@@ -63,7 +63,7 @@ function bundleApp(isProduction) {
     // create vendors.js for dev environment.
     browserify({
       require: dependencies,
-      debug: true
+      debug: true,
     })
       .bundle()
       .on('error', gutil.log)
@@ -78,17 +78,6 @@ function bundleApp(isProduction) {
       appBundler.external(dep);
     })
   }
-
-  //gulp.src([
-  //    'node_modules/jquery/dist/jquery.min.js',
-  //    'node_modules/tether/dist/js/tether.min.js',
-  //    'node_modules/bootstrap/dist/js/bootstrap.min.js'],
-  //  {base: './node_modules/'})
-  //  .pipe(plugins.concat('bootstrap.js'))
-  //  .on('error', gutil.log)
-  //  .pipe(plugins.uglify())
-  //  .pipe(plugins.rename('bootstrap.js'))
-  //  .pipe(gulp.dest('./dist/js/'));
 
   gulp.src('./src/**/*.jsx')
     .pipe(plugins.babel({

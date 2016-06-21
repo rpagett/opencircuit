@@ -7,6 +7,7 @@ import { AppRouter } from './routing/routes';
 import { appReducers } from './redux';
 
 // Bootstrap for Browserify
+global.$ = require('jquery');
 global.jQuery = require('jquery');
 global.Tether = require('tether');
 require('bootstrap');
@@ -16,7 +17,7 @@ const appStore = createStore(appReducers, preloadedState)
 
 ReactDOM.render(
   <Provider store={ appStore }>
-    <AppRouter />
+    <AppRouter reduxStore={ appStore } />
   </Provider>,
   document.getElementById('react-container')
 );

@@ -41,11 +41,7 @@ var AuthTemplate = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'row' },
-          _react2.default.createElement(
-            'div',
-            { className: 'vcenter-parent col-xs-12 col-md-offset-3 col-md-6' },
-            this.props.children
-          )
+          this.props.children
         )
       );
     }

@@ -44,13 +44,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _LoginForm = function (_React$Component) {
-  _inherits(_LoginForm, _React$Component);
+var _RegistrationForm = function (_React$Component) {
+  _inherits(_RegistrationForm, _React$Component);
 
-  function _LoginForm() {
-    _classCallCheck(this, _LoginForm);
+  function _RegistrationForm() {
+    _classCallCheck(this, _RegistrationForm);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_LoginForm).call(this));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_RegistrationForm).call(this));
 
     _this.state = {
       canSubmit: false,
@@ -59,34 +59,34 @@ var _LoginForm = function (_React$Component) {
     return _this;
   }
 
-  _createClass(_LoginForm, [{
+  _createClass(_RegistrationForm, [{
     key: 'submit',
     value: function submit(data, reset, errors) {
       var _this2 = this;
 
-      console.log("We'll also do some validation.");
       console.log(data);
 
       this.setState({ buttonState: 'loading' });
-      (0, _isomorphicFetch2.default)('/auth/login', {
+      (0, _isomorphicFetch2.default)('/auth/register', {
         credentials: 'same-origin',
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          email: data.email,
-          password: data.password
-        })
+        body: JSON.stringify(data)
       }).then(function (response) {
         return response.json();
       }).then(function (res) {
         if (res.success == false) {
           _this2.setState({ buttonState: 'error' });
-          return errors({
-            password: res.message
-          });
+          if (res.cause == 'validation') {
+            return errors(res.messages);
+          } else {
+            return errors({
+              email: res.message.message
+            });
+          }
         } else if (res.success == true) {
           _this2.setState({ buttonState: 'success' });
           _this2.props.dispatchLogin(res.user);
@@ -98,21 +98,25 @@ var _LoginForm = function (_React$Component) {
       return;
     }
   }, {
+    key: 'enableButton',
+    value: function enableButton() {
+      this.setState({ buttonState: '' });
+    }
+  }, {
+    key: 'disableButton',
+    value: function disableButton() {
+      this.setState({ buttonState: 'error' });
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
-
       return _react2.default.createElement(
         _formsyReact2.default.Form,
         {
           onValidSubmit: this.submit.bind(this),
-          onValid: function onValid() {
-            _this3.setState({ buttonState: '' });
-          },
-          onInvalid: function onInvalid() {
-            _this3.setState({ buttonState: 'error' });
-          },
-          noValidate: 'true'
+          onValid: this.enableButton.bind(this),
+          onInvalid: this.disableButton.bind(this)
+          //noValidate="true"
         },
         _react2.default.createElement(_components.FormInput, {
           name: 'email',
@@ -122,18 +126,97 @@ var _LoginForm = function (_React$Component) {
           validations: 'isEmail',
           validationErrors: {
             isEmail: 'This doesn’t look like a valid email address.'
-          }
-          //defaultValue=""
-          , required: true
+          },
+          required: true
         }),
         _react2.default.createElement(_components.FormInput, {
           name: 'password',
           label: 'Password',
           inputType: 'password',
-          placeholder: 'Enter your password.',
-          validationHook: 'change'
-          //defaultValue=""
-          , required: true
+          placeholder: 'Enter your desired password.',
+          validationHook: 'change',
+          required: true
+        }),
+        _react2.default.createElement(_components.FormInput, {
+          name: 'password-verify',
+          label: 'Verify Password',
+          inputType: 'password',
+          placeholder: 'Enter your password again.',
+          validations: 'equalsField:password',
+          validationErrors: {
+            equalsField: 'Your passwords must match.'
+          },
+          required: true
+        }),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement(_components.FormInput, {
+          name: 'first-name',
+          label: 'First Name',
+          inputType: 'text',
+          validationHook: 'change',
+          validations: 'isExisty',
+          required: true
+        }),
+        _react2.default.createElement(_components.FormInput, {
+          name: 'mi',
+          label: 'Middle Initial (opt.)',
+          inputType: 'text',
+          maxLength: '1',
+          afterInput: '.',
+          validationHook: 'change',
+          validations: 'isAlpha',
+          validationError: 'The initial must be a letter.'
+        }),
+        _react2.default.createElement(_components.FormInput, {
+          name: 'last-name',
+          label: 'Last Name',
+          inputType: 'text',
+          validationHook: 'change',
+          validations: 'isExisty',
+          required: true
+        }),
+        _react2.default.createElement(_components.PhoneInput, {
+          name: 'phone',
+          label: 'Phone',
+          beforeInput: '+1'
+        }),
+        _react2.default.createElement(_components.FormInput, {
+          name: 'street',
+          label: 'Street',
+          inputType: 'text',
+          validationHook: 'change',
+          validations: 'isExisty',
+          required: true
+        }),
+        _react2.default.createElement(_components.FormInput, {
+          name: 'address-2',
+          label: 'Address 2 (opt.)',
+          inputType: 'text'
+        }),
+        _react2.default.createElement(_components.FormInput, {
+          name: 'city',
+          label: 'City',
+          inputType: 'text',
+          validationHook: 'change',
+          validations: 'isExisty',
+          required: true
+        }),
+        _react2.default.createElement(_components.StateSelect, {
+          name: 'state',
+          label: 'State',
+          required: true
+        }),
+        _react2.default.createElement(_components.FormInput, {
+          name: 'zip',
+          label: 'ZIP',
+          inputType: 'text',
+          validationHook: 'change',
+          validations: {
+            isExisty: true,
+            isNumeric: true
+          },
+          maxLength: '5',
+          required: true
         }),
         _react2.default.createElement(
           'div',
@@ -145,14 +228,14 @@ var _LoginForm = function (_React$Component) {
               ref: 'submit',
               state: this.state.buttonState
             },
-            'Log In'
+            'Register'
           )
         )
       );
     }
   }]);
 
-  return _LoginForm;
+  return _RegistrationForm;
 }(_react2.default.Component);
 
 ;
@@ -169,5 +252,5 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-var LoginForm = (0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_LoginForm));
-exports.default = LoginForm;
+var RegistrationForm = (0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_RegistrationForm));
+exports.default = RegistrationForm;
