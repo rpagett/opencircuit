@@ -24,7 +24,7 @@ var _redux = require('redux');
 
 var _reactRedux = require('react-redux');
 
-var _AuthActions = require('../actions/AuthActions');
+var _AuthActions = require('../models/Auth/AuthActions');
 
 var AuthActions = _interopRequireWildcard(_AuthActions);
 

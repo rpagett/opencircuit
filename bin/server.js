@@ -36,21 +36,21 @@ var _passportLocal2 = _interopRequireDefault(_passportLocal);
 
 var _reactRouter = require('react-router');
 
-var _routes = require('./routing/routes');
+var _routes = require('./routes');
 
-var _redux2 = require('./redux');
-
-var _AuthActions = require('./actions/AuthActions');
-
-var _UserModel = require('./models/UserModel');
+var _UserModel = require('./models/User/UserModel');
 
 var _UserModel2 = _interopRequireDefault(_UserModel);
 
-var _AuthController = require('./controllers/AuthController');
+var _redux2 = require('./redux');
+
+var _AuthActions = require('./models/Auth/AuthActions');
+
+var _AuthController = require('./models/Auth/AuthController');
 
 var _AuthController2 = _interopRequireDefault(_AuthController);
 
-var _APIDispatch = require('./controllers/APIDispatch');
+var _APIDispatch = require('./APIDispatch');
 
 var _APIDispatch2 = _interopRequireDefault(_APIDispatch);
 
@@ -140,19 +140,6 @@ function dispatchReactRoute(req, res, appRoutes) {
   });
 }
 
-app.get('/maketheuser', function (req, res) {
-  _UserModel2.default.register(new _UserModel2.default({ email: 'riley@opencircuit.us' }), 'estiondf', function (err) {
-    if (err) {
-      console.log('error while user register!', err);
-      return next(err);
-    }
-
-    console.log('user registered!');
-
-    res.redirect('/');
-  });
-});
-
 app.use('/api', _APIDispatch2.default);
 app.use('/auth', _AuthController2.default);
 
@@ -165,11 +152,11 @@ app.get('*', function (req, res) {
 });
 
 app.listen(8080, function () {
-  console.log('Example app listening on port 8080!');
+  console.log('OpenCircuit is live on port 8080.');
 
   notifier.notify({
     'title': 'OpenCircuit',
-    'message': 'Server is running with a new build.',
+    'message': 'Local server is running with a new build.',
     'icon': './dist/assets/img/favicon.ico',
     'sound': 'Glass'
   });

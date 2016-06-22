@@ -15,23 +15,23 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _app = require('../app');
+var _app = require('./app');
 
 var _app2 = _interopRequireDefault(_app);
 
-var _AppTemplate = require('../templates/AppTemplate');
+var _AppTemplate = require('./templates/AppTemplate');
 
 var _AppTemplate2 = _interopRequireDefault(_AppTemplate);
 
-var _RootViews = require('../models/Dashboard/RootViews');
+var _DashboardViews = require('./models/Dashboard/DashboardViews');
 
-var RootView = _interopRequireWildcard(_RootViews);
+var RootView = _interopRequireWildcard(_DashboardViews);
 
-var _AuthTemplate = require('../templates/AuthTemplate');
+var _AuthTemplate = require('./templates/AuthTemplate');
 
 var _AuthTemplate2 = _interopRequireDefault(_AuthTemplate);
 
-var _AuthViews = require('../models/Auth/AuthViews');
+var _AuthViews = require('./models/Auth/AuthViews');
 
 var AuthView = _interopRequireWildcard(_AuthViews);
 

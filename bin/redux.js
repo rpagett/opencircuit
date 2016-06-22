@@ -7,7 +7,7 @@ exports.appReducers = undefined;
 
 var _redux = require('redux');
 
-var _AuthReducer = require('./reducers/AuthReducer');
+var _AuthReducer = require('./models/Auth/AuthReducer');
 
 var _AuthReducer2 = _interopRequireDefault(_AuthReducer);
 

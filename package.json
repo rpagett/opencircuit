@@ -4,7 +4,7 @@
   "description": "opencircuit.us",
   "main": "bin/server.js",
   "scripts": {
-    "start": "nodemon --watch dist/js/bundle.js bin/server.js",
+    "start": "nodemon -C --watch dist/js/bundle.js bin/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

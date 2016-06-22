@@ -1,12 +1,12 @@
 import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import App from '../app';
-import AppTemplate from '../templates/AppTemplate';
-import * as RootView from '../views/RootViews';
+import App from './app';
+import AppTemplate from './templates/AppTemplate';
+import * as RootView from './models/Dashboard/DashboardViews';
 
-import AuthTemplate from '../templates/AuthTemplate';
-import * as AuthView from '../views/AuthViews';
+import AuthTemplate from './templates/AuthTemplate';
+import * as AuthView from './models/Auth/AuthViews';
 
 export function getAppRoutes(store) {
 
@@ -34,8 +34,8 @@ export function getAppRoutes(store) {
         <Route path="about" component={ RootView.About }/>
       </Route>
 
-      <Route path="/auth" component={ AuthTemplate }>
-        <Route path="login" component={ AuthView.Login } onEnter={ guestOnly } />
+      <Route path="/auth" component={ AuthTemplate } onEnter={ guestOnly }>
+        <Route path="login" component={ AuthView.Login } />
         <Route path="register" component={ AuthView.Register }/>
       </Route>
 

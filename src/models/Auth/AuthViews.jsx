@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
-import Icon from '../helpers/Icon';
-import LoginForm from '../forms/LoginForm';
-import RegistrationForm from '../forms/RegistrationForm';
+import Icon from '../../helpers/Icon';
+import { LoginForm, RegistrationForm } from './AuthForms';
 
 export class Login extends React.Component {
   render() {
@@ -24,12 +23,12 @@ export class Login extends React.Component {
             <div className="row">
               <div className="col-xs-12 col-sm-6 pull-xs-center">
                 <Link to="/auth/register" className="btn btn-link">
-                  <Icon shape="plus" /> Register Account
+                  <Icon shape="plus" />Register Account
                 </Link>
               </div>
               <div className="col-xs-12 col-sm-6 pull-xs-center">
                 <Link to="/auth/recover" className="btn btn-link">
-                  <Icon shape="question" /> Forgot Password
+                  <Icon shape="question" />Forgot Password
                 </Link>
               </div>
             </div>
@@ -57,9 +56,7 @@ export class Register extends React.Component {
           </div>
 
           <div className="card-footer">
-            <div className="row">
-
-            </div>
+            <center>Already have an account? <Link to="/auth/login" className="btn btn-link">Log In.</Link></center>
           </div>
         </div>
       </div>

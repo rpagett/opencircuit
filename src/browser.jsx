@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import { AppRouter } from './routing/routes';
+import { AppRouter } from './routes';
 import { appReducers } from './redux';
 
 // Bootstrap for Browserify

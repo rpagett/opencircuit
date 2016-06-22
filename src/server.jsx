@@ -17,16 +17,16 @@ const notifier = require('node-notifier');
 
 // Client Routing
 import { createRoutes, match, RouterContext } from 'react-router';
-import { getAppRoutes } from './routing/routes';
+import { getAppRoutes } from './routes';
 
 // Models and Repos
+import User from './models/User/UserModel';
 import { appReducers } from './redux';
-import { loginUser } from './actions/AuthActions';
-import User from './models/UserModel';
+import { loginUser } from './models/Auth/AuthActions';
 
 // API Endpoints
-import AuthController from './controllers/AuthController';
-import APIDispatch from './controllers/APIDispatch';
+import AuthController from './models/Auth/AuthController';
+import APIDispatch from './APIDispatch';
 
 app.use(express.static('dist'));
 
@@ -115,19 +115,6 @@ function dispatchReactRoute(req, res, appRoutes) {
   });
 }
 
-app.get('/maketheuser', (req, res) => {
-  User.register(new User({email: 'riley@opencircuit.us'}), 'estiondf', function(err) {
-    if (err) {
-      console.log('error while user register!', err);
-      return next(err);
-    }
-
-    console.log('user registered!');
-
-    res.redirect('/');
-  });
-});
-
 app.use('/api', APIDispatch);
 app.use('/auth', AuthController);
 
@@ -140,11 +127,11 @@ app.get('*', (req, res) => {
 });
 
 app.listen(8080, function () {
-  console.log('Example app listening on port 8080!');
+  console.log('OpenCircuit is live on port 8080.');
 
   notifier.notify({
     'title': 'OpenCircuit',
-    'message': 'Server is running with a new build.',
+    'message': 'Local server is running with a new build.',
     'icon': './dist/assets/img/favicon.ico',
     'sound': 'Glass',
   });

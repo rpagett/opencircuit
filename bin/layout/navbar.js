@@ -45,7 +45,7 @@ var _UserDropdown = function (_React$Component) {
         { className: 'nav-item right dropdown' },
         _react2.default.createElement(
           'a',
-          { className: 'user-dropdown nav-link dropdown-toggle', 'data-toggle': 'dropdown', href: '#', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+          { className: 'user-dropdown nav-link dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
           _react2.default.createElement(_gravatars.MiniGravatar, { email: this.props.user.email }),
           '  ' + this.props.user.formattedName
         ),
@@ -125,8 +125,7 @@ var NavBar = function (_React$Component2) {
                 _reactRouter.Link,
                 { to: '/', className: 'nav-link', activeClassName: 'active' },
                 _react2.default.createElement(_Icon2.default, { shape: 'home' }),
-                '  ',
-                'Dashboard'
+                ' Dashboard'
               )
             ),
             _react2.default.createElement(
@@ -136,8 +135,7 @@ var NavBar = function (_React$Component2) {
                 _reactRouter.Link,
                 { to: '/events', className: 'nav-link', activeClassName: 'active' },
                 _react2.default.createElement(_Icon2.default, { shape: 'trophy' }),
-                '  ',
-                'Events'
+                ' Events'
               )
             ),
             _react2.default.createElement(
@@ -145,10 +143,9 @@ var NavBar = function (_React$Component2) {
               { className: 'nav-item dropdown' },
               _react2.default.createElement(
                 'a',
-                { className: 'nav-link dropdown-toggle', 'data-toggle': 'dropdown', href: '#', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+                { className: 'nav-link dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
                 _react2.default.createElement(_Icon2.default, { shape: 'cog' }),
-                '  ',
-                'Manage'
+                ' Manage'
               ),
               _react2.default.createElement(
                 'div',

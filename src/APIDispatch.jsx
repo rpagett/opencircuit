@@ -1,6 +1,6 @@
 import Express from 'express';
 
-import EventController from './EventController';
+import EventController from './models/Event/EventController';
 
 let router = Express.Router();
 

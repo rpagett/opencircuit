@@ -12,7 +12,7 @@ var _redux = require('redux');
 
 var _reactRedux = require('react-redux');
 
-var _routes = require('./routing/routes');
+var _routes = require('./routes');
 
 var _redux2 = require('./redux');
 

@@ -9,7 +9,7 @@ class _UserDropdown extends React.Component {
   render() {
     return (
       <div className="nav-item right dropdown">
-        <a className="user-dropdown nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        <a className="user-dropdown nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
           <MiniGravatar email={ this.props.user.email } />{ '  ' + this.props.user.formattedName }
         </a>
         <div className="dropdown-menu">
@@ -51,19 +51,19 @@ class NavBar extends React.Component {
 
             <div className="nav-item">
               <Link to="/" className="nav-link" activeClassName="active">
-                <Icon shape="home" />{'  '}Dashboard
+                <Icon shape="home" /> Dashboard
               </Link>
             </div>
 
             <div className="nav-item">
               <Link to="/events" className="nav-link" activeClassName="active">
-                <Icon shape="trophy" />{'  '}Events
+                <Icon shape="trophy" /> Events
               </Link>
             </div>
 
             <div className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <Icon shape="cog" />{'  '}Manage
+              <a className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <Icon shape="cog" /> Manage
               </a>
               <div className="dropdown-menu">
                 <a className="dropdown-item" href="#">Circuit</a>

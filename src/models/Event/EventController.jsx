@@ -1,8 +1,7 @@
 import Express from 'express';
 
-import EventRepository from '../repositories/EventRepository';
-
 let router = Express.Router();
+// All routes are '/events/...'
 
 router.get('/', (req, res) => {
   res.send(EventRepository.all());

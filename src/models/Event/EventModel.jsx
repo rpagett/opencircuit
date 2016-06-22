@@ -29,6 +29,12 @@ const EventSchema = new Mongoose.Schema({
   }
 }, {
   timestamps: true
+  //toObject: {
+  //  virtuals: true
+  //},
+  //toJSON: {
+  //  virtuals: true
+  //}
 });
 
 export default Mongoose.model('Event', EventSchema);

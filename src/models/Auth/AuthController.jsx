@@ -1,11 +1,12 @@
 import Express from 'express';
 import Indicative from 'indicative';
 
-import User from '../models/UserModel';
-import { loginUser } from '../actions/AuthActions';
-import { translateValidationErrors } from '../helpers/functions'
+import User from '../User/UserModel';
+import { loginUser } from './AuthActions';
+import { translateValidationErrors } from '../../helpers/functions'
 
 let router = Express.Router();
+// All routes are '/auth/...'
 
 router.post('/login', (req, res) => {
   User.authenticate()(req.body.email, req.body.password, (err, user, options) => {
@@ -100,8 +101,8 @@ router.post('/register', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
+  req.logout();
   req.session.destroy(() => {
-    req.logout();
     res.redirect('/auth/login');
   });
 });

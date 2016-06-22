@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.LoginForm = exports.RegistrationForm = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -24,13 +25,13 @@ var _redux = require('redux');
 
 var _reactRedux = require('react-redux');
 
-var _AuthActions = require('../models/Auth/AuthActions');
+var _AuthActions = require('./AuthActions');
 
 var AuthActions = _interopRequireWildcard(_AuthActions);
 
-var _components = require('./components');
+var _components = require('../../forms/components');
 
-var _ProgressButton = require('../helpers/ProgressButton');
+var _ProgressButton = require('../../helpers/ProgressButton');
 
 var _ProgressButton2 = _interopRequireDefault(_ProgressButton);
 
@@ -240,11 +241,11 @@ var _RegistrationForm = function (_React$Component) {
 
 ;
 
-var mapStateToProps = function mapStateToProps(state, ownProps) {
+var mapStateToRegistrationProps = function mapStateToRegistrationProps(state, ownProps) {
   return {};
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+var mapDispatchToRegistrationProps = function mapDispatchToRegistrationProps(dispatch) {
   return {
     dispatchLogin: function dispatchLogin(user) {
       dispatch(AuthActions.loginUser(user));
@@ -252,5 +253,131 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-var RegistrationForm = (0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_RegistrationForm));
-exports.default = RegistrationForm;
+var RegistrationForm = exports.RegistrationForm = (0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToRegistrationProps, mapDispatchToRegistrationProps)(_RegistrationForm));
+
+var _LoginForm = function (_React$Component2) {
+  _inherits(_LoginForm, _React$Component2);
+
+  function _LoginForm() {
+    _classCallCheck(this, _LoginForm);
+
+    var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(_LoginForm).call(this));
+
+    _this3.state = {
+      canSubmit: false,
+      buttonState: 'error'
+    };
+    return _this3;
+  }
+
+  _createClass(_LoginForm, [{
+    key: 'submit',
+    value: function submit(data, reset, errors) {
+      var _this4 = this;
+
+      console.log("We'll also do some validation.");
+      console.log(data);
+
+      this.setState({ buttonState: 'loading' });
+      (0, _isomorphicFetch2.default)('/auth/login', {
+        credentials: 'same-origin',
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password
+        })
+      }).then(function (response) {
+        return response.json();
+      }).then(function (res) {
+        if (res.success == false) {
+          _this4.setState({ buttonState: 'error' });
+          return errors({
+            password: res.message
+          });
+        } else if (res.success == true) {
+          _this4.setState({ buttonState: 'success' });
+          _this4.props.dispatchLogin(res.user);
+          _this4.props.router.push('/');
+        }
+        console.log(res);
+      });
+
+      return;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this5 = this;
+
+      return _react2.default.createElement(
+        _formsyReact2.default.Form,
+        {
+          onValidSubmit: this.submit.bind(this),
+          onValid: function onValid() {
+            _this5.setState({ buttonState: '' });
+          },
+          onInvalid: function onInvalid() {
+            _this5.setState({ buttonState: 'error' });
+          },
+          noValidate: 'true'
+        },
+        _react2.default.createElement(_components.FormInput, {
+          name: 'email',
+          label: 'Email Address',
+          inputType: 'email',
+          placeholder: 'Enter your email address.',
+          validations: 'isEmail',
+          validationErrors: {
+            isEmail: 'This doesn’t look like a valid email address.'
+          }
+          //defaultValue=""
+          , required: true
+        }),
+        _react2.default.createElement(_components.FormInput, {
+          name: 'password',
+          label: 'Password',
+          inputType: 'password',
+          placeholder: 'Enter your password.',
+          validationHook: 'change'
+          //defaultValue=""
+          , required: true
+        }),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group row' },
+          _react2.default.createElement(
+            _ProgressButton2.default,
+            {
+              type: 'submit',
+              ref: 'submit',
+              state: this.state.buttonState
+            },
+            'Log In'
+          )
+        )
+      );
+    }
+  }]);
+
+  return _LoginForm;
+}(_react2.default.Component);
+
+;
+
+var mapStateToLoginProps = function mapStateToLoginProps(state, ownProps) {
+  return {};
+};
+
+var mapDispatchToLoginProps = function mapDispatchToLoginProps(dispatch) {
+  return {
+    dispatchLogin: function dispatchLogin(user) {
+      dispatch(AuthActions.loginUser(user));
+    }
+  };
+};
+
+var LoginForm = exports.LoginForm = (0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToLoginProps, mapDispatchToLoginProps)(_LoginForm));
