@@ -15,10 +15,6 @@ var _formsyReact = require('formsy-react');
 
 var _formsyReact2 = _interopRequireDefault(_formsyReact);
 
-var _isomorphicFetch = require('isomorphic-fetch');
-
-var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
-
 var _reactRouter = require('react-router');
 
 var _redux = require('redux');
@@ -34,6 +30,8 @@ var _components = require('../../forms/components');
 var _ProgressButton = require('../../helpers/ProgressButton');
 
 var _ProgressButton2 = _interopRequireDefault(_ProgressButton);
+
+var _functions = require('../../helpers/functions');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -68,7 +66,7 @@ var _RegistrationForm = function (_React$Component) {
       console.log(data);
 
       this.setState({ buttonState: 'loading' });
-      (0, _isomorphicFetch2.default)('/auth/register', {
+      (0, _functions.fetchAPI)('/auth/register', {
         credentials: 'same-origin',
         method: 'POST',
         headers: {
@@ -279,7 +277,7 @@ var _LoginForm = function (_React$Component2) {
       console.log(data);
 
       this.setState({ buttonState: 'loading' });
-      (0, _isomorphicFetch2.default)('/auth/login', {
+      fetch('/auth/login', {
         credentials: 'same-origin',
         method: 'POST',
         headers: {

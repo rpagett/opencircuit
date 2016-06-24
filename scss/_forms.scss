@@ -3,18 +3,17 @@
   @extends .danger-text;
   font-size: .8rem;
   padding-top: .3rem;
-  transition: opacity 500ms ease-in;
-  //opacity: 0;
+  transition: display 500ms linear;
 }
 
 .Select-control {
   border: 0;
   padding: 0;
   height: 1rem;
-}
 
-.Select-control:hover {
-  box-shadow: 0;
+  &:hover {
+    box-shadow: 0;
+  }
 }
 
 .Select-value {

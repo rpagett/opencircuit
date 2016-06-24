@@ -7,6 +7,7 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var gutil = require('gulp-util');
 var babelify = require('babelify');
+var nodemon = require('gulp-nodemon');
 
 // External dependencies you do not want to rebundle while developing,
 // but include in your application deployment
@@ -21,6 +22,14 @@ var scriptsCount = 0;
 
 // Gulp tasks
 // ----------------------------------------------------------------------------
+gulp.task('server', function () {
+  nodemon({
+    script: 'bin/server.js',
+    watch: 'dist/js/bundle.js',
+    env: { 'NODE_ENV': 'development' }
+  });
+});
+
 gulp.task('scripts', function () {
   bundleApp(false);
 });

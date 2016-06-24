@@ -10,6 +10,10 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _redux = require('redux');
 
+var _reduxThunk = require('redux-thunk');
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
 var _reactRedux = require('react-redux');
 
 var _routes = require('./routes');
@@ -25,7 +29,7 @@ global.Tether = require('tether');
 require('bootstrap');
 
 var preloadedState = window.__PRELOADED_STATE__;
-var appStore = (0, _redux.createStore)(_redux2.appReducers, preloadedState);
+var appStore = (0, _redux.createStore)(_redux2.appReducers, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 
 _reactDom2.default.render(_react2.default.createElement(
   _reactRedux.Provider,

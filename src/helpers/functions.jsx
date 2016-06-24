@@ -1,3 +1,10 @@
+import libFetch from 'isomorphic-fetch';
+
+export function fetchAPI(url, options) {
+  const finalUrl = ( typeof window === 'undefined' ? 'http://localhost:8080' + url : url );
+  return libFetch(finalUrl, options);
+}
+
 export function translateValidationErrors(errors) {
   /*
     We want to translate

@@ -10,7 +10,29 @@ export class MiniGravatar extends React.Component {
     const hash = MD5(this.props.email);
 
     return (
-      <img src={'//www.gravatar.com/avatar/' + hash + '?s=30&d=mm'} className="gravatar" />
+      <img
+        src={'//www.gravatar.com/avatar/' + hash + '?s=30&d=mm'}
+        className="gravatar"
+        aria-hidden="true"
+      />
+    );
+  }
+}
+
+export class ProfileGravatar extends React.Component {
+  static propTypes = {
+    email: React.PropTypes.string.isRequired
+  }
+
+  render() {
+    const hash = MD5(this.props.email);
+
+    return (
+      <img
+        src={'//www.gravatar.com/avatar/' + hash + '?s=150&d=mm'}
+        className="img-responsive center-block profile-gravatar"
+        aria-hidden="true"
+      />
     );
   }
 }

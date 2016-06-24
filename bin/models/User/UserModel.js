@@ -4,6 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
+
 var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
@@ -13,6 +19,13 @@ var _passportLocalMongoose = require('passport-local-mongoose');
 var _passportLocalMongoose2 = _interopRequireDefault(_passportLocalMongoose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var UserRoles = Object.freeze({
+  Administrator: 1,
+  SiteManager: 2,
+  Tabulator: 3,
+  FormsManager: 4
+});
 
 var UserSchema = new _mongoose2.default.Schema({
   first_name: String,
@@ -44,6 +57,14 @@ var UserSchema = new _mongoose2.default.Schema({
 
 UserSchema.virtual('formattedName').get(function () {
   return this.first_name + ' ' + (this.mi ? this.mi + '. ' : '') + this.last_name;
+});
+
+UserSchema.virtual('profileLink').get(function () {
+  return '/users/' + this.email;
+});
+
+UserSchema.virtual('emailLink').get(function () {
+  return 'mailto:' + this.email;
 });
 
 UserSchema.plugin(_passportLocalMongoose2.default, {

@@ -144,34 +144,31 @@ var FormInput = exports.FormInput = (_dec = (0, _formsyReact.Decorator)(), _dec(
 var StateSelect = exports.StateSelect = (_dec2 = (0, _formsyReact.Decorator)(), _dec2(_class3 = function (_React$Component3) {
   _inherits(StateSelect, _React$Component3);
 
+  function StateSelect() {
+    _classCallCheck(this, StateSelect);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(StateSelect).apply(this, arguments));
+  }
+
   _createClass(StateSelect, [{
     key: 'selectOptions',
     value: function selectOptions() {
       return [{ value: 'AL', label: 'Alabama' }, { value: 'AK', label: 'Alaska' }, { value: 'AZ', label: 'Arizona' }, { value: 'AR', label: 'Arkansas' }, { value: 'CA', label: 'California' }, { value: 'CO', label: 'Colorado' }, { value: 'CT', label: 'Connecticut' }, { value: 'DE', label: 'Delaware' }, { value: 'DC', label: 'District Of Columbia' }, { value: 'FL', label: 'Florida' }, { value: 'GA', label: 'Georgia' }, { value: 'HI', label: 'Hawaii' }, { value: 'ID', label: 'Idaho' }, { value: 'IL', label: 'Illinois' }, { value: 'IN', label: 'Indiana' }, { value: 'IA', label: 'Iowa' }, { value: 'KS', label: 'Kansas' }, { value: 'KY', label: 'Kentucky' }, { value: 'LA', label: 'Louisiana' }, { value: 'ME', label: 'Maine' }, { value: 'MD', label: 'Maryland' }, { value: 'MA', label: 'Massachusetts' }, { value: 'MI', label: 'Michigan' }, { value: 'MN', label: 'Minnesota' }, { value: 'MS', label: 'Mississippi' }, { value: 'MO', label: 'Missouri' }, { value: 'MT', label: 'Montana' }, { value: 'NE', label: 'Nebraska' }, { value: 'NV', label: 'Nevada' }, { value: 'NH', label: 'New Hampshire' }, { value: 'NJ', label: 'New Jersey' }, { value: 'NM', label: 'New Mexico' }, { value: 'NY', label: 'New York' }, { value: 'NC', label: 'North Carolina' }, { value: 'ND', label: 'North Dakota' }, { value: 'OH', label: 'Ohio' }, { value: 'OK', label: 'Oklahoma' }, { value: 'OR', label: 'Oregon' }, { value: 'PA', label: 'Pennsylvania' }, { value: 'RI', label: 'Rhode Island' }, { value: 'SC', label: 'South Carolina' }, { value: 'SD', label: 'South Dakota' }, { value: 'TN', label: 'Tennessee' }, { value: 'TX', label: 'Texas' }, { value: 'UT', label: 'Utah' }, { value: 'VT', label: 'Vermont' }, { value: 'VA', label: 'Virginia' }, { value: 'WA', label: 'Washington' }, { value: 'WV', label: 'West Virginia' }, { value: 'WI', label: 'Wisconsin' }, { value: 'WY', label: 'Wyoming' }];
     }
-  }]);
-
-  function StateSelect() {
-    _classCallCheck(this, StateSelect);
-
-    var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(StateSelect).call(this));
-
-    _this3.state = {
-      selectValue: 'SC'
-    };
-    return _this3;
-  }
-
-  _createClass(StateSelect, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.props.setValue(this.state.selectValue);
+  }, {
+    key: 'changeValue',
+    value: function changeValue(value, selectedOptions) {
+      if (this.props.multiple) {
+        this.props.setValue(selectedOptions.map(function (option) {
+          return option.value;
+        }));
+      } else {
+        this.props.setValue(value.value);
+      }
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
-
       var isRequiredError = this.props.isRequired() && !this.props.isValid() && this.props.requiredError;
       var className = 'form-group row ' + (this.props.showError() || isRequiredError ? 'has-danger' : '');
       var errorMessage = this.props.getErrorMessage() || isRequiredError;
@@ -192,10 +189,8 @@ var StateSelect = exports.StateSelect = (_dec2 = (0, _formsyReact.Decorator)(), 
             className: 'form-control',
             clearable: false,
             options: this.selectOptions(),
-            onChange: function onChange(selectValue) {
-              return _this4.props.setValue(selectValue);
-            },
-            value: this.state.selectValue,
+            onChange: this.changeValue.bind(this),
+            value: this.props.getValue(),
             autosize: false
           }, this.props))
         )

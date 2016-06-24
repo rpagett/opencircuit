@@ -3,7 +3,8 @@ let app = express();
 
 // Frameworks and Dependencies
 import React from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import flash from 'connect-flash';
@@ -53,7 +54,7 @@ Passport.serializeUser(function(user, done) {
 
 Passport.deserializeUser((user_id, done) => {
   console.log('DESERIALIZING! ID is ', user_id);
-  User.findById(user_id, (err, user) => {
+  User.findById(user_id, '_id email first_name mi last_name formattedName', (err, user) => {
     if (err) { return done(err); }
     done(null, user);
   });
@@ -62,7 +63,7 @@ Passport.deserializeUser((user_id, done) => {
 app.use(Passport.initialize());
 app.use(Passport.session());
 
-const appStore = createStore(appReducers);
+const appStore = createStore(appReducers, {auth: {}, users: {}}, applyMiddleware(thunk));
 
 app.use((req, res, next) => {
   res.store = appStore;

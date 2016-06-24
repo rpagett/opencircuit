@@ -140,16 +140,13 @@ export class StateSelect extends React.Component {
     ];
   }
 
-  constructor() {
-    super();
-
-    this.state = {
-      selectValue: 'SC'
+  changeValue(value, selectedOptions) {
+    if (this.props.multiple) {
+      this.props.setValue(selectedOptions.map(option => option.value));
     }
-  }
-
-  componentWillMount() {
-    this.props.setValue(this.state.selectValue);
+    else {
+      this.props.setValue(value.value);
+    }
   }
 
   render() {
@@ -170,8 +167,8 @@ export class StateSelect extends React.Component {
             className="form-control"
             clearable={ false }
             options={ this.selectOptions() }
-            onChange={ (selectValue) => this.props.setValue(selectValue) }
-            value={ this.state.selectValue }
+            onChange={ this.changeValue.bind(this) }
+            value={ this.props.getValue() }
             autosize={ false }
             { ...this.props }
           />

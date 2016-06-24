@@ -6,6 +6,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _redux = require('redux');
 
+var _reduxThunk = require('redux-thunk');
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
 var _reactRedux = require('react-redux');
 
 var _server = require('react-dom/server');
@@ -98,7 +102,7 @@ _passport2.default.serializeUser(function (user, done) {
 
 _passport2.default.deserializeUser(function (user_id, done) {
   console.log('DESERIALIZING! ID is ', user_id);
-  _UserModel2.default.findById(user_id, function (err, user) {
+  _UserModel2.default.findById(user_id, '_id email first_name mi last_name formattedName', function (err, user) {
     if (err) {
       return done(err);
     }
@@ -109,7 +113,7 @@ _passport2.default.deserializeUser(function (user_id, done) {
 app.use(_passport2.default.initialize());
 app.use(_passport2.default.session());
 
-var appStore = (0, _redux.createStore)(_redux2.appReducers);
+var appStore = (0, _redux.createStore)(_redux2.appReducers, { auth: {}, users: {} }, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 
 app.use(function (req, res, next) {
   res.store = appStore;

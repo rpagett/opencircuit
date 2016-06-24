@@ -1,0 +1,50 @@
+@include media-breakpoint-down(sm) {
+  /* Force table to not be like tables anymore */
+  .flex-table {
+    table, thead, tbody, tr, th, td {
+      display: block;
+    }
+
+    thead tr {
+      display: none;
+    }
+
+    tr {
+      border: .1rem solid #ccc;
+    }
+
+    td {
+      /* Behave  like a "row" */
+      border: none;
+      //border-bottom: 1px solid #eee;
+      position: relative;
+      padding-left: 50%;
+      white-space: normal;
+      text-align: left;
+    }
+
+    td:before {
+      /* Now like a table header */
+      position: absolute;
+      /* Top/left values mimic padding */
+      top: .6rem;
+      left: .3rem;
+      width: 45%;
+      padding-right: .5rem;
+      white-space: nowrap;
+      font-variant: small-caps;
+      text-align: left;
+      font-weight: 1500;
+      content: attr(data-title);
+    }
+  }
+}
+
+.flex-table thead tr {
+
+  th {
+    border-top: 0;
+    font-weight: lighter;
+    letter-spacing: .15rem;
+  }
+}

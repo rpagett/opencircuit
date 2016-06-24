@@ -2,7 +2,8 @@ import Express from 'express';
 import Indicative from 'indicative';
 
 import User from '../User/UserModel';
-import { loginUser } from './AuthActions';
+import { loginUser, logoutUser } from './AuthActions';
+import { registrationValidation } from './AuthValidation';
 import { translateValidationErrors } from '../../helpers/functions'
 
 let router = Express.Router();
@@ -32,30 +33,7 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-  const rules = {
-    'email': 'required|email',
-    'password': 'required',
-    'password_verify': 'required|same:password',
-    'first_name': ['required', 'regex:^[a-zA-Z\.\s]+$'],
-    'mi': 'max:1',
-    'last_name': ['required', 'regex:^[a-zA-Z\-\s]+$'],
-    'phone': 'required',
-    'street': 'required',
-    'city': 'required',
-    'state': 'required|min:2|max:2|alpha',
-    'zip': ['required', 'regex:^[0-9]{5}$']
-  };
-
-  const messages = {
-    'first_name.regex': 'Your first name may only contain letters and spaces.',
-    'last_name.regex': 'Your last name may only contain letters, spaces, and dashes.',
-    'zip.regex': 'Please supply a 5-digit ZIP.'
-  };
-
-  const data = req.body;
-
-  Indicative
-    .validate(data, rules, messages)
+    registrationValidation(req.body)
     .then(() => {
       User.register(new User({email: req.body.email}), req.body.password, (err, user) => {
         if (err) {
@@ -101,6 +79,7 @@ router.post('/register', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
+  res.store.dispatch(logoutUser());
   req.logout();
   req.session.destroy(() => {
     res.redirect('/auth/login');

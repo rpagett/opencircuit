@@ -1,9 +1,23 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.MD5 = undefined;
+exports.fetchAPI = fetchAPI;
 exports.translateValidationErrors = translateValidationErrors;
+
+var _isomorphicFetch = require('isomorphic-fetch');
+
+var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function fetchAPI(url, options) {
+  var finalUrl = typeof window === 'undefined' ? 'http://localhost:8080' + url : url;
+  return (0, _isomorphicFetch2.default)(finalUrl, options);
+}
+
 function translateValidationErrors(errors) {
   /*
     We want to translate

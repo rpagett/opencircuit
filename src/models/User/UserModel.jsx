@@ -1,5 +1,14 @@
+import React from 'react';
+import { Link } from 'react-router';
 import Mongoose from 'mongoose';
 import PassportLocalMongoose from 'passport-local-mongoose';
+
+const UserRoles = Object.freeze({
+  Administrator: 1,
+  SiteManager: 2,
+  Tabulator: 3,
+  FormsManager: 4
+});
 
 const UserSchema = new Mongoose.Schema({
   first_name: String,
@@ -31,6 +40,14 @@ const UserSchema = new Mongoose.Schema({
 
 UserSchema.virtual('formattedName').get(function() {
   return this.first_name + ' ' + (this.mi ? this.mi + '. ' : '') + this.last_name;
+});
+
+UserSchema.virtual('profileLink').get(function() {
+  return `/users/${this.email}`;
+});
+
+UserSchema.virtual('emailLink').get(function() {
+  return `mailto:${this.email}`;
 });
 
 UserSchema.plugin(PassportLocalMongoose, {

@@ -18,6 +18,8 @@ var _UserModel2 = _interopRequireDefault(_UserModel);
 
 var _AuthActions = require('./AuthActions');
 
+var _AuthValidation = require('./AuthValidation');
+
 var _functions = require('../../helpers/functions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -48,29 +50,7 @@ router.post('/login', function (req, res) {
 });
 
 router.post('/register', function (req, res) {
-  var rules = {
-    'email': 'required|email',
-    'password': 'required',
-    'password_verify': 'required|same:password',
-    'first_name': ['required', 'regex:^[a-zA-Z\.\s]+$'],
-    'mi': 'max:1',
-    'last_name': ['required', 'regex:^[a-zA-Z\-\s]+$'],
-    'phone': 'required',
-    'street': 'required',
-    'city': 'required',
-    'state': 'required|min:2|max:2|alpha',
-    'zip': ['required', 'regex:^[0-9]{5}$']
-  };
-
-  var messages = {
-    'first_name.regex': 'Your first name may only contain letters and spaces.',
-    'last_name.regex': 'Your last name may only contain letters, spaces, and dashes.',
-    'zip.regex': 'Please supply a 5-digit ZIP.'
-  };
-
-  var data = req.body;
-
-  _indicative2.default.validate(data, rules, messages).then(function () {
+  (0, _AuthValidation.registrationValidation)(req.body).then(function () {
     _UserModel2.default.register(new _UserModel2.default({ email: req.body.email }), req.body.password, function (err, user) {
       if (err) {
         res.send({
@@ -123,6 +103,7 @@ router.post('/register', function (req, res) {
 });
 
 router.get('/logout', function (req, res) {
+  res.store.dispatch((0, _AuthActions.logoutUser)());
   req.logout();
   req.session.destroy(function () {
     res.redirect('/auth/login');

@@ -35,6 +35,10 @@ var _AuthViews = require('./models/Auth/AuthViews');
 
 var AuthView = _interopRequireWildcard(_AuthViews);
 
+var _UserViews = require('./models/User/UserViews');
+
+var UserView = _interopRequireWildcard(_UserViews);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -46,7 +50,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function getAppRoutes(store) {
-
   function authOnly(nextState, replace) {
     var authUser = store.getState().auth.user;
 
@@ -70,7 +73,12 @@ function getAppRoutes(store) {
       _reactRouter.Route,
       { component: _app2.default, onEnter: authOnly },
       _react2.default.createElement(_reactRouter.IndexRoute, { component: RootView.Home }),
-      _react2.default.createElement(_reactRouter.Route, { path: 'about', component: RootView.About })
+      _react2.default.createElement(
+        _reactRouter.Route,
+        { path: '/users' },
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: UserView.Index }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':email', component: UserView.Show })
+      )
     ),
     _react2.default.createElement(
       _reactRouter.Route,

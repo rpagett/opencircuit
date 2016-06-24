@@ -1,6 +1,5 @@
 import React from 'react';
 import Formsy from 'formsy-react';
-import fetch from 'isomorphic-fetch';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -8,6 +7,7 @@ import { connect } from 'react-redux';
 import * as AuthActions from './AuthActions';
 import { FormInput, StateSelect, PhoneInput } from '../../forms/components';
 import ProgressButton from '../../helpers/ProgressButton';
+import { fetchAPI } from '../../helpers/functions';
 
 class _RegistrationForm extends React.Component {
   constructor() {
@@ -23,7 +23,7 @@ class _RegistrationForm extends React.Component {
     console.log(data);
 
     this.setState({ buttonState: 'loading' });
-    fetch('/auth/register', {
+    fetchAPI('/auth/register', {
       credentials: 'same-origin',
       method: 'POST',
       headers: {

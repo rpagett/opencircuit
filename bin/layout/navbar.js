@@ -42,10 +42,10 @@ var _UserDropdown = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'nav-item right dropdown' },
+        { className: 'nav-item right dropdown user-dropdown' },
         _react2.default.createElement(
           'a',
-          { className: 'user-dropdown nav-link dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+          { className: 'nav-link dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
           _react2.default.createElement(_gravatars.MiniGravatar, { email: this.props.user.email }),
           '  ' + this.props.user.formattedName
         ),
@@ -115,14 +115,14 @@ var NavBar = function (_React$Component2) {
               _react2.default.createElement(
                 _reactRouter.Link,
                 { to: '/' },
-                _react2.default.createElement('img', { src: '/assets/img/NavbarLogo.png', alt: 'OpenCircuit', className: 'nav-logo' })
+                _react2.default.createElement('img', { src: '/assets/img/NavbarLogo.png', alt: 'OpenCircuit', className: 'nav-logo', 'aria-hidden': 'true' })
               )
             ),
             _react2.default.createElement(
               'div',
               { className: 'nav-item' },
               _react2.default.createElement(
-                _reactRouter.Link,
+                _reactRouter.IndexLink,
                 { to: '/', className: 'nav-link', activeClassName: 'active' },
                 _react2.default.createElement(_Icon2.default, { shape: 'home' }),
                 ' Dashboard'
@@ -156,8 +156,8 @@ var NavBar = function (_React$Component2) {
                   'Circuit'
                 ),
                 _react2.default.createElement(
-                  'a',
-                  { className: 'dropdown-item', href: '#' },
+                  _reactRouter.Link,
+                  { to: '/users', className: 'dropdown-item' },
                   'Users'
                 ),
                 _react2.default.createElement(

@@ -8,8 +8,8 @@ import { MiniGravatar } from '../helpers/gravatars';
 class _UserDropdown extends React.Component {
   render() {
     return (
-      <div className="nav-item right dropdown">
-        <a className="user-dropdown nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      <div className="nav-item right dropdown user-dropdown">
+        <a className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
           <MiniGravatar email={ this.props.user.email } />{ '  ' + this.props.user.formattedName }
         </a>
         <div className="dropdown-menu">
@@ -45,14 +45,14 @@ class NavBar extends React.Component {
           <div className="nav navbar-nav flex-nav">
             <div className="nav-item">
               <Link to="/">
-                <img src="/assets/img/NavbarLogo.png" alt="OpenCircuit" className="nav-logo" />
+                <img src="/assets/img/NavbarLogo.png" alt="OpenCircuit" className="nav-logo" aria-hidden="true" />
               </Link>
             </div>
 
             <div className="nav-item">
-              <Link to="/" className="nav-link" activeClassName="active">
+              <IndexLink to="/" className="nav-link" activeClassName="active">
                 <Icon shape="home" /> Dashboard
-              </Link>
+              </IndexLink>
             </div>
 
             <div className="nav-item">
@@ -67,7 +67,7 @@ class NavBar extends React.Component {
               </a>
               <div className="dropdown-menu">
                 <a className="dropdown-item" href="#">Circuit</a>
-                <a className="dropdown-item" href="#">Users</a>
+                <Link to="/users" className="dropdown-item">Users</Link>
                 <a className="dropdown-item" href="#">Etc.</a>
                 <div className="dropdown-divider"></div>
                 <a className="dropdown-item" href="#">Separated link</a>

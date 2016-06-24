@@ -7,6 +7,6 @@ export const loginUser = (user) => {
 
 export const logoutUser = () => {
   return {
-    type: 'LOGOUT_USER',
+    type: 'LOGOUT_USER'
   }
 }

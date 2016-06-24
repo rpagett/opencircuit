@@ -4,7 +4,7 @@
   "description": "opencircuit.us",
   "main": "bin/server.js",
   "scripts": {
-    "start": "nodemon -C --watch dist/js/bundle.js bin/server.js",
+    "start": "nodemon --watch dist/js/bundle.js bin/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,6 +17,7 @@
     "express-session": "^1.13.0",
     "font-awesome": "^4.6.3",
     "formsy-react": "^0.18.0",
+    "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.4",
     "mongodb": "^2.1.21",
@@ -33,7 +34,8 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.4.0",
     "react-select2-wrapper": "^0.6.1",
-    "redux": "^3.5.2"
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -53,6 +55,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-filter": "^4.0.0",
     "gulp-load-plugins": "^1.2.2",
+    "gulp-nodemon": "^2.1.0",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
