@@ -32,7 +32,7 @@ var AppContent = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         "div",
-        { className: "container-fluid app-container" },
+        { className: "app-container" },
         this.props.children
       );
     }

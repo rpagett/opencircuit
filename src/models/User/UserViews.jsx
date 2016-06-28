@@ -6,6 +6,7 @@ import LoadingCube from '../../helpers/LoadingCube';
 import UserList from './UserList';
 import { ProfileGravatar } from '../../helpers/gravatars';
 import { Prop, Val } from '../../layout/ModelInfo';
+import * as UserForms from './UserForms';
 
 export class Index extends React.Component {
   render() {
@@ -97,5 +98,20 @@ export class Show extends React.Component {
         <UserProfile email={ this.props.params.email } />
       </div>
     );
+  }
+}
+
+export class Edit extends React.Component {
+  render() {
+    return (
+      <div className="container-fluid">
+        <h1 className="page-header">Editing User</h1>
+        <div className="row">
+          <div className="col-sm-offset-1 col-sm-10">
+            <UserForms.Edit email={ this.props.params.email }/>
+          </div>
+        </div>
+      </div>
+    )
   }
 }

@@ -1,10 +1,10 @@
 import Indicative from 'indicative';
 
-export function registrationValidation(data = { }) {
+export default function validateUser(data = { }) {
   const rules = {
     'email': 'required|email',
-    'password': 'required',
-    'password_verify': 'required|same:password',
+    'password': 'required_if:password_verify',
+    'password_verify': 'required_if:password|same:password',
     'first_name': ['required', 'regex:^[a-zA-Z\.\s]+$'],
     'mi': 'max:1',
     'last_name': ['required', 'regex:^[a-zA-Z\-\s]+$'],
@@ -15,21 +15,22 @@ export function registrationValidation(data = { }) {
     'zip': ['required', 'regex:^[0-9]{5}$']
   };
 
-  const messages = {
-    'first_name.regex': 'Your first name may only contain letters and spaces.',
-    'last_name.regex': 'Your last name may only contain letters, spaces, and dashes.',
-    'zip.regex': 'Please supply a 5-digit ZIP.'
-  };
-
-  return Indicative.validate(data, rules, messages);
-}
-
-export function registrationSanitation(data = { }) {
-  const rules = {
+  const sanitation = {
     'first_name': 'capitalize',
     'mi': 'capitalize',
     'last_name': 'title',
     'city': 'title',
     'zip': 'toInt'
   }
+
+  const messages = {
+    'first_name.regex': 'Your first name may only contain letters and spaces.',
+    'last_name.regex': 'Your last name may only contain letters, spaces, and dashes.',
+    'zip.regex': 'Please supply a 5-digit ZIP.'
+  };
+
+  return Indicative.validateAll(data, rules, messages)
+    .then(data => {
+      return Indicative.sanitize(data, sanitation);
+    })
 }

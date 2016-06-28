@@ -45,6 +45,7 @@
 .sk-folding-cube .sk-cube2:before {
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
+  background-color: $brand-info;
 }
 .sk-folding-cube .sk-cube3:before {
   -webkit-animation-delay: 0.6s;
@@ -53,7 +54,9 @@
 .sk-folding-cube .sk-cube4:before {
   -webkit-animation-delay: 0.9s;
   animation-delay: 0.9s;
+  background-color: $brand-info;
 }
+
 @-webkit-keyframes sk-foldCubeAngle {
   0%, 10% {
     -webkit-transform: perspective(140px) rotateX(-180deg);

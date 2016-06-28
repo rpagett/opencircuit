@@ -62,6 +62,22 @@ var users = exports.users = function users() {
         profileLoading: false
       });
 
+    case 'USER_EDIT_RECEIVED_DATA':
+      return _extends({}, state, {
+        editFormData: action.user,
+        editFormLoading: false
+      });
+
+    case 'USER_EDIT_BEGIN_LOADING':
+      return _extends({}, state, {
+        editFormLoading: true
+      });
+
+    case 'USER_EDIT_STOP_LOADING':
+      return _extends({}, state, {
+        editFormLoading: false
+      });
+
     default:
       return state;
   }

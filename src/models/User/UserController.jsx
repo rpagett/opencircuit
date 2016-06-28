@@ -1,5 +1,6 @@
 import Express from 'express';
 import User from './UserModel';
+import validateUser from './UserValidation';
 
 let router = Express.Router();
 // routes are '/api/users/...'
@@ -22,12 +23,20 @@ router.get('/', (req, res) => {
 
 router.route('/:email')
   .get((req, res) => {
-    User.findOne({ email: req.params.email }, '-password -hash -salt')
+    User.findOne({ email: req.params.email }, '-password -hash -salt -createdAt -updatedAt')
       .then(user => {
-        res.json({
-          success: true,
-          user: user
-        });
+        if (!user) {
+          res.json({
+            success: false,
+            error: 'User not found.'
+          })
+        }
+        else {
+          res.json({
+            success: true,
+            user: user
+          });
+        }
       })
       .catch(err => {
         res.json({
@@ -35,6 +44,22 @@ router.route('/:email')
           error: err
         });
       });
+  })
+  .patch((req, res) => {
+    console.log('Body is:', req.body);
+    validateUser(req.body)
+      .then(() => {
+        res.json({
+          success: true,
+          teehee: true
+        })
+      })
+      .catch((errors) => {
+          res.json({
+          success: false,
+          errors
+        })
+      })
   });
 
 export default router;

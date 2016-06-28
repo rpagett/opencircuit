@@ -3,13 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PhoneInput = exports.StateSelect = exports.FormInput = undefined;
+exports.FormStatic = exports.PhoneInput = exports.StateSelect = exports.LiberatedFormInput = exports.FormInput = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _class, _temp, _dec, _class2, _dec2, _class3, _dec3, _class4;
+var _class, _temp, _dec, _class2, _class3, _temp2, _dec2, _class4, _dec3, _class5;
 
 var _react = require('react');
 
@@ -141,8 +141,65 @@ var FormInput = exports.FormInput = (_dec = (0, _formsyReact.Decorator)(), _dec(
 }(_react2.default.Component)) || _class2);
 ;
 
-var StateSelect = exports.StateSelect = (_dec2 = (0, _formsyReact.Decorator)(), _dec2(_class3 = function (_React$Component3) {
-  _inherits(StateSelect, _React$Component3);
+var LiberatedFormInput = exports.LiberatedFormInput = (_temp2 = _class3 = function (_React$Component3) {
+  _inherits(LiberatedFormInput, _React$Component3);
+
+  function LiberatedFormInput() {
+    _classCallCheck(this, LiberatedFormInput);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(LiberatedFormInput).apply(this, arguments));
+  }
+
+  _createClass(LiberatedFormInput, [{
+    key: 'render',
+    value: function render() {
+      var className = 'form-group row';
+
+      return _react2.default.createElement(
+        'div',
+        { className: className },
+        _react2.default.createElement(
+          'label',
+          { htmlFor: this.props.name, className: 'col-xs-12 col-sm-4 form-control-label' },
+          this.props.label
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'col-xs-12 col-sm-8' },
+          _react2.default.createElement(
+            'div',
+            { className: 'input-group' },
+            _react2.default.createElement('input', _extends({
+              type: this.props.inputType || 'text',
+              name: this.props.name,
+              className: 'form-control'
+            }, this.props)),
+            this.props.afterInput ? _react2.default.createElement(
+              'span',
+              { className: 'input-group-addon' },
+              this.props.afterInput
+            ) : null
+          ),
+          _react2.default.createElement(
+            FormError,
+            null,
+            this.props.touched && this.props.error
+          )
+        )
+      );
+    }
+  }]);
+
+  return LiberatedFormInput;
+}(_react2.default.Component), _class3.propTypes = {
+  afterInput: _react2.default.PropTypes.string,
+  name: _react2.default.PropTypes.string.isRequired,
+  type: _react2.default.PropTypes.string
+}, _temp2);
+;
+
+var StateSelect = exports.StateSelect = (_dec2 = (0, _formsyReact.Decorator)(), _dec2(_class4 = function (_React$Component4) {
+  _inherits(StateSelect, _React$Component4);
 
   function StateSelect() {
     _classCallCheck(this, StateSelect);
@@ -199,9 +256,9 @@ var StateSelect = exports.StateSelect = (_dec2 = (0, _formsyReact.Decorator)(), 
   }]);
 
   return StateSelect;
-}(_react2.default.Component)) || _class3);
-var PhoneInput = exports.PhoneInput = (_dec3 = (0, _formsyReact.Decorator)(), _dec3(_class4 = function (_React$Component4) {
-  _inherits(PhoneInput, _React$Component4);
+}(_react2.default.Component)) || _class4);
+var PhoneInput = exports.PhoneInput = (_dec3 = (0, _formsyReact.Decorator)(), _dec3(_class5 = function (_React$Component5) {
+  _inherits(PhoneInput, _React$Component5);
 
   function PhoneInput() {
     _classCallCheck(this, PhoneInput);
@@ -264,4 +321,44 @@ var PhoneInput = exports.PhoneInput = (_dec3 = (0, _formsyReact.Decorator)(), _d
   }]);
 
   return PhoneInput;
-}(_react2.default.Component)) || _class4);
+}(_react2.default.Component)) || _class5);
+
+var FormStatic = exports.FormStatic = function (_React$Component6) {
+  _inherits(FormStatic, _React$Component6);
+
+  function FormStatic() {
+    _classCallCheck(this, FormStatic);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(FormStatic).apply(this, arguments));
+  }
+
+  _createClass(FormStatic, [{
+    key: 'render',
+    value: function render() {
+      var className = 'form-group row';
+
+      return _react2.default.createElement(
+        'div',
+        { className: className },
+        _react2.default.createElement(
+          'label',
+          { htmlFor: this.props.name, className: 'col-xs-12 col-sm-4 form-control-label' },
+          this.props.label
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'col-xs-12 col-sm-8' },
+          _react2.default.createElement(
+            'div',
+            { className: 'form-control-static' },
+            this.props.fill
+          )
+        )
+      );
+    }
+  }]);
+
+  return FormStatic;
+}(_react2.default.Component);
+
+;

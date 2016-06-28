@@ -36,6 +36,7 @@ export function getAppRoutes(store) {
         <Route path="/users">
           <IndexRoute component={ UserView.Index } />
           <Route path=":email" component={ UserView.Show } />
+          <Route path=":email/edit" component={ UserView.Edit } />
         </Route>
       </Route>
 

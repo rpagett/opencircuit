@@ -82,6 +82,43 @@ export class FormInput extends React.Component {
   }
 };
 
+export class LiberatedFormInput extends React.Component {
+  static propTypes = {
+    afterInput: React.PropTypes.string,
+    name: React.PropTypes.string.isRequired,
+    type: React.PropTypes.string
+  }
+
+  render() {
+    const className='form-group row';
+
+    return (
+      <div className={ className }>
+        <label htmlFor={ this.props.name } className="col-xs-12 col-sm-4 form-control-label">
+          { this.props.label }
+        </label>
+
+        <div className="col-xs-12 col-sm-8">
+          <div className="input-group">
+            <input
+              type={ this.props.inputType || 'text' }
+              name={ this.props.name }
+              className="form-control"
+              { ...this.props }
+            />
+
+            {( this.props.afterInput ? <span className="input-group-addon">{ this.props.afterInput }</span> : null )}
+          </div>
+
+          <FormError>
+            { this.props.touched && this.props.error }
+          </FormError>
+        </div>
+      </div>
+    );
+  }
+};
+
 @FormsyDecorator()
 export class StateSelect extends React.Component {
   selectOptions() {
@@ -220,3 +257,23 @@ export class PhoneInput extends React.Component {
     );
   }
 }
+
+export class FormStatic extends React.Component {
+  render() {
+    const className='form-group row';
+
+    return (
+      <div className={ className }>
+        <label htmlFor={ this.props.name } className="col-xs-12 col-sm-4 form-control-label">
+          { this.props.label }
+        </label>
+
+        <div className="col-xs-12 col-sm-8">
+          <div className="form-control-static">
+            { this.props.fill }
+          </div>
+        </div>
+      </div>
+    );
+  }
+};

@@ -77,7 +77,8 @@ function getAppRoutes(store) {
         _reactRouter.Route,
         { path: '/users' },
         _react2.default.createElement(_reactRouter.IndexRoute, { component: UserView.Index }),
-        _react2.default.createElement(_reactRouter.Route, { path: ':email', component: UserView.Show })
+        _react2.default.createElement(_reactRouter.Route, { path: ':email', component: UserView.Show }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':email/edit', component: UserView.Edit })
       )
     ),
     _react2.default.createElement(

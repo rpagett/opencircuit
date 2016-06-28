@@ -13,8 +13,16 @@ var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function fetchAPI(url, options) {
+function fetchAPI(url) {
+  var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
   var finalUrl = typeof window === 'undefined' ? 'http://localhost:8080' + url : url;
+
+  options.headers = options.headers || {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  };
+
   return (0, _isomorphicFetch2.default)(finalUrl, options);
 }
 

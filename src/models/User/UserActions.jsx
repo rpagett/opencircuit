@@ -1,4 +1,5 @@
-import { fetchAPI } from '../../helpers/functions';
+import { SubmissionError } from 'redux-form';
+import { fetchAPI, translateValidationErrors } from '../../helpers/functions';
 
 export const fetchUserList = (endpoint, addedBody = { }) => {
   return (dispatch, getState) => {
@@ -115,4 +116,90 @@ function profileError(error) {
     type: 'USER_PROFILE_ERROR',
     error: error
   }
+}
+
+function editBeginLoading() {
+  return {
+    type: 'USER_EDIT_BEGIN_LOADING'
+  }
+}
+
+function editStopLoading() {
+  return {
+    type: 'USER_EDIT_STOP_LOADING'
+  }
+}
+
+export function editError(error) {
+  return {
+    type: 'USER_EDIT_ERROR',
+    error: error
+  }
+}
+
+export function fetchEditData(email) {
+  return dispatch => {
+    dispatch(editBeginLoading());
+    fetchAPI(`/api/users/${email}`, {
+      credentials: 'same-origin',
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        return res.json()
+      })
+      .then(res => {
+        if (!res.success) {
+          throw new Error(res.error);
+        }
+
+        dispatch(receivedEditData(res.user));
+      })
+      .catch(error => {
+        dispatch(editError(error));
+      });
+  }
+}
+
+function receivedEditData(user) {
+  return {
+    type: 'USER_EDIT_RECEIVED_DATA',
+    user: user
+  }
+}
+
+export function submitEditData(values) {
+  return dispatch => {
+    return fetchAPI(`/api/users/${values.email}`, {
+      credentials: 'same-origin',
+      method: 'PATCH',
+      body: JSON.stringify(values)
+    })
+      .then(res => {
+        return res.json()
+      })
+      .then(res => {
+        if (res.success === true) {
+          console.log('Success!', res);
+          return res;
+        }
+        else {
+          console.log('Errors', res.errors);
+          const errors = translateValidationErrors(res.errors);
+          console.log('Translated', errors)
+          throw new Error(errors);
+        }
+      })
+      //.catch(errors => {
+      //  submissionError(errors);
+      //})
+  }
+}
+
+function submissionError(errors) {
+  console.log('ERRORS', errors);
+  throw new SubmissionError(errors);
 }

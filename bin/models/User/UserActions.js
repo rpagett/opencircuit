@@ -4,6 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.fetchProfile = exports.fetchUserList = undefined;
+exports.editError = editError;
+exports.fetchEditData = fetchEditData;
+exports.submitEditData = submitEditData;
+
+var _reduxForm = require('redux-form');
 
 var _functions = require('../../helpers/functions');
 
@@ -124,4 +129,84 @@ function profileError(error) {
     type: 'USER_PROFILE_ERROR',
     error: error
   };
+}
+
+function editBeginLoading() {
+  return {
+    type: 'USER_EDIT_BEGIN_LOADING'
+  };
+}
+
+function editStopLoading() {
+  return {
+    type: 'USER_EDIT_STOP_LOADING'
+  };
+}
+
+function editError(error) {
+  return {
+    type: 'USER_EDIT_ERROR',
+    error: error
+  };
+}
+
+function fetchEditData(email) {
+  return function (dispatch) {
+    dispatch(editBeginLoading());
+    (0, _functions.fetchAPI)('/api/users/' + email, {
+      credentials: 'same-origin',
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(function (res) {
+      return res.json();
+    }).then(function (res) {
+      if (!res.success) {
+        throw new Error(res.error);
+      }
+
+      dispatch(receivedEditData(res.user));
+    }).catch(function (error) {
+      dispatch(editError(error));
+    });
+  };
+}
+
+function receivedEditData(user) {
+  return {
+    type: 'USER_EDIT_RECEIVED_DATA',
+    user: user
+  };
+}
+
+function submitEditData(values) {
+  return function (dispatch) {
+    return (0, _functions.fetchAPI)('/api/users/' + values.email, {
+      credentials: 'same-origin',
+      method: 'PATCH',
+      body: JSON.stringify(values)
+    }).then(function (res) {
+      return res.json();
+    }).then(function (res) {
+      if (res.success === true) {
+        console.log('Success!', res);
+        return res;
+      } else {
+        console.log('Errors', res.errors);
+        var errors = (0, _functions.translateValidationErrors)(res.errors);
+        console.log('Translated', errors);
+        throw new Error(errors);
+      }
+    });
+    //.catch(errors => {
+    //  submissionError(errors);
+    //})
+  };
+}
+
+function submissionError(errors) {
+  console.log('ERRORS', errors);
+  throw new _reduxForm.SubmissionError(errors);
 }

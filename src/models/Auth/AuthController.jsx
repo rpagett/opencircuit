@@ -3,7 +3,7 @@ import Indicative from 'indicative';
 
 import User from '../User/UserModel';
 import { loginUser, logoutUser } from './AuthActions';
-import { registrationValidation } from './AuthValidation';
+import validateUser from '../User/UserValidation';
 import { translateValidationErrors } from '../../helpers/functions'
 
 let router = Express.Router();
@@ -33,7 +33,7 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-    registrationValidation(req.body)
+    validateUser(req.body)
     .then(() => {
       User.register(new User({email: req.body.email}), req.body.password, (err, user) => {
         if (err) {

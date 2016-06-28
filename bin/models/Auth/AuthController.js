@@ -18,7 +18,9 @@ var _UserModel2 = _interopRequireDefault(_UserModel);
 
 var _AuthActions = require('./AuthActions');
 
-var _AuthValidation = require('./AuthValidation');
+var _UserValidation = require('../User/UserValidation');
+
+var _UserValidation2 = _interopRequireDefault(_UserValidation);
 
 var _functions = require('../../helpers/functions');
 
@@ -50,7 +52,7 @@ router.post('/login', function (req, res) {
 });
 
 router.post('/register', function (req, res) {
-  (0, _AuthValidation.registrationValidation)(req.body).then(function () {
+  (0, _UserValidation2.default)(req.body).then(function () {
     _UserModel2.default.register(new _UserModel2.default({ email: req.body.email }), req.body.password, function (err, user) {
       if (err) {
         res.send({

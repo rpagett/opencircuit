@@ -59,6 +59,25 @@ export const users = (state = { }, action) => {
         profileLoading: false
       }
 
+    case 'USER_EDIT_RECEIVED_DATA':
+      return {
+        ...state,
+        editFormData: action.user,
+        editFormLoading: false
+      }
+
+    case 'USER_EDIT_BEGIN_LOADING':
+      return {
+        ...state,
+        editFormLoading: true
+      }
+
+    case 'USER_EDIT_STOP_LOADING':
+      return {
+        ...state,
+        editFormLoading: false
+      }
+
     default:
       return state;
   }

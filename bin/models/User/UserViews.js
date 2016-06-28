@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Show = exports._UserProfile = exports.Index = undefined;
+exports.Edit = exports.Show = exports._UserProfile = exports.Index = undefined;
 
 var _class, _temp;
 
@@ -30,6 +30,10 @@ var _UserList2 = _interopRequireDefault(_UserList);
 var _gravatars = require('../../helpers/gravatars');
 
 var _ModelInfo = require('../../layout/ModelInfo');
+
+var _UserForms = require('./UserForms');
+
+var UserForms = _interopRequireWildcard(_UserForms);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -211,4 +215,40 @@ var Show = exports.Show = function (_React$Component3) {
   }]);
 
   return Show;
+}(_react2.default.Component);
+
+var Edit = exports.Edit = function (_React$Component4) {
+  _inherits(Edit, _React$Component4);
+
+  function Edit() {
+    _classCallCheck(this, Edit);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Edit).apply(this, arguments));
+  }
+
+  _createClass(Edit, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'container-fluid' },
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          'Editing User'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-sm-offset-1 col-sm-10' },
+            _react2.default.createElement(UserForms.Edit, { email: this.props.params.email })
+          )
+        )
+      );
+    }
+  }]);
+
+  return Edit;
 }(_react2.default.Component);
