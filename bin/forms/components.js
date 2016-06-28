@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FormStatic = exports.PhoneInput = exports.StateSelect = exports.LiberatedFormInput = exports.FormInput = undefined;
+exports.ReduxForm = exports.FormStatic = exports.PhoneInput = exports.StateSelect = exports.LiberatedFormInput = exports.FormInput = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -15,6 +15,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = require('react-redux');
+
 var _reactSelect = require('react-select');
 
 var _reactSelect2 = _interopRequireDefault(_reactSelect);
@@ -24,6 +26,12 @@ var _formsyReact = require('formsy-react');
 var _reactInputMask = require('react-input-mask');
 
 var _reactInputMask2 = _interopRequireDefault(_reactInputMask);
+
+var _FormActions = require('./FormActions');
+
+var FormActions = _interopRequireWildcard(_FormActions);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -141,19 +149,28 @@ var FormInput = exports.FormInput = (_dec = (0, _formsyReact.Decorator)(), _dec(
 }(_react2.default.Component)) || _class2);
 ;
 
-var LiberatedFormInput = exports.LiberatedFormInput = (_temp2 = _class3 = function (_React$Component3) {
-  _inherits(LiberatedFormInput, _React$Component3);
+var _LiberatedFormInput = (_temp2 = _class3 = function (_React$Component3) {
+  _inherits(_LiberatedFormInput, _React$Component3);
 
-  function LiberatedFormInput() {
-    _classCallCheck(this, LiberatedFormInput);
+  function _LiberatedFormInput() {
+    _classCallCheck(this, _LiberatedFormInput);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(LiberatedFormInput).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_LiberatedFormInput).apply(this, arguments));
   }
 
-  _createClass(LiberatedFormInput, [{
+  _createClass(_LiberatedFormInput, [{
+    key: 'updateValue',
+    value: function updateValue(e) {
+      this.props.updateField(e.currentTarget.value);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var className = 'form-group row';
+
+      if (this.props.error) {
+        className += ' has-danger';
+      }
 
       return _react2.default.createElement(
         'div',
@@ -170,8 +187,8 @@ var LiberatedFormInput = exports.LiberatedFormInput = (_temp2 = _class3 = functi
             'div',
             { className: 'input-group' },
             _react2.default.createElement('input', _extends({
-              type: this.props.inputType || 'text',
               name: this.props.name,
+              onChange: this.updateValue.bind(this),
               className: 'form-control'
             }, this.props)),
             this.props.afterInput ? _react2.default.createElement(
@@ -183,20 +200,42 @@ var LiberatedFormInput = exports.LiberatedFormInput = (_temp2 = _class3 = functi
           _react2.default.createElement(
             FormError,
             null,
-            this.props.touched && this.props.error
+            this.props.error
           )
         )
       );
     }
   }]);
 
-  return LiberatedFormInput;
+  return _LiberatedFormInput;
 }(_react2.default.Component), _class3.propTypes = {
   afterInput: _react2.default.PropTypes.string,
   name: _react2.default.PropTypes.string.isRequired,
-  type: _react2.default.PropTypes.string
+  type: _react2.default.PropTypes.string,
+  error: _react2.default.PropTypes.string,
+  formStore: _react2.default.PropTypes.string.isRequired
+}, _class3.defaultProps = {
+  type: 'text',
+  value: ''
 }, _temp2);
+
 ;
+
+var mapStateToFormInputProps = function mapStateToFormInputProps(state, props) {
+  return {
+    value: state.form[props.formStore][props.name]
+  };
+};
+
+var mapDispatchToFormInputProps = function mapDispatchToFormInputProps(dispatch, props) {
+  return {
+    updateField: function updateField(value) {
+      dispatch(FormActions.updateField(props.formStore, props.name, value));
+    }
+  };
+};
+
+var LiberatedFormInput = exports.LiberatedFormInput = (0, _reactRedux.connect)(mapStateToFormInputProps, mapDispatchToFormInputProps)(_LiberatedFormInput);
 
 var StateSelect = exports.StateSelect = (_dec2 = (0, _formsyReact.Decorator)(), _dec2(_class4 = function (_React$Component4) {
   _inherits(StateSelect, _React$Component4);
@@ -362,3 +401,42 @@ var FormStatic = exports.FormStatic = function (_React$Component6) {
 }(_react2.default.Component);
 
 ;
+
+var ReduxForm = exports.ReduxForm = function (_React$Component7) {
+  _inherits(ReduxForm, _React$Component7);
+
+  function ReduxForm() {
+    _classCallCheck(this, ReduxForm);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(ReduxForm).apply(this, arguments));
+  }
+
+  _createClass(ReduxForm, [{
+    key: 'recursivelyCloneChildren',
+    value: function recursivelyCloneChildren(children) {
+      var _this8 = this;
+
+      return _react2.default.Children.map(children, function (child) {
+        if (!_react2.default.isValidElement(child)) {
+          return child;
+        }
+
+        var childProps = { formStore: _this8.props.subStore };
+        childProps.children = _this8.recursiveCloneChildren(child.props.children);
+
+        return _react2.default.cloneElement(child, childProps);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'form',
+        this.props,
+        this.recursivelyCloneChildren(this.props.children)
+      );
+    }
+  }]);
+
+  return ReduxForm;
+}(_react2.default.Component);

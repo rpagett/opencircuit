@@ -157,26 +157,31 @@ export function fetchEditData(email) {
         }
 
         dispatch(receivedEditData(res.user));
+        dispatch(editStopLoading());
+        console.log('Made it to end');
       })
       .catch(error => {
+        console.log('In catch block', error);
         dispatch(editError(error));
       });
   }
 }
 
 function receivedEditData(user) {
+  console.log('Dispatching!');
   return {
-    type: 'USER_EDIT_RECEIVED_DATA',
-    user: user
+    type: 'FORM_RECEIVED_DATA',
+    formStore: 'user_edit',
+    model: user
   }
 }
 
-export function submitEditData(values) {
+export function submitEditData(formData) {
   return dispatch => {
-    return fetchAPI(`/api/users/${values.email}`, {
+    fetchAPI(`/api/users/${formData.get('email')}`, {
       credentials: 'same-origin',
       method: 'PATCH',
-      body: JSON.stringify(values)
+      body: formData
     })
       .then(res => {
         return res.json()
@@ -193,13 +198,15 @@ export function submitEditData(values) {
           throw new Error(errors);
         }
       })
-      //.catch(errors => {
-      //  submissionError(errors);
-      //})
+      .catch(errors => {
+        dispatch(submissionError(errors));
+      })
   }
 }
 
 function submissionError(errors) {
-  console.log('ERRORS', errors);
-  throw new SubmissionError(errors);
+  return {
+    type: 'USER_EDIT_SUBMISSION_ERROR',
+    errors: errors
+  }
 }

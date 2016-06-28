@@ -66,6 +66,13 @@ export const users = (state = { }, action) => {
         editFormLoading: false
       }
 
+    case 'USER_EDIT_ERROR':
+      return {
+        ...state,
+        editFormLoading: false,
+        editFormError: action.error.toString()
+      }
+
     case 'USER_EDIT_BEGIN_LOADING':
       return {
         ...state,
@@ -76,6 +83,12 @@ export const users = (state = { }, action) => {
       return {
         ...state,
         editFormLoading: false
+      }
+
+    case 'USER_EDIT_SUBMISSION_ERROR':
+      return {
+        ...state,
+        editFormErrors: action.errors
       }
 
     default:

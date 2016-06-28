@@ -68,6 +68,12 @@ var users = exports.users = function users() {
         editFormLoading: false
       });
 
+    case 'USER_EDIT_ERROR':
+      return _extends({}, state, {
+        editFormLoading: false,
+        editFormError: action.error.toString()
+      });
+
     case 'USER_EDIT_BEGIN_LOADING':
       return _extends({}, state, {
         editFormLoading: true
@@ -76,6 +82,11 @@ var users = exports.users = function users() {
     case 'USER_EDIT_STOP_LOADING':
       return _extends({}, state, {
         editFormLoading: false
+      });
+
+    case 'USER_EDIT_SUBMISSION_ERROR':
+      return _extends({}, state, {
+        editFormErrors: action.errors
       });
 
     default:

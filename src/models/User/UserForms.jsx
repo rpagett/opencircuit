@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
 
-import { LiberatedFormInput as FormInput, FormStatic } from '../../forms/components';
+import { ReduxForm, LiberatedFormInput as FormInput, FormStatic } from '../../forms/components';
 import LoadingCube from '../../helpers/LoadingCube';
 import * as UserActions from './UserActions';
 
@@ -11,24 +10,30 @@ class _Edit extends React.Component {
     isLoading: true
   }
 
-  editSubmit(values) {
-    console.log('VALUES ARE ', values);
+  submit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
 
-    this.props.submitEditData(values)
-      .then(data => {
-        // do stuff
-      })
-      .catch(errors => {
-        throw new SubmissionError(errors);
-      });
+    this.props.submitEditData(formData);
   }
+
+  // TODO tomorrow: Create a form container component to manage state and take care of everything so that
+  //    EditForm can be completely dumb. Should affect LiberatedFormInput and FormStatic and override onSubmit.
+  //    Validation happens server-side, so it only needs an endpoint, identifier, and formStore [subStore?]
 
   componentDidMount() {
     this.props.fetchUserData(this.props.email);
   }
 
   render() {
-    if (this.props.isLoading) {
+    if (this.props.globalError) {
+      return (
+        <div>
+          <strong>Error: { this.props.globalError }</strong>
+        </div>
+      );
+    }
+    else if (this.props.isLoading) {
       return (
         <div>
           <LoadingCube show={ true }/>
@@ -36,51 +41,52 @@ class _Edit extends React.Component {
       );
     }
 
-    console.log(this.props.initialValues);
 
+    //const values = this.props.values;
+    //const errors = this.props.errors;
+    //console.log(values);
+
+    console.log('Getting ready to return.');
     return (
-      <form onSubmit={ this.props.handleSubmit(this.editSubmit.bind(this)) }>
-        <FormStatic name="email" label="Email" fill={ this.props.initialValues.email } />
-        <Field component={ FormInput } name="first_name" label="First Name" />
-        <Field component={ FormInput } name="mi" label="Middle Initial" />
-        <Field component={ FormInput } name="last_name" label="Last Name" />
-        <Field component={ FormInput } name="street" label="Street" />
-        <Field component={ FormInput } name="address_2" label="Address 2" />
-        <Field component={ FormInput } name="city" label="City" />
-        <Field component={ FormInput } name="zip" label="ZIP" />
+      <ReduxForm
+        subStore="user_edit"
+        //onSubmit={ this.submit.bind(this) }
+      >
+        <FormStatic name="email" label="Email" />
+        <FormInput name="first_name" label="First Name"/>
+        <FormInput name="mi" label="Middle Initial" />
+        <FormInput name="last_name" label="Last Name" />
+        <FormInput name="street" label="Street" />
+        <FormInput name="address_2" label="Address 2" />
+        <FormInput name="city" label="City" />
+        <FormInput name="zip" label="ZIP" />
 
-        <div className="row">
-          <div className="pull-center">
-            <button type="submit" className="pull-center btn btn-success" disabled={ this.props.submitting }>
-              Save Changes
-            </button>
-          </div>
-        </div>
-      </form>
+        <button name="submit" type="submit" className="btn btn-success btn-block">
+          Save Changes
+        </button>
+      </ReduxForm>
     )
   }
 }
 
 const mapStateToEditProps = (state) => {
   return {
-    initialValues: state.users.editFormData,
-    isLoading: state.users.editFormLoading
+    //values: state.users.editFormData,
+    isLoading: state.users.editFormLoading,
+    globalError: state.users.editFormError,
+    //errors: state.users.editFormErrors
   }
 }
 
 const mapDispatchToEditProps = (dispatch) => {
   return {
     fetchUserData: (email) => {
-      dispatch(UserActions.fetchEditData(email));
+      dispatch(UserActions.fetchEditData(email))
     },
-    submitEditData: (values) => {
-      return dispatch(UserActions.submitEditData(values))
+    submitEditData: (formData) => {
+      dispatch(UserActions.submitEditData(formData))
     }
   }
 }
 
-const rf_Edit = reduxForm({
-  form: 'userEditForm'
-})(_Edit);
-
-export const Edit = connect(mapStateToEditProps, mapDispatchToEditProps)(rf_Edit);
+export const Edit = connect(mapStateToEditProps, mapDispatchToEditProps)(_Edit);

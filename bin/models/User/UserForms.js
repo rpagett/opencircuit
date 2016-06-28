@@ -15,8 +15,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
-var _reduxForm = require('redux-form');
-
 var _components = require('../../forms/components');
 
 var _LoadingCube = require('../../helpers/LoadingCube');
@@ -47,16 +45,18 @@ var _Edit = (_temp = _class = function (_React$Component) {
   }
 
   _createClass(_Edit, [{
-    key: 'editSubmit',
-    value: function editSubmit(values) {
-      console.log('VALUES ARE ', values);
+    key: 'submit',
+    value: function submit(e) {
+      e.preventDefault();
+      var formData = new FormData(e.target);
 
-      this.props.submitEditData(values).then(function (data) {
-        // do stuff
-      }).catch(function (errors) {
-        throw new _reduxForm.SubmissionError(errors);
-      });
+      this.props.submitEditData(formData);
     }
+
+    // TODO tomorrow: Create a form container component to manage state and take care of everything so that
+    //    EditForm can be completely dumb. Should affect LiberatedFormInput and FormStatic and override onSubmit.
+    //    Validation happens server-side, so it only needs an endpoint, identifier, and formStore [subStore?]
+
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
@@ -65,7 +65,18 @@ var _Edit = (_temp = _class = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (this.props.isLoading) {
+      if (this.props.globalError) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'strong',
+            null,
+            'Error: ',
+            this.props.globalError
+          )
+        );
+      } else if (this.props.isLoading) {
         return _react2.default.createElement(
           'div',
           null,
@@ -73,31 +84,29 @@ var _Edit = (_temp = _class = function (_React$Component) {
         );
       }
 
-      console.log(this.props.initialValues);
+      //const values = this.props.values;
+      //const errors = this.props.errors;
+      //console.log(values);
 
+      console.log('Getting ready to return.');
       return _react2.default.createElement(
-        'form',
-        { onSubmit: this.props.handleSubmit(this.editSubmit.bind(this)) },
-        _react2.default.createElement(_components.FormStatic, { name: 'email', label: 'Email', fill: this.props.initialValues.email }),
-        _react2.default.createElement(_reduxForm.Field, { component: _components.LiberatedFormInput, name: 'first_name', label: 'First Name' }),
-        _react2.default.createElement(_reduxForm.Field, { component: _components.LiberatedFormInput, name: 'mi', label: 'Middle Initial' }),
-        _react2.default.createElement(_reduxForm.Field, { component: _components.LiberatedFormInput, name: 'last_name', label: 'Last Name' }),
-        _react2.default.createElement(_reduxForm.Field, { component: _components.LiberatedFormInput, name: 'street', label: 'Street' }),
-        _react2.default.createElement(_reduxForm.Field, { component: _components.LiberatedFormInput, name: 'address_2', label: 'Address 2' }),
-        _react2.default.createElement(_reduxForm.Field, { component: _components.LiberatedFormInput, name: 'city', label: 'City' }),
-        _react2.default.createElement(_reduxForm.Field, { component: _components.LiberatedFormInput, name: 'zip', label: 'ZIP' }),
+        _components.ReduxForm,
+        {
+          subStore: 'user_edit'
+          //onSubmit={ this.submit.bind(this) }
+        },
+        _react2.default.createElement(_components.FormStatic, { name: 'email', label: 'Email' }),
+        _react2.default.createElement(_components.LiberatedFormInput, { name: 'first_name', label: 'First Name' }),
+        _react2.default.createElement(_components.LiberatedFormInput, { name: 'mi', label: 'Middle Initial' }),
+        _react2.default.createElement(_components.LiberatedFormInput, { name: 'last_name', label: 'Last Name' }),
+        _react2.default.createElement(_components.LiberatedFormInput, { name: 'street', label: 'Street' }),
+        _react2.default.createElement(_components.LiberatedFormInput, { name: 'address_2', label: 'Address 2' }),
+        _react2.default.createElement(_components.LiberatedFormInput, { name: 'city', label: 'City' }),
+        _react2.default.createElement(_components.LiberatedFormInput, { name: 'zip', label: 'ZIP' }),
         _react2.default.createElement(
-          'div',
-          { className: 'row' },
-          _react2.default.createElement(
-            'div',
-            { className: 'pull-center' },
-            _react2.default.createElement(
-              'button',
-              { type: 'submit', className: 'pull-center btn btn-success', disabled: this.props.submitting },
-              'Save Changes'
-            )
-          )
+          'button',
+          { name: 'submit', type: 'submit', className: 'btn btn-success btn-block' },
+          'Save Changes'
         )
       );
     }
@@ -110,24 +119,22 @@ var _Edit = (_temp = _class = function (_React$Component) {
 
 var mapStateToEditProps = function mapStateToEditProps(state) {
   return {
-    initialValues: state.users.editFormData,
-    isLoading: state.users.editFormLoading
+    //values: state.users.editFormData,
+    isLoading: state.users.editFormLoading,
+    globalError: state.users.editFormError
   };
 };
 
+//errors: state.users.editFormErrors
 var mapDispatchToEditProps = function mapDispatchToEditProps(dispatch) {
   return {
     fetchUserData: function fetchUserData(email) {
       dispatch(UserActions.fetchEditData(email));
     },
-    submitEditData: function submitEditData(values) {
-      return dispatch(UserActions.submitEditData(values));
+    submitEditData: function submitEditData(formData) {
+      dispatch(UserActions.submitEditData(formData));
     }
   };
 };
 
-var rf_Edit = (0, _reduxForm.reduxForm)({
-  form: 'userEditForm'
-})(_Edit);
-
-var Edit = exports.Edit = (0, _reactRedux.connect)(mapStateToEditProps, mapDispatchToEditProps)(rf_Edit);
+var Edit = exports.Edit = (0, _reactRedux.connect)(mapStateToEditProps, mapDispatchToEditProps)(_Edit);

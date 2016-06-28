@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Select from 'react-select';
 import { Decorator as FormsyDecorator } from 'formsy-react';
 import MaskedInput from 'react-input-mask';
+
+import * as FormActions from './FormActions';
 
 class FormError extends React.Component {
   static propTypes = {
@@ -82,15 +85,30 @@ export class FormInput extends React.Component {
   }
 };
 
-export class LiberatedFormInput extends React.Component {
+class _LiberatedFormInput extends React.Component {
   static propTypes = {
     afterInput: React.PropTypes.string,
     name: React.PropTypes.string.isRequired,
-    type: React.PropTypes.string
+    type: React.PropTypes.string,
+    error: React.PropTypes.string,
+    formStore: React.PropTypes.string.isRequired
+  }
+
+  static defaultProps = {
+    type: 'text',
+    value: ''
+  }
+
+  updateValue(e) {
+    this.props.updateField(e.currentTarget.value);
   }
 
   render() {
-    const className='form-group row';
+    let className='form-group row';
+
+    if (this.props.error) {
+      className += ' has-danger';
+    }
 
     return (
       <div className={ className }>
@@ -101,8 +119,8 @@ export class LiberatedFormInput extends React.Component {
         <div className="col-xs-12 col-sm-8">
           <div className="input-group">
             <input
-              type={ this.props.inputType || 'text' }
               name={ this.props.name }
+              onChange={ this.updateValue.bind(this) }
               className="form-control"
               { ...this.props }
             />
@@ -111,13 +129,29 @@ export class LiberatedFormInput extends React.Component {
           </div>
 
           <FormError>
-            { this.props.touched && this.props.error }
+            { this.props.error }
           </FormError>
         </div>
       </div>
     );
   }
 };
+
+const mapStateToFormInputProps = (state, props) => {
+  return {
+    value: state.form[props.formStore][props.name],
+  }
+}
+
+const mapDispatchToFormInputProps = (dispatch, props) => {
+  return {
+    updateField: value => {
+      dispatch(FormActions.updateField(props.formStore, props.name, value))
+    }
+  }
+}
+
+export const LiberatedFormInput = connect(mapStateToFormInputProps, mapDispatchToFormInputProps)(_LiberatedFormInput);
 
 @FormsyDecorator()
 export class StateSelect extends React.Component {
@@ -277,3 +311,26 @@ export class FormStatic extends React.Component {
     );
   }
 };
+
+export class ReduxForm extends React.Component {
+  recursivelyCloneChildren(children) {
+    return React.Children.map(children, child => {
+      if (!React.isValidElement(child)) {
+        return child;
+      }
+
+      let childProps = {formStore: this.props.subStore};
+      childProps.children = this.recursiveCloneChildren(child.props.children);
+      
+      return React.cloneElement(child, childProps);
+    })
+  }
+
+  render() {
+    return (
+      <form {...this.props}>
+        { this.recursivelyCloneChildren(this.props.children) }
+      </form>
+    )
+  }
+}

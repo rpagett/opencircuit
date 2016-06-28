@@ -1,5 +1,7 @@
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -29,7 +31,9 @@ global.Tether = require('tether');
 require('bootstrap');
 
 var preloadedState = window.__PRELOADED_STATE__;
-var appStore = (0, _redux.createStore)(_redux2.appReducers, preloadedState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+var appStore = (0, _redux.createStore)(_redux2.appReducers, preloadedState, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : function (f) {
+  return f;
+}));
 
 _reactDom2.default.render(_react2.default.createElement(
   _reactRedux.Provider,
