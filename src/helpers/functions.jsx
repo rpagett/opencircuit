@@ -28,7 +28,10 @@ export function translateValidationErrors(errors) {
   let messages = { };
   for (let index in errors) {
     const line = errors[index];
-    messages[line.field] = line.message;
+    messages = {
+      ...messages,
+      [line.field]: line.message
+    }
   }
 
   return messages;

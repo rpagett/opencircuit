@@ -34,6 +34,11 @@ export class _UserProfile extends React.Component {
   }
 
   render() {
+    if (this.props.error) {
+      return (
+        <strong>{ this.props.error }</strong>
+      )
+    }
     if (this.props.isLoading) {
       return (
         <div>
@@ -77,6 +82,7 @@ export class _UserProfile extends React.Component {
 const mapStateToUserProfileProps = (state) => {
   return {
     user: state.users.profileUser,
+    error: state.users.profileError,
     isLoading: state.users.profileLoading
   }
 }

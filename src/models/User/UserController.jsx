@@ -1,4 +1,6 @@
 import Express from 'express';
+import _ from 'lodash';
+
 import User from './UserModel';
 import validateUser from './UserValidation';
 
@@ -26,36 +28,44 @@ router.route('/:email')
     User.findOne({ email: req.params.email }, '-password -hash -salt -createdAt -updatedAt')
       .then(user => {
         if (!user) {
-          res.json({
-            success: false,
-            error: 'User not found.'
-          })
+          throw new Error('That user does not exist.');
         }
         else {
           res.json({
             success: true,
-            user: user
+            model: user
           });
         }
       })
       .catch(err => {
         res.json({
           success: false,
-          error: err
+          error: err.message
         });
       });
   })
+
   .patch((req, res) => {
     console.log('Body is:', req.body);
     validateUser(req.body)
-      .then(() => {
-        res.json({
-          success: true,
-          teehee: true
+      .then(data => {
+        if (req.params.email != data.email) {
+          throw {field: 'email', message: 'There was an authorization error.'};
+        }
+
+        const fillableData = _.pick(data, User.fillableFields());
+        User.findOneAndUpdate({ email: req.params.email }, fillableData, {
+          fields: 'email'
+        })
+        .then(data => {
+          res.send({
+            success: true,
+            redirect: `/users/${data.email}`
+          })
         })
       })
       .catch((errors) => {
-          res.json({
+        res.json({
           success: false,
           errors
         })

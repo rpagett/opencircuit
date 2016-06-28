@@ -50,6 +50,10 @@ UserSchema.virtual('emailLink').get(function() {
   return `mailto:${this.email}`;
 });
 
+UserSchema.statics.fillableFields = () => {
+  return ['first_name', 'mi', 'last_name', 'phone', 'street', 'address_2', 'city', 'state', 'zip'];
+}
+
 UserSchema.plugin(PassportLocalMongoose, {
   usernameField: 'email',
   usernameQueryFields: ['email'],

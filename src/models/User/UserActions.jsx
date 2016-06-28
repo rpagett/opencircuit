@@ -27,7 +27,7 @@ export const fetchUserList = (endpoint, addedBody = { }) => {
         dispatch(listReceivedUsers(res.users));
       })
       .catch((error) => {
-        dispatch(listError(error.toString()));
+        dispatch(listError(error.message));
       });
   };
 }
@@ -62,12 +62,9 @@ export const fetchProfile = (email) => {
   return (dispatch, getState) => {
     const { users } = getState();
 
-    if (users.profileUser && users.profileUser.email === email) {
-      dispatch(profileStopLoading());
-      return;
-    }
-
     dispatch(profileBeginLoading());
+    dispatch(profileClearErrors());
+
     fetchAPI(`/api/users/${email}`, {
       credentials: 'same-origin',
       method: 'GET',
@@ -84,11 +81,17 @@ export const fetchProfile = (email) => {
           throw new Error(res.error);
         }
 
-        dispatch(profileReceivedData(res.user));
+        dispatch(profileReceivedData(res.model));
       })
       .catch(error => {
         dispatch(profileError(error));
       });
+  }
+}
+
+function profileClearErrors() {
+  return {
+    type: 'USER_PROFILE_CLEAR_ERRORS'
   }
 }
 
@@ -114,7 +117,7 @@ function profileReceivedData(user) {
 function profileError(error) {
   return {
     type: 'USER_PROFILE_ERROR',
-    error: error
+    error: error.toString()
   }
 }
 

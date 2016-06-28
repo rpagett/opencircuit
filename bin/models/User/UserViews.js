@@ -90,6 +90,13 @@ var _UserProfile = exports._UserProfile = (_temp = _class = function (_React$Com
   }, {
     key: 'render',
     value: function render() {
+      if (this.props.error) {
+        return _react2.default.createElement(
+          'strong',
+          null,
+          this.props.error
+        );
+      }
       if (this.props.isLoading) {
         return _react2.default.createElement(
           'div',
@@ -180,6 +187,7 @@ var _UserProfile = exports._UserProfile = (_temp = _class = function (_React$Com
 var mapStateToUserProfileProps = function mapStateToUserProfileProps(state) {
   return {
     user: state.users.profileUser,
+    error: state.users.profileError,
     isLoading: state.users.profileLoading
   };
 };

@@ -33,6 +33,12 @@ export const users = (state = { }, action) => {
         listLoading: false
       }
 
+    case 'USER_PROFILE_CLEAR_ERRORS':
+      return {
+        ...state,
+        profileError: ''
+      }
+
     case 'USER_PROFILE_RECEIVED_DATA':
       return {
         ...state,
@@ -50,7 +56,7 @@ export const users = (state = { }, action) => {
     case 'USER_PROFILE_BEGIN_LOADING':
       return {
         ...state,
-        profileLoading: true
+        profileLoading: true,
       }
 
     case 'USER_PROFILE_STOP_LOADING':
@@ -59,37 +65,37 @@ export const users = (state = { }, action) => {
         profileLoading: false
       }
 
-    case 'USER_EDIT_RECEIVED_DATA':
-      return {
-        ...state,
-        editFormData: action.user,
-        editFormLoading: false
-      }
-
-    case 'USER_EDIT_ERROR':
-      return {
-        ...state,
-        editFormLoading: false,
-        editFormError: action.error.toString()
-      }
-
-    case 'USER_EDIT_BEGIN_LOADING':
-      return {
-        ...state,
-        editFormLoading: true
-      }
-
-    case 'USER_EDIT_STOP_LOADING':
-      return {
-        ...state,
-        editFormLoading: false
-      }
-
-    case 'USER_EDIT_SUBMISSION_ERROR':
-      return {
-        ...state,
-        editFormErrors: action.errors
-      }
+    //case 'USER_EDIT_RECEIVED_DATA':
+    //  return {
+    //    ...state,
+    //    editFormData: action.user,
+    //    editFormLoading: false
+    //  }
+    //
+    //case 'USER_EDIT_ERROR':
+    //  return {
+    //    ...state,
+    //    editFormLoading: false,
+    //    editFormError: action.error.toString()
+    //  }
+    //
+    //case 'USER_EDIT_BEGIN_LOADING':
+    //  return {
+    //    ...state,
+    //    editFormLoading: true
+    //  }
+    //
+    //case 'USER_EDIT_STOP_LOADING':
+    //  return {
+    //    ...state,
+    //    editFormLoading: false
+    //  }
+    //
+    //case 'USER_EDIT_SUBMISSION_ERROR':
+    //  return {
+    //    ...state,
+    //    editFormErrors: action.errors
+    //  }
 
     default:
       return state;

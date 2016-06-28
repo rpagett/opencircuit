@@ -1,26 +1,68 @@
-const form = (state = { }, action) => {
+const initialState = {
+  loading: { },
+  globalErrors: { }
+}
+
+const form = (state = initialState, action) => {
   switch (action.type) {
 
     case 'FORM_RECEIVED_DATA':
-      console.log('In reducer.');
-      const newState = {
+      return {
         ...state,
-        [action.formStore]: action.model,
-        [action.formStore + '_errors']: { }
+        [action.subStore]: action.model,
+        [action.subStore + '_errors']: { }
       }
-      console.log('NEW STATE', newState);
-      return newState;
 
     case 'FORM_UPDATE_FIELD_VALUE':
-      const updatedState =  {
+      return {
         ...state,
-        [action.formStore]: {
-          ...state[action.formStore],
+        [action.subStore]: {
+          ...state[action.subStore],
           [action.field]: action.value
         }
       }
-      console.log('UPDATED STATE', updatedState);
-      return updatedState;
+
+    case 'FORM_BEGIN_LOADING':
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          [action.subStore]: true
+        }
+      }
+
+    case 'FORM_STOP_LOADING':
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          [action.subStore]: false
+        }
+      }
+
+    case 'FORM_GLOBAL_ERROR':
+      return {
+        ...state,
+        globalErrors: {
+          ...state.globalErrors,
+          [action.subStore]: action.error.toString()
+        }
+      }
+
+    case 'FORM_CLEAR_ERRORS':
+      return {
+        ...state,
+        [action.subStore + '_errors']: { }
+      }
+
+    case 'FORM_SUBMISSION_ERRORS':
+      console.log('Applying errors', action.errors);
+      return {
+        ...state,
+        [action.subStore + '_errors']: {
+          ...action.errors
+        }
+      }
 
     default:
       return state

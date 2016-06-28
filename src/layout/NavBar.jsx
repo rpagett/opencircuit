@@ -13,7 +13,7 @@ class _UserDropdown extends React.Component {
           <MiniGravatar email={ this.props.user.email } />{ '  ' + this.props.user.formattedName }
         </a>
         <div className="dropdown-menu">
-          <a className="dropdown-item" href="#">View Profile</a>
+          <Link to={ this.props.user.profileLink } className="dropdown-item">View Profile</Link>
           <div className="dropdown-divider"></div>
           <a className="dropdown-item" href="/auth/logout">Log Out</a>
         </div>

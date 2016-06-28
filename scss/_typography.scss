@@ -32,3 +32,9 @@ h1.page-header {
 hr.header-hr {
   color: green;
 }
+
+a[href^="tel:"]:before {
+  content: "\260E";
+  display: block;
+  margin-right: 0.5rem;
+}

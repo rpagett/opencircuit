@@ -4,6 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.MD5 = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports.fetchAPI = fetchAPI;
 exports.translateValidationErrors = translateValidationErrors;
 
@@ -12,6 +15,8 @@ var _isomorphicFetch = require('isomorphic-fetch');
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function fetchAPI(url) {
   var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
@@ -41,7 +46,7 @@ function translateValidationErrors(errors) {
   var messages = {};
   for (var index in errors) {
     var line = errors[index];
-    messages[line.field] = line.message;
+    messages = _extends({}, messages, _defineProperty({}, line.field, line.message));
   }
 
   return messages;

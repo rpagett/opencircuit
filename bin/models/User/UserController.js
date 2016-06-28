@@ -8,6 +8,10 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _UserModel = require('./UserModel');
 
 var _UserModel2 = _interopRequireDefault(_UserModel);
@@ -38,28 +42,34 @@ router.get('/', function (req, res) {
 router.route('/:email').get(function (req, res) {
   _UserModel2.default.findOne({ email: req.params.email }, '-password -hash -salt -createdAt -updatedAt').then(function (user) {
     if (!user) {
-      res.json({
-        success: false,
-        error: 'User not found.'
-      });
+      throw new Error('That user does not exist.');
     } else {
       res.json({
         success: true,
-        user: user
+        model: user
       });
     }
   }).catch(function (err) {
     res.json({
       success: false,
-      error: err
+      error: err.message
     });
   });
 }).patch(function (req, res) {
   console.log('Body is:', req.body);
-  (0, _UserValidation2.default)(req.body).then(function () {
-    res.json({
-      success: true,
-      teehee: true
+  (0, _UserValidation2.default)(req.body).then(function (data) {
+    if (req.params.email != data.email) {
+      throw { field: 'email', message: 'There was an authorization error.' };
+    }
+
+    var fillableData = _lodash2.default.pick(data, _UserModel2.default.fillableFields());
+    _UserModel2.default.findOneAndUpdate({ email: req.params.email }, fillableData, {
+      fields: 'email'
+    }).then(function (data) {
+      res.send({
+        success: true,
+        redirect: '/users/' + data.email
+      });
     });
   }).catch(function (errors) {
     res.json({

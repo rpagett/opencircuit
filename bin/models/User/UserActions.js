@@ -40,7 +40,7 @@ var fetchUserList = exports.fetchUserList = function fetchUserList(endpoint) {
 
       dispatch(listReceivedUsers(res.users));
     }).catch(function (error) {
-      dispatch(listError(error.toString()));
+      dispatch(listError(error.message));
     });
   };
 };
@@ -78,12 +78,9 @@ var fetchProfile = exports.fetchProfile = function fetchProfile(email) {
     var users = _getState2.users;
 
 
-    if (users.profileUser && users.profileUser.email === email) {
-      dispatch(profileStopLoading());
-      return;
-    }
-
     dispatch(profileBeginLoading());
+    dispatch(profileClearErrors());
+
     (0, _functions.fetchAPI)('/api/users/' + email, {
       credentials: 'same-origin',
       method: 'GET',
@@ -98,12 +95,18 @@ var fetchProfile = exports.fetchProfile = function fetchProfile(email) {
         throw new Error(res.error);
       }
 
-      dispatch(profileReceivedData(res.user));
+      dispatch(profileReceivedData(res.model));
     }).catch(function (error) {
       dispatch(profileError(error));
     });
   };
 };
+
+function profileClearErrors() {
+  return {
+    type: 'USER_PROFILE_CLEAR_ERRORS'
+  };
+}
 
 function profileBeginLoading() {
   return {
@@ -127,7 +130,7 @@ function profileReceivedData(user) {
 function profileError(error) {
   return {
     type: 'USER_PROFILE_ERROR',
-    error: error
+    error: error.toString()
   };
 }
 

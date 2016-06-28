@@ -53,8 +53,8 @@ var _UserDropdown = function (_React$Component) {
           'div',
           { className: 'dropdown-menu' },
           _react2.default.createElement(
-            'a',
-            { className: 'dropdown-item', href: '#' },
+            _reactRouter.Link,
+            { to: this.props.user.profileLink, className: 'dropdown-item' },
             'View Profile'
           ),
           _react2.default.createElement('div', { className: 'dropdown-divider' }),

@@ -7,8 +7,6 @@ exports.Edit = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _class, _temp;
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -35,7 +33,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _Edit = (_temp = _class = function (_React$Component) {
+var _Edit = function (_React$Component) {
   _inherits(_Edit, _React$Component);
 
   function _Edit() {
@@ -45,63 +43,26 @@ var _Edit = (_temp = _class = function (_React$Component) {
   }
 
   _createClass(_Edit, [{
-    key: 'submit',
-    value: function submit(e) {
-      e.preventDefault();
-      var formData = new FormData(e.target);
-
-      this.props.submitEditData(formData);
-    }
-
-    // TODO tomorrow: Create a form container component to manage state and take care of everything so that
-    //    EditForm can be completely dumb. Should affect LiberatedFormInput and FormStatic and override onSubmit.
-    //    Validation happens server-side, so it only needs an endpoint, identifier, and formStore [subStore?]
-
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.fetchUserData(this.props.email);
-    }
-  }, {
     key: 'render',
     value: function render() {
-      if (this.props.globalError) {
-        return _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(
-            'strong',
-            null,
-            'Error: ',
-            this.props.globalError
-          )
-        );
-      } else if (this.props.isLoading) {
-        return _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(_LoadingCube2.default, { show: true })
-        );
-      }
-
-      //const values = this.props.values;
-      //const errors = this.props.errors;
-      //console.log(values);
-
       console.log('Getting ready to return.');
       return _react2.default.createElement(
         _components.ReduxForm,
         {
-          subStore: 'user_edit'
-          //onSubmit={ this.submit.bind(this) }
+          subStore: 'user_edit',
+          fetchEndpoint: '/api/users/' + this.props.email,
+          submitEndpoint: '/api/users/' + this.props.email,
+          submitMethod: 'PATCH'
         },
         _react2.default.createElement(_components.FormStatic, { name: 'email', label: 'Email' }),
         _react2.default.createElement(_components.LiberatedFormInput, { name: 'first_name', label: 'First Name' }),
         _react2.default.createElement(_components.LiberatedFormInput, { name: 'mi', label: 'Middle Initial' }),
         _react2.default.createElement(_components.LiberatedFormInput, { name: 'last_name', label: 'Last Name' }),
+        _react2.default.createElement(_components.LiberatedPhoneInput, { name: 'phone', label: 'Phone' }),
         _react2.default.createElement(_components.LiberatedFormInput, { name: 'street', label: 'Street' }),
         _react2.default.createElement(_components.LiberatedFormInput, { name: 'address_2', label: 'Address 2' }),
         _react2.default.createElement(_components.LiberatedFormInput, { name: 'city', label: 'City' }),
+        _react2.default.createElement(_components.LiberatedStateSelect, { name: 'state', label: 'State' }),
         _react2.default.createElement(_components.LiberatedFormInput, { name: 'zip', label: 'ZIP' }),
         _react2.default.createElement(
           'button',
@@ -113,9 +74,7 @@ var _Edit = (_temp = _class = function (_React$Component) {
   }]);
 
   return _Edit;
-}(_react2.default.Component), _class.defaultProps = {
-  isLoading: true
-}, _temp);
+}(_react2.default.Component);
 
 var mapStateToEditProps = function mapStateToEditProps(state) {
   return {

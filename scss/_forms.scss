@@ -1,9 +1,6 @@
 .form-validation-error {
-  @extends .muted-text;
-  @extends .danger-text;
   font-size: .8rem;
   padding-top: .3rem;
-  transition: display 500ms linear;
 }
 
 .Select-control {
@@ -16,10 +13,18 @@
   }
 }
 
+.Select--single {
+  padding-right: .1rem !important;
+}
+
 .Select-value {
-  line-height: 1.7rem;
+  padding: 0 !important;
 }
 
 .Select-input {
   height: 1.9rem;
+}
+
+.Select-arrow-zone {
+  padding-right: 0;
 }
