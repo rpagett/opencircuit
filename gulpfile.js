@@ -5,9 +5,11 @@ var plugins = require("gulp-load-plugins")({
 });
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
 var babelify = require('babelify');
 var nodemon = require('gulp-nodemon');
+var pump = require('pump');
 
 // External dependencies you do not want to rebundle while developing,
 // but include in your application deployment
@@ -68,25 +70,25 @@ function bundleApp(isProduction) {
   // If it's not for production, a separate vendors.js file will be created
   // the first time gulp is run so that we don't have to rebundle things like
   // react everytime there's a change in the js file
-  if (!isProduction && scriptsCount === 1){
-    // create vendors.js for dev environment.
-    browserify({
-      require: dependencies,
-      debug: true,
-    })
-      .bundle()
-      .on('error', gutil.log)
-      .pipe(source('vendor.js'))
-      .pipe(gulp.dest('./dist/js/'));
-  }
-  if (!isProduction){
-    // make the dependencies external so they dont get bundled by the
-    // app bundler. Dependencies are already bundled in vendor.js for
-    // development environments.
-    dependencies.forEach(function(dep){
-      appBundler.external(dep);
-    })
-  }
+  //if (!isProduction && scriptsCount === 1){
+  //  // create vendors.js for dev environment.
+  //  browserify({
+  //    require: dependencies,
+  //    debug: true,
+  //  })
+  //    .bundle()
+  //    .on('error', gutil.log)
+  //    .pipe(source('vendor.js'))
+  //    .pipe(gulp.dest('./dist/js/'));
+  //}
+  //if (!isProduction){
+  //  // make the dependencies external so they dont get bundled by the
+  //  // app bundler. Dependencies are already bundled in vendor.js for
+  //  // development environments.
+  //  dependencies.forEach(function(dep){
+  //    appBundler.external(dep);
+  //  })
+  //}
 
   gulp.src('./src/**/*.jsx')
     .pipe(plugins.babel({
@@ -106,6 +108,8 @@ function bundleApp(isProduction) {
     .bundle()
     .on('error', gutil.log)
     .pipe(source('bundle.js'))
+    //.pipe(buffer())
+    //.pipe(plugins.uglify()).on('error', gutil.log)
     .pipe(gulp.dest('./dist/js/'));
 }
 

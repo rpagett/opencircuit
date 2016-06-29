@@ -14,10 +14,4 @@ var VenueSchema = new _mongoose2.default.Schema({}, {
   timestamps: true
 });
 
-//toObject: {
-//  virtuals: true
-//},
-//toJSON: {
-//  virtuals: true
-//}
 exports.default = _mongoose2.default.model('Venue', VenueSchema);

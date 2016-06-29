@@ -82,6 +82,7 @@ var notifier = require('node-notifier');
 app.use(express.static('dist'));
 
 _mongoose2.default.connect('mongodb://localhost/opencircuit');
+_mongoose2.default.Promise = global.Promise;
 
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: true }));

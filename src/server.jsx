@@ -32,6 +32,7 @@ import APIDispatch from './APIDispatch';
 app.use(express.static('dist'));
 
 Mongoose.connect('mongodb://localhost/opencircuit');
+Mongoose.Promise = global.Promise;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
