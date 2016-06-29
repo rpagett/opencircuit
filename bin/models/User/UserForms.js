@@ -11,19 +11,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = require('react-redux');
-
 var _components = require('../../forms/components');
-
-var _LoadingCube = require('../../helpers/LoadingCube');
-
-var _LoadingCube2 = _interopRequireDefault(_LoadingCube);
-
-var _UserActions = require('./UserActions');
-
-var UserActions = _interopRequireWildcard(_UserActions);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33,19 +21,18 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _Edit = function (_React$Component) {
-  _inherits(_Edit, _React$Component);
+var Edit = exports.Edit = function (_React$Component) {
+  _inherits(Edit, _React$Component);
 
-  function _Edit() {
-    _classCallCheck(this, _Edit);
+  function Edit() {
+    _classCallCheck(this, Edit);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Edit).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Edit).apply(this, arguments));
   }
 
-  _createClass(_Edit, [{
+  _createClass(Edit, [{
     key: 'render',
     value: function render() {
-      console.log('Getting ready to return.');
       return _react2.default.createElement(
         _components.ReduxForm,
         {
@@ -55,15 +42,15 @@ var _Edit = function (_React$Component) {
           submitMethod: 'PATCH'
         },
         _react2.default.createElement(_components.FormStatic, { name: 'email', label: 'Email' }),
-        _react2.default.createElement(_components.LiberatedFormInput, { name: 'first_name', label: 'First Name' }),
-        _react2.default.createElement(_components.LiberatedFormInput, { name: 'mi', label: 'Middle Initial' }),
-        _react2.default.createElement(_components.LiberatedFormInput, { name: 'last_name', label: 'Last Name' }),
-        _react2.default.createElement(_components.LiberatedPhoneInput, { name: 'phone', label: 'Phone' }),
-        _react2.default.createElement(_components.LiberatedFormInput, { name: 'street', label: 'Street' }),
-        _react2.default.createElement(_components.LiberatedFormInput, { name: 'address_2', label: 'Address 2' }),
-        _react2.default.createElement(_components.LiberatedFormInput, { name: 'city', label: 'City' }),
-        _react2.default.createElement(_components.LiberatedStateSelect, { name: 'state', label: 'State' }),
-        _react2.default.createElement(_components.LiberatedFormInput, { name: 'zip', label: 'ZIP' }),
+        _react2.default.createElement(_components.FormInput, { name: 'first_name', label: 'First Name' }),
+        _react2.default.createElement(_components.FormInput, { name: 'mi', label: 'Middle Initial' }),
+        _react2.default.createElement(_components.FormInput, { name: 'last_name', label: 'Last Name' }),
+        _react2.default.createElement(_components.PhoneInput, { name: 'phone', label: 'Phone' }),
+        _react2.default.createElement(_components.FormInput, { name: 'street', label: 'Street' }),
+        _react2.default.createElement(_components.FormInput, { name: 'address_2', label: 'Address 2' }),
+        _react2.default.createElement(_components.FormInput, { name: 'city', label: 'City' }),
+        _react2.default.createElement(_components.StateSelect, { name: 'state', label: 'State' }),
+        _react2.default.createElement(_components.FormInput, { name: 'zip', label: 'ZIP' }),
         _react2.default.createElement(
           'button',
           { name: 'submit', type: 'submit', className: 'btn btn-success btn-block' },
@@ -73,27 +60,5 @@ var _Edit = function (_React$Component) {
     }
   }]);
 
-  return _Edit;
+  return Edit;
 }(_react2.default.Component);
-
-var mapStateToEditProps = function mapStateToEditProps(state) {
-  return {
-    //values: state.users.editFormData,
-    isLoading: state.users.editFormLoading,
-    globalError: state.users.editFormError
-  };
-};
-
-//errors: state.users.editFormErrors
-var mapDispatchToEditProps = function mapDispatchToEditProps(dispatch) {
-  return {
-    fetchUserData: function fetchUserData(email) {
-      dispatch(UserActions.fetchEditData(email));
-    },
-    submitEditData: function submitEditData(formData) {
-      dispatch(UserActions.submitEditData(formData));
-    }
-  };
-};
-
-var Edit = exports.Edit = (0, _reactRedux.connect)(mapStateToEditProps, mapDispatchToEditProps)(_Edit);

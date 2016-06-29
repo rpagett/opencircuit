@@ -59,11 +59,11 @@ router.route('/:email').get(function (req, res) {
   console.log('Body is:', req.body);
   (0, _UserValidation2.default)(req.body).then(function (data) {
     if (req.params.email != data.email) {
-      throw { field: 'email', message: 'There was an authorization error.' };
+      throw [{ field: 'email', message: 'There was an authorization error.' }];
     }
 
     var fillableData = _lodash2.default.pick(data, _UserModel2.default.fillableFields());
-    _UserModel2.default.findOneAndUpdate({ email: req.params.email }, fillableData, {
+    _UserModel2.default.findOneAndUpdate({ email: data.email }, fillableData, {
       fields: 'email'
     }).then(function (data) {
       res.send({

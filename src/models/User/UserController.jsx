@@ -50,11 +50,11 @@ router.route('/:email')
     validateUser(req.body)
       .then(data => {
         if (req.params.email != data.email) {
-          throw {field: 'email', message: 'There was an authorization error.'};
+          throw [{field: 'email', message: 'There was an authorization error.'}];
         }
 
         const fillableData = _.pick(data, User.fillableFields());
-        User.findOneAndUpdate({ email: req.params.email }, fillableData, {
+        User.findOneAndUpdate({ email: data.email }, fillableData, {
           fields: 'email'
         })
         .then(data => {

@@ -3,7 +3,7 @@ let app = express();
 
 // Frameworks and Dependencies
 import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
@@ -63,7 +63,10 @@ Passport.deserializeUser((user_id, done) => {
 app.use(Passport.initialize());
 app.use(Passport.session());
 
-const appStore = createStore(appReducers, {auth: {}, users: {}}, applyMiddleware(thunk));
+const appStore = createStore(appReducers, {auth: {}, users: {}},
+  compose(applyMiddleware(thunk),
+    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
+  ));
 
 app.use((req, res, next) => {
   res.store = appStore;

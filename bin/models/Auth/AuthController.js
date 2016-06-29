@@ -12,6 +12,10 @@ var _indicative = require('indicative');
 
 var _indicative2 = _interopRequireDefault(_indicative);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _UserModel = require('../User/UserModel');
 
 var _UserModel2 = _interopRequireDefault(_UserModel);
@@ -31,75 +35,60 @@ var router = _express2.default.Router();
 
 router.post('/login', function (req, res) {
   _UserModel2.default.authenticate()(req.body.email, req.body.password, function (err, user, options) {
-    if (err) return next(err);
-    if (user === false) {
+    if (err || !user) {
       res.send({
-        message: options.message,
-        success: false
+        success: false,
+        errors: [{ field: 'email', message: options.message }]
       });
     } else {
       req.login(user, function (err) {
         res.send({
           success: true,
-          user: user
+          redirect: '/',
+          external: true
         });
-
-        console.log('\n----\n');
-        console.log(req.session);
       });
     }
   });
 });
 
 router.post('/register', function (req, res) {
-  (0, _UserValidation2.default)(req.body).then(function () {
-    _UserModel2.default.register(new _UserModel2.default({ email: req.body.email }), req.body.password, function (err, user) {
+  (0, _UserValidation2.default)(req.body).then(function (data) {
+    _UserModel2.default.register(new _UserModel2.default({ email: data.email }), data.password, function (err, user) {
       if (err) {
-        res.send({
+        res.json({
           success: false,
-          message: err
-        });
-      } else {
-        console.log('user registered!');
-
-        var _req$body = req.body;
-        var first_name = _req$body.first_name;
-        var mi = _req$body.mi;
-        var last_name = _req$body.last_name;
-        var phone = _req$body.phone;
-        var street = _req$body.street;
-        var address_2 = _req$body.address_2;
-        var city = _req$body.city;
-        var state = _req$body.state;
-        var zip = _req$body.zip;
-
-        user.first_name = first_name;
-        user.mi = mi;
-        user.last_name = last_name;
-        user.phone = phone;
-        user.street = street;
-        user.address_2 = address_2;
-        user.city = city;
-        user.state = state;
-        user.zip = zip;
-
-        user.save().then(function (user) {
-          req.login(user, function (err) {
-            res.send({
-              success: true,
-              user: user
-            });
-          });
+          errors: [{ field: 'email', message: err.message }]
         });
       }
+
+      var fillableData = _lodash2.default.pick(data, _UserModel2.default.fillableFields());
+
+      _UserModel2.default.findOneAndUpdate({ email: data.email }, fillableData, { 'new': true }).then(function (user) {
+        req.login(user, function (err) {
+          if (err) {
+            res.json({
+              success: false,
+              errors: [{ field: 'email', message: err.message }]
+            });
+          }
+
+          res.store.dispatch((0, _AuthActions.loginUser)(user));
+          res.send({
+            success: true,
+            external: true,
+            redirect: '/'
+          });
+        });
+      }).catch(function (error) {
+        console.log('ERROR', error);
+      });
     });
   }).catch(function (errors) {
-    var validationErrors = (0, _functions.translateValidationErrors)(errors);
-
-    res.send({
+    console.log('ERRORS', errors);
+    res.json({
       success: false,
-      cause: 'validation',
-      messages: validationErrors
+      errors: errors
     });
   });
 });

@@ -1,5 +1,6 @@
 import Express from 'express';
 import Indicative from 'indicative';
+import _ from 'lodash';
 
 import User from '../User/UserModel';
 import { loginUser, logoutUser } from './AuthActions';
@@ -11,69 +12,65 @@ let router = Express.Router();
 
 router.post('/login', (req, res) => {
   User.authenticate()(req.body.email, req.body.password, (err, user, options) => {
-    if (err) return next(err);
-    if (user === false) {
+    if (err || !user) {
       res.send({
-        message: options.message,
-        success: false
+        success: false,
+        errors: [{field: 'email', message: options.message}],
       });
     }
     else {
       req.login(user, function (err) {
         res.send({
           success: true,
-          user: user
-        });
-
-        console.log('\n----\n')
-        console.log(req.session);
+          redirect: '/',
+          external: true
+        })
       });
     }
   });
 });
 
 router.post('/register', (req, res) => {
-    validateUser(req.body)
-    .then(() => {
-      User.register(new User({email: req.body.email}), req.body.password, (err, user) => {
+  validateUser(req.body)
+    .then(data => {
+      User.register(new User({email: data.email}), data.password, (err, user) => {
         if (err) {
-          res.send({
+          res.json({
             success: false,
-            message: err
-          });
-        }
-        else {
-          console.log('user registered!');
-
-          const {first_name, mi, last_name, phone, street, address_2, city, state, zip} = req.body;
-          user.first_name = first_name;
-          user.mi = mi;
-          user.last_name = last_name;
-          user.phone = phone;
-          user.street = street;
-          user.address_2 = address_2;
-          user.city = city;
-          user.state = state;
-          user.zip = zip;
-
-          user.save().then((user) => {
-            req.login(user, function (err) {
-              res.send({
-                success: true,
-                user: user
-              });
-            });
+            errors: [{field: 'email', message: err.message}]
           })
         }
-      });
-    })
-    .catch((errors) => {
-      const validationErrors = translateValidationErrors(errors);
 
-      res.send({
+        const fillableData = _.pick(data, User.fillableFields());
+
+        User.findOneAndUpdate({email: data.email}, fillableData, {'new': true})
+          .then(user => {
+            req.login(user, err => {
+              if (err) {
+                res.json({
+                  success: false,
+                  errors: [{field: 'email', message: err.message}]
+                });
+              }
+
+              res.store.dispatch(loginUser(user));
+              res.send({
+                success: true,
+                external: true,
+                redirect: '/'
+              });
+            })
+          })
+          .catch(error => {
+            console.log('ERROR', error);
+          })
+      })
+    })
+    .catch(errors => {
+      console.log('ERRORS', errors);
+      res.json({
         success: false,
-        cause: 'validation',
-        messages: validationErrors
+        errors
       });
     });
 });

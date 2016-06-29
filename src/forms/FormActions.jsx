@@ -1,5 +1,12 @@
 import { fetchAPI, translateValidationErrors } from '../helpers/functions';
 
+function initializeSubstore(subStore) {
+  return {
+    type: 'FORM_INITIALIZE_SUBSTORE',
+    subStore
+  }
+}
+
 export function updateField(subStore, field, value) {
   return {
     type: 'FORM_UPDATE_FIELD_VALUE',
@@ -33,6 +40,12 @@ function setError(subStore, error) {
 
 export function fetchData(subStore, endpoint) {
   return dispatch => {
+    if (!endpoint) {
+      dispatch(initializeSubstore(subStore));
+      dispatch(stopLoading(subStore));
+      return;
+    }
+
     dispatch(beginLoading(subStore));
     fetchAPI(endpoint, {
       credentials: 'same-origin',

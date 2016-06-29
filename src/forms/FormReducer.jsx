@@ -6,6 +6,13 @@ const initialState = {
 const form = (state = initialState, action) => {
   switch (action.type) {
 
+    case 'FORM_INITIALIZE_SUBSTORE':
+      return {
+        ...state,
+        [action.subStore]: { },
+        [action.subStore + '_errors']: { }
+      }
+
     case 'FORM_RECEIVED_DATA':
       return {
         ...state,

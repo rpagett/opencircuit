@@ -9,6 +9,13 @@ exports.submitData = submitData;
 
 var _functions = require('../helpers/functions');
 
+function initializeSubstore(subStore) {
+  return {
+    type: 'FORM_INITIALIZE_SUBSTORE',
+    subStore: subStore
+  };
+}
+
 function updateField(subStore, field, value) {
   return {
     type: 'FORM_UPDATE_FIELD_VALUE',
@@ -42,6 +49,12 @@ function setError(subStore, error) {
 
 function fetchData(subStore, endpoint) {
   return function (dispatch) {
+    if (!endpoint) {
+      dispatch(initializeSubstore(subStore));
+      dispatch(stopLoading(subStore));
+      return;
+    }
+
     dispatch(beginLoading(subStore));
     (0, _functions.fetchAPI)(endpoint, {
       credentials: 'same-origin',

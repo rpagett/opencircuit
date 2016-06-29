@@ -1,5 +1,7 @@
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -113,7 +115,9 @@ _passport2.default.deserializeUser(function (user_id, done) {
 app.use(_passport2.default.initialize());
 app.use(_passport2.default.session());
 
-var appStore = (0, _redux.createStore)(_redux2.appReducers, { auth: {}, users: {} }, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+var appStore = (0, _redux.createStore)(_redux2.appReducers, { auth: {}, users: {} }, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : function (f) {
+  return f;
+}));
 
 app.use(function (req, res, next) {
   res.store = appStore;

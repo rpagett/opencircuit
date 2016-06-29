@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ReduxForm = exports.PhoneInput = exports.StateSelect = exports.LiberatedStateSelect = exports.FormStatic = exports.LiberatedPhoneInput = exports.LiberatedFormInput = exports.InputWrapper = exports.FormInput = undefined;
+exports.ReduxForm = exports.StateSelect = exports.FormStatic = exports.PhoneInput = exports.FormInput = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _dec, _class, _class2, _temp, _dec2, _class3, _dec3, _class4, _class5, _temp2;
+var _class, _temp, _class2, _temp2;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -22,8 +22,6 @@ var _reactRouter = require('react-router');
 var _reactSelect = require('react-select');
 
 var _reactSelect2 = _interopRequireDefault(_reactSelect);
-
-var _formsyReact = require('formsy-react');
 
 var _reactInputMask = require('react-input-mask');
 
@@ -70,88 +68,8 @@ var FormError = function (_React$Component) {
   return FormError;
 }(_react2.default.Component);
 
-var FormInput = exports.FormInput = (_dec = (0, _formsyReact.Decorator)(), _dec(_class = function (_React$Component2) {
-  _inherits(FormInput, _React$Component2);
-
-  function FormInput() {
-    _classCallCheck(this, FormInput);
-
-    var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(FormInput).call(this));
-
-    _this2.state = {
-      hasError: false
-    };
-    return _this2;
-  }
-
-  _createClass(FormInput, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.setState({
-        hasError: false
-      });
-    }
-  }, {
-    key: 'changeValue',
-    value: function changeValue(e) {
-      this.props.setValue(e.currentTarget.value);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var isRequiredError = this.props.isRequired() && !this.props.isValid() && this.props.requiredError;
-      var className = 'form-group row ' + (this.props.showError() || isRequiredError ? 'has-danger' : '');
-      var errorMessage = this.props.getErrorMessage() || isRequiredError;
-
-      var validation = {};
-      if (this.props.validationHook == 'change') {
-        validation['onChange'] = this.changeValue.bind(this);
-      } else {
-        validation['onBlur'] = this.changeValue.bind(this);
-      }
-
-      return _react2.default.createElement(
-        'div',
-        { className: className },
-        _react2.default.createElement(
-          'label',
-          { htmlFor: this.props.name, className: 'col-xs-12 col-sm-4 form-control-label' },
-          this.props.label
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'col-xs-12 col-sm-8' },
-          _react2.default.createElement(
-            'div',
-            { className: 'input-group' },
-            _react2.default.createElement('input', _extends({
-              type: this.props.inputType || 'text',
-              name: this.props.name,
-              className: 'form-control',
-              defaultValue: this.props.getValue()
-            }, validation, this.props)),
-            this.props.afterInput ? _react2.default.createElement(
-              'span',
-              { className: 'input-group-addon' },
-              this.props.afterInput
-            ) : null
-          ),
-          _react2.default.createElement(
-            FormError,
-            null,
-            errorMessage
-          )
-        )
-      );
-    }
-  }]);
-
-  return FormInput;
-}(_react2.default.Component)) || _class);
-;
-
-var _InputWrapper = (_temp = _class2 = function (_React$Component3) {
-  _inherits(_InputWrapper, _React$Component3);
+var _InputWrapper = (_temp = _class = function (_React$Component2) {
+  _inherits(_InputWrapper, _React$Component2);
 
   function _InputWrapper() {
     _classCallCheck(this, _InputWrapper);
@@ -181,7 +99,7 @@ var _InputWrapper = (_temp = _class2 = function (_React$Component3) {
   }, {
     key: 'recursivelyCloneChildren',
     value: function recursivelyCloneChildren(children) {
-      var _this4 = this;
+      var _this3 = this;
 
       return _react2.default.Children.map(children, function (child) {
         if (!_react2.default.isValidElement(child)) {
@@ -189,12 +107,13 @@ var _InputWrapper = (_temp = _class2 = function (_React$Component3) {
         }
 
         var childProps = {
-          onChange: _this4.updateValue.bind(_this4),
+          onChange: _this3.updateValue.bind(_this3),
           className: 'form-control',
-          name: _this4.props.name,
-          value: _this4.props.value
+          name: _this3.props.name,
+          value: _this3.props.value,
+          type: _this3.props.type
         };
-        childProps.children = _this4.recursivelyCloneChildren(child.props.children);
+        childProps.children = _this3.recursivelyCloneChildren(child.props.children);
 
         return _react2.default.cloneElement(child, childProps);
       });
@@ -240,13 +159,13 @@ var _InputWrapper = (_temp = _class2 = function (_React$Component3) {
   }]);
 
   return _InputWrapper;
-}(_react2.default.Component), _class2.propTypes = {
+}(_react2.default.Component), _class.propTypes = {
   afterInput: _react2.default.PropTypes.string,
   name: _react2.default.PropTypes.string.isRequired,
   type: _react2.default.PropTypes.string,
   error: _react2.default.PropTypes.string,
   formStore: _react2.default.PropTypes.string.isRequired
-}, _class2.defaultProps = {
+}, _class.defaultProps = {
   type: 'text',
   value: ''
 }, _temp);
@@ -268,18 +187,18 @@ var mapDispatchToFormInputProps = function mapDispatchToFormInputProps(dispatch,
   };
 };
 
-var InputWrapper = exports.InputWrapper = (0, _reactRedux.connect)(mapStateToFormInputProps, mapDispatchToFormInputProps)(_InputWrapper);
+var InputWrapper = (0, _reactRedux.connect)(mapStateToFormInputProps, mapDispatchToFormInputProps)(_InputWrapper);
 
-var LiberatedFormInput = exports.LiberatedFormInput = function (_React$Component4) {
-  _inherits(LiberatedFormInput, _React$Component4);
+var FormInput = exports.FormInput = function (_React$Component3) {
+  _inherits(FormInput, _React$Component3);
 
-  function LiberatedFormInput() {
-    _classCallCheck(this, LiberatedFormInput);
+  function FormInput() {
+    _classCallCheck(this, FormInput);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(LiberatedFormInput).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(FormInput).apply(this, arguments));
   }
 
-  _createClass(LiberatedFormInput, [{
+  _createClass(FormInput, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -290,34 +209,34 @@ var LiberatedFormInput = exports.LiberatedFormInput = function (_React$Component
     }
   }]);
 
-  return LiberatedFormInput;
+  return FormInput;
 }(_react2.default.Component);
 
-var LiberatedPhoneInput = exports.LiberatedPhoneInput = function (_React$Component5) {
-  _inherits(LiberatedPhoneInput, _React$Component5);
+var PhoneInput = exports.PhoneInput = function (_React$Component4) {
+  _inherits(PhoneInput, _React$Component4);
 
-  function LiberatedPhoneInput() {
-    _classCallCheck(this, LiberatedPhoneInput);
+  function PhoneInput() {
+    _classCallCheck(this, PhoneInput);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(LiberatedPhoneInput).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(PhoneInput).apply(this, arguments));
   }
 
-  _createClass(LiberatedPhoneInput, [{
+  _createClass(PhoneInput, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         InputWrapper,
         this.props,
-        _react2.default.createElement(_reactInputMask2.default, { className: 'form-control', mask: '(999) 999 - 9999' })
+        _react2.default.createElement(_reactInputMask2.default, { type: 'tel', className: 'form-control', mask: '(999) 999 - 9999' })
       );
     }
   }]);
 
-  return LiberatedPhoneInput;
+  return PhoneInput;
 }(_react2.default.Component);
 
-var _FormStatic = function (_React$Component6) {
-  _inherits(_FormStatic, _React$Component6);
+var _FormStatic = function (_React$Component5) {
+  _inherits(_FormStatic, _React$Component5);
 
   function _FormStatic() {
     _classCallCheck(this, _FormStatic);
@@ -339,8 +258,8 @@ var _FormStatic = function (_React$Component6) {
   return _FormStatic;
 }(_react2.default.Component);
 
-var FormStatic = exports.FormStatic = function (_React$Component7) {
-  _inherits(FormStatic, _React$Component7);
+var FormStatic = exports.FormStatic = function (_React$Component6) {
+  _inherits(FormStatic, _React$Component6);
 
   function FormStatic() {
     _classCallCheck(this, FormStatic);
@@ -366,16 +285,16 @@ var FormStatic = exports.FormStatic = function (_React$Component7) {
 
 ;
 
-var LiberatedStateSelect = exports.LiberatedStateSelect = function (_React$Component8) {
-  _inherits(LiberatedStateSelect, _React$Component8);
+var StateSelect = exports.StateSelect = function (_React$Component7) {
+  _inherits(StateSelect, _React$Component7);
 
-  function LiberatedStateSelect() {
-    _classCallCheck(this, LiberatedStateSelect);
+  function StateSelect() {
+    _classCallCheck(this, StateSelect);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(LiberatedStateSelect).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(StateSelect).apply(this, arguments));
   }
 
-  _createClass(LiberatedStateSelect, [{
+  _createClass(StateSelect, [{
     key: 'selectOptions',
     value: function selectOptions() {
       return [{ value: 'AL', label: 'Alabama' }, { value: 'AK', label: 'Alaska' }, { value: 'AZ', label: 'Arizona' }, { value: 'AR', label: 'Arkansas' }, { value: 'CA', label: 'California' }, { value: 'CO', label: 'Colorado' }, { value: 'CT', label: 'Connecticut' }, { value: 'DE', label: 'Delaware' }, { value: 'DC', label: 'District Of Columbia' }, { value: 'FL', label: 'Florida' }, { value: 'GA', label: 'Georgia' }, { value: 'HI', label: 'Hawaii' }, { value: 'ID', label: 'Idaho' }, { value: 'IL', label: 'Illinois' }, { value: 'IN', label: 'Indiana' }, { value: 'IA', label: 'Iowa' }, { value: 'KS', label: 'Kansas' }, { value: 'KY', label: 'Kentucky' }, { value: 'LA', label: 'Louisiana' }, { value: 'ME', label: 'Maine' }, { value: 'MD', label: 'Maryland' }, { value: 'MA', label: 'Massachusetts' }, { value: 'MI', label: 'Michigan' }, { value: 'MN', label: 'Minnesota' }, { value: 'MS', label: 'Mississippi' }, { value: 'MO', label: 'Missouri' }, { value: 'MT', label: 'Montana' }, { value: 'NE', label: 'Nebraska' }, { value: 'NV', label: 'Nevada' }, { value: 'NH', label: 'New Hampshire' }, { value: 'NJ', label: 'New Jersey' }, { value: 'NM', label: 'New Mexico' }, { value: 'NY', label: 'New York' }, { value: 'NC', label: 'North Carolina' }, { value: 'ND', label: 'North Dakota' }, { value: 'OH', label: 'Ohio' }, { value: 'OK', label: 'Oklahoma' }, { value: 'OR', label: 'Oregon' }, { value: 'PA', label: 'Pennsylvania' }, { value: 'RI', label: 'Rhode Island' }, { value: 'SC', label: 'South Carolina' }, { value: 'SD', label: 'South Dakota' }, { value: 'TN', label: 'Tennessee' }, { value: 'TX', label: 'Texas' }, { value: 'UT', label: 'Utah' }, { value: 'VT', label: 'Vermont' }, { value: 'VA', label: 'Virginia' }, { value: 'WA', label: 'Washington' }, { value: 'WV', label: 'West Virginia' }, { value: 'WI', label: 'Wisconsin' }, { value: 'WY', label: 'Wyoming' }];
@@ -395,136 +314,11 @@ var LiberatedStateSelect = exports.LiberatedStateSelect = function (_React$Compo
     }
   }]);
 
-  return LiberatedStateSelect;
+  return StateSelect;
 }(_react2.default.Component);
 
-var StateSelect = exports.StateSelect = (_dec2 = (0, _formsyReact.Decorator)(), _dec2(_class3 = function (_React$Component9) {
-  _inherits(StateSelect, _React$Component9);
-
-  function StateSelect() {
-    _classCallCheck(this, StateSelect);
-
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(StateSelect).apply(this, arguments));
-  }
-
-  _createClass(StateSelect, [{
-    key: 'selectOptions',
-    value: function selectOptions() {
-      return [{ value: 'AL', label: 'Alabama' }, { value: 'AK', label: 'Alaska' }, { value: 'AZ', label: 'Arizona' }, { value: 'AR', label: 'Arkansas' }, { value: 'CA', label: 'California' }, { value: 'CO', label: 'Colorado' }, { value: 'CT', label: 'Connecticut' }, { value: 'DE', label: 'Delaware' }, { value: 'DC', label: 'District Of Columbia' }, { value: 'FL', label: 'Florida' }, { value: 'GA', label: 'Georgia' }, { value: 'HI', label: 'Hawaii' }, { value: 'ID', label: 'Idaho' }, { value: 'IL', label: 'Illinois' }, { value: 'IN', label: 'Indiana' }, { value: 'IA', label: 'Iowa' }, { value: 'KS', label: 'Kansas' }, { value: 'KY', label: 'Kentucky' }, { value: 'LA', label: 'Louisiana' }, { value: 'ME', label: 'Maine' }, { value: 'MD', label: 'Maryland' }, { value: 'MA', label: 'Massachusetts' }, { value: 'MI', label: 'Michigan' }, { value: 'MN', label: 'Minnesota' }, { value: 'MS', label: 'Mississippi' }, { value: 'MO', label: 'Missouri' }, { value: 'MT', label: 'Montana' }, { value: 'NE', label: 'Nebraska' }, { value: 'NV', label: 'Nevada' }, { value: 'NH', label: 'New Hampshire' }, { value: 'NJ', label: 'New Jersey' }, { value: 'NM', label: 'New Mexico' }, { value: 'NY', label: 'New York' }, { value: 'NC', label: 'North Carolina' }, { value: 'ND', label: 'North Dakota' }, { value: 'OH', label: 'Ohio' }, { value: 'OK', label: 'Oklahoma' }, { value: 'OR', label: 'Oregon' }, { value: 'PA', label: 'Pennsylvania' }, { value: 'RI', label: 'Rhode Island' }, { value: 'SC', label: 'South Carolina' }, { value: 'SD', label: 'South Dakota' }, { value: 'TN', label: 'Tennessee' }, { value: 'TX', label: 'Texas' }, { value: 'UT', label: 'Utah' }, { value: 'VT', label: 'Vermont' }, { value: 'VA', label: 'Virginia' }, { value: 'WA', label: 'Washington' }, { value: 'WV', label: 'West Virginia' }, { value: 'WI', label: 'Wisconsin' }, { value: 'WY', label: 'Wyoming' }];
-    }
-  }, {
-    key: 'changeValue',
-    value: function changeValue(value, selectedOptions) {
-      if (this.props.multiple) {
-        this.props.setValue(selectedOptions.map(function (option) {
-          return option.value;
-        }));
-      } else {
-        this.props.setValue(value.value);
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var isRequiredError = this.props.isRequired() && !this.props.isValid() && this.props.requiredError;
-      var className = 'form-group row ' + (this.props.showError() || isRequiredError ? 'has-danger' : '');
-      var errorMessage = this.props.getErrorMessage() || isRequiredError;
-
-      return _react2.default.createElement(
-        'div',
-        { className: className },
-        _react2.default.createElement(
-          'label',
-          { htmlFor: this.props.name, className: 'col-xs-12 col-sm-4 form-control-label' },
-          this.props.label
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'col-xs-12 col-sm-8' },
-          _react2.default.createElement(_reactSelect2.default, _extends({
-            name: this.props.name,
-            className: 'form-control',
-            clearable: false,
-            options: this.selectOptions(),
-            onChange: this.changeValue.bind(this),
-            value: this.props.getValue(),
-            autosize: false
-          }, this.props))
-        )
-      );
-    }
-  }]);
-
-  return StateSelect;
-}(_react2.default.Component)) || _class3);
-var PhoneInput = exports.PhoneInput = (_dec3 = (0, _formsyReact.Decorator)(), _dec3(_class4 = function (_React$Component10) {
-  _inherits(PhoneInput, _React$Component10);
-
-  function PhoneInput() {
-    _classCallCheck(this, PhoneInput);
-
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(PhoneInput).apply(this, arguments));
-  }
-
-  _createClass(PhoneInput, [{
-    key: 'changeValue',
-    value: function changeValue(e) {
-      this.props.setValue(e.currentTarget.value);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var isRequiredError = this.props.isRequired() && !this.props.isValid() && this.props.requiredError;
-      var className = 'form-group row ' + (this.props.showError() || isRequiredError ? 'has-danger' : '');
-      var errorMessage = this.props.getErrorMessage() || isRequiredError;
-
-      return _react2.default.createElement(
-        'div',
-        { className: className },
-        _react2.default.createElement(
-          'label',
-          { htmlFor: this.props.name, className: 'col-xs-12 col-sm-4 form-control-label' },
-          this.props.label
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'col-xs-12 col-sm-8' },
-          _react2.default.createElement(
-            'div',
-            { className: 'input-group' },
-            this.props.beforeInput ? _react2.default.createElement(
-              'span',
-              { className: 'input-group-addon' },
-              this.props.beforeInput
-            ) : null,
-            _react2.default.createElement(_reactInputMask2.default, _extends({
-              name: this.props.name,
-              className: 'form-control',
-              onChange: this.changeValue.bind(this),
-              defaultValue: this.props.getValue(),
-              mask: '(999) 999 - 9999'
-            }, this.props)),
-            this.props.afterInput ? _react2.default.createElement(
-              'span',
-              { className: 'input-group-addon' },
-              this.props.afterInput
-            ) : null
-          ),
-          _react2.default.createElement(
-            FormError,
-            null,
-            errorMessage
-          )
-        )
-      );
-    }
-  }]);
-
-  return PhoneInput;
-}(_react2.default.Component)) || _class4);
-
-var _ReduxForm = (_temp2 = _class5 = function (_React$Component11) {
-  _inherits(_ReduxForm, _React$Component11);
+var _ReduxForm = (_temp2 = _class2 = function (_React$Component8) {
+  _inherits(_ReduxForm, _React$Component8);
 
   function _ReduxForm() {
     _classCallCheck(this, _ReduxForm);
@@ -540,15 +334,15 @@ var _ReduxForm = (_temp2 = _class5 = function (_React$Component11) {
   }, {
     key: 'recursivelyCloneChildren',
     value: function recursivelyCloneChildren(children) {
-      var _this13 = this;
+      var _this10 = this;
 
       return _react2.default.Children.map(children, function (child) {
         if (!_react2.default.isValidElement(child)) {
           return child;
         }
 
-        var childProps = { formStore: _this13.props.subStore };
-        childProps.children = _this13.recursivelyCloneChildren(child.props.children);
+        var childProps = { formStore: _this10.props.subStore };
+        childProps.children = _this10.recursivelyCloneChildren(child.props.children);
 
         return _react2.default.cloneElement(child, childProps);
       });
@@ -556,13 +350,17 @@ var _ReduxForm = (_temp2 = _class5 = function (_React$Component11) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      var _this14 = this;
+      var _this11 = this;
 
       event && event.preventDefault();
 
       this.props.submitData().then(function (res) {
-        if (res.success === true) {
-          _this14.props.router.push(res.redirect);
+        if (res && res.success === true) {
+          if (res.external && window) {
+            window.location = res.redirect;
+          } else {
+            _this11.props.router.push(res.redirect);
+          }
         }
       });
     }
@@ -597,13 +395,13 @@ var _ReduxForm = (_temp2 = _class5 = function (_React$Component11) {
   }]);
 
   return _ReduxForm;
-}(_react2.default.Component), _class5.propTypes = {
+}(_react2.default.Component), _class2.propTypes = {
   submitEndpoint: _react2.default.PropTypes.string.isRequired,
   submitMethod: _react2.default.PropTypes.string.isRequired,
   fetchEndpoint: _react2.default.PropTypes.string,
   isLoading: _react2.default.PropTypes.bool,
   subStore: _react2.default.PropTypes.string.isRequired
-}, _class5.defaultProps = {
+}, _class2.defaultProps = {
   isLoading: true
 }, _temp2);
 

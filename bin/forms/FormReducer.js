@@ -14,15 +14,18 @@ var initialState = {
 };
 
 var form = function form() {
-  var _extends2;
+  var _extends2, _extends3;
 
   var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
   var action = arguments[1];
 
   switch (action.type) {
 
+    case 'FORM_INITIALIZE_SUBSTORE':
+      return _extends({}, state, (_extends2 = {}, _defineProperty(_extends2, action.subStore, {}), _defineProperty(_extends2, action.subStore + '_errors', {}), _extends2));
+
     case 'FORM_RECEIVED_DATA':
-      return _extends({}, state, (_extends2 = {}, _defineProperty(_extends2, action.subStore, action.model), _defineProperty(_extends2, action.subStore + '_errors', {}), _extends2));
+      return _extends({}, state, (_extends3 = {}, _defineProperty(_extends3, action.subStore, action.model), _defineProperty(_extends3, action.subStore + '_errors', {}), _extends3));
 
     case 'FORM_UPDATE_FIELD_VALUE':
       return _extends({}, state, _defineProperty({}, action.subStore, _extends({}, state[action.subStore], _defineProperty({}, action.field, action.value))));

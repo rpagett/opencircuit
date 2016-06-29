@@ -65,7 +65,7 @@ UserSchema.plugin(PassportLocalMongoose, {
     MissingPasswordError: 'You must provide a password.',
     IncorrectPasswordError: 'Your email and password do not match.',
     IncorrectUsernameError: 'There is no account registered with that email address.',
-    UserExistsError: 'There is already an account associated with that email address.',
+    UserExistsError: 'There is already an account associated with that email address.'
   }
 });
 
