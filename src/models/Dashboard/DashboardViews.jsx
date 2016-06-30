@@ -27,7 +27,9 @@ const mapStateToHomeProps = (state, ownProps) => {
 }
 
 const mapDispatchToHomeProps = (dispatch) => {
-  return { }
+  return {
+
+  }
 }
 
 export const Home = connect(mapStateToHomeProps, mapDispatchToHomeProps)(_Home);

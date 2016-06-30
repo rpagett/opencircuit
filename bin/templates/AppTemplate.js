@@ -11,6 +11,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _SpawnableModal = require('../helpers/modals/SpawnableModal');
+
+var _SpawnableModal2 = _interopRequireDefault(_SpawnableModal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31,7 +35,12 @@ var AppTemplate = function (_React$Component) {
   _createClass(AppTemplate, [{
     key: 'render',
     value: function render() {
-      return this.props.children;
+      return _react2.default.createElement(
+        'div',
+        null,
+        this.props.children,
+        _react2.default.createElement(_SpawnableModal2.default, null)
+      );
     }
   }]);
 

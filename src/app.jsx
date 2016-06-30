@@ -1,4 +1,7 @@
 import React from 'react';
+
+import SpawnableModal from 'modals/SpawnableModal';
+
 import AppContent from './layout/AppContent';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
@@ -15,6 +18,7 @@ class App extends React.Component {
         </BodyContent>
 
         <Footer />
+        {/*<SpawnableModal /> */}
       </AppContent>
     );
   }

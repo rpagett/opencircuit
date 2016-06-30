@@ -29,6 +29,7 @@
     "react-dom": "^15.1.0",
     "react-input-autosize": "^1.0.0",
     "react-input-mask": "^0.7.0",
+    "react-overlays": "^0.6.3",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.0",
     "react-select": "^1.0.0-beta13",

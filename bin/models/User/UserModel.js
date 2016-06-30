@@ -44,7 +44,8 @@ var UserSchema = new _mongoose2.default.Schema({
     type: String,
     minlength: 5,
     maxlength: 5
-  }
+  },
+  roles: [Number]
 }, {
   timestamps: true,
   toObject: {
@@ -54,6 +55,20 @@ var UserSchema = new _mongoose2.default.Schema({
     virtuals: true
   }
 });
+
+function userHasRole(user, role) {
+  return user.roles.includes(UserRoles.Administrator) || user.roles.includes(role);
+}
+
+UserSchema.methods.isAdministrator = function () {
+  return userHasRole(undefined, UserRoles.Administrator);
+};
+UserSchema.methods.isSiteManager = function () {
+  return userHasRole(undefined, UserRoles.Administrator);
+};
+
+// TODO tomorrow: setting/modifying User roles using react-overlays(?), gating components by role, gating routes by role
+// .then() => forgot password so I don't neglect that forever.
 
 UserSchema.virtual('formattedName').get(function () {
   return this.first_name + ' ' + (this.mi ? this.mi + '. ' : '') + this.last_name;

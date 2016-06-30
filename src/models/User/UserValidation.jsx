@@ -29,6 +29,7 @@ export default function validateUser(data = { }) {
   const messages = {
     'required': 'This field is required.',
     'required_if': 'This field is required.',
+    'password_verify.same': 'The passwords must match.',
     'first_name.regex': 'Your first name may only contain letters and spaces.',
     'last_name.regex': 'Your last name may only contain letters, spaces, and dashes.',
     'phone.regex': 'Phone numbers must follow a (555) 555 - 5555 format.',

@@ -39,11 +39,6 @@ class _UserList extends React.Component {
 
     const users = this.props.users;
     return (
-      //<div className="container">
-      //  { users.map((user) => {
-      //    return (<div className="row" key={ user._id }>{ user.formattedName } - { user.email }</div>);
-      //  }) }
-      //</div>
       <div>
         <FlexTable
           emptyMessage="There are no registered users."

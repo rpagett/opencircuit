@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _SpawnableModal = require('./helpers/modals/SpawnableModal');
+
+var _SpawnableModal2 = _interopRequireDefault(_SpawnableModal);
+
 var _AppContent = require('./layout/AppContent');
 
 var _AppContent2 = _interopRequireDefault(_AppContent);

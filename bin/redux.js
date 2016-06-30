@@ -15,6 +15,10 @@ var _FormReducer = require('./forms/FormReducer');
 
 var _FormReducer2 = _interopRequireDefault(_FormReducer);
 
+var _ModalReducer = require('./helpers/modals/ModalReducer');
+
+var _ModalReducer2 = _interopRequireDefault(_ModalReducer);
+
 var _UserReducer = require('./models/User/UserReducer');
 
 var _UserReducer2 = _interopRequireDefault(_UserReducer);
@@ -23,11 +27,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // combine reducers
 
-//import { reducer as formReducer } from 'redux-form';
+
+// import reducers
 var appReducers = exports.appReducers = (0, _redux.combineReducers)({
   auth: _AuthReducer2.default,
   form: _FormReducer2.default,
+  modal: _ModalReducer2.default,
   users: _UserReducer2.default
 });
-
-// import reducers
+//import { reducer as formReducer } from 'redux-form';
