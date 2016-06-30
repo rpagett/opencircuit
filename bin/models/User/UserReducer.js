@@ -18,28 +18,6 @@ var users = exports.users = function users() {
   var action = arguments[1];
 
   switch (action.type) {
-    case 'USER_LIST_RECEIVED_USERS':
-      return _extends({}, state, {
-        listUsers: action.users,
-        listLoading: false
-      });
-
-    case 'USER_LIST_ERROR':
-      return _extends({}, state, {
-        listError: action.error,
-        listLoading: false
-      });
-
-    case 'USER_LIST_BEGIN_LOADING':
-      return _extends({}, state, {
-        listLoading: true
-      });
-
-    case 'USER_LIST_STOP_LOADING':
-      return _extends({}, state, {
-        listLoading: false
-      });
-
     case 'USER_PROFILE_CLEAR_ERRORS':
       return _extends({}, state, {
         profileError: ''

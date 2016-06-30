@@ -9,13 +9,13 @@ let router = Express.Router();
 
 router.get('/', (req, res) => {
   User.find({ }, 'email first_name mi last_name formattedName profileURL phone')
-    .then((users) => {
+    .then(users => {
       res.json({
         success: true,
-        users: users
+        contents: users
       });
     })
-    .catch((err) => {
+    .catch(err => {
       res.json({
         success: false,
         error: err

@@ -7,32 +7,6 @@
 
 export const users = (state = { }, action) => {
   switch (action.type) {
-    case 'USER_LIST_RECEIVED_USERS':
-      return {
-        ...state,
-        listUsers: action.users,
-        listLoading: false
-      };
-
-    case 'USER_LIST_ERROR':
-      return {
-        ...state,
-        listError: action.error,
-        listLoading: false
-      }
-
-    case 'USER_LIST_BEGIN_LOADING':
-      return {
-        ...state,
-        listLoading: true
-      }
-
-    case 'USER_LIST_STOP_LOADING':
-      return {
-        ...state,
-        listLoading: false
-      }
-
     case 'USER_PROFILE_CLEAR_ERRORS':
       return {
         ...state,
