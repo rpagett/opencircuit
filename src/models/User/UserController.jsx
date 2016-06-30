@@ -8,7 +8,7 @@ let router = Express.Router();
 // routes are '/api/users/...'
 
 router.get('/', (req, res) => {
-  User.find({ }, 'email first_name mi last_name formattedName profileLink emailLink phone')
+  User.find({ }, 'email first_name mi last_name formattedName profileURL phone')
     .then((users) => {
       res.json({
         success: true,

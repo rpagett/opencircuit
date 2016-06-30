@@ -74,12 +74,8 @@ UserSchema.virtual('formattedName').get(function () {
   return this.first_name + ' ' + (this.mi ? this.mi + '. ' : '') + this.last_name;
 });
 
-UserSchema.virtual('profileLink').get(function () {
+UserSchema.virtual('profileURL').get(function () {
   return '/users/' + this.email;
-});
-
-UserSchema.virtual('emailLink').get(function () {
-  return 'mailto:' + this.email;
 });
 
 UserSchema.statics.fillableFields = function () {

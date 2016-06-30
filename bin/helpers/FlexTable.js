@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _class, _temp;
@@ -35,32 +33,8 @@ var FlexTable = (_temp = _class = function (_React$Component) {
   }
 
   _createClass(FlexTable, [{
-    key: 'headingField',
-    value: function headingField(columns, key) {
-      if (typeof columns[key] === 'string') {
-        return columns[key];
-      }
-
-      return columns[key].heading;
-    }
-  }, {
-    key: 'lineField',
-    value: function lineField(line, columns, key) {
-      if (_typeof(columns[key]) === 'object' && columns[key].link) {
-        return _react2.default.createElement(
-          _reactRouter.Link,
-          { className: 'btn-link', to: line[columns[key].link] },
-          line[key]
-        );
-      }
-
-      return line[key];
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var columns = this.props.columns;
 
       if (!this.props.contents) {
@@ -77,7 +51,7 @@ var FlexTable = (_temp = _class = function (_React$Component) {
         header.push(_react2.default.createElement(
           'th',
           { key: key },
-          this.headingField(columns, key)
+          key
         ));
       }
 
@@ -110,8 +84,8 @@ var FlexTable = (_temp = _class = function (_React$Component) {
               for (var _key in columns) {
                 cells.push(_react2.default.createElement(
                   'td',
-                  { key: line._id + '-' + _key, 'data-title': _this2.headingField(columns, _key) },
-                  _this2.lineField(line, columns, _key)
+                  { key: line._id + '-' + _key, 'data-title': _key },
+                  columns[_key](line)
                 ));
               }
 

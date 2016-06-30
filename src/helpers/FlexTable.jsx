@@ -9,22 +9,6 @@ export default class FlexTable extends React.Component {
     contents: React.PropTypes.array
   }
 
-  headingField(columns, key) {
-    if (typeof columns[key] === 'string') {
-      return columns[key];
-    }
-
-    return columns[key].heading;
-  }
-
-  lineField(line, columns, key) {
-    if (typeof columns[key] === 'object' && columns[key].link) {
-      return <Link className="btn-link" to={ line[columns[key].link] }>{ line[key] }</Link>;
-    }
-
-    return line[key];
-  }
-
   render() {
     const columns = this.props.columns;
 
@@ -36,7 +20,7 @@ export default class FlexTable extends React.Component {
 
     let header = [ ];
     for (let key in columns) {
-      header.push(<th key={ key }>{ this.headingField(columns, key) }</th>);
+      header.push(<th key={ key }>{ key }</th>);
     }
 
     return (
@@ -47,13 +31,13 @@ export default class FlexTable extends React.Component {
             <tr>{ header }</tr>
           </thead>
           <tbody>
-            { this.props.contents.map((line) => {
+            { this.props.contents.map(line => {
               let cells = [ ];
 
               for (let key in columns) {
                 cells.push(
-                  <td key={ line._id + '-' + key } data-title={ this.headingField(columns, key) }>
-                    { this.lineField(line, columns, key) }
+                  <td key={ line._id + '-' + key } data-title={ key }>
+                    { columns[key](line) }
                   </td>
                 );
               }

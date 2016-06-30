@@ -133,7 +133,7 @@ var _UserProfile = exports._UserProfile = (_temp = _class = function (_React$Com
             null,
             _react2.default.createElement(
               'a',
-              { href: user.email },
+              { href: 'mailto:' + user.email },
               user.email
             )
           )

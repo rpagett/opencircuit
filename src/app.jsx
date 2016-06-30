@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SpawnableModal from 'modals/SpawnableModal';
+import SpawnableModal from './modals/SpawnableModal';
 
 import AppContent from './layout/AppContent';
 import Header from './layout/Header';

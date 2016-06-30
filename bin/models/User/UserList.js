@@ -80,28 +80,28 @@ var _UserList = (_temp = _class = function (_React$Component) {
       }
 
       var users = this.props.users;
-      return(
-        //<div className="container">
-        //  { users.map((user) => {
-        //    return (<div className="row" key={ user._id }>{ user.formattedName } - { user.email }</div>);
-        //  }) }
-        //</div>
-        _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(_FlexTable2.default, {
-            emptyMessage: 'There are no registered users.',
-            columns: {
-              formattedName: {
-                heading: 'Name',
-                link: 'profileLink'
-              },
-              email: 'Email',
-              phone: 'Phone'
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_FlexTable2.default, {
+          emptyMessage: 'There are no registered users.',
+          columns: {
+            'Name': function Name(user) {
+              return user.formattedName;
             },
-            contents: users
-          })
-        )
+            'Email': function Email(user) {
+              return _react2.default.createElement(
+                'a',
+                { href: 'mailto:' + user.email },
+                user.email
+              );
+            },
+            'Phone': function Phone(user) {
+              return user.phone;
+            }
+          },
+          contents: users
+        })
       );
     }
   }]);

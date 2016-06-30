@@ -43,12 +43,9 @@ class _UserList extends React.Component {
         <FlexTable
           emptyMessage="There are no registered users."
           columns={{
-            formattedName: {
-              heading: 'Name',
-              link: 'profileLink'
-            },
-            email: 'Email',
-            phone: 'Phone'
+            'Name': user => { return user.formattedName },
+            'Email': user => { return (<a href={`mailto:${user.email}`}>{ user.email }</a>)},
+            'Phone': user => { return user.phone }
           }}
           contents={ users }
         />

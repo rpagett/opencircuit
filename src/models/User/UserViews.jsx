@@ -58,7 +58,7 @@ export class _UserProfile extends React.Component {
 
         <div className="row">
           <Prop>Email</Prop>
-          <Val><a href={ user.email }>{ user.email }</a></Val>
+          <Val><a href={ `mailto:${user.email}` }>{ user.email }</a></Val>
         </div>
 
         <div className="row">

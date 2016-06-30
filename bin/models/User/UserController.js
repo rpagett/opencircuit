@@ -26,7 +26,7 @@ var router = _express2.default.Router();
 // routes are '/api/users/...'
 
 router.get('/', function (req, res) {
-  _UserModel2.default.find({}, 'email first_name mi last_name formattedName profileLink emailLink phone').then(function (users) {
+  _UserModel2.default.find({}, 'email first_name mi last_name formattedName profileURL phone').then(function (users) {
     res.json({
       success: true,
       users: users

@@ -15,7 +15,7 @@ var _FormReducer = require('./forms/FormReducer');
 
 var _FormReducer2 = _interopRequireDefault(_FormReducer);
 
-var _ModalReducer = require('./helpers/modals/ModalReducer');
+var _ModalReducer = require('./modals/ModalReducer');
 
 var _ModalReducer2 = _interopRequireDefault(_ModalReducer);
 
