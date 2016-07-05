@@ -37,7 +37,7 @@ var AppTemplate = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { style: { 'height': '100%' } },
         this.props.children,
         _react2.default.createElement(_SpawnableModal2.default, null)
       );

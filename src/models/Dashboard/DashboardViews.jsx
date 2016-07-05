@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { UserRoles, HasRole } from '../User/UserRoles';
+
 class _Home extends React.Component {
   render() {
     return (
@@ -14,6 +16,12 @@ class _Home extends React.Component {
            </strong>
           </span>
         </div>
+
+        <HasRole role={ UserRoles.Administrator }>
+          <div className="alert alert-warning">
+            You have the right privileges.
+          </div>
+        </HasRole>
       </div>
     );
   }

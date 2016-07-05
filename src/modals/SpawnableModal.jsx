@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Icon from '../helpers/Icon';
 import LoadingCube from '../helpers/LoadingCube';
 import * as ModalActions from './ModalActions';
+import * as UserModals from '../models/User/UserModals';
 
 class SpawnableModalTransition extends React.Component {
   render() {
@@ -27,9 +28,14 @@ class _SpawnableModal extends React.Component {
   }
 
   fetchModalBody() {
-    return (
-      <LoadingCube show={ true } />
-    )
+    switch (this.props.componentName) {
+
+      case 'USER_ROLES':
+        return <UserModals.ManageRoles { ...this.props.modalProps }/>;
+
+      default:
+        return (<LoadingCube show={ true } />)
+    }
   }
 
   render() {
@@ -58,7 +64,7 @@ class _SpawnableModal extends React.Component {
         >
           <div className="container spawnable-modal">
             { (this.props.allowClose ?
-              <span className="pull-right close">
+              <span className="pull-right close" onClick={ this.props.markClosed }>
                   <Icon shape="close" />
                 </span> : '') }
             <div className="row">
@@ -79,10 +85,11 @@ class _SpawnableModal extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    isOpen: state.modal.isOpen,
     allowClose: state.modal.allowClose,
-    title: state.modal.title,
-    componentName: state.modal.component
+    componentName: state.modal.component,
+    isOpen: state.modal.isOpen,
+    modalProps: state.modal.props,
+    title: state.modal.title
   }
 }
 

@@ -61,7 +61,7 @@ class _FlexTable extends React.Component {
               for (let key in columns) {
                 cells.push(
                   <td key={ line._id + '-' + key } data-title={ key }>
-                    { columns[key](line, this.props.feedDispatch) }
+                    { columns[key](line, this.props.feedDispatch()) }
                   </td>
                 );
               }

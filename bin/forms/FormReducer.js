@@ -30,6 +30,9 @@ var form = function form() {
     case 'FORM_UPDATE_FIELD_VALUE':
       return _extends({}, state, _defineProperty({}, action.subStore, _extends({}, state[action.subStore], _defineProperty({}, action.field, action.value))));
 
+    case 'FORM_UPDATE_CHECKBOX':
+      return _extends({}, state, _defineProperty({}, action.subStore, _extends({}, state[action.subStore], _defineProperty({}, action.field, _extends({}, state[action.subStore][action.field], _defineProperty({}, action.value, action.checked))))));
+
     case 'FORM_BEGIN_LOADING':
       return _extends({}, state, {
         loading: _extends({}, state.loading, _defineProperty({}, action.subStore, true))

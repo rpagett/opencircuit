@@ -1,8 +1,16 @@
-export function define(title, component) {
+export function launch(title, component, props = { }) {
+  return dispatch => {
+    dispatch(define(title, component, props));
+    dispatch(open());
+  }
+}
+
+function define(title, component, props = { }) {
   return {
     type: 'MODAL_DEFINE',
     title,
-    component
+    component,
+    props
   }
 }
 

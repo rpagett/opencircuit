@@ -21,8 +21,9 @@ const modal = (state = initialState, action) => {
     case 'MODAL_DEFINE':
       return {
         ...state,
+        component: action.component,
         title: action.title,
-        component: action.component
+        props: action.props
       }
 
     default:

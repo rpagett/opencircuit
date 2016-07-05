@@ -20,12 +20,18 @@ var _UserValidation = require('./UserValidation');
 
 var _UserValidation2 = _interopRequireDefault(_UserValidation);
 
+var _UserRoles = require('./UserRoles');
+
+var _authRoute = require('../../middleware/authRoute');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var router = _express2.default.Router();
 // routes are '/api/users/...'
 
-router.get('/', function (req, res) {
+router.get('/', (0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
   _UserModel2.default.find({}, 'email first_name mi last_name formattedName profileURL phone').then(function (users) {
     res.json({
       success: true,
@@ -34,7 +40,7 @@ router.get('/', function (req, res) {
   }).catch(function (err) {
     res.json({
       success: false,
-      error: err
+      error: err.message
     });
   });
 });
@@ -55,7 +61,7 @@ router.route('/:email').get(function (req, res) {
       error: err.message
     });
   });
-}).patch(function (req, res) {
+}).patch((0, _authRoute.userOrAdmin)(), function (req, res) {
   console.log('Body is:', req.body);
   (0, _UserValidation2.default)(req.body).then(function (data) {
     if (req.params.email != data.email) {
@@ -75,6 +81,76 @@ router.route('/:email').get(function (req, res) {
     res.json({
       success: false,
       errors: errors
+    });
+  });
+});
+
+router.route('/:email/roles').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
+  _UserModel2.default.findOne({ email: req.params.email }, 'roles').then(function (user) {
+    if (!user) {
+      throw new Error('That user does not exist.');
+    }
+
+    var userRoles = {};
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = user.roles[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var key = _step.value;
+
+        userRoles[key] = true;
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    res.json({
+      success: true,
+      model: _defineProperty({
+        _id: user._id
+      }, 'roles[]', userRoles)
+    });
+  }).catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
+    });
+  });
+}).patch((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
+  var inRoles = req.body['roles[]'];
+  console.log(inRoles);
+
+  var userRoles = [];
+  Object.keys(inRoles).forEach(function (key, index) {
+    if (inRoles[key] === true) {
+      userRoles.push(key);
+    }
+  });
+
+  console.log('Final', userRoles);
+  _UserModel2.default.findOneAndUpdate({ email: req.params.email }, {
+    roles: userRoles
+  }).then(function (user) {
+    res.json({
+      success: true
+    });
+  }).catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
     });
   });
 });

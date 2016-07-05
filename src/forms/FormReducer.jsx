@@ -29,6 +29,18 @@ const form = (state = initialState, action) => {
         }
       }
 
+    case 'FORM_UPDATE_CHECKBOX':
+      return {
+        ...state,
+        [action.subStore]: {
+          ...state[action.subStore],
+          [action.field]: {
+            ...state[action.subStore][action.field],
+            [action.value]: action.checked
+          }
+        }
+      }
+
     case 'FORM_BEGIN_LOADING':
       return {
         ...state,

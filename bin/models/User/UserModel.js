@@ -18,14 +18,9 @@ var _passportLocalMongoose = require('passport-local-mongoose');
 
 var _passportLocalMongoose2 = _interopRequireDefault(_passportLocalMongoose);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _UserRoles = require('./UserRoles');
 
-var UserRoles = Object.freeze({
-  Administrator: 1,
-  SiteManager: 2,
-  Tabulator: 3,
-  FormsManager: 4
-});
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var UserSchema = new _mongoose2.default.Schema({
   first_name: String,
@@ -45,7 +40,10 @@ var UserSchema = new _mongoose2.default.Schema({
     minlength: 5,
     maxlength: 5
   },
-  roles: [Number]
+
+  roles: [Number],
+
+  apiToken: String
 }, {
   timestamps: true,
   toObject: {
@@ -55,20 +53,6 @@ var UserSchema = new _mongoose2.default.Schema({
     virtuals: true
   }
 });
-
-function userHasRole(user, role) {
-  return user.roles.includes(UserRoles.Administrator) || user.roles.includes(role);
-}
-
-UserSchema.methods.isAdministrator = function () {
-  return userHasRole(undefined, UserRoles.Administrator);
-};
-UserSchema.methods.isSiteManager = function () {
-  return userHasRole(undefined, UserRoles.Administrator);
-};
-
-// TODO tomorrow: setting/modifying User roles using react-overlays(?), gating components by role, gating routes by role
-// .then() => forgot password so I don't neglect that forever.
 
 UserSchema.virtual('formattedName').get(function () {
   return this.first_name + ' ' + (this.mi ? this.mi + '. ' : '') + this.last_name;
@@ -97,4 +81,5 @@ UserSchema.plugin(_passportLocalMongoose2.default, {
   }
 });
 
-exports.default = _mongoose2.default.model('User', UserSchema);
+var UserModel = _mongoose2.default.model('User', UserSchema);
+exports.default = UserModel;

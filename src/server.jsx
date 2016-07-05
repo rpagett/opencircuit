@@ -55,7 +55,7 @@ Passport.serializeUser(function(user, done) {
 
 Passport.deserializeUser((user_id, done) => {
   console.log('DESERIALIZING! ID is ', user_id);
-  User.findById(user_id, '_id email first_name mi last_name formattedName', (err, user) => {
+  User.findOne({ _id: user_id }, '-password -hash -salt -createdAt -updatedAt', (err, user) => {
     if (err) { return done(err); }
     done(null, user);
   });
@@ -64,7 +64,7 @@ Passport.deserializeUser((user_id, done) => {
 app.use(Passport.initialize());
 app.use(Passport.session());
 
-const appStore = createStore(appReducers, {auth: {}, users: {}},
+const appStore = createStore(appReducers,
   compose(applyMiddleware(thunk),
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   ));
@@ -109,6 +109,24 @@ function dispatchReactRoute(req, res, appRoutes) {
           </script>
           <script type="text/javascript" src="/js/vendor.js"></script>
           <script type="text/javascript" src="/js/bundle.js"></script>
+          <script>
+            $(document).ready(function()
+            {
+                function reset_dimensions()
+                {
+                    doc_height = $(document).height();
+                    $('.content-container').css('min-height', (doc_height-35) + 'px');
+                }
+
+                reset_dimensions();
+                $(window).resize(function() {
+                    reset_dimensions();
+                });
+                $(document).resize(function () {
+                    reset_dimensions();
+                });
+            });
+          </script>
         </body>
         </html>`;
 

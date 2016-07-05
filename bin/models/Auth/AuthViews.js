@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Register = exports.Login = undefined;
+exports.Forgot = exports.Register = exports.Login = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -48,7 +48,7 @@ var Login = exports.Login = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'card-header', style: { 'padding': '0rem' } },
-            _react2.default.createElement('img', { className: 'card-img-top', src: '/assets/img/NavbarLogo.png' }),
+            _react2.default.createElement('img', { className: 'card-img-top', src: '/assets/img/2016NavbarLogo.png' }),
             _react2.default.createElement(
               'div',
               { className: 'container-fluid card-info card-inverse auth-card' },
@@ -121,7 +121,7 @@ var Register = exports.Register = function (_React$Component2) {
           _react2.default.createElement(
             'div',
             { className: 'card-header', style: { 'padding': '0rem' } },
-            _react2.default.createElement('img', { className: 'card-img-top', src: '/assets/img/NavbarLogo.png' }),
+            _react2.default.createElement('img', { className: 'card-img-top', src: '/assets/img/2016NavbarLogo.png' }),
             _react2.default.createElement(
               'div',
               { className: 'container-fluid card-info card-inverse auth-card' },
@@ -157,4 +157,49 @@ var Register = exports.Register = function (_React$Component2) {
   }]);
 
   return Register;
+}(_react2.default.Component);
+
+var Forgot = exports.Forgot = function (_React$Component3) {
+  _inherits(Forgot, _React$Component3);
+
+  function Forgot() {
+    _classCallCheck(this, Forgot);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Forgot).apply(this, arguments));
+  }
+
+  _createClass(Forgot, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'vcenter-parent registration-box col-xs-12 col-md-offset-2 col-md-8' },
+        _react2.default.createElement(
+          'div',
+          { className: 'card text-xs-center light-shadow' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card-header', style: { 'padding': '0rem' } },
+            _react2.default.createElement('img', { className: 'card-img-top', src: '/assets/img/2016NavbarLogo.png' }),
+            _react2.default.createElement(
+              'div',
+              { className: 'container-fluid card-info card-inverse auth-card' },
+              _react2.default.createElement(
+                'strong',
+                { className: 'h5' },
+                'Recover Password'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-block' },
+            _react2.default.createElement(_AuthForms.PasswordRecovery, null)
+          )
+        )
+      );
+    }
+  }]);
+
+  return Forgot;
 }(_react2.default.Component);

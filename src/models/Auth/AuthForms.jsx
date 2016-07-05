@@ -52,3 +52,21 @@ export class LoginForm extends React.Component {
     )
   }
 }
+
+export class PasswordRecovery extends React.Component {
+  render() {
+    return (
+      <ReduxForm
+        subStore="auth_recover"
+        submitEndpoint={ `/auth/forgot` }
+        submitMethod="POST"
+      >
+        <FormInput type="email" name="email" label="Email" />
+
+        <button type="submit" className="btn btn-success btn-block">
+          Send Recovery Code
+        </button>
+      </ReduxForm>
+    )
+  }
+}

@@ -29,8 +29,9 @@ var modal = function modal() {
 
     case 'MODAL_DEFINE':
       return _extends({}, state, {
+        component: action.component,
         title: action.title,
-        component: action.component
+        props: action.props
       });
 
     default:

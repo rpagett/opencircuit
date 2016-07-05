@@ -30,6 +30,10 @@ var _ModalActions = require('./ModalActions');
 
 var ModalActions = _interopRequireWildcard(_ModalActions);
 
+var _UserModals = require('../models/User/UserModals');
+
+var UserModals = _interopRequireWildcard(_UserModals);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -77,7 +81,14 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
   _createClass(_SpawnableModal, [{
     key: 'fetchModalBody',
     value: function fetchModalBody() {
-      return _react2.default.createElement(_LoadingCube2.default, { show: true });
+      switch (this.props.componentName) {
+
+        case 'USER_ROLES':
+          return _react2.default.createElement(UserModals.ManageRoles, this.props.modalProps);
+
+        default:
+          return _react2.default.createElement(_LoadingCube2.default, { show: true });
+      }
     }
   }, {
     key: 'render',
@@ -112,7 +123,7 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
             { className: 'container spawnable-modal' },
             this.props.allowClose ? _react2.default.createElement(
               'span',
-              { className: 'pull-right close' },
+              { className: 'pull-right close', onClick: this.props.markClosed },
               _react2.default.createElement(_Icon2.default, { shape: 'close' })
             ) : '',
             _react2.default.createElement(
@@ -143,10 +154,11 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    isOpen: state.modal.isOpen,
     allowClose: state.modal.allowClose,
-    title: state.modal.title,
-    componentName: state.modal.component
+    componentName: state.modal.component,
+    isOpen: state.modal.isOpen,
+    modalProps: state.modal.props,
+    title: state.modal.title
   };
 };
 

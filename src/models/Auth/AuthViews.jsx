@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Icon from '../../helpers/Icon';
-import { LoginForm, RegistrationForm } from './AuthForms';
+import { LoginForm, RegistrationForm, PasswordRecovery } from './AuthForms';
 
 export class Login extends React.Component {
   render() {
@@ -9,7 +9,7 @@ export class Login extends React.Component {
       <div className="vcenter-parent col-xs-12 col-md-offset-2 col-md-8">
         <div className="card text-xs-center light-shadow">
           <div className="card-header" style={{ 'padding': '0rem' }}>
-            <img className="card-img-top" src="/assets/img/NavbarLogo.png" />
+            <img className="card-img-top" src="/assets/img/2016NavbarLogo.png" />
             <div className="container-fluid card-info card-inverse auth-card">
               <strong className="h5">Log In</strong>
             </div>
@@ -45,7 +45,7 @@ export class Register extends React.Component {
       <div className="vcenter-parent registration-box col-xs-12 col-md-offset-2 col-md-8">
         <div className="card text-xs-center light-shadow">
           <div className="card-header" style={{ 'padding': '0rem' }}>
-            <img className="card-img-top" src="/assets/img/NavbarLogo.png" />
+            <img className="card-img-top" src="/assets/img/2016NavbarLogo.png" />
             <div className="container-fluid card-info card-inverse auth-card">
               <strong className="h5">Register an Account</strong>
             </div>
@@ -57,6 +57,27 @@ export class Register extends React.Component {
 
           <div className="card-footer">
             <center>Already have an account? <Link to="/auth/login" className="btn btn-link">Log In.</Link></center>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export class Forgot extends React.Component {
+  render() {
+    return (
+      <div className="vcenter-parent registration-box col-xs-12 col-md-offset-2 col-md-8">
+        <div className="card text-xs-center light-shadow">
+          <div className="card-header" style={{ 'padding': '0rem' }}>
+            <img className="card-img-top" src="/assets/img/2016NavbarLogo.png" />
+            <div className="container-fluid card-info card-inverse auth-card">
+              <strong className="h5">Recover Password</strong>
+            </div>
+          </div>
+
+          <div className="card-block">
+            <PasswordRecovery />
           </div>
         </div>
       </div>

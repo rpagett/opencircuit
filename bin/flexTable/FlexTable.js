@@ -114,7 +114,7 @@ var _FlexTable = (_temp = _class = function (_React$Component) {
                 cells.push(_react2.default.createElement(
                   'td',
                   { key: line._id + '-' + _key, 'data-title': _key },
-                  columns[_key](line, _this2.props.feedDispatch)
+                  columns[_key](line, _this2.props.feedDispatch())
                 ));
               }
 

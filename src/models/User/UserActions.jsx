@@ -2,7 +2,7 @@ import { fetchAPI, translateValidationErrors } from '../../helpers/functions';
 
 export const fetchProfile = (email) => {
   return (dispatch, getState) => {
-    const { users } = getState();
+    const { users, auth } = getState();
 
     dispatch(profileBeginLoading());
     dispatch(profileClearErrors());
@@ -12,7 +12,8 @@ export const fetchProfile = (email) => {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': auth.user.apiToken
       }
     })
       .then(res => {

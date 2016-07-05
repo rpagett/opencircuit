@@ -1,40 +1,25 @@
 import Mongoose from 'mongoose';
 
 const EventSchema = new Mongoose.Schema({
-  shortname: {
+  slug: {
     type: String,
     unique: true,
     required: true,
   },
   name: String,
   date: Date,
-  start_time: {
-    type : Date,
-    default: Date.now
-  },
-
-  street: String,
-  city: String,
-  state: String,
-  zip: Number,
-
+  start_time: String,
   attendance_cap: Number,
-  registration_open: {
-    type: Boolean,
-    default: true
-  },
-  critique_open: {
-    type: Boolean,
-    default: true
-  }
+  registration_open: Boolean,
+  critique_open: Boolean
 }, {
-  timestamps: true
-  //toObject: {
-  //  virtuals: true
-  //},
-  //toJSON: {
-  //  virtuals: true
-  //}
+  timestamps: true,
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
 });
 
 export default Mongoose.model('Event', EventSchema);

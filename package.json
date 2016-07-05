@@ -1,6 +1,7 @@
 {
   "name": "OpenCircuit",
   "version": "0.1.0",
+  "repository": "rpagett/opencircuit",
   "description": "opencircuit.us",
   "main": "bin/server.js",
   "scripts": {
@@ -22,6 +23,7 @@
     "mongodb": "^2.1.21",
     "mongoose": "^4.4.19",
     "node-notifier": "^4.6.0",
+    "node-uuid": "^1.4.7",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",

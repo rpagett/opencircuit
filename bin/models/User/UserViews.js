@@ -15,6 +15,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
+var _reactRouter = require('react-router');
+
 var _UserActions = require('./UserActions');
 
 var UserActions = _interopRequireWildcard(_UserActions);
@@ -30,6 +32,8 @@ var _UserList2 = _interopRequireDefault(_UserList);
 var _gravatars = require('../../helpers/gravatars');
 
 var _ModelInfo = require('../../layout/ModelInfo');
+
+var _UserRoles = require('./UserRoles');
 
 var _UserForms = require('./UserForms');
 
@@ -165,12 +169,33 @@ var _UserProfile = exports._UserProfile = (_temp = _class = function (_React$Com
             null,
             user.street,
             _react2.default.createElement('br', null),
-            user.address_2 ? user.address_2 + '<br />' : '',
+            user.address_2 ? user.address_2 : '',
             user.city,
             ', ',
             user.state,
             ' ',
             user.zip
+          )
+        ),
+        _react2.default.createElement(
+          _UserRoles.UserOrAdmin,
+          { profileEmail: user.email },
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'pull-center col-xs-12 col-sm-offset-4 col-sm-4' },
+              _react2.default.createElement(
+                'small',
+                null,
+                _react2.default.createElement(
+                  _reactRouter.Link,
+                  { to: user.profileURL + '/edit', className: 'btn btn-sm btn-secondary-outline btn-block' },
+                  'Edit Profile'
+                )
+              )
+            )
           )
         )
       );

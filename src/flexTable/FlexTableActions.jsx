@@ -2,7 +2,7 @@ import { fetchAPI, translateValidationErrors } from '../helpers/functions';
 
 export const fetchContents = endpoint => {
   return (dispatch, getState) => {
-    const { flexTable } = getState();
+    const { flexTable, auth } = getState();
 
     dispatch(beginLoading());
 
@@ -11,7 +11,8 @@ export const fetchContents = endpoint => {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': auth.user.apiToken
       }
     })
       .then(res => {

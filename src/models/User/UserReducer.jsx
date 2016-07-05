@@ -1,10 +1,3 @@
-//import Immutable from 'immutable';
-//
-//const initialState = Immutable.Map({
-//  listUsers: null,
-//  listError: null
-//});
-
 export const users = (state = { }, action) => {
   switch (action.type) {
     case 'USER_PROFILE_CLEAR_ERRORS':
@@ -38,38 +31,6 @@ export const users = (state = { }, action) => {
         ...state,
         profileLoading: false
       }
-
-    //case 'USER_EDIT_RECEIVED_DATA':
-    //  return {
-    //    ...state,
-    //    editFormData: action.user,
-    //    editFormLoading: false
-    //  }
-    //
-    //case 'USER_EDIT_ERROR':
-    //  return {
-    //    ...state,
-    //    editFormLoading: false,
-    //    editFormError: action.error.toString()
-    //  }
-    //
-    //case 'USER_EDIT_BEGIN_LOADING':
-    //  return {
-    //    ...state,
-    //    editFormLoading: true
-    //  }
-    //
-    //case 'USER_EDIT_STOP_LOADING':
-    //  return {
-    //    ...state,
-    //    editFormLoading: false
-    //  }
-    //
-    //case 'USER_EDIT_SUBMISSION_ERROR':
-    //  return {
-    //    ...state,
-    //    editFormErrors: action.errors
-    //  }
 
     default:
       return state;

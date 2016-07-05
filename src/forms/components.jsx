@@ -5,6 +5,7 @@ import Select from 'react-select';
 import MaskedInput from 'react-input-mask';
 
 import * as FormActions from './FormActions';
+import * as ModalActions from '../modals/ModalActions';
 import LoadingCube from '../helpers/LoadingCube';
 
 class FormError extends React.Component {
@@ -20,6 +21,7 @@ class FormError extends React.Component {
 class _InputWrapper extends React.Component {
   static propTypes = {
     afterInput: React.PropTypes.string,
+    label: React.PropTypes.string,
     name: React.PropTypes.string.isRequired,
     type: React.PropTypes.string,
     error: React.PropTypes.string,
@@ -57,7 +59,6 @@ class _InputWrapper extends React.Component {
 
       let childProps = {
         onChange: this.updateValue.bind(this),
-        className: 'form-control',
         name: this.props.name,
         value: this.props.value,
         type: this.props.type
@@ -75,13 +76,19 @@ class _InputWrapper extends React.Component {
       className += ' has-danger';
     }
 
+    let inputClass = 'col-xs-12 col-sm-8';
+    if (!this.props.label) {
+      inputClass = 'col-xs-12';
+    }
+
     return (
       <div className={ className }>
-        <label htmlFor={ this.props.name } className="col-xs-12 col-sm-4 form-control-label">
-          { this.props.label }
-        </label>
+        { (this.props.label ?
+          <label htmlFor={ this.props.name } className="col-xs-12 col-sm-4 form-control-label">
+            { this.props.label }
+          </label> : '') }
 
-        <div className="col-xs-12 col-sm-8">
+        <div className={ inputClass }>
           <div className="input-group">
             { this.recursivelyCloneChildren(this.props.children) }
 
@@ -217,6 +224,7 @@ export class StateSelect extends React.Component {
     return (
       <InputWrapper { ...this.props }>
         <Select
+          className="form-control"
           clearable={ false }
           options={ this.selectOptions() }
           autosize={ false }
@@ -225,6 +233,51 @@ export class StateSelect extends React.Component {
     );
   }
 }
+
+class _Checkbox extends React.Component {
+  static propTypes = {
+    label: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired,
+  }
+
+  updateChecked(e) {
+    this.props.updateField(e.target.checked);
+  }
+
+  render() {
+    return (
+      <div className="checkbox">
+        <label>
+          <input
+            type="checkbox"
+            name={ this.props.name }
+            value={ this.props.value }
+            checked={ this.props.checked }
+            onChange={ this.updateChecked.bind(this) }
+          />
+          <span className="checkbox-label">{ this.props.label }</span>
+        </label>
+      </div>
+    )
+  }
+}
+
+const mapStateToCheckboxProps = (state, props) => {
+  return {
+    checked: state.form[props.formStore][props.name] &&
+      state.form[props.formStore][props.name][props.value]
+  }
+}
+
+const mapStateToDispatchProps = (dispatch, props) => {
+  return {
+    updateField: checked => {
+      dispatch(FormActions.updateCheckbox(props.formStore, props.name, props.value, checked))
+    }
+  }
+}
+
+export const Checkbox = connect(mapStateToCheckboxProps, mapStateToDispatchProps)(_Checkbox);
 
 class _ReduxForm extends React.Component {
   static propTypes = {
@@ -262,11 +315,17 @@ class _ReduxForm extends React.Component {
     this.props.submitData()
       .then(res => {
         if (res && res.success === true) {
-          if (res.external && window) {
-            window.location = res.redirect;
+
+          if (this.props.inModal) {
+            this.props.closeModal();
           }
-          else {
-            this.props.router.push(res.redirect)
+          else if (res.redirect) {
+            if (res.external && window) {
+              window.location = res.redirect;
+            }
+            else {
+              this.props.router.push(res.redirect)
+            }
           }
         }
       })
@@ -276,7 +335,7 @@ class _ReduxForm extends React.Component {
     if (this.props.globalError) {
       return (
         <div>
-          <strong>Error: { this.props.globalError }</strong>
+          <strong>{ this.props.globalError }</strong>
         </div>
       );
     }
@@ -308,7 +367,8 @@ const mapDispatchToReduxFormProps = (dispatch, props) => {
     fetchData: () => { dispatch(FormActions.fetchData(props.subStore, props.fetchEndpoint)) },
     submitData: () => {
       return dispatch(FormActions.submitData(props.subStore, props.submitMethod, props.submitEndpoint))
-    }
+    },
+    closeModal: () => { dispatch(ModalActions.close()) }
   }
 }
 

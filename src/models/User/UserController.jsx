@@ -3,11 +3,13 @@ import _ from 'lodash';
 
 import User from './UserModel';
 import validateUser from './UserValidation';
+import { UserRoles } from './UserRoles';
+import { hasRole, userOrAdmin } from '../../middleware/authRoute';
 
 let router = Express.Router();
 // routes are '/api/users/...'
 
-router.get('/', (req, res) => {
+router.get('/', hasRole(UserRoles.Administrator), (req, res) => {
   User.find({ }, 'email first_name mi last_name formattedName profileURL phone')
     .then(users => {
       res.json({
@@ -18,7 +20,7 @@ router.get('/', (req, res) => {
     .catch(err => {
       res.json({
         success: false,
-        error: err
+        error: err.message
       });
     })
 });
@@ -45,7 +47,7 @@ router.route('/:email')
       });
   })
 
-  .patch((req, res) => {
+  .patch(userOrAdmin(), (req, res) => {
     console.log('Body is:', req.body);
     validateUser(req.body)
       .then(data => {
@@ -68,6 +70,63 @@ router.route('/:email')
         res.json({
           success: false,
           errors
+        })
+      })
+  });
+
+router.route('/:email/roles')
+  .get(hasRole(UserRoles.Administrator), (req, res) => {
+    User.findOne({ email: req.params.email }, 'roles')
+      .then(user => {
+        if (!user) {
+          throw new Error('That user does not exist.');
+        }
+
+        let userRoles = { };
+        for (let key of user.roles) {
+          userRoles[key] = true;
+        }
+
+        res.json({
+          success: true,
+          model: {
+            _id: user._id,
+            ['roles[]']: userRoles
+          }
+        })
+      })
+      .catch(err => {
+        res.json({
+          success: false,
+          error: err.message
+        })
+      });
+  })
+
+  .patch(hasRole(UserRoles.Administrator), (req, res) => {
+    const inRoles = req.body['roles[]'];
+    console.log(inRoles);
+
+    let userRoles = [ ];
+    Object.keys(inRoles).forEach((key, index) => {
+      if (inRoles[key] === true) {
+        userRoles.push(key);
+      }
+    });
+
+    console.log('Final', userRoles);
+    User.findOneAndUpdate({ email: req.params.email }, {
+      roles: userRoles
+    })
+      .then(user => {
+        res.json({
+          success: true
+        })
+      })
+      .catch(err => {
+        res.json({
+          success: false,
+          error: err.message
         })
       })
   });

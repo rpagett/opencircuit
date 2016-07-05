@@ -12,6 +12,7 @@ var fetchProfile = exports.fetchProfile = function fetchProfile(email) {
     var _getState = getState();
 
     var users = _getState.users;
+    var auth = _getState.auth;
 
 
     dispatch(profileBeginLoading());
@@ -22,7 +23,8 @@ var fetchProfile = exports.fetchProfile = function fetchProfile(email) {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': auth.user.apiToken
       }
     }).then(function (res) {
       return res.json();

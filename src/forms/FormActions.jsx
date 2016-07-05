@@ -16,6 +16,16 @@ export function updateField(subStore, field, value) {
   }
 }
 
+export function updateCheckbox(subStore, field, value, checked) {
+  return {
+    type: 'FORM_UPDATE_CHECKBOX',
+    subStore,
+    field,
+    value,
+    checked: (checked ? true : false)
+  }
+}
+
 function beginLoading(subStore) {
   return {
     type: 'FORM_BEGIN_LOADING',
@@ -39,20 +49,22 @@ function setError(subStore, error) {
 }
 
 export function fetchData(subStore, endpoint) {
-  return dispatch => {
+  return (dispatch, getState) => {
     if (!endpoint) {
       dispatch(initializeSubstore(subStore));
       dispatch(stopLoading(subStore));
       return;
     }
 
+    const { auth } = getState();
     dispatch(beginLoading(subStore));
     fetchAPI(endpoint, {
       credentials: 'same-origin',
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': auth.user.apiToken
       }
     })
       .then(res => {
@@ -87,11 +99,16 @@ export function submitData(subStore, submitMethod, endpoint) {
     dispatch(beginLoading(subStore));
     dispatch(clearErrors(subStore));
 
-    const { form } = getState();
+    const { form, auth } = getState();
 
     return fetchAPI(endpoint, {
       credentials: 'same-origin',
       method: submitMethod,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': auth.user && auth.user.apiToken
+      },
       body: JSON.stringify(form[subStore])
     })
       .then(res => {

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.LoginForm = exports.RegistrationForm = undefined;
+exports.PasswordRecovery = exports.LoginForm = exports.RegistrationForm = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -96,4 +96,36 @@ var LoginForm = exports.LoginForm = function (_React$Component2) {
   }]);
 
   return LoginForm;
+}(_react2.default.Component);
+
+var PasswordRecovery = exports.PasswordRecovery = function (_React$Component3) {
+  _inherits(PasswordRecovery, _React$Component3);
+
+  function PasswordRecovery() {
+    _classCallCheck(this, PasswordRecovery);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(PasswordRecovery).apply(this, arguments));
+  }
+
+  _createClass(PasswordRecovery, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _components.ReduxForm,
+        {
+          subStore: 'auth_recover',
+          submitEndpoint: '/auth/forgot',
+          submitMethod: 'POST'
+        },
+        _react2.default.createElement(_components.FormInput, { type: 'email', name: 'email', label: 'Email' }),
+        _react2.default.createElement(
+          'button',
+          { type: 'submit', className: 'btn btn-success btn-block' },
+          'Send Recovery Code'
+        )
+      );
+    }
+  }]);
+
+  return PasswordRecovery;
 }(_react2.default.Component);

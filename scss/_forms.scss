@@ -32,3 +32,32 @@
 .btn-block:after {
   padding-bottom: 2rem;
 }
+
+.checkbox-group {
+  width: 100%;
+  padding-bottom: .5rem;
+
+  button {
+    margin-top: .6rem !important;
+    margin-top: .4rem !important;
+  }
+
+  .checkbox-label {
+    margin-left: 1.5rem;
+  }
+
+  input {
+    padding-left: 3rem;
+    padding-right: 1rem;
+  }
+}
+
+.checkbox {
+  label {
+    padding-left: 3rem;
+  }
+
+  &:last-of-type {
+    padding-bottom: .6rem;
+  }
+}

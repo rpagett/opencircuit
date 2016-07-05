@@ -105,7 +105,7 @@ _passport2.default.serializeUser(function (user, done) {
 
 _passport2.default.deserializeUser(function (user_id, done) {
   console.log('DESERIALIZING! ID is ', user_id);
-  _UserModel2.default.findById(user_id, '_id email first_name mi last_name formattedName', function (err, user) {
+  _UserModel2.default.findOne({ _id: user_id }, '-password -hash -salt -createdAt -updatedAt', function (err, user) {
     if (err) {
       return done(err);
     }
@@ -116,7 +116,7 @@ _passport2.default.deserializeUser(function (user_id, done) {
 app.use(_passport2.default.initialize());
 app.use(_passport2.default.session());
 
-var appStore = (0, _redux.createStore)(_redux2.appReducers, { auth: {}, users: {} }, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : function (f) {
+var appStore = (0, _redux.createStore)(_redux2.appReducers, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : function (f) {
   return f;
 }));
 
@@ -140,7 +140,7 @@ function dispatchReactRoute(req, res, appRoutes) {
         _react2.default.createElement(_reactRouter.RouterContext, renderProps)
       ));
       var preloadedState = appStore.getState();
-      var HTML = '<!DOCTYPE html>\n        <html>\n        <head>\n          <meta charSet="UTF-8" />\n          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />\n          <title>OpenCircuit</title>\n          <link rel="stylesheet" href="/css/app.min.css" />\n          <link rel="shortcut icon" href="/assets/img/favicon.ico" />\n        </head>\n        <body>\n          <div className="container-fluid" id="react-container">\n            <div>' + routerComponent + '</div>\n          </div>\n          <script id="injected-state">\n            window.__PRELOADED_STATE__ = ' + JSON.stringify(preloadedState) + '\n          </script>\n          <script type="text/javascript" src="/js/vendor.js"></script>\n          <script type="text/javascript" src="/js/bundle.js"></script>\n        </body>\n        </html>';
+      var HTML = '<!DOCTYPE html>\n        <html>\n        <head>\n          <meta charSet="UTF-8" />\n          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />\n          <title>OpenCircuit</title>\n          <link rel="stylesheet" href="/css/app.min.css" />\n          <link rel="shortcut icon" href="/assets/img/favicon.ico" />\n        </head>\n        <body>\n          <div className="container-fluid" id="react-container">\n            <div>' + routerComponent + '</div>\n          </div>\n          <script id="injected-state">\n            window.__PRELOADED_STATE__ = ' + JSON.stringify(preloadedState) + '\n          </script>\n          <script type="text/javascript" src="/js/vendor.js"></script>\n          <script type="text/javascript" src="/js/bundle.js"></script>\n          <script>\n            $(document).ready(function()\n            {\n                function reset_dimensions()\n                {\n                    doc_height = $(document).height();\n                    $(\'.content-container\').css(\'min-height\', (doc_height-35) + \'px\');\n                }\n\n                reset_dimensions();\n                $(window).resize(function() {\n                    reset_dimensions();\n                });\n                $(document).resize(function () {\n                    reset_dimensions();\n                });\n            });\n          </script>\n        </body>\n        </html>';
 
       res.status(200).send(HTML);
     } else {

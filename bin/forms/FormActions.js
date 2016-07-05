@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.updateField = updateField;
+exports.updateCheckbox = updateCheckbox;
 exports.fetchData = fetchData;
 exports.submitData = submitData;
 
@@ -22,6 +23,16 @@ function updateField(subStore, field, value) {
     subStore: subStore,
     field: field,
     value: value
+  };
+}
+
+function updateCheckbox(subStore, field, value, checked) {
+  return {
+    type: 'FORM_UPDATE_CHECKBOX',
+    subStore: subStore,
+    field: field,
+    value: value,
+    checked: checked ? true : false
   };
 }
 
@@ -48,12 +59,16 @@ function setError(subStore, error) {
 }
 
 function fetchData(subStore, endpoint) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     if (!endpoint) {
       dispatch(initializeSubstore(subStore));
       dispatch(stopLoading(subStore));
       return;
     }
+
+    var _getState = getState();
+
+    var auth = _getState.auth;
 
     dispatch(beginLoading(subStore));
     (0, _functions.fetchAPI)(endpoint, {
@@ -61,7 +76,8 @@ function fetchData(subStore, endpoint) {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': auth.user.apiToken
       }
     }).then(function (res) {
       return res.json();
@@ -93,14 +109,20 @@ function submitData(subStore, submitMethod, endpoint) {
     dispatch(beginLoading(subStore));
     dispatch(clearErrors(subStore));
 
-    var _getState = getState();
+    var _getState2 = getState();
 
-    var form = _getState.form;
+    var form = _getState2.form;
+    var auth = _getState2.auth;
 
 
     return (0, _functions.fetchAPI)(endpoint, {
       credentials: 'same-origin',
       method: submitMethod,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': auth.user && auth.user.apiToken
+      },
       body: JSON.stringify(form[subStore])
     }).then(function (res) {
       return res.json();

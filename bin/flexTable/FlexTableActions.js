@@ -12,6 +12,7 @@ var fetchContents = exports.fetchContents = function fetchContents(endpoint) {
     var _getState = getState();
 
     var flexTable = _getState.flexTable;
+    var auth = _getState.auth;
 
 
     dispatch(beginLoading());
@@ -21,7 +22,8 @@ var fetchContents = exports.fetchContents = function fetchContents(endpoint) {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': auth.user.apiToken
       }
     }).then(function (res) {
       return res.json();

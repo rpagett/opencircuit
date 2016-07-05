@@ -23,13 +23,13 @@ var _AppTemplate = require('./templates/AppTemplate');
 
 var _AppTemplate2 = _interopRequireDefault(_AppTemplate);
 
-var _DashboardViews = require('./models/Dashboard/DashboardViews');
-
-var RootView = _interopRequireWildcard(_DashboardViews);
-
 var _AuthTemplate = require('./templates/AuthTemplate');
 
 var _AuthTemplate2 = _interopRequireDefault(_AuthTemplate);
+
+var _DashboardViews = require('./models/Dashboard/DashboardViews');
+
+var RootView = _interopRequireWildcard(_DashboardViews);
 
 var _AuthViews = require('./models/Auth/AuthViews');
 
@@ -38,6 +38,8 @@ var AuthView = _interopRequireWildcard(_AuthViews);
 var _UserViews = require('./models/User/UserViews');
 
 var UserView = _interopRequireWildcard(_UserViews);
+
+var _UserRoles = require('./models/User/UserRoles');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -55,6 +57,35 @@ function getAppRoutes(store) {
 
     if (!authUser) {
       replace('/auth/login');
+    }
+  }
+
+  function isUserOrAdmin(nextState, replace) {
+    var authUser = store.getState().auth.user;
+    var routeUser = nextState.params.email;
+
+    if (!authUser) {
+      replace('/');
+    }
+
+    if (routeUser != authUser.email && !authUser.roles.includes(_UserRoles.UserRoles.Administrator)) {
+      replace('/');
+    }
+  }
+
+  function requiresRole() {
+    var role = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+    var nextState = arguments[1];
+    var replace = arguments[2];
+
+    var authUser = store.getState().auth.user;
+
+    if (!authUser) {
+      replace('/');
+    }
+
+    if (role && !authUser.roles.includes(role)) {
+      replace('/');
     }
   }
 
@@ -76,16 +107,17 @@ function getAppRoutes(store) {
       _react2.default.createElement(
         _reactRouter.Route,
         { path: '/users' },
-        _react2.default.createElement(_reactRouter.IndexRoute, { component: UserView.Index }),
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: UserView.Index, onEnter: requiresRole.bind(this, _UserRoles.UserRoles.Administrator) }),
         _react2.default.createElement(_reactRouter.Route, { path: ':email', component: UserView.Show }),
-        _react2.default.createElement(_reactRouter.Route, { path: ':email/edit', component: UserView.Edit })
+        _react2.default.createElement(_reactRouter.Route, { path: ':email/edit', component: UserView.Edit, onEnter: isUserOrAdmin })
       )
     ),
     _react2.default.createElement(
       _reactRouter.Route,
       { path: '/auth', component: _AuthTemplate2.default, onEnter: guestOnly },
       _react2.default.createElement(_reactRouter.Route, { path: 'login', component: AuthView.Login }),
-      _react2.default.createElement(_reactRouter.Route, { path: 'register', component: AuthView.Register })
+      _react2.default.createElement(_reactRouter.Route, { path: 'register', component: AuthView.Register }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'forgot', component: AuthView.Forgot })
     )
   );
 

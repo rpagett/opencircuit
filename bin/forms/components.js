@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ReduxForm = exports.StateSelect = exports.FormStatic = exports.PhoneInput = exports.FormInput = undefined;
+exports.ReduxForm = exports.Checkbox = exports.StateSelect = exports.FormStatic = exports.PhoneInput = exports.FormInput = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _class, _temp, _class2, _temp2;
+var _class, _temp, _class2, _temp2, _class3, _temp3;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -30,6 +30,10 @@ var _reactInputMask2 = _interopRequireDefault(_reactInputMask);
 var _FormActions = require('./FormActions');
 
 var FormActions = _interopRequireWildcard(_FormActions);
+
+var _ModalActions = require('../modals/ModalActions');
+
+var ModalActions = _interopRequireWildcard(_ModalActions);
 
 var _LoadingCube = require('../helpers/LoadingCube');
 
@@ -108,7 +112,6 @@ var _InputWrapper = (_temp = _class = function (_React$Component2) {
 
         var childProps = {
           onChange: _this3.updateValue.bind(_this3),
-          className: 'form-control',
           name: _this3.props.name,
           value: _this3.props.value,
           type: _this3.props.type
@@ -127,17 +130,22 @@ var _InputWrapper = (_temp = _class = function (_React$Component2) {
         className += ' has-danger';
       }
 
+      var inputClass = 'col-xs-12 col-sm-8';
+      if (!this.props.label) {
+        inputClass = 'col-xs-12';
+      }
+
       return _react2.default.createElement(
         'div',
         { className: className },
-        _react2.default.createElement(
+        this.props.label ? _react2.default.createElement(
           'label',
           { htmlFor: this.props.name, className: 'col-xs-12 col-sm-4 form-control-label' },
           this.props.label
-        ),
+        ) : '',
         _react2.default.createElement(
           'div',
-          { className: 'col-xs-12 col-sm-8' },
+          { className: inputClass },
           _react2.default.createElement(
             'div',
             { className: 'input-group' },
@@ -161,6 +169,7 @@ var _InputWrapper = (_temp = _class = function (_React$Component2) {
   return _InputWrapper;
 }(_react2.default.Component), _class.propTypes = {
   afterInput: _react2.default.PropTypes.string,
+  label: _react2.default.PropTypes.string,
   name: _react2.default.PropTypes.string.isRequired,
   type: _react2.default.PropTypes.string,
   error: _react2.default.PropTypes.string,
@@ -306,6 +315,7 @@ var StateSelect = exports.StateSelect = function (_React$Component7) {
         InputWrapper,
         this.props,
         _react2.default.createElement(_reactSelect2.default, {
+          className: 'form-control',
           clearable: false,
           options: this.selectOptions(),
           autosize: false
@@ -317,8 +327,70 @@ var StateSelect = exports.StateSelect = function (_React$Component7) {
   return StateSelect;
 }(_react2.default.Component);
 
-var _ReduxForm = (_temp2 = _class2 = function (_React$Component8) {
-  _inherits(_ReduxForm, _React$Component8);
+var _Checkbox = (_temp2 = _class2 = function (_React$Component8) {
+  _inherits(_Checkbox, _React$Component8);
+
+  function _Checkbox() {
+    _classCallCheck(this, _Checkbox);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Checkbox).apply(this, arguments));
+  }
+
+  _createClass(_Checkbox, [{
+    key: 'updateChecked',
+    value: function updateChecked(e) {
+      this.props.updateField(e.target.checked);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'checkbox' },
+        _react2.default.createElement(
+          'label',
+          null,
+          _react2.default.createElement('input', {
+            type: 'checkbox',
+            name: this.props.name,
+            value: this.props.value,
+            checked: this.props.checked,
+            onChange: this.updateChecked.bind(this)
+          }),
+          _react2.default.createElement(
+            'span',
+            { className: 'checkbox-label' },
+            this.props.label
+          )
+        )
+      );
+    }
+  }]);
+
+  return _Checkbox;
+}(_react2.default.Component), _class2.propTypes = {
+  label: _react2.default.PropTypes.string.isRequired,
+  name: _react2.default.PropTypes.string.isRequired
+}, _temp2);
+
+var mapStateToCheckboxProps = function mapStateToCheckboxProps(state, props) {
+  return {
+    checked: state.form[props.formStore][props.name] && state.form[props.formStore][props.name][props.value]
+  };
+};
+
+var mapStateToDispatchProps = function mapStateToDispatchProps(dispatch, props) {
+  return {
+    updateField: function updateField(checked) {
+      dispatch(FormActions.updateCheckbox(props.formStore, props.name, props.value, checked));
+    }
+  };
+};
+
+var Checkbox = exports.Checkbox = (0, _reactRedux.connect)(mapStateToCheckboxProps, mapStateToDispatchProps)(_Checkbox);
+
+var _ReduxForm = (_temp3 = _class3 = function (_React$Component9) {
+  _inherits(_ReduxForm, _React$Component9);
 
   function _ReduxForm() {
     _classCallCheck(this, _ReduxForm);
@@ -334,15 +406,15 @@ var _ReduxForm = (_temp2 = _class2 = function (_React$Component8) {
   }, {
     key: 'recursivelyCloneChildren',
     value: function recursivelyCloneChildren(children) {
-      var _this10 = this;
+      var _this11 = this;
 
       return _react2.default.Children.map(children, function (child) {
         if (!_react2.default.isValidElement(child)) {
           return child;
         }
 
-        var childProps = { formStore: _this10.props.subStore };
-        childProps.children = _this10.recursivelyCloneChildren(child.props.children);
+        var childProps = { formStore: _this11.props.subStore };
+        childProps.children = _this11.recursivelyCloneChildren(child.props.children);
 
         return _react2.default.cloneElement(child, childProps);
       });
@@ -350,16 +422,21 @@ var _ReduxForm = (_temp2 = _class2 = function (_React$Component8) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      var _this11 = this;
+      var _this12 = this;
 
       event && event.preventDefault();
 
       this.props.submitData().then(function (res) {
         if (res && res.success === true) {
-          if (res.external && window) {
-            window.location = res.redirect;
-          } else {
-            _this11.props.router.push(res.redirect);
+
+          if (_this12.props.inModal) {
+            _this12.props.closeModal();
+          } else if (res.redirect) {
+            if (res.external && window) {
+              window.location = res.redirect;
+            } else {
+              _this12.props.router.push(res.redirect);
+            }
           }
         }
       });
@@ -374,7 +451,6 @@ var _ReduxForm = (_temp2 = _class2 = function (_React$Component8) {
           _react2.default.createElement(
             'strong',
             null,
-            'Error: ',
             this.props.globalError
           )
         );
@@ -395,15 +471,15 @@ var _ReduxForm = (_temp2 = _class2 = function (_React$Component8) {
   }]);
 
   return _ReduxForm;
-}(_react2.default.Component), _class2.propTypes = {
+}(_react2.default.Component), _class3.propTypes = {
   submitEndpoint: _react2.default.PropTypes.string.isRequired,
   submitMethod: _react2.default.PropTypes.string.isRequired,
   fetchEndpoint: _react2.default.PropTypes.string,
   isLoading: _react2.default.PropTypes.bool,
   subStore: _react2.default.PropTypes.string.isRequired
-}, _class2.defaultProps = {
+}, _class3.defaultProps = {
   isLoading: true
-}, _temp2);
+}, _temp3);
 
 var mapStateToReduxFormProps = function mapStateToReduxFormProps(state, props) {
   return {
@@ -419,6 +495,9 @@ var mapDispatchToReduxFormProps = function mapDispatchToReduxFormProps(dispatch,
     },
     submitData: function submitData() {
       return dispatch(FormActions.submitData(props.subStore, props.submitMethod, props.submitEndpoint));
+    },
+    closeModal: function closeModal() {
+      dispatch(ModalActions.close());
     }
   };
 };
