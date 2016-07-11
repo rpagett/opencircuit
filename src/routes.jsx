@@ -7,6 +7,7 @@ import AuthTemplate from './templates/AuthTemplate';
 
 import * as RootView from './models/Dashboard/DashboardViews';
 import * as AuthView from './models/Auth/AuthViews';
+import * as EventView from './models/Event/EventViews';
 import * as UserView from './models/User/UserViews';
 
 import { UserRoles } from './models/User/UserRoles';
@@ -40,7 +41,7 @@ export function getAppRoutes(store) {
       replace('/');
     }
 
-    if (role && !authUser.roles.includes(role)) {
+    if (role && !authUser.roles.includes(UserRoles.Administrator) && !authUser.roles.includes(role)) {
       replace('/');
     }
   }
@@ -58,6 +59,13 @@ export function getAppRoutes(store) {
 
       <Route component={ App } onEnter={ authOnly }>
         <IndexRoute component={ RootView.Home } />
+
+        <Route path="/events">
+          <IndexRoute component={ EventView.Index } />
+          <Route path="new" component={ EventView.New } onEnter={ requiresRole.bind(this, UserRoles.EventDirector) } />
+          <Route path=":slug" component={ EventView.Show } />
+          <Route path=":slug/edit" component={ EventView.Edit } onEnter={ requiresRole.bind(this, UserRoles.EventDirector) } />
+        </Route>
 
         <Route path="/users">
           <IndexRoute component={ UserView.Index } onEnter={ requiresRole.bind(this, UserRoles.Administrator) } />

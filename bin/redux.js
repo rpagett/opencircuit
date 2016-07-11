@@ -23,6 +23,10 @@ var _ModalReducer = require('./modals/ModalReducer');
 
 var _ModalReducer2 = _interopRequireDefault(_ModalReducer);
 
+var _ModelViewReducer = require('./modelView/ModelViewReducer');
+
+var _ModelViewReducer2 = _interopRequireDefault(_ModelViewReducer);
+
 var _UserReducer = require('./models/User/UserReducer');
 
 var _UserReducer2 = _interopRequireDefault(_UserReducer);
@@ -30,12 +34,14 @@ var _UserReducer2 = _interopRequireDefault(_UserReducer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // combine reducers
+
+
+// import reducers
 var appReducers = exports.appReducers = (0, _redux.combineReducers)({
   auth: _AuthReducer2.default,
   flexTable: _FlexTableReducer2.default,
   form: _FormReducer2.default,
   modal: _ModalReducer2.default,
+  modelView: _ModelViewReducer2.default,
   users: _UserReducer2.default
 });
-
-// import reducers

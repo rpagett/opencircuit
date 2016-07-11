@@ -66,7 +66,7 @@ router.route('/:email')
           })
         })
       })
-      .catch((errors) => {
+      .catch(errors => {
         res.json({
           success: false,
           errors

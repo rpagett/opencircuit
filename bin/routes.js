@@ -35,6 +35,10 @@ var _AuthViews = require('./models/Auth/AuthViews');
 
 var AuthView = _interopRequireWildcard(_AuthViews);
 
+var _EventViews = require('./models/Event/EventViews');
+
+var EventView = _interopRequireWildcard(_EventViews);
+
 var _UserViews = require('./models/User/UserViews');
 
 var UserView = _interopRequireWildcard(_UserViews);
@@ -84,7 +88,7 @@ function getAppRoutes(store) {
       replace('/');
     }
 
-    if (role && !authUser.roles.includes(role)) {
+    if (role && !authUser.roles.includes(_UserRoles.UserRoles.Administrator) && !authUser.roles.includes(role)) {
       replace('/');
     }
   }
@@ -104,6 +108,14 @@ function getAppRoutes(store) {
       _reactRouter.Route,
       { component: _app2.default, onEnter: authOnly },
       _react2.default.createElement(_reactRouter.IndexRoute, { component: RootView.Home }),
+      _react2.default.createElement(
+        _reactRouter.Route,
+        { path: '/events' },
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: EventView.Index }),
+        _react2.default.createElement(_reactRouter.Route, { path: 'new', component: EventView.New, onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector) }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':slug', component: EventView.Show }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':slug/edit', component: EventView.Edit, onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector) })
+      ),
       _react2.default.createElement(
         _reactRouter.Route,
         { path: '/users' },

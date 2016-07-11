@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Select from 'react-select';
 import MaskedInput from 'react-input-mask';
+import DateTimeField from 'react-datetime';
+import Moment from 'moment';
 
 import * as FormActions from './FormActions';
 import * as ModalActions from '../modals/ModalActions';
@@ -21,14 +23,17 @@ class FormError extends React.Component {
 class _InputWrapper extends React.Component {
   static propTypes = {
     afterInput: React.PropTypes.string,
+    beforeInput: React.PropTypes.string,
+    error: React.PropTypes.string,
+    formStore: React.PropTypes.string.isRequired,
+    horizontal: React.PropTypes.bool,
     label: React.PropTypes.string,
     name: React.PropTypes.string.isRequired,
-    type: React.PropTypes.string,
-    error: React.PropTypes.string,
-    formStore: React.PropTypes.string.isRequired
+    type: React.PropTypes.string
   }
 
   static defaultProps = {
+    horizontal: true,
     type: 'text',
     value: ''
   }
@@ -39,6 +44,9 @@ class _InputWrapper extends React.Component {
 
     if (e.currentTarget) {
       this.props.updateField(e.currentTarget.value);
+    }
+    else if (e._isAMomentObject) {
+      this.props.updateField(e.toDate());
     }
     else {
       console.log('Nailed it!');
@@ -63,6 +71,12 @@ class _InputWrapper extends React.Component {
         value: this.props.value,
         type: this.props.type
       };
+
+      if (this.props.value instanceof Date) {
+        console.log('It\'s a Date!')
+        childProps.value = Moment(this.props.value);
+      }
+
       childProps.children = this.recursivelyCloneChildren(child.props.children);
 
       return React.cloneElement(child, childProps);
@@ -76,20 +90,24 @@ class _InputWrapper extends React.Component {
       className += ' has-danger';
     }
 
-    let inputClass = 'col-xs-12 col-sm-8';
-    if (!this.props.label) {
-      inputClass = 'col-xs-12';
+    let labelClass = 'form-control-label col-xs-12';
+    let inputClass = 'col-xs-12';
+    if (this.props.label && this.props.horizontal) {
+      inputClass += ' col-sm-8';
+      labelClass += ' col-sm-4';
     }
 
     return (
       <div className={ className }>
         { (this.props.label ?
-          <label htmlFor={ this.props.name } className="col-xs-12 col-sm-4 form-control-label">
+          <label htmlFor={ this.props.name } className={ labelClass }>
             { this.props.label }
           </label> : '') }
 
         <div className={ inputClass }>
           <div className="input-group">
+            {( this.props.beforeInput ? <span className="input-group-addon">{ this.props.beforeInput }</span> : null )}
+
             { this.recursivelyCloneChildren(this.props.children) }
 
             {( this.props.afterInput ? <span className="input-group-addon">{ this.props.afterInput }</span> : null )}
@@ -153,8 +171,6 @@ class _FormStatic extends React.Component {
 
 export class FormStatic extends React.Component {
   render() {
-    const className='form-group row';
-
     return (
       <InputWrapper { ...this.props }>
         <_FormStatic />
@@ -162,6 +178,16 @@ export class FormStatic extends React.Component {
     );
   }
 };
+
+export class TextArea extends React.Component {
+  render() {
+    return (
+      <InputWrapper horizontal={ false } { ...this.props }>
+        <textarea className="form-control" />
+      </InputWrapper>
+    )
+  }
+}
 
 export class StateSelect extends React.Component {
   selectOptions() {
@@ -234,6 +260,22 @@ export class StateSelect extends React.Component {
   }
 }
 
+export class DateTime extends React.Component {
+  render() {
+    return (
+      <InputWrapper { ...this.props }>
+        <DateTimeField
+          strict={ false }
+          inputProps={{
+          className: 'form-control',
+           ...this.props
+        }}
+        />
+      </InputWrapper>
+    );
+  }
+}
+
 class _Checkbox extends React.Component {
   static propTypes = {
     label: React.PropTypes.string.isRequired,
@@ -241,38 +283,66 @@ class _Checkbox extends React.Component {
   }
 
   updateChecked(e) {
-    this.props.updateField(e.target.checked);
+    if (this.props.inForm) {
+      this.props.updateField(e.target.checked);
+    }
+    else {
+      this.props.updateCheckbox(e.target.checked);
+    }
   }
 
   render() {
-    return (
-      <div className="checkbox">
-        <label>
-          <input
-            type="checkbox"
-            name={ this.props.name }
-            value={ this.props.value }
-            checked={ this.props.checked }
-            onChange={ this.updateChecked.bind(this) }
-          />
-          <span className="checkbox-label">{ this.props.label }</span>
-        </label>
-      </div>
-    )
+    if (this.props.inForm) {
+      return (
+        <div className="form-group row">
+          <div className="col-xs-10 col-sm-4 form-control-label">
+            { this.props.label }
+          </div>
+          <div className="col-xs-2 col-sm-8">
+            <input
+              type="checkbox"
+              name={ this.props.name }
+              checked={ this.props.formChecked }
+              onChange={ this.updateChecked.bind(this) }
+            />
+          </div>
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className="checkbox">
+          <label>
+            <input
+              type="checkbox"
+              name={ this.props.name }
+              value={ this.props.value }
+              checked={ this.props.checked }
+              onChange={ this.updateChecked.bind(this) }
+            />
+            <span className="checkbox-label">{ this.props.label }</span>
+          </label>
+        </div>
+      )
+    }
   }
 }
 
 const mapStateToCheckboxProps = (state, props) => {
   return {
     checked: state.form[props.formStore][props.name] &&
-      state.form[props.formStore][props.name][props.value]
+      state.form[props.formStore][props.name][props.value],
+    formChecked: state.form[props.formStore][props.name]
   }
 }
 
 const mapStateToDispatchProps = (dispatch, props) => {
   return {
-    updateField: checked => {
+    updateCheckbox: checked => {
       dispatch(FormActions.updateCheckbox(props.formStore, props.name, props.value, checked))
+    },
+    updateField: checked => {
+      dispatch(FormActions.updateField(props.formStore, props.name, checked))
     }
   }
 }

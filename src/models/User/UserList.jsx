@@ -15,7 +15,7 @@ export default class UserList extends React.Component {
     return (
       <div>
         <FlexTable
-          endpoint="/api/users"
+          endpoint={ this.props.endpoint }
           emptyMessage="There are no registered users."
           columns={{
             'Name': user => { return (<Link to={ user.profileURL }>{ user.formattedName }</Link>) },

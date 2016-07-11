@@ -52,7 +52,7 @@ var UserList = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(_FlexTable2.default, {
-          endpoint: '/api/users',
+          endpoint: this.props.endpoint,
           emptyMessage: 'There are no registered users.',
           columns: {
             'Name': function Name(user) {

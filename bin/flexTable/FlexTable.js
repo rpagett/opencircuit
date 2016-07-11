@@ -65,7 +65,7 @@ var _FlexTable = (_temp = _class = function (_React$Component) {
         );
       }
 
-      if (!this.props.contents) {
+      if (!this.props.contents.length) {
         return _react2.default.createElement(
           'strong',
           null,

@@ -88,7 +88,7 @@ export class _UserProfile extends React.Component {
             </div>
           </div>
         </UserOrAdmin>
-        
+
       </div>
     );
   }
