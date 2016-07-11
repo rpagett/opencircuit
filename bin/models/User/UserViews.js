@@ -3,9 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Edit = exports.Show = exports._UserProfile = exports.Index = undefined;
-
-var _class, _temp;
+exports.Edit = exports.Show = exports._Show = exports.Index = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -13,21 +11,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = require('react-redux');
-
 var _reactRouter = require('react-router');
-
-var _UserActions = require('./UserActions');
-
-var UserActions = _interopRequireWildcard(_UserActions);
-
-var _LoadingCube = require('../../helpers/LoadingCube');
-
-var _LoadingCube2 = _interopRequireDefault(_LoadingCube);
 
 var _UserList = require('./UserList');
 
 var _UserList2 = _interopRequireDefault(_UserList);
+
+var _ModelView = require('../../modelView/ModelView');
+
+var _ModelView2 = _interopRequireDefault(_ModelView);
 
 var _gravatars = require('../../helpers/gravatars');
 
@@ -77,39 +69,19 @@ var Index = exports.Index = function (_React$Component) {
   return Index;
 }(_react2.default.Component);
 
-var _UserProfile = exports._UserProfile = (_temp = _class = function (_React$Component2) {
-  _inherits(_UserProfile, _React$Component2);
+var _Show = exports._Show = function (_React$Component2) {
+  _inherits(_Show, _React$Component2);
 
-  function _UserProfile() {
-    _classCallCheck(this, _UserProfile);
+  function _Show() {
+    _classCallCheck(this, _Show);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_UserProfile).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Show).apply(this, arguments));
   }
 
-  _createClass(_UserProfile, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.props.fetchUserProfile(this.props.email);
-    }
-  }, {
+  _createClass(_Show, [{
     key: 'render',
     value: function render() {
-      if (this.props.error) {
-        return _react2.default.createElement(
-          'strong',
-          null,
-          this.props.error
-        );
-      }
-      if (this.props.isLoading) {
-        return _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(_LoadingCube2.default, { show: true })
-        );
-      }
-
-      var user = this.props.user;
+      var user = this.props.model;
 
       return _react2.default.createElement(
         'div',
@@ -202,30 +174,8 @@ var _UserProfile = exports._UserProfile = (_temp = _class = function (_React$Com
     }
   }]);
 
-  return _UserProfile;
-}(_react2.default.Component), _class.propTypes = {
-  email: _react2.default.PropTypes.string.isRequired
-}, _class.defaultProps = {
-  isLoading: true
-}, _temp);
-
-var mapStateToUserProfileProps = function mapStateToUserProfileProps(state) {
-  return {
-    user: state.users.profileUser,
-    error: state.users.profileError,
-    isLoading: state.users.profileLoading
-  };
-};
-
-var mapDispatchToUserProfileProps = function mapDispatchToUserProfileProps(dispatch) {
-  return {
-    fetchUserProfile: function fetchUserProfile(email) {
-      dispatch(UserActions.fetchProfile(email));
-    }
-  };
-};
-
-var UserProfile = (0, _reactRedux.connect)(mapStateToUserProfileProps, mapDispatchToUserProfileProps)(_UserProfile);
+  return _Show;
+}(_react2.default.Component);
 
 var Show = exports.Show = function (_React$Component3) {
   _inherits(Show, _React$Component3);
@@ -239,11 +189,7 @@ var Show = exports.Show = function (_React$Component3) {
   _createClass(Show, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'container-fluid' },
-        _react2.default.createElement(UserProfile, { email: this.props.params.email })
-      );
+      return _react2.default.createElement(_ModelView2.default, { endpoint: '/api/users/' + this.props.params.email, component: _Show });
     }
   }]);
 

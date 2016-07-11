@@ -1,10 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import * as UserActions from './UserActions';
-import LoadingCube from '../../helpers/LoadingCube';
 import UserList from './UserList';
+import ModelView from '../../modelView/ModelView';
 import { ProfileGravatar } from '../../helpers/gravatars';
 import { Prop, Val } from '../../layout/ModelInfo';
 import { UserOrAdmin } from './UserRoles';
@@ -22,34 +20,9 @@ export class Index extends React.Component {
   }
 }
 
-export class _UserProfile extends React.Component {
-  static propTypes = {
-    email: React.PropTypes.string.isRequired
-  }
-
-  static defaultProps = {
-    isLoading: true
-  }
-
-  componentWillMount() {
-    this.props.fetchUserProfile(this.props.email);
-  }
-
+export class _Show extends React.Component {
   render() {
-    if (this.props.error) {
-      return (
-        <strong>{ this.props.error }</strong>
-      )
-    }
-    if (this.props.isLoading) {
-      return (
-        <div>
-          <LoadingCube show={ true } />
-        </div>
-      );
-    }
-
-    const user = this.props.user;
+    const user = this.props.model;
 
     return (
       <div className="container-fluid model-info">
@@ -94,30 +67,10 @@ export class _UserProfile extends React.Component {
   }
 }
 
-const mapStateToUserProfileProps = (state) => {
-  return {
-    user: state.users.profileUser,
-    error: state.users.profileError,
-    isLoading: state.users.profileLoading
-  }
-}
-
-const mapDispatchToUserProfileProps = (dispatch) => {
-  return {
-    fetchUserProfile: (email) => {
-      dispatch(UserActions.fetchProfile(email))
-    }
-  };
-}
-
-const UserProfile = connect(mapStateToUserProfileProps, mapDispatchToUserProfileProps)(_UserProfile);
-
 export class Show extends React.Component {
   render() {
     return (
-      <div className="container-fluid">
-        <UserProfile email={ this.props.params.email } />
-      </div>
+      <ModelView endpoint={ `/api/users/${ this.props.params.email }` } component={ _Show } />
     );
   }
 }
