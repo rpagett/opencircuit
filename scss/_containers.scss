@@ -1,6 +1,6 @@
 html, body, .content-container, .app-container, .vcenter-parent, #react-container {
   //height: 100%;
-  min-height: 100% !important;
+  //min-height: 100% !important;
 }
 
 .content-container {
@@ -54,6 +54,14 @@ hr {
   background: $brand-info;
   background: linear-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, $brand-info));
   background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, $brand-info));
+}
+
+.jumbotron {
+  hr {
+    background: $brand-info;
+    background: linear-gradient(linear, 0 0, 100% 0, from($jumbotron_bg), to($jumbotron_bg), color-stop(50%, $brand-info));
+    background: -webkit-gradient(linear, 0 0, 100% 0, from($jumbotron_bg), to($jumbotron_bg), color-stop(50%, $brand-info));
+  }
 }
 
 .model-info .row {

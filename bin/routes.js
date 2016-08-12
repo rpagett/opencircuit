@@ -39,11 +39,17 @@ var _EventViews = require('./models/Event/EventViews');
 
 var EventView = _interopRequireWildcard(_EventViews);
 
+var _UnitViews = require('./models/Unit/UnitViews');
+
+var UnitView = _interopRequireWildcard(_UnitViews);
+
 var _UserViews = require('./models/User/UserViews');
 
 var UserView = _interopRequireWildcard(_UserViews);
 
 var _UserRoles = require('./models/User/UserRoles');
+
+var _FlexTableActions = require('./helpers/FlexTable/FlexTableActions');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -58,6 +64,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function getAppRoutes(store) {
   function authOnly(nextState, replace) {
     var authUser = store.getState().auth.user;
+
+    (0, _FlexTableActions.dumpContents)();
 
     if (!authUser) {
       replace('/auth/login');
@@ -115,6 +123,11 @@ function getAppRoutes(store) {
         _react2.default.createElement(_reactRouter.Route, { path: 'new', component: EventView.New, onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector) }),
         _react2.default.createElement(_reactRouter.Route, { path: ':slug', component: EventView.Show }),
         _react2.default.createElement(_reactRouter.Route, { path: ':slug/edit', component: EventView.Edit, onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector) })
+      ),
+      _react2.default.createElement(
+        _reactRouter.Route,
+        { path: '/units' },
+        _react2.default.createElement(_reactRouter.Route, { path: 'register', component: UnitView.Register })
       ),
       _react2.default.createElement(
         _reactRouter.Route,

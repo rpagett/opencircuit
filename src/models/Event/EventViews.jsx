@@ -1,6 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router';
 
-import ModelView from '../../modelView/ModelView';
+import ModelView from '../../helpers/modelView/ModelView';
+import { Prop, Val } from '../../layout/ModelInfo';
+import { UserRoles, HasRole } from '../User/UserRoles';
+
 import EventList from './EventList';
 import * as EventForms from './EventForms';
 
@@ -55,8 +59,79 @@ class _Show extends React.Component {
     const event = this.props.model;
 
     return (
-      <div>
-        Showing event { event.name }!
+      <div className="container-fluid model-info">
+        <h1 className="page-header">{ event.name }</h1>
+
+        <div className="row">
+          <Prop>Date and Time</Prop>
+          <Val>{ event.formattedDate }</Val>
+        </div>
+
+        <div className="row">
+          <Prop>Attendance Cap</Prop>
+          <Val>{ event.attendance_cap }</Val>
+        </div>
+
+        <div className="row">
+          <Prop>Facebook Page</Prop>
+          <Val><a href={ event.facebook_url }>{ event.facebook_url }</a></Val>
+        </div>
+
+        <div className="row">
+          <Prop>Adult Tickets</Prop>
+          <Val>${ event.adult_ticket_price }</Val>
+        </div>
+
+        <div className="row">
+          <Prop>Youth Tickets</Prop>
+          <Val>${ event.youth_ticket_price }</Val>
+        </div>
+
+        <hr />
+
+        <div className="row">
+          <Prop>Registration Is...</Prop>
+          <Val>
+            { (event.registration_closed ?
+              <span className="text-danger">{' '}closed</span> :
+              <span className="text-success">{' '}open</span>) }
+          </Val>
+        </div>
+
+        { (!event.registration_closed && event.registration_autoclose ?
+          <div className="row">
+            <Prop>Autocloses On...</Prop>
+            <Val>{ event.formattedRegistrationAutoclose }</Val>
+          </div> : '') }
+
+        <div className="row">
+          <Prop>Critique Registration is...</Prop>
+          <Val>
+            { (event.critique_closed ?
+              <span className="text-danger">closed</span> :
+              <span className="text-success">open</span>) }
+          </Val>
+        </div>
+
+        <HasRole role={ UserRoles.EventDirector }>
+          <div>
+            <div className="row">
+              <Prop>Notes</Prop>
+              <Val>{ event.notes }</Val>
+            </div>
+
+            <hr />
+
+            <div className="row">
+              <div className="pull-center col-xs-12 col-sm-offset-4 col-sm-4">
+                <Link to={ `/events/${event.slug}/edit` } className="btn btn-sm btn-secondary-outline btn-block">
+                  Edit Event
+                </Link>
+              </div>
+            </div>
+          </div>
+        </HasRole>
+
       </div>
     )
   }

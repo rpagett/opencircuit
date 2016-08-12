@@ -122,7 +122,7 @@ var _NavBar = function (_React$Component2) {
               'div',
               { className: 'nav-item' },
               _react2.default.createElement(
-                _reactRouter.Link,
+                _reactRouter.IndexLink,
                 { to: '/events', className: 'nav-link', activeClassName: 'active' },
                 _react2.default.createElement(_Icon2.default, { shape: 'trophy' }),
                 ' Events'

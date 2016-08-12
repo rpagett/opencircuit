@@ -248,7 +248,7 @@ export class StateSelect extends React.Component {
 
   render() {
     return (
-      <InputWrapper { ...this.props }>
+      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
         <Select
           className="form-control"
           clearable={ false }
@@ -266,10 +266,12 @@ export class DateTime extends React.Component {
       <InputWrapper { ...this.props }>
         <DateTimeField
           strict={ false }
+          strictParsing={ false }
           inputProps={{
-          className: 'form-control',
-           ...this.props
-        }}
+            className: 'form-control',
+            //...this.props
+          }}
+          value={ this.props.value }
         />
       </InputWrapper>
     );
@@ -336,7 +338,7 @@ const mapStateToCheckboxProps = (state, props) => {
   }
 }
 
-const mapStateToDispatchProps = (dispatch, props) => {
+const mapDispatchToCheckboxProps = (dispatch, props) => {
   return {
     updateCheckbox: checked => {
       dispatch(FormActions.updateCheckbox(props.formStore, props.name, props.value, checked))
@@ -347,7 +349,51 @@ const mapStateToDispatchProps = (dispatch, props) => {
   }
 }
 
-export const Checkbox = connect(mapStateToCheckboxProps, mapStateToDispatchProps)(_Checkbox);
+export const Checkbox = connect(mapStateToCheckboxProps, mapDispatchToCheckboxProps)(_Checkbox);
+
+class _Radio extends React.Component {
+  static propTypes = {
+    label: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired,
+  }
+
+  updateChecked(e) {
+    this.props.updateField(e.target.checked);
+  }
+
+  render() {
+    return (
+      <div className="radio">
+        <label>
+          <input
+            type="radio"
+            name={ this.props.name }
+            value={ this.props.value }
+            checked={ this.props.checked }
+            onChange={ this.updateChecked.bind(this) }
+          />
+          <span className="checkbox-label">{ this.props.label }</span>
+        </label>
+      </div>
+    )
+  }
+}
+
+const mapStateToRadioProps = (state, props) => {
+  return {
+    formChecked: state.form[props.formStore][props.name] === props.value
+  }
+}
+
+const mapDispatchToRadioProps = (dispatch, props) => {
+  return {
+    updateField: checked => {
+      dispatch(FormActions.updateField(props.formStore, props.name, props.value))
+    }
+  }
+}
+
+export const Radio = connect(mapStateToCheckboxProps, mapDispatchToRadioProps)(_Radio);
 
 class _ReduxForm extends React.Component {
   static propTypes = {

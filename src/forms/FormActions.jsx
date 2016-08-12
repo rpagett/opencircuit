@@ -51,7 +51,9 @@ function setError(subStore, error) {
 export function fetchData(subStore, endpoint) {
   return (dispatch, getState) => {
     if (!endpoint) {
-      dispatch(initializeSubstore(subStore));
+      if (!getState().form[subStore]) {
+        dispatch(initializeSubstore(subStore));
+      }
       dispatch(stopLoading(subStore));
       return;
     }
@@ -116,6 +118,7 @@ export function submitData(subStore, submitMethod, endpoint) {
       })
       .then(res => {
         if (res.success === true) {
+          dispatch(initializeSubstore(subStore));
           return res;
         }
         else {

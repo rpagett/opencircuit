@@ -13,7 +13,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _FlexTable = require('../../flexTable/FlexTable');
+var _FlexTable = require('../../helpers/flexTable/FlexTable');
 
 var _FlexTable2 = _interopRequireDefault(_FlexTable);
 
@@ -24,8 +24,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-//import {launch as launchModal} from '../../modals/ModalActions';
 
 var EventList = function (_React$Component) {
   _inherits(EventList, _React$Component);
@@ -38,18 +36,12 @@ var EventList = function (_React$Component) {
 
   _createClass(EventList, [{
     key: 'render',
-
-    //launchRolesOverlay(dispatch) {
-    //  dispatch(launchModal(this.formattedName + '\'s Roles', 'USER_ROLES', {
-    //    email: this.email
-    //  }));
-    //}
-
     value: function render() {
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(_FlexTable2.default, {
+          name: 'eventList',
           endpoint: this.props.endpoint,
           emptyMessage: 'There are no scheduled events.',
           columns: {

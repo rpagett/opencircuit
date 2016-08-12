@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import LoadingCube from '../helpers/LoadingCube';
+import LoadingCube from '../LoadingCube';
 import * as FlexTableActions from './FlexTableActions';
 
 class _FlexTable extends React.Component {
@@ -17,11 +17,17 @@ class _FlexTable extends React.Component {
     isLoading: true
   }
 
+  componentWillMount() {
+    this.props.dumpContents();
+  }
+
   componentDidMount() {
     this.props.fetchContents();
   }
 
   render() {
+    console.log('Rendering');
+
     if (this.props.isLoading) {
       return (
         <LoadingCube show={ true } />
@@ -34,7 +40,7 @@ class _FlexTable extends React.Component {
       );
     }
 
-    if (!this.props.contents.length) {
+    if (!this.props.contents) {
       return (
         <strong>{ this.props.emptyMessage }</strong>
       );
@@ -75,21 +81,29 @@ class _FlexTable extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     isLoading: state.flexTable.isLoading,
     error: state.flexTable.error,
-    contents: state.flexTable.contents
+    contents: state.flexTable[props.name]
   }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
     fetchContents: () => {
-      dispatch(FlexTableActions.fetchContents(props.endpoint));
+      dispatch(FlexTableActions.fetchContents(props.name, props.endpoint));
     },
 
-    feedDispatch: () => { return dispatch }
+    dumpContents: () => {
+      dispatch(FlexTableActions.dumpContents());
+    },
+
+    feedDispatch: () => { return dispatch },
+
+    setLoading: () => {
+      dispatch(FlexTableActions.beginLoading());
+    }
   }
 }
 

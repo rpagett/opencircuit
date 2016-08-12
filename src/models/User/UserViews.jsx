@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import UserList from './UserList';
-import ModelView from '../../modelView/ModelView';
-import { ProfileGravatar } from '../../helpers/gravatars';
+import ModelView from '../../helpers/modelView/ModelView';
 import { Prop, Val } from '../../layout/ModelInfo';
 import { UserOrAdmin } from './UserRoles';
+import { ProfileGravatar } from '../../helpers/gravatars';
+
+import UserList from './UserList';
 import * as UserForms from './UserForms';
 
 export class Index extends React.Component {
@@ -54,7 +55,7 @@ export class _Show extends React.Component {
           <div className="row">
             <div className="pull-center col-xs-12 col-sm-offset-4 col-sm-4">
               <small>
-                <Link to={ `${user.profileURL}/edit` } className="btn btn-sm btn-secondary-outline btn-block">
+                <Link to={ `/users/${user.profileURL}/edit` } className="btn btn-sm btn-secondary-outline btn-block">
                   Edit Profile
                 </Link>
               </small>

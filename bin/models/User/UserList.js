@@ -13,7 +13,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _FlexTable = require('../../flexTable/FlexTable');
+var _FlexTable = require('../../helpers/flexTable/FlexTable');
 
 var _FlexTable2 = _interopRequireDefault(_FlexTable);
 
@@ -52,6 +52,7 @@ var UserList = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(_FlexTable2.default, {
+          name: 'userList',
           endpoint: this.props.endpoint,
           emptyMessage: 'There are no registered users.',
           columns: {

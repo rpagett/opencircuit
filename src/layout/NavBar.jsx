@@ -45,9 +45,9 @@ class _NavBar extends React.Component {
             </div>
 
             <div className="nav-item">
-              <Link to="/events" className="nav-link" activeClassName="active">
+              <IndexLink to="/events" className="nav-link" activeClassName="active">
                 <Icon shape="trophy" /> Events
-              </Link>
+              </IndexLink>
             </div>
 
             <HasRole role={ UserRoles.Administrator }>

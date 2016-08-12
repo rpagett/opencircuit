@@ -39,6 +39,10 @@ EventSchema.virtual('formattedDate').get(function() {
   return Moment(this.date).format('MMM. Do, YYYY [at] h:mm a');
 });
 
+EventSchema.virtual('formattedRegistrationAutoclose').get(function() {
+  return Moment(this.registration_autoclose).format('MMM. Do, YYYY [at] h:mm a');
+});
+
 EventSchema.statics.fillableFields = () => {
   return ['name', 'slug', 'facebook_url', 'date', 'registration_autoclose', 'attendance_cap', 'registration_closed',
     'critique_closed', 'notes', 'adult_ticket_price', 'youth_ticket_price'];

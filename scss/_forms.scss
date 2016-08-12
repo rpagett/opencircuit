@@ -7,6 +7,10 @@
   padding-top: .6rem;
 }
 
+.form-control {
+  z-index: 1
+}
+
 .Select-control {
   border: 0;
   padding: 0;
@@ -18,7 +22,8 @@
 }
 
 .Select--single {
-  padding-right: .1rem !important;
+  //padding-right: .1rem !important;
+  //padding-left: .1rem !important;
 }
 
 .Select-value {

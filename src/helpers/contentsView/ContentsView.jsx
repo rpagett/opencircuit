@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import LoadingCube from '../helpers/LoadingCube';
-import * as actions from './ModelViewActions';
+import LoadingCube from '../LoadingCube';
+import * as actions from './ContentsViewActions';
 
-class _ModelView extends React.Component {
+class _ContentsView extends React.Component {
   static propTypes = {
     endpoint: React.PropTypes.string.isRequired,
     error: React.PropTypes.string,
@@ -16,7 +16,7 @@ class _ModelView extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchModel();
+    this.props.fetchContents();
   }
 
   render() {
@@ -28,23 +28,23 @@ class _ModelView extends React.Component {
       return <LoadingCube show={ true } />
     }
 
-    return (<this.props.component model={ this.props.model } />)
+    return (<this.props.component contents={ this.props.contents } />)
   }
 }
 
 const mapStateToProps = state => {
   return {
-    model: state.modelView.model,
-    error: state.modelView.error,
-    isLoading: state.modelView.isLoading
+    contents: state.contentsView.contents,
+    error: state.contentsView.error,
+    isLoading: state.contentsView.isLoading
   }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    fetchModel: () => dispatch(actions.fetchModel(props.endpoint))
+    fetchContents: () => dispatch(actions.fetchContents(props.endpoint))
   }
 }
 
-const ModelView = connect(mapStateToProps, mapDispatchToProps)(_ModelView);
-export default ModelView;
+const ContentsView = connect(mapStateToProps, mapDispatchToProps)(_ContentsView);
+export default ContentsView;

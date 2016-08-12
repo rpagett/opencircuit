@@ -1,8 +1,8 @@
-import { fetchAPI, translateValidationErrors } from '../helpers/functions';
+import { fetchAPI } from '../functions';
 
 export const fetchContents = endpoint => {
   return (dispatch, getState) => {
-    const { flexTable, auth } = getState();
+    const { modelView, auth } = getState();
 
     dispatch(beginLoading());
 
@@ -33,26 +33,20 @@ export const fetchContents = endpoint => {
 
 function beginLoading() {
   return {
-    type: 'FLEXTABLE_BEGIN_LOADING'
+    type: 'CONTENTSVIEW_BEGIN_LOADING'
   }
 }
 
 function receivedContents(contents) {
   return {
-    type: 'FLEXTABLE_RECEIVED_CONTENTS',
+    type: 'CONTENTSVIEW_RECEIVED_CONTENTS',
     contents
-  }
-}
-
-function stopLoading() {
-  return {
-    type: 'FLEXTABLE_STOP_LOADING'
   }
 }
 
 function gotError(error) {
   return {
-    type: 'FLEXTABLE_ERROR',
+    type: 'CONTENTSVIEW_ERROR',
     error: error.message
   }
 }

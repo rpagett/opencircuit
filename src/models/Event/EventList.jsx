@@ -1,20 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import FlexTable from '../../flexTable/FlexTable'
-//import {launch as launchModal} from '../../modals/ModalActions';
+import FlexTable from '../../helpers/flexTable/FlexTable'
 
 export default class EventList extends React.Component {
-  //launchRolesOverlay(dispatch) {
-  //  dispatch(launchModal(this.formattedName + '\'s Roles', 'USER_ROLES', {
-  //    email: this.email
-  //  }));
-  //}
-
   render() {
     return (
       <div>
         <FlexTable
+          name="eventList"
           endpoint={ this.props.endpoint }
           emptyMessage="There are no scheduled events."
           columns={{

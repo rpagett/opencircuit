@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import FlexTable from '../../flexTable/FlexTable'
+import FlexTable from '../../helpers/flexTable/FlexTable'
 import {launch as launchModal} from '../../modals/ModalActions';
 
 export default class UserList extends React.Component {
@@ -15,6 +15,7 @@ export default class UserList extends React.Component {
     return (
       <div>
         <FlexTable
+          name="userList"
           endpoint={ this.props.endpoint }
           emptyMessage="There are no registered users."
           columns={{

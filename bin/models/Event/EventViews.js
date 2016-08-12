@@ -13,9 +13,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ModelView = require('../../modelView/ModelView');
+var _reactRouter = require('react-router');
+
+var _ModelView = require('../../helpers/modelView/ModelView');
 
 var _ModelView2 = _interopRequireDefault(_ModelView);
+
+var _ModelInfo = require('../../layout/ModelInfo');
+
+var _UserRoles = require('../User/UserRoles');
 
 var _EventList = require('./EventList');
 
@@ -151,10 +157,185 @@ var _Show = (_temp = _class = function (_React$Component4) {
 
       return _react2.default.createElement(
         'div',
-        null,
-        'Showing event ',
-        event.name,
-        '!'
+        { className: 'container-fluid model-info' },
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          event.name
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            _ModelInfo.Prop,
+            null,
+            'Date and Time'
+          ),
+          _react2.default.createElement(
+            _ModelInfo.Val,
+            null,
+            event.formattedDate
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            _ModelInfo.Prop,
+            null,
+            'Attendance Cap'
+          ),
+          _react2.default.createElement(
+            _ModelInfo.Val,
+            null,
+            event.attendance_cap
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            _ModelInfo.Prop,
+            null,
+            'Facebook Page'
+          ),
+          _react2.default.createElement(
+            _ModelInfo.Val,
+            null,
+            _react2.default.createElement(
+              'a',
+              { href: event.facebook_url },
+              event.facebook_url
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            _ModelInfo.Prop,
+            null,
+            'Adult Tickets'
+          ),
+          _react2.default.createElement(
+            _ModelInfo.Val,
+            null,
+            '$',
+            event.adult_ticket_price
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            _ModelInfo.Prop,
+            null,
+            'Youth Tickets'
+          ),
+          _react2.default.createElement(
+            _ModelInfo.Val,
+            null,
+            '$',
+            event.youth_ticket_price
+          )
+        ),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            _ModelInfo.Prop,
+            null,
+            'Registration Is...'
+          ),
+          _react2.default.createElement(
+            _ModelInfo.Val,
+            null,
+            event.registration_closed ? _react2.default.createElement(
+              'span',
+              { className: 'text-danger' },
+              ' ',
+              'closed'
+            ) : _react2.default.createElement(
+              'span',
+              { className: 'text-success' },
+              ' ',
+              'open'
+            )
+          )
+        ),
+        !event.registration_closed && event.registration_autoclose ? _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            _ModelInfo.Prop,
+            null,
+            'Autocloses On...'
+          ),
+          _react2.default.createElement(
+            _ModelInfo.Val,
+            null,
+            event.formattedRegistrationAutoclose
+          )
+        ) : '',
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            _ModelInfo.Prop,
+            null,
+            'Critique Registration is...'
+          ),
+          _react2.default.createElement(
+            _ModelInfo.Val,
+            null,
+            event.critique_closed ? _react2.default.createElement(
+              'span',
+              { className: 'text-danger' },
+              'closed'
+            ) : _react2.default.createElement(
+              'span',
+              { className: 'text-success' },
+              'open'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          _UserRoles.HasRole,
+          { role: _UserRoles.UserRoles.EventDirector },
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'div',
+              { className: 'row' },
+              _react2.default.createElement(
+                _ModelInfo.Prop,
+                null,
+                'Notes'
+              ),
+              _react2.default.createElement(
+                _ModelInfo.Val,
+                null,
+                event.notes
+              )
+            ),
+            _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              'div',
+              { className: 'row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'pull-center col-xs-12 col-sm-offset-4 col-sm-4' },
+                _react2.default.createElement(
+                  _reactRouter.Link,
+                  { to: '/events/' + event.slug + '/edit', className: 'btn btn-sm btn-secondary-outline btn-block' },
+                  'Edit Event'
+                )
+              )
+            )
+          )
+        )
       );
     }
   }]);

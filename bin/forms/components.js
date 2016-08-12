@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ReduxForm = exports.Checkbox = exports.DateTime = exports.StateSelect = exports.TextArea = exports.FormStatic = exports.PhoneInput = exports.FormInput = undefined;
+exports.ReduxForm = exports.Radio = exports.Checkbox = exports.DateTime = exports.StateSelect = exports.TextArea = exports.FormStatic = exports.PhoneInput = exports.FormInput = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _class, _temp, _class2, _temp2, _class3, _temp3;
+var _class, _temp, _class2, _temp2, _class3, _temp3, _class4, _temp4;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -360,7 +360,7 @@ var StateSelect = exports.StateSelect = function (_React$Component8) {
     value: function render() {
       return _react2.default.createElement(
         InputWrapper,
-        this.props,
+        _extends({}, this.props, { style: { 'zIndex': '10' } }),
         _react2.default.createElement(_reactSelect2.default, {
           className: 'form-control',
           clearable: false,
@@ -391,9 +391,11 @@ var DateTime = exports.DateTime = function (_React$Component9) {
         this.props,
         _react2.default.createElement(_reactDatetime2.default, {
           strict: false,
-          inputProps: _extends({
+          strictParsing: false,
+          inputProps: {
             className: 'form-control'
-          }, this.props)
+          },
+          value: this.props.value
         })
       );
     }
@@ -481,7 +483,7 @@ var mapStateToCheckboxProps = function mapStateToCheckboxProps(state, props) {
   };
 };
 
-var mapStateToDispatchProps = function mapStateToDispatchProps(dispatch, props) {
+var mapDispatchToCheckboxProps = function mapDispatchToCheckboxProps(dispatch, props) {
   return {
     updateCheckbox: function updateCheckbox(checked) {
       dispatch(FormActions.updateCheckbox(props.formStore, props.name, props.value, checked));
@@ -492,10 +494,72 @@ var mapStateToDispatchProps = function mapStateToDispatchProps(dispatch, props) 
   };
 };
 
-var Checkbox = exports.Checkbox = (0, _reactRedux.connect)(mapStateToCheckboxProps, mapStateToDispatchProps)(_Checkbox);
+var Checkbox = exports.Checkbox = (0, _reactRedux.connect)(mapStateToCheckboxProps, mapDispatchToCheckboxProps)(_Checkbox);
 
-var _ReduxForm = (_temp3 = _class3 = function (_React$Component11) {
-  _inherits(_ReduxForm, _React$Component11);
+var _Radio = (_temp3 = _class3 = function (_React$Component11) {
+  _inherits(_Radio, _React$Component11);
+
+  function _Radio() {
+    _classCallCheck(this, _Radio);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Radio).apply(this, arguments));
+  }
+
+  _createClass(_Radio, [{
+    key: 'updateChecked',
+    value: function updateChecked(e) {
+      this.props.updateField(e.target.checked);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'radio' },
+        _react2.default.createElement(
+          'label',
+          null,
+          _react2.default.createElement('input', {
+            type: 'radio',
+            name: this.props.name,
+            value: this.props.value,
+            checked: this.props.checked,
+            onChange: this.updateChecked.bind(this)
+          }),
+          _react2.default.createElement(
+            'span',
+            { className: 'checkbox-label' },
+            this.props.label
+          )
+        )
+      );
+    }
+  }]);
+
+  return _Radio;
+}(_react2.default.Component), _class3.propTypes = {
+  label: _react2.default.PropTypes.string.isRequired,
+  name: _react2.default.PropTypes.string.isRequired
+}, _temp3);
+
+var mapStateToRadioProps = function mapStateToRadioProps(state, props) {
+  return {
+    formChecked: state.form[props.formStore][props.name] === props.value
+  };
+};
+
+var mapDispatchToRadioProps = function mapDispatchToRadioProps(dispatch, props) {
+  return {
+    updateField: function updateField(checked) {
+      dispatch(FormActions.updateField(props.formStore, props.name, props.value));
+    }
+  };
+};
+
+var Radio = exports.Radio = (0, _reactRedux.connect)(mapStateToCheckboxProps, mapDispatchToRadioProps)(_Radio);
+
+var _ReduxForm = (_temp4 = _class4 = function (_React$Component12) {
+  _inherits(_ReduxForm, _React$Component12);
 
   function _ReduxForm() {
     _classCallCheck(this, _ReduxForm);
@@ -511,15 +575,15 @@ var _ReduxForm = (_temp3 = _class3 = function (_React$Component11) {
   }, {
     key: 'recursivelyCloneChildren',
     value: function recursivelyCloneChildren(children) {
-      var _this13 = this;
+      var _this14 = this;
 
       return _react2.default.Children.map(children, function (child) {
         if (!_react2.default.isValidElement(child)) {
           return child;
         }
 
-        var childProps = { formStore: _this13.props.subStore };
-        childProps.children = _this13.recursivelyCloneChildren(child.props.children);
+        var childProps = { formStore: _this14.props.subStore };
+        childProps.children = _this14.recursivelyCloneChildren(child.props.children);
 
         return _react2.default.cloneElement(child, childProps);
       });
@@ -527,20 +591,20 @@ var _ReduxForm = (_temp3 = _class3 = function (_React$Component11) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      var _this14 = this;
+      var _this15 = this;
 
       event && event.preventDefault();
 
       this.props.submitData().then(function (res) {
         if (res && res.success === true) {
 
-          if (_this14.props.inModal) {
-            _this14.props.closeModal();
+          if (_this15.props.inModal) {
+            _this15.props.closeModal();
           } else if (res.redirect) {
             if (res.external && window) {
               window.location = res.redirect;
             } else {
-              _this14.props.router.push(res.redirect);
+              _this15.props.router.push(res.redirect);
             }
           }
         }
@@ -576,15 +640,15 @@ var _ReduxForm = (_temp3 = _class3 = function (_React$Component11) {
   }]);
 
   return _ReduxForm;
-}(_react2.default.Component), _class3.propTypes = {
+}(_react2.default.Component), _class4.propTypes = {
   submitEndpoint: _react2.default.PropTypes.string.isRequired,
   submitMethod: _react2.default.PropTypes.string.isRequired,
   fetchEndpoint: _react2.default.PropTypes.string,
   isLoading: _react2.default.PropTypes.bool,
   subStore: _react2.default.PropTypes.string.isRequired
-}, _class3.defaultProps = {
+}, _class4.defaultProps = {
   isLoading: true
-}, _temp3);
+}, _temp4);
 
 var mapStateToReduxFormProps = function mapStateToReduxFormProps(state, props) {
   return {

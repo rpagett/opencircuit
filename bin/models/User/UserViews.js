@@ -13,19 +13,19 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _UserList = require('./UserList');
-
-var _UserList2 = _interopRequireDefault(_UserList);
-
-var _ModelView = require('../../modelView/ModelView');
+var _ModelView = require('../../helpers/modelView/ModelView');
 
 var _ModelView2 = _interopRequireDefault(_ModelView);
-
-var _gravatars = require('../../helpers/gravatars');
 
 var _ModelInfo = require('../../layout/ModelInfo');
 
 var _UserRoles = require('./UserRoles');
+
+var _gravatars = require('../../helpers/gravatars');
+
+var _UserList = require('./UserList');
+
+var _UserList2 = _interopRequireDefault(_UserList);
 
 var _UserForms = require('./UserForms');
 
@@ -163,7 +163,7 @@ var _Show = exports._Show = function (_React$Component2) {
                 null,
                 _react2.default.createElement(
                   _reactRouter.Link,
-                  { to: user.profileURL + '/edit', className: 'btn btn-sm btn-secondary-outline btn-block' },
+                  { to: '/users/' + user.profileURL + '/edit', className: 'btn btn-sm btn-secondary-outline btn-block' },
                   'Edit Profile'
                 )
               )

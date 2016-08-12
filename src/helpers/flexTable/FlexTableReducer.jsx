@@ -3,9 +3,14 @@ const flexTable = (state = { }, action) => {
 
     case 'FLEXTABLE_RECEIVED_CONTENTS':
       return {
-        contents: action.contents,
+        [action.name]: action.contents,
         isLoading: false
       };
+
+    case 'FLEXTABLE_DUMP_CONTENTS':
+      return {
+        isLoading: true
+      }
 
     case 'FLEXTABLE_ERROR':
       return {
@@ -17,7 +22,8 @@ const flexTable = (state = { }, action) => {
     case 'FLEXTABLE_BEGIN_LOADING':
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        lastName: action.tableName
       }
 
     case 'FLEXTABLE_STOP_LOADING':

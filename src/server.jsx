@@ -115,7 +115,7 @@ function dispatchReactRoute(req, res, appRoutes) {
                 function reset_dimensions()
                 {
                     doc_height = $(document).height();
-                    $('.content-container').css('min-height', (doc_height-35) + 'px');
+                    $('.content-container').css('min-height', doc_height + 'px');
                 }
 
                 reset_dimensions();

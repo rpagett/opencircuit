@@ -35,10 +35,10 @@ class _HasRole extends React.Component {
 
   render() {
     if (!this.hasRole()) {
-      return null;
+      return '';
     }
 
-    return this.props.children;
+    return this.props.children
   }
 }
 

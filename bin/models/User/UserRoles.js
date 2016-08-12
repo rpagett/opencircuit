@@ -63,7 +63,7 @@ var _HasRole = (_temp = _class = function (_React$Component) {
     key: 'render',
     value: function render() {
       if (!this.hasRole()) {
-        return null;
+        return '';
       }
 
       return this.props.children;

@@ -61,7 +61,9 @@ function setError(subStore, error) {
 function fetchData(subStore, endpoint) {
   return function (dispatch, getState) {
     if (!endpoint) {
-      dispatch(initializeSubstore(subStore));
+      if (!getState().form[subStore]) {
+        dispatch(initializeSubstore(subStore));
+      }
       dispatch(stopLoading(subStore));
       return;
     }
@@ -128,6 +130,7 @@ function submitData(subStore, submitMethod, endpoint) {
       return res.json();
     }).then(function (res) {
       if (res.success === true) {
+        dispatch(initializeSubstore(subStore));
         return res;
       } else {
         throw (0, _functions.translateValidationErrors)(res.errors);
