@@ -43,10 +43,30 @@ function translateValidationErrors(errors) {
       }
   */
 
+  if (!errors) {
+    return {};
+  }
+
   var messages = {};
-  for (var index in errors) {
-    var line = errors[index];
-    messages = _extends({}, messages, _defineProperty({}, line.field, line.message));
+  var validate = function validate(line) {
+    if (line.code == 11000) {
+      messages = _extends({}, messages, {
+        'name': 'There is already a record by that name.'
+      });
+    } else {
+      messages = _extends({}, messages, _defineProperty({}, line.field, line.message));
+    }
+  };
+
+  if (errors.constructor === Array) {
+    for (var index in errors) {
+      var line = errors[index];
+
+      console.log(line);
+      validate(line);
+    }
+  } else {
+    validate(errors);
   }
 
   return messages;

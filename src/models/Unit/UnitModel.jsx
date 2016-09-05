@@ -1,4 +1,8 @@
 import Mongoose from 'mongoose';
+import UnitType from '../UnitType/UnitTypeModel';
+import CompClass from '../CompClass/CompClassModel';
+import User from '../User/UserModel';
+import Organization from '../Organization/OrganizationModel';
 
 const ObjectId = Mongoose.Schema.Types.ObjectId;
 const UnitSchema = Mongoose.Schema({
@@ -12,12 +16,22 @@ const UnitSchema = Mongoose.Schema({
 
   competition_class: {
     type: ObjectId,
-    ref: CompetitionClass
+    ref: 'CompClass'
   },
   unit_type: {
     type: ObjectId,
-    ref: UnitType
-  }
+    ref: 'UnitType'
+  },
+  director: {
+    type: ObjectId,
+    ref: 'User'
+  },
+  organization: {
+    type: ObjectId,
+    ref: 'Organization'
+  },
+
+  registered: Boolean,
 }, {
   timestamps: true,
   toObject: {
@@ -27,5 +41,13 @@ const UnitSchema = Mongoose.Schema({
     virtuals: true
   }
 });
+
+UnitSchema.virtual('detailsLink').get(function() {
+  return `/units/${this.slug}`;
+});
+
+UnitSchema.statics.fillableFields = () => {
+  return ['name', 'slug', 'members', 'competiton_class', 'image_url'];
+}
 
 export default Mongoose.model('Unit', UnitSchema);

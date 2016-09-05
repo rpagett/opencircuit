@@ -3,12 +3,27 @@ const contentsView = (state = { }, action) => {
     case 'CONTENTSVIEW_BEGIN_LOADING':
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+      }
+
+    case 'CONTENTSVIEW_DUMP_CONTENTS':
+      if (action.subStore) {
+        return {
+          ...state,
+          [action.subStore]: null,
+          isLoading: true
+        }
+      }
+      else {
+        return {
+          isLoading: true
+        }
       }
 
     case 'CONTENTSVIEW_RECEIVED_CONTENTS':
       return {
-        contents: action.contents,
+        ...state,
+        [action.subStore]: action.contents,
         isLoading: false
       }
 

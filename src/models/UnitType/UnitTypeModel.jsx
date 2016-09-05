@@ -17,4 +17,8 @@ const UnitTypeSchema = new Mongoose.Schema({
   }
 });
 
+UnitTypeSchema.virtual('detailsUrl').get(function() {
+  return `/unittypes/${this.slug}`;
+})
+
 export default Mongoose.model('UnitType', UnitTypeSchema);

@@ -27,4 +27,8 @@ var UnitTypeSchema = new _mongoose2.default.Schema({
   }
 });
 
+UnitTypeSchema.virtual('detailsUrl').get(function () {
+  return '/unittypes/' + this.slug;
+});
+
 exports.default = _mongoose2.default.model('UnitType', UnitTypeSchema);

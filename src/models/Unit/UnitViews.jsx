@@ -1,16 +1,14 @@
 import React from 'react';
 
-import { ReduxForm } from '../../forms/components';
-import ComponentFlow from '../../helpers/componentFlow/ComponentFlow';
-import RegistrationFlow from './RegistrationFlow';
+import UnitList from './UnitList';
 
-export class Register extends React.Component {
+export class Index extends React.Component {
   render() {
     return (
-      <div className="jumbotron">
-        <p className="display-3">Unit Registration</p>
+      <div>
+        <h1 className="page-header">Units</h1>
 
-        <ComponentFlow flow={ RegistrationFlow } />
+        <UnitList endpoint="/api/units" />
       </div>
     )
   }

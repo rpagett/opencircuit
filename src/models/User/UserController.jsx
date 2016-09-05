@@ -10,7 +10,7 @@ let router = Express.Router();
 // routes are '/api/users/...'
 
 router.get('/', hasRole(UserRoles.Administrator), (req, res) => {
-  User.find({ }, 'email first_name mi last_name formattedName profileURL phone')
+  User.find({ }, 'email first_name mi last_name formattedName profileUrl phone')
     .then(users => {
       res.json({
         success: true,

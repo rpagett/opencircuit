@@ -100,4 +100,21 @@ router.route('/:slug').get(function (req, res) {
   });
 });
 
+// :type is a UnitType _id
+router.get('/by_type/:type', function (req, res) {
+  _EventModel2.default.find({}, '_id name date')
+  //Event.find({ types_allowed: req.params.type }, '_id name')
+  .sort('date').exec().then(function (events) {
+    res.json({
+      success: true,
+      events: events
+    });
+  }).catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
 exports.default = router;

@@ -4,17 +4,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.fetchContents = undefined;
+exports.dumpContents = dumpContents;
 
 var _functions = require('../functions');
 
-var fetchContents = exports.fetchContents = function fetchContents(endpoint) {
+var fetchContents = exports.fetchContents = function fetchContents(endpoint, subStore) {
   return function (dispatch, getState) {
     var _getState = getState();
 
-    var modelView = _getState.modelView;
     var auth = _getState.auth;
 
 
+    dispatch(dumpContents(subStore));
     dispatch(beginLoading());
 
     (0, _functions.fetchAPI)(endpoint, {
@@ -32,8 +33,9 @@ var fetchContents = exports.fetchContents = function fetchContents(endpoint) {
         throw new Error(res.error);
       }
 
-      dispatch(receivedContents(res.contents));
+      dispatch(receivedContents(res.contents, subStore));
     }).catch(function (error) {
+      console.log('Catching a contents view error', error);
       dispatch(gotError(error));
     });
   };
@@ -45,10 +47,20 @@ function beginLoading() {
   };
 }
 
-function receivedContents(contents) {
+function dumpContents() {
+  var subStore = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+
+  return {
+    type: 'CONTENTSVIEW_DUMP_CONTENTS',
+    subStore: subStore
+  };
+}
+
+function receivedContents(contents, subStore) {
   return {
     type: 'CONTENTSVIEW_RECEIVED_CONTENTS',
-    contents: contents
+    contents: contents,
+    subStore: subStore
   };
 }
 

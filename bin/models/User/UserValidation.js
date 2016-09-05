@@ -31,8 +31,7 @@ function validateUser() {
   var sanitation = {
     'first_name': 'capitalize',
     'last_name': 'title',
-    'city': 'title',
-    'zip': 'toInt'
+    'city': 'title'
   };
 
   if (data.mi) {

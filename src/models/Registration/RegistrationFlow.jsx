@@ -1,6 +1,7 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 
-import { ReduxForm, FormInput, StateSelect, Radio } from '../../forms/components';
+import { ReduxForm, FormInput, ClassSelect, StateSelect, Radio } from '../../forms/components';
 import ContentsView from '../../helpers/contentsView/ContentsView';
 import { setView } from '../../helpers/componentFlow/ComponentFlowActions';
 
@@ -88,10 +89,30 @@ const views = {
         <hr />
 
         <p>
-          My first unit is classified under:
+          This unit is:
         </p>
 
-        <ContentsView endpoint="/api/unittypes" component={ _UnitTypes } />
+        <ContentsView subStore="register_unit_types" endpoint="/api/unittypes" component={ _UnitTypes } />
+      </div>
+    )
+  },
+
+  'unit-details': props => {
+    const state = props.formState[formProps.subStore];
+
+    return (
+      <div>
+        <p className="lead">
+          Now it's time to focus on a team.
+        </p>
+
+        <hr />
+
+        <ReduxForm { ...formProps }>
+          <FormInput name="unit.name" label="Unit Name" />
+          <ClassSelect name="unit.compclass" label="Class" unitType={ state.unit_type } />
+          <FormInput name="unit.members" label="Members" />
+        </ReduxForm>
       </div>
     )
   }
@@ -136,7 +157,11 @@ const actions = {
       return;
     }
 
-    alert('You good.');
+    dispatch(setView('unit-details'));
+  },
+
+  'unit-details': dispatch => {
+    alert('Yep');
   }
 }
 
@@ -152,6 +177,10 @@ const flow = {
   'unit-type': {
     component: views['unit-type'],
     buttonAction: actions['unit-type'],
+  },
+  'unit-details': {
+    component: views['unit-details'],
+    buttonAction: actions['unit-details']
   }
 }
 

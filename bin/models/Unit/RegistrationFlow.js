@@ -8,6 +8,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouter = require('react-router');
+
 var _components = require('../../forms/components');
 
 var _ContentsView = require('../../helpers/contentsView/ContentsView');
@@ -116,9 +118,31 @@ var views = {
       _react2.default.createElement(
         'p',
         null,
-        'My first unit is classified under:'
+        'My first unit is classified as:'
       ),
       _react2.default.createElement(_ContentsView2.default, { endpoint: '/api/unittypes', component: _UnitTypes })
+    );
+  },
+
+  'unit-details': function unitDetails(props) {
+    var state = props.formState[formProps.subStore];
+
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'p',
+        { className: 'lead' },
+        'Now it\'s time to focus on a team.'
+      ),
+      _react2.default.createElement('hr', null),
+      _react2.default.createElement(
+        _components.ReduxForm,
+        formProps,
+        _react2.default.createElement(_components.FormInput, { name: 'unit.name', label: 'Unit Name' }),
+        _react2.default.createElement(_components.ClassSelect, { name: 'unit.compclass', label: 'Class', unitType: state.unit_type }),
+        _react2.default.createElement(_components.FormInput, { name: 'unit.members', label: 'Members' })
+      )
     );
   }
 };
@@ -161,7 +185,11 @@ var actions = {
       return;
     }
 
-    alert('You good.');
+    dispatch((0, _ComponentFlowActions.setView)('unit-details'));
+  },
+
+  'unit-details': function unitDetails(dispatch) {
+    alert('Yep');
   }
 };
 
@@ -177,6 +205,10 @@ var flow = {
   'unit-type': {
     component: views['unit-type'],
     buttonAction: actions['unit-type']
+  },
+  'unit-details': {
+    component: views['unit-details'],
+    buttonAction: actions['unit-details']
   }
 };
 

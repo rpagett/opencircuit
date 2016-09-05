@@ -1,12 +1,18 @@
 import Express from 'express';
 
+import CompClassController from './models/CompClass/CompClassController';
 import EventController from './models/Event/EventController';
+import RegistrationController from './models/Registration/RegistrationController';
+import UnitController from './models/Unit/UnitController';
 import UnitTypeController from './models/UnitType/UnitTypeController';
 import UserController from './models/User/UserController';
 
 let router = Express.Router();
 
+router.use('/compclasses/', CompClassController);
 router.use('/events/', EventController);
+router.use('/register/', RegistrationController)
+router.use('/units/', UnitController);
 router.use('/unittypes/', UnitTypeController);
 router.use('/users/', UserController);
 

@@ -163,7 +163,7 @@ var _Show = exports._Show = function (_React$Component2) {
                 null,
                 _react2.default.createElement(
                   _reactRouter.Link,
-                  { to: '/users/' + user.profileURL + '/edit', className: 'btn btn-sm btn-secondary-outline btn-block' },
+                  { to: '/users/' + user.profileUrl + '/edit', className: 'btn btn-sm btn-secondary-outline btn-block' },
                   'Edit Profile'
                 )
               )

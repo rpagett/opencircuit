@@ -1,6 +1,7 @@
 import Mongoose from 'mongoose';
 import Moment from 'moment';
 
+const ObjectId = Mongoose.Schema.Types.ObjectId;
 const EventSchema = new Mongoose.Schema({
   slug: {
     type: String,
@@ -15,6 +16,11 @@ const EventSchema = new Mongoose.Schema({
   attendance_cap: Number,
   registration_closed: Boolean,
   critique_closed: Boolean,
+
+  types_allowed: {
+    type: [ObjectId],
+    ref: 'UnitType'
+  },
 
   notes: String, //EventDirector+
 

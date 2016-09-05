@@ -59,7 +59,7 @@ var UserList = function (_React$Component) {
             'Name': function Name(user) {
               return _react2.default.createElement(
                 _reactRouter.Link,
-                { to: user.profileURL },
+                { to: user.profileUrl },
                 user.formattedName
               );
             },

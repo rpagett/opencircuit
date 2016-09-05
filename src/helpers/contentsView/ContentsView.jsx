@@ -7,12 +7,17 @@ import * as actions from './ContentsViewActions';
 class _ContentsView extends React.Component {
   static propTypes = {
     endpoint: React.PropTypes.string.isRequired,
+    subStore: React.PropTypes.string.isRequired,
     error: React.PropTypes.string,
     isLoading: React.PropTypes.bool
   }
 
   static defaultProps = {
     isLoading: true
+  }
+
+  componentWillMount() {
+    this.props.dumpContents();
   }
 
   componentDidMount() {
@@ -28,13 +33,17 @@ class _ContentsView extends React.Component {
       return <LoadingCube show={ true } />
     }
 
+    if (!this.props.contents) {
+      return (<strong>Nothing to display.</strong>)
+    }
+
     return (<this.props.component contents={ this.props.contents } />)
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
   return {
-    contents: state.contentsView.contents,
+    contents: state.contentsView[props.subStore],
     error: state.contentsView.error,
     isLoading: state.contentsView.isLoading
   }
@@ -42,7 +51,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    fetchContents: () => dispatch(actions.fetchContents(props.endpoint))
+    fetchContents: () => dispatch(actions.fetchContents(props.endpoint, props.subStore)),
+    dumpContents: () => {
+      dispatch(actions.dumpContents(props.subStore));
+    },
   }
 }
 

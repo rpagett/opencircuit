@@ -1,4 +1,6 @@
-import Mongoose from 'mongoose';
+import Mongoose from 'mongoose'
+
+import UnitType from '../UnitType/UnitTypeModel';
 
 const ObjectId = Mongoose.Schema.Types.ObjectId;
 const CompClassSchema = new Mongoose.Schema({
@@ -10,7 +12,7 @@ const CompClassSchema = new Mongoose.Schema({
   name: String,
   unit_type: {
     type: ObjectId,
-    ref: UnitType
+    ref: 'UnitType'
   }
 }, {
   timestamps: true,
@@ -21,5 +23,13 @@ const CompClassSchema = new Mongoose.Schema({
     virtuals: true
   }
 });
+
+CompClassSchema.virtual('formattedName').get(function() {
+  return this.name + ' (' + this.abbreviation.toUpperCase() + ')';
+})
+
+CompClassSchema.virtual('detailsUrl').get(function() {
+  return `/compclasses/${this.abbreviation.toLowerCase()}`
+})
 
 export default Mongoose.model('CompClass', CompClassSchema)

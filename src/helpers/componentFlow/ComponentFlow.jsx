@@ -16,29 +16,33 @@ import { connect } from 'react-redux';
 class _ComponentFlow extends React.Component {
   static propTypes = {
     flow: React.PropTypes.object.isRequired,
-    currentSlug: React.PropTypes.string,
+    step: React.PropTypes.string
+  }
+
+  static defaultProps = {
+    step: 'root'
   }
 
   dispatchButtonAction() {
-    this.props.dispatchAction(this.props.flow[this.props.currentSlug].buttonAction);
+    this.props.dispatchAction(this.props.flow[this.props.step].buttonAction);
   }
 
   selectComponent() {
-    const { flow, currentSlug } = this.props;
+    const { flow, step } = this.props;
 
-    if (flow[currentSlug] && flow[currentSlug].component) {
-      return flow[currentSlug].component;
+    if (flow[step] && flow[step].component) {
+      return flow[step].component;
     }
 
     return null;
   }
 
   render() {
-    const { flow, currentSlug } = this.props;
+    const { flow, step } = this.props;
     const CurrentComponent = this.selectComponent();
 
     let buttonClasses = 'btn btn-info btn-block';
-    if (flow[currentSlug] && flow[currentSlug].final) {
+    if (flow[step] && flow[step].final) {
       buttonClasses = 'btn btn-block btn-success';
     }
 
@@ -49,7 +53,7 @@ class _ComponentFlow extends React.Component {
         <div className="row">
           <div className="col-xs-12 col-sm-offset-3 col-sm-6">
             <button className={ buttonClasses } onClick={ this.dispatchButtonAction.bind(this) }>
-              { (flow[currentSlug].buttonText ? flow[currentSlug].buttonText : 'Continue') }
+              { (flow[step].buttonText ? flow[step].buttonText : 'Continue') }
             </button>
           </div>
         </div>
@@ -58,9 +62,8 @@ class _ComponentFlow extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
   return {
-    currentSlug: state.componentFlow.currentSlug,
     formState: state.form
   }
 }

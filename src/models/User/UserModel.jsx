@@ -40,7 +40,7 @@ UserSchema.virtual('formattedName').get(function() {
   return this.first_name + ' ' + (this.mi ? this.mi + '. ' : '') + this.last_name;
 });
 
-UserSchema.virtual('profileURL').get(function() {
+UserSchema.virtual('profileUrl').get(function() {
   return `/users/${this.email}`;
 });
 

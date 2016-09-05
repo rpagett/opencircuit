@@ -46,18 +46,18 @@ var _ComponentFlow = (_temp = _class = function (_React$Component) {
   _createClass(_ComponentFlow, [{
     key: 'dispatchButtonAction',
     value: function dispatchButtonAction() {
-      this.props.dispatchAction(this.props.flow[this.props.currentSlug].buttonAction);
+      this.props.dispatchAction(this.props.flow[this.props.step].buttonAction);
     }
   }, {
     key: 'selectComponent',
     value: function selectComponent() {
       var _props = this.props;
       var flow = _props.flow;
-      var currentSlug = _props.currentSlug;
+      var step = _props.step;
 
 
-      if (flow[currentSlug] && flow[currentSlug].component) {
-        return flow[currentSlug].component;
+      if (flow[step] && flow[step].component) {
+        return flow[step].component;
       }
 
       return null;
@@ -67,12 +67,12 @@ var _ComponentFlow = (_temp = _class = function (_React$Component) {
     value: function render() {
       var _props2 = this.props;
       var flow = _props2.flow;
-      var currentSlug = _props2.currentSlug;
+      var step = _props2.step;
 
       var CurrentComponent = this.selectComponent();
 
       var buttonClasses = 'btn btn-info btn-block';
-      if (flow[currentSlug] && flow[currentSlug].final) {
+      if (flow[step] && flow[step].final) {
         buttonClasses = 'btn btn-block btn-success';
       }
 
@@ -89,7 +89,7 @@ var _ComponentFlow = (_temp = _class = function (_React$Component) {
             _react2.default.createElement(
               'button',
               { className: buttonClasses, onClick: this.dispatchButtonAction.bind(this) },
-              flow[currentSlug].buttonText ? flow[currentSlug].buttonText : 'Continue'
+              flow[step].buttonText ? flow[step].buttonText : 'Continue'
             )
           )
         )
@@ -100,12 +100,13 @@ var _ComponentFlow = (_temp = _class = function (_React$Component) {
   return _ComponentFlow;
 }(_react2.default.Component), _class.propTypes = {
   flow: _react2.default.PropTypes.object.isRequired,
-  currentSlug: _react2.default.PropTypes.string
+  step: _react2.default.PropTypes.string
+}, _class.defaultProps = {
+  step: 'root'
 }, _temp);
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, props) {
   return {
-    currentSlug: state.componentFlow.currentSlug,
     formState: state.form
   };
 };

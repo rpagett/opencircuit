@@ -8,9 +8,21 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
+var _CompClassController = require('./models/CompClass/CompClassController');
+
+var _CompClassController2 = _interopRequireDefault(_CompClassController);
+
 var _EventController = require('./models/Event/EventController');
 
 var _EventController2 = _interopRequireDefault(_EventController);
+
+var _RegistrationController = require('./models/Registration/RegistrationController');
+
+var _RegistrationController2 = _interopRequireDefault(_RegistrationController);
+
+var _UnitController = require('./models/Unit/UnitController');
+
+var _UnitController2 = _interopRequireDefault(_UnitController);
 
 var _UnitTypeController = require('./models/UnitType/UnitTypeController');
 
@@ -24,7 +36,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = _express2.default.Router();
 
+router.use('/compclasses/', _CompClassController2.default);
 router.use('/events/', _EventController2.default);
+router.use('/register/', _RegistrationController2.default);
+router.use('/units/', _UnitController2.default);
 router.use('/unittypes/', _UnitTypeController2.default);
 router.use('/users/', _UserController2.default);
 

@@ -19,7 +19,6 @@ export default function validateUser(data = { }) {
     'first_name': 'capitalize',
     'last_name': 'title',
     'city': 'title',
-    'zip': 'toInt'
   }
 
   if (data.mi) {

@@ -1,9 +1,10 @@
 import { fetchAPI } from '../functions';
 
-export const fetchContents = endpoint => {
+export const fetchContents = (endpoint, subStore) => {
   return (dispatch, getState) => {
-    const { modelView, auth } = getState();
+    const { auth } = getState();
 
+    dispatch(dumpContents(subStore))
     dispatch(beginLoading());
 
     fetchAPI(endpoint, {
@@ -23,9 +24,10 @@ export const fetchContents = endpoint => {
           throw new Error(res.error);
         }
 
-        dispatch(receivedContents(res.contents));
+        dispatch(receivedContents(res.contents, subStore));
       })
       .catch(error => {
+        console.log('Catching a contents view error', error);
         dispatch(gotError(error));
       });
   };
@@ -37,10 +39,18 @@ function beginLoading() {
   }
 }
 
-function receivedContents(contents) {
+export function dumpContents(subStore = null) {
+  return {
+    type: 'CONTENTSVIEW_DUMP_CONTENTS',
+    subStore
+  }
+}
+
+function receivedContents(contents, subStore) {
   return {
     type: 'CONTENTSVIEW_RECEIVED_CONTENTS',
-    contents
+    contents,
+    subStore
   }
 }
 

@@ -99,4 +99,24 @@ router.route('/:slug')
       })
   })
 
+// :type is a UnitType _id
+router.get('/by_type/:type', (req, res) => {
+  Event.find({ }, '_id name date')
+  //Event.find({ types_allowed: req.params.type }, '_id name')
+    .sort('date')
+    .exec()
+    .then(events => {
+      res.json({
+        success: true,
+        events
+      })
+    })
+    .catch(err => {
+      res.json({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
 export default router;

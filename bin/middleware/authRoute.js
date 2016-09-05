@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.userHasRole = userHasRole;
 exports.userOrAdmin = userOrAdmin;
 exports.hasRole = hasRole;
 

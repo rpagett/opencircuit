@@ -56,7 +56,7 @@ var UserDropdown = function (_React$Component) {
           { className: 'dropdown-menu' },
           _react2.default.createElement(
             _reactRouter.Link,
-            { to: this.props.user.profileURL, className: 'dropdown-item' },
+            { to: this.props.user.profileUrl, className: 'dropdown-item' },
             'View Profile'
           ),
           _react2.default.createElement('div', { className: 'dropdown-divider' }),
@@ -150,13 +150,23 @@ var _NavBar = function (_React$Component2) {
                   ),
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { to: '/users', className: 'dropdown-item' },
-                    'Users'
+                    { to: '/classes', className: 'dropdown-item' },
+                    'Classes'
                   ),
                   _react2.default.createElement(
-                    'a',
-                    { className: 'dropdown-item', href: '#' },
-                    'Etc.'
+                    _reactRouter.Link,
+                    { to: '/units', className: 'dropdown-item' },
+                    'Units'
+                  ),
+                  _react2.default.createElement(
+                    _reactRouter.Link,
+                    { to: '/unittypes', className: 'dropdown-item' },
+                    'Unit Types'
+                  ),
+                  _react2.default.createElement(
+                    _reactRouter.Link,
+                    { to: '/users', className: 'dropdown-item' },
+                    'Users'
                   ),
                   _react2.default.createElement('div', { className: 'dropdown-divider' }),
                   _react2.default.createElement(

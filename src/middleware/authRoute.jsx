@@ -1,7 +1,7 @@
 import User from '../models/User/UserModel';
 import { UserRoles } from '../models/User/UserRoles';
 
-function userHasRole(user, role) {
+export function userHasRole(user, role) {
   return user.roles.includes(UserRoles.Administrator) || user.roles.includes(role);
 }
 

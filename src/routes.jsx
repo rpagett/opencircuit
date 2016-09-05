@@ -7,14 +7,23 @@ import AuthTemplate from './templates/AuthTemplate';
 
 import * as RootView from './models/Dashboard/DashboardViews';
 import * as AuthView from './models/Auth/AuthViews';
+import * as CompClassView from './models/CompClass/CompClassViews';
 import * as EventView from './models/Event/EventViews';
+import * as RegistrationView from './models/Registration/RegistrationViews'
 import * as UnitView from './models/Unit/UnitViews';
+import * as UnitTypeView from './models/UnitType/UnitTypeViews'
 import * as UserView from './models/User/UserViews';
 
 import { UserRoles } from './models/User/UserRoles';
-import { dumpContents } from './helpers/FlexTable/FlexTableActions';
+import { dumpContents as dumpFlexTable } from './helpers/FlexTable/FlexTableActions';
+import { dumpContents as dumpContentsView } from './helpers/ContentsView/ContentsViewActions';
 
 export function getAppRoutes(store) {
+  const dumpContents = () => {
+    dumpFlexTable();
+    dumpContentsView();
+  }
+
   function authOnly(nextState, replace) {
     const authUser = store.getState().auth.user;
 
@@ -64,6 +73,13 @@ export function getAppRoutes(store) {
       <Route component={ App } onEnter={ authOnly }>
         <IndexRoute component={ RootView.Home } />
 
+        <Route path="/compclasses" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
+          <IndexRoute component={ CompClassView.Index } />
+          <Route path="new" component={ CompClassView.New } />
+          <Route path=":abbreviation" component={ CompClassView.Show } />
+          <Route path=":abbreviation/edit" component={ CompClassView.Edit } />
+        </Route>
+
         <Route path="/events">
           <IndexRoute component={ EventView.Index } />
           <Route path="new" component={ EventView.New } onEnter={ requiresRole.bind(this, UserRoles.EventDirector) } />
@@ -71,8 +87,21 @@ export function getAppRoutes(store) {
           <Route path=":slug/edit" component={ EventView.Edit } onEnter={ requiresRole.bind(this, UserRoles.EventDirector) } />
         </Route>
 
+        <Route path="/register">
+          <IndexRoute component={ RegistrationView.Organization } />
+          <Route path="organization/:org" component={ RegistrationView.Unit } />
+          <Route path="unit/:unit" component={ RegistrationView.Details } />
+          <Route path="unit/:unit/events" component={ RegistrationView.EventRegistration } />
+          <Route path="unit/:unit/confirm" component={ RegistrationView.Confirm } />
+        </Route>
+
         <Route path="/units">
-          <Route path="register" component={ UnitView.Register } />
+          <IndexRoute component={ UnitView.Index } onEnter={ requiresRole.bind(this, UserRoles.EventDirector) } />
+        </Route>
+
+        <Route path="/unittypes" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
+          <IndexRoute component={ UnitTypeView.Index } />
+          <Route path=":slug" component={ UnitTypeView.Show } />
         </Route>
 
         <Route path="/users">

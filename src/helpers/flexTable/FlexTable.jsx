@@ -40,7 +40,7 @@ class _FlexTable extends React.Component {
       );
     }
 
-    if (!this.props.contents) {
+    if (!this.props.contents || !this.props.contents.length) {
       return (
         <strong>{ this.props.emptyMessage }</strong>
       );

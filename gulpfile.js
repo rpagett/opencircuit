@@ -10,6 +10,9 @@ var gutil = require('gulp-util');
 var babelify = require('babelify');
 var nodemon = require('gulp-nodemon');
 var pump = require('pump');
+var Cache = require('gulp-file-cache');
+
+var cache = new Cache();
 
 // External dependencies you do not want to rebundle while developing,
 // but include in your application deployment
@@ -41,8 +44,17 @@ gulp.task('deploy', function (){
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['./src/**/*.jsx'], ['scripts']);
   gulp.watch(['./scss/**/*.scss'], ['styles']);
+  var stream = nodemon({
+    script: 'bin/server.js',
+    watch: 'src',
+    env: { 'NODE_ENV': 'development' },
+    tasks: ['scripts']
+  })
+
+  return stream;
+
+  //gulp.watch(['./src/**/*.jsx'], ['scripts']);
 });
 
 gulp.task('icons', function() {
@@ -53,7 +65,7 @@ gulp.task('icons', function() {
 // When running 'gulp' on the terminal this task will fire.
 // It will start watching for changes in every .js file.
 // If there's a change, the task 'scripts' defined above will fire.
-gulp.task('default', ['scripts','watch','styles']);
+gulp.task('default', ['watch','styles']);
 
 // Private Functions
 // ----------------------------------------------------------------------------
@@ -98,7 +110,7 @@ function bundleApp(isProduction) {
     .on('error', gutil.log)
     .pipe(gulp.dest('./bin/'));
 
-  appBundler
+  var stream = appBundler
   // transform ES6 and JSX to ES5 with babelify
     .transform("babelify", {
       presets: ["es2015", "react", "stage-1"],
@@ -108,9 +120,12 @@ function bundleApp(isProduction) {
     .bundle()
     .on('error', gutil.log)
     .pipe(source('bundle.js'))
+    .pipe(cache.cache())
     //.pipe(buffer())
     //.pipe(plugins.uglify()).on('error', gutil.log)
     .pipe(gulp.dest('./dist/js/'));
+
+  return stream;
 }
 
 var dest = 'dist/';

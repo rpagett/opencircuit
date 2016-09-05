@@ -6,6 +6,8 @@ import MaskedInput from 'react-input-mask';
 import DateTimeField from 'react-datetime';
 import Moment from 'moment';
 
+import ContentsView from '../helpers/ContentsView/ContentsView';
+import { fetchAPI } from '../helpers/functions';
 import * as FormActions from './FormActions';
 import * as ModalActions from '../modals/ModalActions';
 import LoadingCube from '../helpers/LoadingCube';
@@ -36,6 +38,12 @@ class _InputWrapper extends React.Component {
     horizontal: true,
     type: 'text',
     value: ''
+  }
+
+  componentDidMount() {
+    if (this.props.value) {
+      this.props.updateField(this.props.value)
+    }
   }
 
   updateValue(e, selected) {
@@ -188,6 +196,61 @@ export class TextArea extends React.Component {
     )
   }
 }
+
+export class ClassSelect extends React.Component {
+  static propTypes = {
+    unitType: React.PropTypes.string.isRequired
+  }
+
+  fetchList() {
+    return fetchAPI(`/api/unittypes/${this.props.unitType}/classes`)
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        return { options: json };
+      });
+  }
+
+  render() {
+    return (
+      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+        <Select.Async
+          className="form-control"
+          clearable={ false }
+          loadOptions={ this.fetchList.bind(this) }
+          autosize={ false }
+        />
+      </InputWrapper>
+    );
+  }
+}
+
+export class UnitTypeSelect extends React.Component {
+  fetchList() {
+    return fetchAPI('/api/unittypes/select')
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        return { options: json };
+      });
+  }
+
+  render() {
+    return (
+      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+        <Select.Async
+          className="form-control"
+          clearable={ false }
+          loadOptions={ this.fetchList.bind(this) }
+          autosize={ false }
+        />
+      </InputWrapper>
+    );
+  }
+}
+
 
 export class StateSelect extends React.Component {
   selectOptions() {
@@ -395,6 +458,89 @@ const mapDispatchToRadioProps = (dispatch, props) => {
 
 export const Radio = connect(mapStateToCheckboxProps, mapDispatchToRadioProps)(_Radio);
 
+class _EventChecks extends React.Component {
+  static propTypes = {
+    endpoint: React.PropTypes.string.isRequired
+  }
+
+  constructor() {
+    super();
+
+    this.state = {
+      isLoading: true
+    }
+  }
+
+  componentDidMount() {
+    fetchAPI(this.props.endpoint)
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        this.setState({
+          isLoading: false,
+          events: json.events
+        })
+      });
+  }
+
+  render() {
+    let boxes = [ ];
+
+    if (this.state.isLoading) {
+      return (
+        <div>
+          <LoadingCube show={ true }/>
+        </div>
+      );
+    }
+
+    console.log(this.state.events);
+
+    if (!this.state.events) {
+      return (
+        <p>
+          No events available at this time.
+        </p>
+      )
+    }
+
+    this.state.events.map(event => {
+      boxes.push(
+        <div className="col-xs-12 col-sm-6" key={ `col-${event.id}` }>
+          <Checkbox
+            name="events[]"
+            formStore={ this.props.formStore }
+            key={ event._id }
+            label={ event.name + ' (' + event.formattedDate + ')' }
+            value={ event._id }
+          />
+        </div>
+      )
+    })
+
+    return (
+      <div className="row">
+        { boxes }
+      </div>
+    )
+  }
+}
+
+export class EventChecks extends React.Component {
+  render() {
+    return (
+      <_EventChecks
+        unitType={ this.props.unitType }
+        endpoint={ this.props.endpoint }
+        formStore={ this.props.formStore }
+        subStore="event_checks"
+        component={ _EventChecks }
+      />
+    )
+  }
+}
+
 class _ReduxForm extends React.Component {
   static propTypes = {
     submitEndpoint: React.PropTypes.string.isRequired,
@@ -409,7 +555,7 @@ class _ReduxForm extends React.Component {
   }
 
   componentDidMount() {
-      this.props.fetchData();
+    this.props.fetchData();
   }
 
   recursivelyCloneChildren(children) {

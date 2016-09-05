@@ -42,6 +42,11 @@ var _ContentsView = (_temp = _class = function (_React$Component) {
   }
 
   _createClass(_ContentsView, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.props.dumpContents();
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.props.fetchContents();
@@ -61,6 +66,14 @@ var _ContentsView = (_temp = _class = function (_React$Component) {
         return _react2.default.createElement(_LoadingCube2.default, { show: true });
       }
 
+      if (!this.props.contents) {
+        return _react2.default.createElement(
+          'strong',
+          null,
+          'Nothing to display.'
+        );
+      }
+
       return _react2.default.createElement(this.props.component, { contents: this.props.contents });
     }
   }]);
@@ -68,15 +81,16 @@ var _ContentsView = (_temp = _class = function (_React$Component) {
   return _ContentsView;
 }(_react2.default.Component), _class.propTypes = {
   endpoint: _react2.default.PropTypes.string.isRequired,
+  subStore: _react2.default.PropTypes.string.isRequired,
   error: _react2.default.PropTypes.string,
   isLoading: _react2.default.PropTypes.bool
 }, _class.defaultProps = {
   isLoading: true
 }, _temp);
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, props) {
   return {
-    contents: state.contentsView.contents,
+    contents: state.contentsView[props.subStore],
     error: state.contentsView.error,
     isLoading: state.contentsView.isLoading
   };
@@ -85,7 +99,10 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
   return {
     fetchContents: function fetchContents() {
-      return dispatch(actions.fetchContents(props.endpoint));
+      return dispatch(actions.fetchContents(props.endpoint, props.subStore));
+    },
+    dumpContents: function dumpContents() {
+      dispatch(actions.dumpContents(props.subStore));
     }
   };
 };

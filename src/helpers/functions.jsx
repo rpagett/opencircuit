@@ -25,13 +25,36 @@ export function translateValidationErrors(errors) {
       }
   */
 
+  if (!errors) {
+    return { };
+  }
+
   let messages = { };
-  for (let index in errors) {
-    const line = errors[index];
-    messages = {
-      ...messages,
-      [line.field]: line.message
+  const validate = line => {
+    if (line.code == 11000) {
+      messages = {
+        ...messages,
+        'name': 'There is already a record by that name.'
+      }
     }
+    else {
+      messages = {
+        ...messages,
+        [line.field]: line.message
+      }
+    }
+  }
+
+  if (errors.constructor === Array) {
+    for (let index in errors) {
+      const line = errors[index];
+
+      console.log(line);
+      validate(line);
+    }
+  }
+  else {
+    validate(errors);
   }
 
   return messages;

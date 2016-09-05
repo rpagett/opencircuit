@@ -14,7 +14,7 @@ class UserDropdown extends React.Component {
           <MiniGravatar email={ this.props.user.email } />{ '  ' + this.props.user.formattedName }
         </a>
         <div className="dropdown-menu">
-          <Link to={ this.props.user.profileURL } className="dropdown-item">View Profile</Link>
+          <Link to={ this.props.user.profileUrl } className="dropdown-item">View Profile</Link>
           <div className="dropdown-divider"></div>
           <a className="dropdown-item" href="/auth/logout">Log Out</a>
         </div>
@@ -57,8 +57,10 @@ class _NavBar extends React.Component {
                 </a>
                 <div className="dropdown-menu">
                   <a className="dropdown-item" href="#">Circuit</a>
+                  <Link to="/classes" className="dropdown-item">Classes</Link>
+                  <Link to="/units" className="dropdown-item">Units</Link>
+                  <Link to="/unittypes" className="dropdown-item">Unit Types</Link>
                   <Link to="/users" className="dropdown-item">Users</Link>
-                  <a className="dropdown-item" href="#">Etc.</a>
                   <div className="dropdown-divider"></div>
                   <a className="dropdown-item" href="#">Separated link</a>
                 </div>

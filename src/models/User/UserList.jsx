@@ -19,7 +19,7 @@ export default class UserList extends React.Component {
           endpoint={ this.props.endpoint }
           emptyMessage="There are no registered users."
           columns={{
-            'Name': user => { return (<Link to={ user.profileURL }>{ user.formattedName }</Link>) },
+            'Name': user => { return (<Link to={ user.profileUrl }>{ user.formattedName }</Link>) },
             'Email': user => { return (<a href={`mailto:${user.email}`}>{ user.email }</a>)},
             'Phone': user => { return user.phone },
             'Roles': (user, dispatch) => {

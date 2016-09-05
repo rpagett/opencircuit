@@ -14,6 +14,7 @@ var _moment2 = _interopRequireDefault(_moment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var ObjectId = _mongoose2.default.Schema.Types.ObjectId;
 var EventSchema = new _mongoose2.default.Schema({
   slug: {
     type: String,
@@ -28,6 +29,11 @@ var EventSchema = new _mongoose2.default.Schema({
   attendance_cap: Number,
   registration_closed: Boolean,
   critique_closed: Boolean,
+
+  types_allowed: {
+    type: [ObjectId],
+    ref: 'UnitType'
+  },
 
   notes: String, //EventDirector+
 
