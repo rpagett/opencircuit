@@ -1,4 +1,4 @@
-import { fetchContents as fetchFlexTable } from '../helpers/flexTable/flexTableActions';
+import { fetchContents as fetchFlexTable } from '../helpers/FlexTable/FlexTableActions';
 
 export function launch(title, component, props = { }) {
   return dispatch => {

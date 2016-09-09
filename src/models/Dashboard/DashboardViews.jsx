@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import ContentsView from '../../helpers/contentsView/ContentsView';
+import ContentsView from '../../helpers/ContentsView/ContentsView';
 import { LaunchModalButton } from '../../modals/SpawnableModal';
 import { UserRoles, HasRole } from '../User/UserRoles';
 import UserFeeList from '../Fee/UserFeeList';

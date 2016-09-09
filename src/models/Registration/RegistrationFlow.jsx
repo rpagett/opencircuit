@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 
 import { ReduxForm, FormInput, ClassSelect, StateSelect, Radio } from '../../forms/components';
-import ContentsView from '../../helpers/contentsView/ContentsView';
+import ContentsView from '../../helpers/ContentsView/ContentsView';
 import { setView } from '../../helpers/componentFlow/ComponentFlowActions';
 
 const formProps = {

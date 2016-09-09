@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router';
 
-import FlexTable from '../../helpers/flexTable/FlexTable'
+import FlexTable from '../../helpers/FlexTable/FlexTable'
 import { LaunchModalButton } from '../../modals/SpawnableModal';
 
 export default class FeeList extends React.Component {

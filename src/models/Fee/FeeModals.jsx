@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import ContentsView from '../../helpers/contentsView/ContentsView';
+import ContentsView from '../../helpers/ContentsView/ContentsView';
 import { ReduxForm, FormInput, Checkbox, DateTime, TextArea, PaymentTypeSelect, FeeCategorySelect, UnitSelect } from '../../forms/components';
 
 export class AdminPayment extends React.Component {

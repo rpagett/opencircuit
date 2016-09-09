@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import { ReduxForm, FormInput, Checkbox, ClassSelect, StateSelect, EventChecks, Radio } from '../../forms/components';
-import ContentsView from '../../helpers/contentsView/ContentsView';
+import ContentsView from '../../helpers/ContentsView/ContentsView';
 
 export class Organization extends React.Component {
   render() {
