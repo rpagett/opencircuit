@@ -123,6 +123,10 @@ router.route('/').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator
   });
 });
 
+router.get('/paypal-return', function (req, res) {
+  console.log('Returning!', req.query);
+});
+
 router.get('/paymentTypes', function (req, res) {
   var json = [];
   for (var key in _PaymentTypes2.default) {
@@ -179,8 +183,8 @@ router.post('/userPay', function (req, res) {
         "payment_method": "paypal"
       },
       "redirect_urls": {
-        "return_url": "google.com",
-        "cancel_url": "google.com"
+        "return_url": process.env.BASE_URL + '/api/fees/paypal-return',
+        "cancel_url": process.env.BASE_URL + '/'
       },
       "transactions": [{
         "item_list": {

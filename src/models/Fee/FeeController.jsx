@@ -102,6 +102,10 @@ router.route('/')
     })
   });
 
+router.get('/paypal-return', (req, res) => {
+  console.log('Returning!', req.query)
+})
+
 router.get('/paymentTypes', (req, res) => {
   let json = [ ];
   for (let key in PaymentTypes) {
@@ -162,8 +166,8 @@ router.post('/userPay', (req, res) => {
           "payment_method": "paypal"
         },
         "redirect_urls": {
-          "return_url": "google.com",
-          "cancel_url": "google.com"
+          "return_url": process.env.BASE_URL + '/api/fees/paypal-return',
+          "cancel_url": process.env.BASE_URL + '/'
         },
         "transactions": [{
           "item_list": {
