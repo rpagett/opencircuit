@@ -26,12 +26,12 @@
       <file leaf-file-name="AuthController.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/models/Auth/AuthController.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.73670214">
-              <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.7659575">
+              <caret line="89" column="21" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
               <folding>
-                <marker date="1473454674000" expanded="true" signature="2186:3166" placeholder="{...}" />
-                <marker date="1473454674000" expanded="true" signature="2274:3141" placeholder="{...}" />
-                <marker date="1473454674000" expanded="true" signature="2422:2666" placeholder="{&quot;first_name&quot;: 'Riley'...}" />
+                <marker date="1473454748000" expanded="true" signature="2188:2364" placeholder="{...}" />
+                <marker date="1473454748000" expanded="true" signature="2189:2339" placeholder="{...}" />
+                <marker date="1473454748000" expanded="true" signature="2281:2338" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -1937,12 +1937,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Auth/AuthController.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73670214">
-          <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.7659575">
+          <caret line="89" column="21" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
           <folding>
-            <marker date="1473454674000" expanded="true" signature="2186:3166" placeholder="{...}" />
-            <marker date="1473454674000" expanded="true" signature="2274:3141" placeholder="{...}" />
-            <marker date="1473454674000" expanded="true" signature="2422:2666" placeholder="{&quot;first_name&quot;: 'Riley'...}" />
+            <marker date="1473454748000" expanded="true" signature="2188:2364" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="2189:2339" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="2281:2338" placeholder="{...}" />
           </folding>
         </state>
       </provider>

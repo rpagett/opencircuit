@@ -83,45 +83,13 @@ router.get('/logout', (req, res) => {
   });
 });
 
-router.get('/seed', (req, res) => {
-  User.register(new User({email: 'riley@opencircuit.us'}), 'estiondf', (err, user) => {
-    if (err) {
+router.get('/reauth', (req, res) => {
+  User.findOneAndUpdate({email: 'riley@opencircuit.us'}, { roles: [1] })
+    .then(user => {
       res.json({
-        success: false,
-        errors: [{field: 'email', message: err.message}]
+        success: true
       })
-    }
-
-    const data = {
-      email: 'riley@opencircuit.us',
-      first_name: 'Riley',
-      last_name: 'Pagett',
-      phone: '(803) 322 - 4757',
-      street: '737 Atherton Way',
-      city: 'Rock Hill',
-      state: 'SC',
-      zip: 29730,
-      roles: [1]
-    }
-
-    User.findOneAndUpdate({email: data.email}, data, {'new': true})
-      .then(user => {
-        req.login(user, err => {
-          if (err) {
-            res.json({
-              success: false,
-              errors: [{field: 'email', message: err.message}]
-            });
-          }
-
-          res.store.dispatch(loginUser(user));
-          res.send({
-            success: true,
-            external: true,
-            redirect: '/'
-          });
-        })
-      })
+    })
 })
 
 export default router;
