@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Auth/AuthController.jsx" afterPath="$PROJECT_DIR$/src/models/Auth/AuthController.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
     </list>
     <ignored path="opencircuit.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,15 +23,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AuthController.jsx" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/models/Auth/AuthController.jsx">
+      <file leaf-file-name="gulpfile.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gulpfile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7659575">
-              <caret line="89" column="21" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.5319149">
+              <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
               <folding>
-                <marker date="1473454748000" expanded="true" signature="2188:2364" placeholder="{...}" />
-                <marker date="1473454748000" expanded="true" signature="2189:2339" placeholder="{...}" />
-                <marker date="1473454748000" expanded="true" signature="2281:2338" placeholder="{...}" />
+                <marker date="1473454843000" expanded="true" signature="3676:3744" placeholder="//..." />
               </folding>
             </state>
           </provider>
@@ -84,7 +82,6 @@
         <option value="$PROJECT_DIR$/src/models/Fee/FeeController.jsx" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_22" />
-        <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/src/modals/ModalActions.jsx" />
         <option value="$PROJECT_DIR$/src/models/Unit/UnitForms.jsx" />
         <option value="$PROJECT_DIR$/src/routes.jsx" />
@@ -96,6 +93,7 @@
         <option value="$PROJECT_DIR$/src/server.jsx" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_21" />
         <option value="$PROJECT_DIR$/src/models/Auth/AuthController.jsx" />
+        <option value="$PROJECT_DIR$/gulpfile.js" />
       </list>
     </option>
   </component>
@@ -1578,37 +1576,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gulpfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5851064">
-          <caret line="115" column="47" selection-start-line="115" selection-start-column="47" selection-end-line="115" selection-end-column="47" />
-          <folding>
-            <marker date="1473452761000" expanded="true" signature="71:158" placeholder="{&quot;replaceString&quot;: /\bgulp[\-.]/...}" />
-            <marker date="1473452761000" expanded="true" signature="488:604" placeholder="//..." />
-            <marker date="1473452761000" expanded="true" signature="624:740" placeholder="[...]" />
-            <marker date="1473452761000" expanded="true" signature="809:902" placeholder="//..." />
-            <marker date="1473452761000" expanded="true" signature="935:1056" placeholder="{...}" />
-            <marker date="1473452761000" expanded="true" signature="947:1052" placeholder="{&quot;script&quot;: 'bin/server.js'...}" />
-            <marker date="1473452761000" expanded="true" signature="1093:1116" placeholder="{...}" />
-            <marker date="1473452761000" expanded="true" signature="1151:1173" placeholder="{...}" />
-            <marker date="1473452761000" expanded="true" signature="1221:1503" placeholder="{...}" />
-            <marker date="1473452761000" expanded="true" signature="1294:1432" placeholder="{&quot;script&quot;: 'bin/server.js'...}" />
-            <marker date="1473452761000" expanded="true" signature="1537:1645" placeholder="{...}" />
-            <marker date="1473452761000" expanded="true" signature="1649:1833" placeholder="//..." />
-            <marker date="1473452761000" expanded="true" signature="1877:1977" placeholder="//..." />
-            <marker date="1473452761000" expanded="true" signature="2011:3763" placeholder="{...}" />
-            <marker date="1473452761000" expanded="true" signature="2033:2145" placeholder="//..." />
-            <marker date="1473452761000" expanded="true" signature="2176:2275" placeholder="{&quot;entries&quot;: './src/browser.jsx'...}" />
-            <marker date="1473452761000" expanded="true" signature="2280:3083" placeholder="//..." />
-            <marker date="1473452761000" expanded="true" signature="3138:3239" placeholder="{...}" />
-            <marker date="1473452761000" expanded="true" signature="3404:3533" placeholder="{...}" />
-            <marker date="1473452761000" expanded="true" signature="3637:3707" placeholder="//..." />
-            <marker date="1473452761000" expanded="true" signature="3817:4144" placeholder="{...}" />
-            <marker date="1473452761000" expanded="true" signature="4183:4239" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/modals/ModalActions.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.74206346">
@@ -1937,12 +1904,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Auth/AuthController.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7659575">
-          <caret line="89" column="21" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.8537234">
+          <caret line="92" column="2" selection-start-line="92" selection-start-column="2" selection-end-line="92" selection-end-column="2" />
           <folding>
+            <marker date="1473454748000" expanded="true" signature="404:810" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="487:806" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="511:631" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="528:623" placeholder="{&quot;success&quot;: false...}" />
+            <marker date="1473454748000" expanded="true" signature="641:802" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="680:794" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="699:785" placeholder="{&quot;success&quot;: true...}" />
+            <marker date="1473454748000" expanded="true" signature="853:1984" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="898:1847" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="981:1840" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="1000:1134" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="1021:1123" placeholder="{&quot;success&quot;: false...}" />
+            <marker date="1473454748000" expanded="true" signature="1307:1749" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="1344:1736" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="1369:1534" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="1396:1516" placeholder="{&quot;success&quot;: false...}" />
+            <marker date="1473454748000" expanded="true" signature="1610:1720" placeholder="{&quot;success&quot;: true...}" />
+            <marker date="1473454748000" expanded="true" signature="1777:1831" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="1870:1980" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="1924:1972" placeholder="{&quot;success&quot;: false...}" />
+            <marker date="1473454748000" expanded="true" signature="2024:2148" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="2106:2144" placeholder="{...}" />
             <marker date="1473454748000" expanded="true" signature="2188:2364" placeholder="{...}" />
             <marker date="1473454748000" expanded="true" signature="2189:2339" placeholder="{...}" />
             <marker date="1473454748000" expanded="true" signature="2281:2338" placeholder="{...}" />
+            <marker date="1473454748000" expanded="true" signature="2287:2336" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5319149">
+          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+          <folding>
+            <marker date="1473454843000" expanded="true" signature="3676:3744" placeholder="//..." />
           </folding>
         </state>
       </provider>

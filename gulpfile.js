@@ -122,10 +122,14 @@ function bundleApp(isProduction) {
     .bundle()
     .on('error', gutil.log)
     .pipe(cache.cache())
-    .pipe(source('bundle.js'))
-    //.pipe(buffer())
-    //.pipe(plugins.uglify()).on('error', gutil.log)
-    .pipe(gulp.dest('./dist/js/'));
+    .pipe(source('bundle.js'));
+
+  if (isProduction) {
+    stream = stream.pipe(buffer())
+      .pipe(plugins.uglify()).on('error', gutil.log)
+  }
+
+  stream = stream.pipe(gulp.dest('./dist/js/'));
 
   return stream;
 }
