@@ -104,6 +104,22 @@ router.route('/')
 
 router.get('/paypal-return', (req, res) => {
   console.log('Returning!', req.query)
+
+  const execute_payment_json = {
+    "payer_id": req.query.PayerID
+  };
+  const paymentId = req.query.paymentId;
+
+  paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+    if (error) {
+      console.log(error.response);
+      throw error;
+    }
+    else {
+      console.log("Get Payment Response");
+      console.log(JSON.stringify(payment));
+    }
+  });
 })
 
 router.get('/paymentTypes', (req, res) => {

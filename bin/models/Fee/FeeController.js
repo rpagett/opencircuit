@@ -125,6 +125,21 @@ router.route('/').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator
 
 router.get('/paypal-return', function (req, res) {
   console.log('Returning!', req.query);
+
+  var execute_payment_json = {
+    "payer_id": req.query.PayerID
+  };
+  var paymentId = req.query.paymentId;
+
+  paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+    if (error) {
+      console.log(error.response);
+      throw error;
+    } else {
+      console.log("Get Payment Response");
+      console.log(JSON.stringify(payment));
+    }
+  });
 });
 
 router.get('/paymentTypes', function (req, res) {
