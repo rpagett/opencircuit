@@ -19,6 +19,17 @@ import Unit from '../Unit/UnitModel';
 let router = Express.Router();
 // All routes are /api/fees/
 
+function configurePaypal() {
+  Paypal.configure({
+    'mode': process.env.PAYPAL_MODE,
+    'client_id': process.env.PAYPAL_CLIENT,
+    'client_secret': process.env.PAYPAL_SECRET,
+    'headers' : {
+      'custom': 'header'
+    }
+  });
+}
+
 function assessFee(unit_id, amount, category, notes = '', due_date = Fee.DUE_DATE()) {
   FeeCategory.findOne({ slug: category }, '_id name')
     .then(feecat => {
@@ -105,6 +116,7 @@ router.route('/')
 router.get('/paypal-return', (req, res) => {
   console.log('Returning!', req.query)
 
+  configurePaypal();
   const execute_payment_json = {
     "payer_id": req.query.PayerID
   };
@@ -167,14 +179,7 @@ router.post('/userPay', (req, res) => {
       })
 
       console.log('Paypal mode is ', process.env.PAYPAL_MODE);
-      Paypal.configure({
-        'mode': process.env.PAYPAL_MODE,
-        'client_id': process.env.PAYPAL_CLIENT,
-        'client_secret': process.env.PAYPAL_SECRET,
-        'headers' : {
-          'custom': 'header'
-        }
-      });
+      configurePaypal();
 
       const payment_details = {
         "intent": "sale",

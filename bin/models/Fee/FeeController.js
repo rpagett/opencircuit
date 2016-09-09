@@ -57,6 +57,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 // All routes are /api/fees/
 
+function configurePaypal() {
+  _paypalRestSdk2.default.configure({
+    'mode': process.env.PAYPAL_MODE,
+    'client_id': process.env.PAYPAL_CLIENT,
+    'client_secret': process.env.PAYPAL_SECRET,
+    'headers': {
+      'custom': 'header'
+    }
+  });
+}
+
 function assessFee(unit_id, amount, category) {
   var notes = arguments.length <= 3 || arguments[3] === undefined ? '' : arguments[3];
   var due_date = arguments.length <= 4 || arguments[4] === undefined ? _FeeModel2.default.DUE_DATE() : arguments[4];
@@ -126,6 +137,7 @@ router.route('/').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator
 router.get('/paypal-return', function (req, res) {
   console.log('Returning!', req.query);
 
+  configurePaypal();
   var execute_payment_json = {
     "payer_id": req.query.PayerID
   };
@@ -183,14 +195,7 @@ router.post('/userPay', function (req, res) {
     });
 
     console.log('Paypal mode is ', process.env.PAYPAL_MODE);
-    _paypalRestSdk2.default.configure({
-      'mode': process.env.PAYPAL_MODE,
-      'client_id': process.env.PAYPAL_CLIENT,
-      'client_secret': process.env.PAYPAL_SECRET,
-      'headers': {
-        'custom': 'header'
-      }
-    });
+    configurePaypal();
 
     var payment_details = {
       "intent": "sale",
