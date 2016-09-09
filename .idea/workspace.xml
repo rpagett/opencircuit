@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/bundle.js" afterPath="$PROJECT_DIR$/dist/js/bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modals/ModalActions.jsx" afterPath="$PROJECT_DIR$/src/modals/ModalActions.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/CompClass/CompClassList.jsx" afterPath="$PROJECT_DIR$/src/models/CompClass/CompClassList.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/CompClass/CompClassViews.jsx" afterPath="$PROJECT_DIR$/src/models/CompClass/CompClassViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Dashboard/DashboardViews.jsx" afterPath="$PROJECT_DIR$/src/models/Dashboard/DashboardViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Event/EventList.jsx" afterPath="$PROJECT_DIR$/src/models/Event/EventList.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Fee/FeeList.jsx" afterPath="$PROJECT_DIR$/src/models/Fee/FeeList.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Fee/FeeModals.jsx" afterPath="$PROJECT_DIR$/src/models/Fee/FeeModals.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Fee/UserFeeList.jsx" afterPath="$PROJECT_DIR$/src/models/Fee/UserFeeList.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Registration/RegistrationFlow.jsx" afterPath="$PROJECT_DIR$/src/models/Registration/RegistrationFlow.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Registration/RegistrationViews.jsx" afterPath="$PROJECT_DIR$/src/models/Registration/RegistrationViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Unit/UnitForms.jsx" afterPath="$PROJECT_DIR$/src/models/Unit/UnitForms.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Unit/UnitList.jsx" afterPath="$PROJECT_DIR$/src/models/Unit/UnitList.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/UnitType/UnitTypeList.jsx" afterPath="$PROJECT_DIR$/src/models/UnitType/UnitTypeList.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/User/UserList.jsx" afterPath="$PROJECT_DIR$/src/models/User/UserList.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux.jsx" afterPath="$PROJECT_DIR$/src/redux.jsx" />
-    </list>
+    <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="" />
     <ignored path="opencircuit.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -483,13 +466,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24609375" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.50625" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934928" sideWeight="0.49375" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934928" sideWeight="0.49375" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
