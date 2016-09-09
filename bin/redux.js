@@ -11,15 +11,15 @@ var _AuthReducer = require('./models/Auth/AuthReducer');
 
 var _AuthReducer2 = _interopRequireDefault(_AuthReducer);
 
-var _ComponentFlowReducer = require('./helpers/componentFlow/ComponentFlowReducer');
+var _ComponentFlowReducer = require('./helpers/ComponentFlow/ComponentFlowReducer');
 
 var _ComponentFlowReducer2 = _interopRequireDefault(_ComponentFlowReducer);
 
-var _ContentsViewReducer = require('./helpers/contentsView/ContentsViewReducer');
+var _ContentsViewReducer = require('./helpers/ContentsView/ContentsViewReducer');
 
 var _ContentsViewReducer2 = _interopRequireDefault(_ContentsViewReducer);
 
-var _FlexTableReducer = require('./helpers/flexTable/FlexTableReducer');
+var _FlexTableReducer = require('./helpers/FlexTable/FlexTableReducer');
 
 var _FlexTableReducer2 = _interopRequireDefault(_FlexTableReducer);
 
@@ -31,7 +31,7 @@ var _ModalReducer = require('./modals/ModalReducer');
 
 var _ModalReducer2 = _interopRequireDefault(_ModalReducer);
 
-var _ModelViewReducer = require('./helpers/modelView/ModelViewReducer');
+var _ModelViewReducer = require('./helpers/ModelView/ModelViewReducer');
 
 var _ModelViewReducer2 = _interopRequireDefault(_ModelViewReducer);
 

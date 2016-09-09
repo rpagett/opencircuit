@@ -41,7 +41,10 @@ var UserSchema = new _mongoose2.default.Schema({
     maxlength: 5
   },
 
-  roles: [Number],
+  roles: {
+    type: [Number],
+    default: []
+  },
 
   apiToken: String
 }, {

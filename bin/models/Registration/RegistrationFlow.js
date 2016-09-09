@@ -12,11 +12,11 @@ var _reactRouter = require('react-router');
 
 var _components = require('../../forms/components');
 
-var _ContentsView = require('../../helpers/contentsView/ContentsView');
+var _ContentsView = require('../../helpers/ContentsView/ContentsView');
 
 var _ContentsView2 = _interopRequireDefault(_ContentsView);
 
-var _ComponentFlowActions = require('../../helpers/componentFlow/ComponentFlowActions');
+var _ComponentFlowActions = require('../../helpers/ComponentFlow/ComponentFlowActions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

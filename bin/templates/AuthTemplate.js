@@ -11,9 +11,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _appContent = require('../layout/appContent');
+var _AppContent = require('../layout/AppContent');
 
-var _appContent2 = _interopRequireDefault(_appContent);
+var _AppContent2 = _interopRequireDefault(_AppContent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36,7 +36,7 @@ var AuthTemplate = function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        _appContent2.default,
+        _AppContent2.default,
         null,
         _react2.default.createElement(
           'div',

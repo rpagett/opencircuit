@@ -17,7 +17,7 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 var _reactRouter = require('react-router');
 
-var _FlexTable = require('../../helpers/flexTable/FlexTable');
+var _FlexTable = require('../../helpers/FlexTable/FlexTable');
 
 var _FlexTable2 = _interopRequireDefault(_FlexTable);
 

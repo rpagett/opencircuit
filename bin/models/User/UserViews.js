@@ -13,7 +13,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _ModelView = require('../../helpers/modelView/ModelView');
+var _ModelView = require('../../helpers/ModelView/ModelView');
 
 var _ModelView2 = _interopRequireDefault(_ModelView);
 

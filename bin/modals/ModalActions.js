@@ -7,7 +7,7 @@ exports.launch = launch;
 exports.close = close;
 exports.open = open;
 
-var _flexTableActions = require('../helpers/flexTable/flexTableActions');
+var _FlexTableActions = require('../helpers/FlexTable/FlexTableActions');
 
 function launch(title, component) {
   var props = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
@@ -40,7 +40,7 @@ function close() {
     var modal = _getState.modal;
 
     if (modal.props.refreshTable) {
-      dispatch((0, _flexTableActions.fetchContents)(modal.props.refreshTable, modal.props.refreshEndpoint));
+      dispatch((0, _FlexTableActions.fetchContents)(modal.props.refreshTable, modal.props.refreshEndpoint));
     }
   };
 }

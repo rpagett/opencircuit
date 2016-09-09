@@ -13,7 +13,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _ContentsView = require('../../helpers/contentsView/ContentsView');
+var _ContentsView = require('../../helpers/ContentsView/ContentsView');
 
 var _ContentsView2 = _interopRequireDefault(_ContentsView);
 

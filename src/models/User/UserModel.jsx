@@ -23,7 +23,10 @@ const UserSchema = new Mongoose.Schema({
     maxlength: 5
   },
 
-  roles: [Number],
+  roles: {
+    type: [Number],
+    default: [ ]
+  },
 
   apiToken: String
 }, {
