@@ -76,7 +76,7 @@ function bundleApp(isProduction) {
   // us use modules in the front end.
   var appBundler = browserify({
     entries: './src/browser.jsx',
-    basedir: '/opencircuit',
+    basedir: '.',
     debug: true,
     extensions: [".jsx"]
   })
