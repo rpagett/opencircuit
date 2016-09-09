@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="" />
+    <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+    </list>
     <ignored path="opencircuit.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,9 +26,11 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3933975">
-              <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
-              <folding />
+            <state vertical-scroll-proportion="0.6973865">
+              <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+              <folding>
+                <marker date="1473450169000" expanded="true" signature="346:2329" placeholder="{&quot;body-parser&quot;: &quot;^1.15.1&quot;...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -40,7 +44,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/layout/NavBar.jsx" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/helpers/componentFlow/ComponentFlow.jsx" />
         <option value="$PROJECT_DIR$/src/layout/BodyContent.jsx" />
         <option value="$PROJECT_DIR$/src/layout/ModelInfo.jsx" />
@@ -90,6 +93,7 @@
         <option value="$PROJECT_DIR$/src/helpers/functions.jsx" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/models/Fee/FeeController.jsx" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -482,20 +486,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/models/User/UserList.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.17553191">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Fee/FeeStructure.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17553191">
-          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Unit/UnitForms.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.64893615">
@@ -1422,11 +1412,75 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.3164893">
+          <caret line="46" column="47" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+          <folding>
+            <marker date="1473101692000" expanded="true" signature="71:158" placeholder="{&quot;replaceString&quot;: /\bgulp[\-.]/...}" />
+            <marker date="1473101692000" expanded="true" signature="488:604" placeholder="//..." />
+            <marker date="1473101692000" expanded="true" signature="624:740" placeholder="[...]" />
+            <marker date="1473101692000" expanded="true" signature="809:902" placeholder="//..." />
+            <marker date="1473101692000" expanded="true" signature="935:1056" placeholder="{...}" />
+            <marker date="1473101692000" expanded="true" signature="947:1052" placeholder="{&quot;script&quot;: 'bin/server.js'...}" />
+            <marker date="1473101692000" expanded="true" signature="1093:1116" placeholder="{...}" />
+            <marker date="1473101692000" expanded="true" signature="1151:1173" placeholder="{...}" />
+            <marker date="1473101692000" expanded="true" signature="1221:1503" placeholder="{...}" />
+            <marker date="1473101692000" expanded="true" signature="1294:1432" placeholder="{&quot;script&quot;: 'bin/server.js'...}" />
+            <marker date="1473101692000" expanded="true" signature="1537:1645" placeholder="{...}" />
+            <marker date="1473101692000" expanded="true" signature="1649:1833" placeholder="//..." />
+            <marker date="1473101692000" expanded="true" signature="1877:1977" placeholder="//..." />
+            <marker date="1473101692000" expanded="true" signature="2011:3745" placeholder="{...}" />
+            <marker date="1473101692000" expanded="true" signature="2033:2145" placeholder="//..." />
+            <marker date="1473101692000" expanded="true" signature="2176:2257" placeholder="{&quot;entries&quot;: './src/browser.jsx'...}" />
+            <marker date="1473101692000" expanded="true" signature="2262:3065" placeholder="//..." />
+            <marker date="1473101692000" expanded="true" signature="3120:3221" placeholder="{...}" />
+            <marker date="1473101692000" expanded="true" signature="3386:3515" placeholder="{...}" />
+            <marker date="1473101692000" expanded="true" signature="3619:3689" placeholder="//..." />
+            <marker date="1473101692000" expanded="true" signature="3799:4126" placeholder="{...}" />
+            <marker date="1473101692000" expanded="true" signature="4165:4221" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/babel-cli/lib/babel-doctor/rules/latest-packages.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1465630504000" expanded="true" signature="775:1224" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="803:839" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="845:1222" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="928:1216" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="958:1056" placeholder="{&quot;json&quot;: true...}" />
+            <marker date="1465630504000" expanded="true" signature="1084:1208" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="1103:1137" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="1143:1200" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="1256:4350" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="1356:4276" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="1529:4255" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="1547:4249" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="1596:4241" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="1877:1946" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="1991:2060" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="2298:2368" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="2568:2638" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="3133:3203" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="3382:3452" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="3573:3698" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="3841:3911" placeholder="{...}" />
+            <marker date="1465630504000" expanded="true" signature="4303:4347" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3933975">
-          <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
-          <folding />
+        <state vertical-scroll-proportion="0.6973865">
+          <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+          <folding>
+            <marker date="1473450169000" expanded="true" signature="346:2329" placeholder="{&quot;body-parser&quot;: &quot;^1.15.1&quot;...}" />
+          </folding>
         </state>
       </provider>
     </entry>
