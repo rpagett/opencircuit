@@ -1,5 +1,5 @@
 import React from 'react';
-import AppContent from '../layout/appContent';
+import AppContent from '../layout/AppContent';
 
 export default class AuthTemplate extends React.Component {
   render() {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ModelView from '../../helpers/modelView/ModelView';
+import ModelView from '../../helpers/ModelView/ModelView';
 import { ReduxForm, FormInput, FormStatic, Checkbox, ClassSelect, TextArea } from '../../forms/components';
 import { UserRoles, HasRole } from '../User/UserRoles';
 

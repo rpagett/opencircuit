@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import ModelView from '../../helpers/modelView/ModelView';
+import ModelView from '../../helpers/ModelView/ModelView';
 import { Prop, Val } from '../../layout/ModelInfo';
 import { UserRoles, HasRole } from '../User/UserRoles';
 

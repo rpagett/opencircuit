@@ -7,7 +7,7 @@ import contentsView from './helpers/ContentsView/ContentsViewReducer';
 import flexTable from './helpers/FlexTable/FlexTableReducer';
 import form from './forms/FormReducer';
 import modal from './modals/ModalReducer';
-import modelView from './helpers/modelView/ModelViewReducer';
+import modelView from './helpers/ModelView/ModelViewReducer';
 import users from './models/User/UserReducer';
 
 // combine reducers
