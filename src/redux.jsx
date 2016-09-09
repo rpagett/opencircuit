@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 // import reducers
 import auth from './models/Auth/AuthReducer';
-import componentFlow from './helpers/componentFlow/ComponentFlowReducer';
+import componentFlow from './helpers/ComponentFlow/ComponentFlowReducer';
 import contentsView from './helpers/ContentsView/ContentsViewReducer';
 import flexTable from './helpers/FlexTable/FlexTableReducer';
 import form from './forms/FormReducer';

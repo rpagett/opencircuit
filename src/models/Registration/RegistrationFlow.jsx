@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 
 import { ReduxForm, FormInput, ClassSelect, StateSelect, Radio } from '../../forms/components';
 import ContentsView from '../../helpers/ContentsView/ContentsView';
-import { setView } from '../../helpers/componentFlow/ComponentFlowActions';
+import { setView } from '../../helpers/ComponentFlow/ComponentFlowActions';
 
 const formProps = {
   subStore: 'unit_registration',
