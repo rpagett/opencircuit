@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Registration/RegistrationFlow.jsx" afterPath="$PROJECT_DIR$/src/models/Registration/RegistrationFlow.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/redux.jsx" afterPath="$PROJECT_DIR$/src/redux.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server.jsx" afterPath="$PROJECT_DIR$/src/server.jsx" />
     </list>
     <ignored path="opencircuit.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="redux.jsx" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/redux.jsx">
+      <file leaf-file-name="server.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/server.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.11702128">
-              <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.5319149">
+              <caret line="154" column="40" selection-start-line="154" selection-start-column="40" selection-end-line="154" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -42,7 +41,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/models/Registration/RegistrationViews.jsx" />
         <option value="$PROJECT_DIR$/src/models/UnitType/UnitTypeViews.jsx" />
         <option value="$PROJECT_DIR$/src/models/Pivots/EventRegistrationModel.jsx" />
         <option value="$PROJECT_DIR$/src/models/Payment/PaymentModel.jsx" />
@@ -80,7 +78,6 @@
         <option value="$PROJECT_DIR$/src/forms/components.jsx" />
         <option value="$PROJECT_DIR$/src/models/Fee/FeeModals.jsx" />
         <option value="$PROJECT_DIR$/src/helpers/functions.jsx" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/models/Fee/FeeController.jsx" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_22" />
@@ -93,6 +90,8 @@
         <option value="$PROJECT_DIR$/src/templates/AuthTemplate.jsx" />
         <option value="$PROJECT_DIR$/src/models/Registration/RegistrationFlow.jsx" />
         <option value="$PROJECT_DIR$/src/redux.jsx" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/src/server.jsx" />
       </list>
     </option>
   </component>
@@ -1515,14 +1514,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17460318">
-          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Fee/FeeController.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.51329786">
@@ -1672,33 +1663,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.23404256">
-          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
-          <folding>
-            <marker date="1473196610000" expanded="true" signature="1288:1448" placeholder="{&quot;secret&quot;: 'asdlfkj243@#R@#POFSDfic'...}" />
-            <marker date="1473196610000" expanded="true" signature="1396:1445" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="1553:1609" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="1657:1869" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="1803:1865" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="2166:2203" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="2256:4403" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="2260:2373" placeholder="//..." />
-            <marker date="1473196610000" expanded="true" signature="2466:4399" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="2483:2532" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="2564:2648" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="2675:4338" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="2731:2827" placeholder="&lt;xml/&gt;" />
-            <marker date="1473196610000" expanded="true" signature="4348:4395" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="4497:4651" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="4543:4592" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="4684:4921" placeholder="{...}" />
-            <marker date="1473196610000" expanded="true" signature="4757:4917" placeholder="{&quot;title&quot;: 'OpenCircuit'...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1912,8 +1876,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/redux.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11702128">
-          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.2925532">
+          <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+          <folding>
+            <marker date="1473453916000" expanded="true" signature="570:665" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1462766">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5319149">
+          <caret line="154" column="40" selection-start-line="154" selection-start-column="40" selection-end-line="154" selection-end-column="40" />
           <folding />
         </state>
       </provider>
