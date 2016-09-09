@@ -1,6 +1,7 @@
 import Express from 'express';
 import Indicative from 'indicative';
 import _ from 'lodash';
+import uuid from 'node-uuid';
 
 import User from '../User/UserModel';
 import { loginUser, logoutUser } from './AuthActions';
@@ -39,6 +40,11 @@ router.post('/register', (req, res) => {
             success: false,
             errors: [{field: 'email', message: err.message}]
           })
+        }
+
+        data = {
+          ...data,
+          apiToken: uuid.v4()
         }
 
         const fillableData = _.pick(data, User.fillableFields());
