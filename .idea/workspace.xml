@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
     </list>
     <ignored path="opencircuit.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,14 +24,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package.json">
+      <file leaf-file-name="gulpfile.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gulpfile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6973865">
-              <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
-              <folding>
-                <marker date="1473450169000" expanded="true" signature="346:2329" placeholder="{&quot;body-parser&quot;: &quot;^1.15.1&quot;...}" />
-              </folding>
+            <state vertical-scroll-proportion="0.087765954">
+              <caret line="78" column="28" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -43,8 +42,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/layout/NavBar.jsx" />
-        <option value="$PROJECT_DIR$/src/helpers/componentFlow/ComponentFlow.jsx" />
         <option value="$PROJECT_DIR$/src/layout/BodyContent.jsx" />
         <option value="$PROJECT_DIR$/src/layout/ModelInfo.jsx" />
         <option value="$PROJECT_DIR$/src/models/Auth/AuthViews.jsx" />
@@ -81,7 +78,6 @@
         <option value="$PROJECT_DIR$/src/models/Fee/UserFeeList.jsx" />
         <option value="$PROJECT_DIR$/src/models/Organization/OrganizationController.jsx" />
         <option value="$PROJECT_DIR$/src/helpers/contentsView/ContentsView.jsx" />
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_21" />
         <option value="$PROJECT_DIR$/src/models/Fee/FeeModel.jsx" />
         <option value="$PROJECT_DIR$/src/models/Fee/FeeList.jsx" />
         <option value="$PROJECT_DIR$/src/models/Fee/FeeViews.jsx" />
@@ -94,6 +90,9 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/models/Fee/FeeController.jsx" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_22" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_21" />
+        <option value="$PROJECT_DIR$/gulpfile.js" />
       </list>
     </option>
   </component>
@@ -455,17 +454,17 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.49375" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997344" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997344" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -486,20 +485,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/models/Unit/UnitForms.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64893615">
-          <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="51" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/CompClass/CompClassController.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02925532">
-          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/helpers/contentsView/ContentsViewActions.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6143617">
@@ -854,16 +839,6 @@
             <marker date="1473434494000" expanded="true" signature="1260:1455" placeholder="{...}" />
             <marker date="1473434494000" expanded="true" signature="1271:1453" placeholder="{...}" />
             <marker date="1473434494000" expanded="true" signature="1387:1448" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_21">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5265958">
-          <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
-          <folding>
-            <marker date="1473444242000" expanded="true" signature="0:593" placeholder="/*...*/" />
           </folding>
         </state>
       </provider>
@@ -1412,37 +1387,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gulpfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3164893">
-          <caret line="46" column="47" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
-          <folding>
-            <marker date="1473101692000" expanded="true" signature="71:158" placeholder="{&quot;replaceString&quot;: /\bgulp[\-.]/...}" />
-            <marker date="1473101692000" expanded="true" signature="488:604" placeholder="//..." />
-            <marker date="1473101692000" expanded="true" signature="624:740" placeholder="[...]" />
-            <marker date="1473101692000" expanded="true" signature="809:902" placeholder="//..." />
-            <marker date="1473101692000" expanded="true" signature="935:1056" placeholder="{...}" />
-            <marker date="1473101692000" expanded="true" signature="947:1052" placeholder="{&quot;script&quot;: 'bin/server.js'...}" />
-            <marker date="1473101692000" expanded="true" signature="1093:1116" placeholder="{...}" />
-            <marker date="1473101692000" expanded="true" signature="1151:1173" placeholder="{...}" />
-            <marker date="1473101692000" expanded="true" signature="1221:1503" placeholder="{...}" />
-            <marker date="1473101692000" expanded="true" signature="1294:1432" placeholder="{&quot;script&quot;: 'bin/server.js'...}" />
-            <marker date="1473101692000" expanded="true" signature="1537:1645" placeholder="{...}" />
-            <marker date="1473101692000" expanded="true" signature="1649:1833" placeholder="//..." />
-            <marker date="1473101692000" expanded="true" signature="1877:1977" placeholder="//..." />
-            <marker date="1473101692000" expanded="true" signature="2011:3745" placeholder="{...}" />
-            <marker date="1473101692000" expanded="true" signature="2033:2145" placeholder="//..." />
-            <marker date="1473101692000" expanded="true" signature="2176:2257" placeholder="{&quot;entries&quot;: './src/browser.jsx'...}" />
-            <marker date="1473101692000" expanded="true" signature="2262:3065" placeholder="//..." />
-            <marker date="1473101692000" expanded="true" signature="3120:3221" placeholder="{...}" />
-            <marker date="1473101692000" expanded="true" signature="3386:3515" placeholder="{...}" />
-            <marker date="1473101692000" expanded="true" signature="3619:3689" placeholder="//..." />
-            <marker date="1473101692000" expanded="true" signature="3799:4126" placeholder="{...}" />
-            <marker date="1473101692000" expanded="true" signature="4165:4221" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/babel-cli/lib/babel-doctor/rules/latest-packages.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1476,11 +1420,66 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6973865">
-          <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.48418158">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
           <folding>
+            <marker date="1473450169000" expanded="true" signature="0:2331" placeholder="{&quot;name&quot;: &quot;OpenCircuit&quot;...}" />
+            <marker date="1473450169000" expanded="true" signature="163:290" placeholder="{&quot;start&quot;: &quot;nodemon --watch dist/js/bundle.js bin/server.js&quot;...}" />
             <marker date="1473450169000" expanded="true" signature="346:2329" placeholder="{&quot;body-parser&quot;: &quot;^1.15.1&quot;...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_22">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.23404256">
+          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+          <folding>
+            <marker date="1473196610000" expanded="true" signature="1288:1448" placeholder="{&quot;secret&quot;: 'asdlfkj243@#R@#POFSDfic'...}" />
+            <marker date="1473196610000" expanded="true" signature="1396:1445" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="1553:1609" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="1657:1869" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="1803:1865" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="2166:2203" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="2256:4403" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="2260:2373" placeholder="//..." />
+            <marker date="1473196610000" expanded="true" signature="2466:4399" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="2483:2532" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="2564:2648" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="2675:4338" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="2731:2827" placeholder="&lt;xml/&gt;" />
+            <marker date="1473196610000" expanded="true" signature="4348:4395" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="4497:4651" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="4543:4592" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="4684:4921" placeholder="{...}" />
+            <marker date="1473196610000" expanded="true" signature="4757:4917" placeholder="{&quot;title&quot;: 'OpenCircuit'...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_21">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5265958">
+          <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
+          <folding>
+            <marker date="1473452718000" expanded="true" signature="0:593" placeholder="/*...*/" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.087765954">
+          <caret line="78" column="28" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
