@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
@@ -15,6 +17,10 @@ var _indicative2 = _interopRequireDefault(_indicative);
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
+
+var _nodeUuid = require('node-uuid');
+
+var _nodeUuid2 = _interopRequireDefault(_nodeUuid);
 
 var _UserModel = require('../User/UserModel');
 
@@ -61,6 +67,10 @@ router.post('/register', function (req, res) {
           errors: [{ field: 'email', message: err.message }]
         });
       }
+
+      data = _extends({}, data, {
+        apiToken: _nodeUuid2.default.v4()
+      });
 
       var fillableData = _lodash2.default.pick(data, _UserModel2.default.fillableFields());
 

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Auth/AuthController.jsx" afterPath="$PROJECT_DIR$/src/models/Auth/AuthController.jsx" />
-    </list>
+    <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="" />
     <ignored path="opencircuit.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,13 +21,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="scratch_21" pinned="false" current-in-tab="true">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_21">
+      <file leaf-file-name="AuthController.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/models/Auth/AuthController.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7898936">
-              <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+            <state vertical-scroll-proportion="-1.6622341">
+              <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <marker date="1473456622000" expanded="true" signature="2295:2471" placeholder="{...}" />
+                <marker date="1473456622000" expanded="true" signature="2296:2446" placeholder="{...}" />
+                <marker date="1473456622000" expanded="true" signature="2388:2445" placeholder="{...}" />
+                <marker date="1473456622000" expanded="true" signature="2394:2443" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -1510,9 +1511,9 @@
         <state vertical-scroll-proportion="0.48418158">
           <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
           <folding>
-            <marker date="1473450169000" expanded="true" signature="0:2331" placeholder="{&quot;name&quot;: &quot;OpenCircuit&quot;...}" />
-            <marker date="1473450169000" expanded="true" signature="163:290" placeholder="{&quot;start&quot;: &quot;nodemon --watch dist/js/bundle.js bin/server.js&quot;...}" />
-            <marker date="1473450169000" expanded="true" signature="346:2329" placeholder="{&quot;body-parser&quot;: &quot;^1.15.1&quot;...}" />
+            <marker date="1473456641000" expanded="true" signature="0:2309" placeholder="{&quot;name&quot;: &quot;OpenCircuit&quot;...}" />
+            <marker date="1473456641000" expanded="true" signature="163:290" placeholder="{&quot;start&quot;: &quot;nodemon --watch dist/js/bundle.js bin/server.js&quot;...}" />
+            <marker date="1473456641000" expanded="true" signature="346:2307" placeholder="{&quot;body-parser&quot;: &quot;^1.15.1&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -1924,50 +1925,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Auth/AuthController.jsx">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_21">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43882978">
-          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.2632979">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
           <folding>
-            <marker date="1473456622000" expanded="true" signature="434:840" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="517:836" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="541:661" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="558:653" placeholder="{&quot;success&quot;: false...}" />
-            <marker date="1473456622000" expanded="true" signature="671:832" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="710:824" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="729:815" placeholder="{&quot;success&quot;: true...}" />
-            <marker date="1473456622000" expanded="true" signature="883:2091" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="928:1954" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="1011:1947" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="1030:1164" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="1051:1153" placeholder="{&quot;success&quot;: false...}" />
-            <marker date="1473456622000" expanded="true" signature="1414:1856" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="1451:1843" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="1476:1641" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="1503:1623" placeholder="{&quot;success&quot;: false...}" />
-            <marker date="1473456622000" expanded="true" signature="1717:1827" placeholder="{&quot;success&quot;: true...}" />
-            <marker date="1473456622000" expanded="true" signature="1884:1938" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="1977:2087" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="2031:2079" placeholder="{&quot;success&quot;: false...}" />
-            <marker date="1473456622000" expanded="true" signature="2131:2255" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="2213:2251" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="2295:2446" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="2295:2471" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="2296:2446" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="2388:2443" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="2388:2445" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="2394:2443" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="2405:2436" placeholder="{&quot;success&quot;: true...}" />
+            <marker date="1473456661000" expanded="true" signature="0:593" placeholder="/*...*/" />
+            <marker date="1473456661000" expanded="true" signature="595:861" placeholder="/*...*/" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_21">
+    <entry file="file://$PROJECT_DIR$/src/models/Auth/AuthController.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7898936">
-          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+        <state vertical-scroll-proportion="-1.6622341">
+          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <marker date="1473456622000" expanded="true" signature="2295:2471" placeholder="{...}" />
+            <marker date="1473456622000" expanded="true" signature="2296:2446" placeholder="{...}" />
+            <marker date="1473456622000" expanded="true" signature="2388:2445" placeholder="{...}" />
+            <marker date="1473456622000" expanded="true" signature="2394:2443" placeholder="{...}" />
           </folding>
         </state>
       </provider>
