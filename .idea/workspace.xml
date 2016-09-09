@@ -1,102 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scss/_invoice.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/helpers/logos.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Fee/FeeController.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Fee/FeeList.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Fee/FeeModals.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Fee/FeeModel.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Fee/FeeStructure.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Fee/FeeValidation.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Fee/FeeViews.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Fee/PaymentTypes.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Fee/UserFeeList.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/FeeCategory/FeeCategoryController.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/FeeCategory/FeeCategoryModel.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Organization/OrganizationController.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Registration/RegistrationValidation.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Unit/UnitForms.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Unit/UnitModals.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/APIDispatch.js" afterPath="$PROJECT_DIR$/bin/APIDispatch.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/forms/components.js" afterPath="$PROJECT_DIR$/bin/forms/components.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/helpers/componentFlow/ComponentFlow.js" afterPath="$PROJECT_DIR$/bin/helpers/componentFlow/ComponentFlow.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/helpers/contentsView/ContentsView.js" afterPath="$PROJECT_DIR$/bin/helpers/contentsView/ContentsView.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/helpers/flexTable/FlexTable.js" afterPath="$PROJECT_DIR$/bin/helpers/flexTable/FlexTable.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/helpers/functions.js" afterPath="$PROJECT_DIR$/bin/helpers/functions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/helpers/gravatars.js" afterPath="$PROJECT_DIR$/bin/helpers/gravatars.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/layout/ModelInfo.js" afterPath="$PROJECT_DIR$/bin/layout/ModelInfo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/layout/bodyContent.js" afterPath="$PROJECT_DIR$/bin/layout/bodyContent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/layout/navbar.js" afterPath="$PROJECT_DIR$/bin/layout/navbar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/middleware/authRoute.js" afterPath="$PROJECT_DIR$/bin/middleware/authRoute.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/modals/ModalActions.js" afterPath="$PROJECT_DIR$/bin/modals/ModalActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/modals/SpawnableModal.js" afterPath="$PROJECT_DIR$/bin/modals/SpawnableModal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Auth/AuthViews.js" afterPath="$PROJECT_DIR$/bin/models/Auth/AuthViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/CompClass/CompClassController.js" afterPath="$PROJECT_DIR$/bin/models/CompClass/CompClassController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/CompClass/CompClassModel.js" afterPath="$PROJECT_DIR$/bin/models/CompClass/CompClassModel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/CompClass/CompClassValidation.js" afterPath="$PROJECT_DIR$/bin/models/CompClass/CompClassValidation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/CompClass/CompClassViews.js" afterPath="$PROJECT_DIR$/bin/models/CompClass/CompClassViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Dashboard/DashboardViews.js" afterPath="$PROJECT_DIR$/bin/models/Dashboard/DashboardViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Event/EventViews.js" afterPath="$PROJECT_DIR$/bin/models/Event/EventViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Organization/OrganizationModel.js" afterPath="$PROJECT_DIR$/bin/models/Organization/OrganizationModel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Pivots/EventRegistrationModel.js" afterPath="$PROJECT_DIR$/bin/models/Pivots/EventRegistrationModel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Registration/RegistrationController.js" afterPath="$PROJECT_DIR$/bin/models/Registration/RegistrationController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Registration/RegistrationViews.js" afterPath="$PROJECT_DIR$/bin/models/Registration/RegistrationViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Unit/UnitController.js" afterPath="$PROJECT_DIR$/bin/models/Unit/UnitController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Unit/UnitList.js" afterPath="$PROJECT_DIR$/bin/models/Unit/UnitList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Unit/UnitModel.js" afterPath="$PROJECT_DIR$/bin/models/Unit/UnitModel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Unit/UnitViews.js" afterPath="$PROJECT_DIR$/bin/models/Unit/UnitViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/UnitType/UnitTypeController.js" afterPath="$PROJECT_DIR$/bin/models/UnitType/UnitTypeController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/UnitType/UnitTypeViews.js" afterPath="$PROJECT_DIR$/bin/models/UnitType/UnitTypeViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/User/UserRoles.js" afterPath="$PROJECT_DIR$/bin/models/User/UserRoles.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/User/UserViews.js" afterPath="$PROJECT_DIR$/bin/models/User/UserViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/routes.js" afterPath="$PROJECT_DIR$/bin/routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/server.js" afterPath="$PROJECT_DIR$/bin/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/app.min.css" afterPath="$PROJECT_DIR$/dist/css/app.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/bundle.js" afterPath="$PROJECT_DIR$/dist/js/bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scss/_forms.scss" afterPath="$PROJECT_DIR$/scss/_forms.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scss/_typography.scss" afterPath="$PROJECT_DIR$/scss/_typography.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scss/app.scss" afterPath="$PROJECT_DIR$/scss/app.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/APIDispatch.jsx" afterPath="$PROJECT_DIR$/src/APIDispatch.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/forms/components.jsx" afterPath="$PROJECT_DIR$/src/forms/components.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helpers/componentFlow/ComponentFlow.jsx" afterPath="$PROJECT_DIR$/src/helpers/componentFlow/ComponentFlow.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helpers/contentsView/ContentsView.jsx" afterPath="$PROJECT_DIR$/src/helpers/contentsView/ContentsView.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helpers/flexTable/FlexTable.jsx" afterPath="$PROJECT_DIR$/src/helpers/flexTable/FlexTable.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helpers/functions.jsx" afterPath="$PROJECT_DIR$/src/helpers/functions.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helpers/gravatars.jsx" afterPath="$PROJECT_DIR$/src/helpers/gravatars.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layout/BodyContent.jsx" afterPath="$PROJECT_DIR$/src/layout/BodyContent.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layout/ModelInfo.jsx" afterPath="$PROJECT_DIR$/src/layout/ModelInfo.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layout/NavBar.jsx" afterPath="$PROJECT_DIR$/src/layout/NavBar.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/middleware/authRoute.jsx" afterPath="$PROJECT_DIR$/src/middleware/authRoute.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modals/ModalActions.jsx" afterPath="$PROJECT_DIR$/src/modals/ModalActions.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modals/SpawnableModal.jsx" afterPath="$PROJECT_DIR$/src/modals/SpawnableModal.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Auth/AuthViews.jsx" afterPath="$PROJECT_DIR$/src/models/Auth/AuthViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/CompClass/CompClassController.jsx" afterPath="$PROJECT_DIR$/src/models/CompClass/CompClassController.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/CompClass/CompClassModel.jsx" afterPath="$PROJECT_DIR$/src/models/CompClass/CompClassModel.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/CompClass/CompClassValidation.jsx" afterPath="$PROJECT_DIR$/src/models/CompClass/CompClassValidation.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/CompClass/CompClassViews.jsx" afterPath="$PROJECT_DIR$/src/models/CompClass/CompClassViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Dashboard/DashboardViews.jsx" afterPath="$PROJECT_DIR$/src/models/Dashboard/DashboardViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Event/EventViews.jsx" afterPath="$PROJECT_DIR$/src/models/Event/EventViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Organization/OrganizationModel.jsx" afterPath="$PROJECT_DIR$/src/models/Organization/OrganizationModel.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Pivots/EventRegistrationModel.jsx" afterPath="$PROJECT_DIR$/src/models/Pivots/EventRegistrationModel.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Registration/RegistrationController.jsx" afterPath="$PROJECT_DIR$/src/models/Registration/RegistrationController.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Registration/RegistrationViews.jsx" afterPath="$PROJECT_DIR$/src/models/Registration/RegistrationViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Unit/UnitController.jsx" afterPath="$PROJECT_DIR$/src/models/Unit/UnitController.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Unit/UnitList.jsx" afterPath="$PROJECT_DIR$/src/models/Unit/UnitList.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Unit/UnitModel.jsx" afterPath="$PROJECT_DIR$/src/models/Unit/UnitModel.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Unit/UnitViews.jsx" afterPath="$PROJECT_DIR$/src/models/Unit/UnitViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/UnitType/UnitTypeController.jsx" afterPath="$PROJECT_DIR$/src/models/UnitType/UnitTypeController.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/UnitType/UnitTypeForms.jsx" afterPath="$PROJECT_DIR$/src/models/UnitType/UnitTypeForms.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/UnitType/UnitTypeViews.jsx" afterPath="$PROJECT_DIR$/src/models/UnitType/UnitTypeViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/User/UserRoles.jsx" afterPath="$PROJECT_DIR$/src/models/User/UserRoles.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/User/UserViews.jsx" afterPath="$PROJECT_DIR$/src/models/User/UserViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes.jsx" afterPath="$PROJECT_DIR$/src/routes.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server.jsx" afterPath="$PROJECT_DIR$/src/server.jsx" />
-    </list>
+    <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="" />
     <ignored path="opencircuit.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -116,20 +21,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FeeController.jsx" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/models/Fee/FeeController.jsx">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.5026596">
-              <caret line="196" column="37" selection-start-line="196" selection-start-column="37" selection-end-line="196" selection-end-column="37" />
-              <folding>
-                <marker date="1473447873000" expanded="true" signature="1412:1721" placeholder="{...}" />
-                <marker date="1473447873000" expanded="true" signature="5591:6339" placeholder="{...}" />
-                <marker date="1473447873000" expanded="true" signature="6665:6733" placeholder="{...}" />
-                <marker date="1473447873000" expanded="true" signature="6970:7446" placeholder="{...}" />
-                <marker date="1473447873000" expanded="true" signature="7346:7446" placeholder="{...}" />
-                <marker date="1473447873000" expanded="true" signature="7698:8134" placeholder="{...}" />
-                <marker date="1473447873000" expanded="true" signature="7716:7769" placeholder="{...}" />
-              </folding>
+            <state vertical-scroll-proportion="0.3933975">
+              <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -585,13 +482,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/models/Pivots/EventRegistrationModel.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7659575">
-          <caret line="33" column="23" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/User/UserList.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.17553191">
@@ -1433,17 +1323,110 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Fee/FeeController.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.5026596">
-          <caret line="196" column="37" selection-start-line="196" selection-start-column="37" selection-end-line="196" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.51329786">
+          <caret line="128" column="22" selection-start-line="128" selection-start-column="22" selection-end-line="128" selection-end-column="22" />
           <folding>
+            <marker date="1473447873000" expanded="true" signature="800:1376" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="876:1148" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="897:952" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="978:1141" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="1167:1290" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="1310:1373" placeholder="{...}" />
             <marker date="1473447873000" expanded="true" signature="1412:1721" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="1412:1723" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="1466:1721" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="1541:1716" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="1779:2059" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="1901:2005" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="2025:2056" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="2136:2640" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="2430:2519" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="2449:2510" placeholder="{&quot;success&quot;: true...}" />
+            <marker date="1473447873000" expanded="true" signature="2541:2635" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="2560:2626" placeholder="{&quot;success&quot;: false...}" />
+            <marker date="1473447873000" expanded="true" signature="2665:2814" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="2782:2809" placeholder="{&quot;success&quot;: true...}" />
+            <marker date="1473447873000" expanded="true" signature="2860:3011" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="2912:2990" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="2928:2984" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="3052:5139" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="3145:3209" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="3175:3205" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="3396:5135" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="3471:3729" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="3495:3678" placeholder="{&quot;currency&quot;: 'USD'...}" />
+            <marker date="1473447873000" expanded="true" signature="3818:4029" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="3981:4021" placeholder="{&quot;custom&quot;: 'header'...}" />
+            <marker date="1473447873000" expanded="true" signature="4063:4538" placeholder="{&quot;intent&quot;: &quot;sale&quot;...}" />
+            <marker date="1473447873000" expanded="true" signature="4108:4156" placeholder="{&quot;payment_method&quot;: &quot;paypal&quot;...}" />
+            <marker date="1473447873000" expanded="true" signature="4183:4269" placeholder="{&quot;return_url&quot;: &quot;google.com&quot;...}" />
+            <marker date="1473447873000" expanded="true" signature="4295:4530" placeholder="[...]" />
+            <marker date="1473447873000" expanded="true" signature="4296:4529" placeholder="{&quot;description&quot;: &quot;These are the fees to be paid.&quot;...}" />
+            <marker date="1473447873000" expanded="true" signature="4321:4364" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="4386:4460" placeholder="{&quot;currency&quot;: &quot;USD&quot;...}" />
+            <marker date="1473447873000" expanded="true" signature="4659:5127" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="4680:4714" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="4728:5119" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="4740:4815" placeholder="//..." />
+            <marker date="1473447873000" expanded="true" signature="4961:5109" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="4984:5096" placeholder="{&quot;success&quot;: true...}" />
+            <marker date="1473447873000" expanded="true" signature="5193:6339" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="5268:5477" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="5500:5572" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="5517:5565" placeholder="{&quot;success&quot;: false...}" />
+            <marker date="1473447873000" expanded="true" signature="5591:6132" placeholder="{...}" />
             <marker date="1473447873000" expanded="true" signature="5591:6339" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="5843:5982" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="5871:5973" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="6056:6101" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="6150:6232" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="6167:6225" placeholder="{&quot;success&quot;: true...}" />
+            <marker date="1473447873000" expanded="true" signature="6252:6336" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="6269:6329" placeholder="{&quot;success&quot;: false...}" />
+            <marker date="1473447873000" expanded="true" signature="6376:6608" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="6397:6501" placeholder="[...]" />
+            <marker date="1473447873000" expanded="true" signature="6550:6605" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="6567:6598" placeholder="{&quot;success&quot;: true...}" />
+            <marker date="1473447873000" expanded="true" signature="6661:7553" placeholder="{...}" />
             <marker date="1473447873000" expanded="true" signature="6665:6733" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="6752:6950" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="6970:7325" placeholder="{...}" />
             <marker date="1473447873000" expanded="true" signature="6970:7446" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="6989:7076" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="7008:7067" placeholder="{&quot;success&quot;: true...}" />
+            <marker date="1473447873000" expanded="true" signature="7118:7163" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="7203:7248" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="7345:7446" placeholder="{...}" />
             <marker date="1473447873000" expanded="true" signature="7346:7446" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="7362:7439" placeholder="{&quot;success&quot;: true...}" />
+            <marker date="1473447873000" expanded="true" signature="7405:7431" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="7466:7550" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="7483:7543" placeholder="{&quot;success&quot;: false...}" />
+            <marker date="1473447873000" expanded="true" signature="7598:8292" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="7698:7877" placeholder="{...}" />
             <marker date="1473447873000" expanded="true" signature="7698:8134" placeholder="{...}" />
             <marker date="1473447873000" expanded="true" signature="7716:7769" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="7716:7770" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="7898:8134" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="8154:8289" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="8171:8282" placeholder="{&quot;success&quot;: true...}" />
+            <marker date="1473447873000" expanded="true" signature="8214:8274" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="8341:9143" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="8439:8538" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="8559:8935" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="8955:9034" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="8972:9027" placeholder="{&quot;success&quot;: true...}" />
+            <marker date="1473447873000" expanded="true" signature="9054:9138" placeholder="{...}" />
+            <marker date="1473447873000" expanded="true" signature="9071:9131" placeholder="{&quot;success&quot;: false...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3933975">
+          <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
