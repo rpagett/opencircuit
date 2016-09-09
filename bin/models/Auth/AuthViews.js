@@ -41,7 +41,7 @@ var Login = exports.Login = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'vcenter-parent col-xs-12 col-md-offset-2 col-md-8' },
+        { className: 'vcenter-parent col-xs-12 offset-md-2 col-md-8' },
         _react2.default.createElement(
           'div',
           { className: 'card text-xs-center light-shadow' },
@@ -114,7 +114,7 @@ var Register = exports.Register = function (_React$Component2) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'vcenter-parent registration-box col-xs-12 col-md-offset-2 col-md-8' },
+        { className: 'vcenter-parent registration-box col-xs-12 offset-md-2 col-md-8' },
         _react2.default.createElement(
           'div',
           { className: 'card text-xs-center light-shadow' },
@@ -173,7 +173,7 @@ var Forgot = exports.Forgot = function (_React$Component3) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'vcenter-parent registration-box col-xs-12 col-md-offset-2 col-md-8' },
+        { className: 'vcenter-parent registration-box col-xs-12 offset-md-2 col-md-8' },
         _react2.default.createElement(
           'div',
           { className: 'card text-xs-center light-shadow' },

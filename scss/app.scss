@@ -5,6 +5,7 @@ $enable_flex: true;
 @import '../node_modules/react-select/scss/default';
 
 @import './_datetime.scss';
+@import './_invoice.scss';
 @import './_loadingCube.scss';
 @import './_navigation.scss';
 @import './_containers.scss';

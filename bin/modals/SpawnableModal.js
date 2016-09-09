@@ -3,8 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.LaunchModalButton = undefined;
 
-var _class, _temp;
+var _class, _temp, _class2, _temp2;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -29,6 +30,10 @@ var _LoadingCube2 = _interopRequireDefault(_LoadingCube);
 var _ModalActions = require('./ModalActions');
 
 var ModalActions = _interopRequireWildcard(_ModalActions);
+
+var _FeeModals = require('../models/Fee/FeeModals');
+
+var FeeModals = _interopRequireWildcard(_FeeModals);
 
 var _UserModals = require('../models/User/UserModals');
 
@@ -81,10 +86,25 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
   _createClass(_SpawnableModal, [{
     key: 'fetchModalBody',
     value: function fetchModalBody() {
+      var modalProps = _extends({}, this.props.modalProps, {
+        markClosed: this.props.markClosed
+      });
       switch (this.props.componentName) {
 
         case 'USER_ROLES':
-          return _react2.default.createElement(UserModals.ManageRoles, this.props.modalProps);
+          return _react2.default.createElement(UserModals.ManageRoles, modalProps);
+
+        case 'FEE_APPLY_PAYMENT':
+          return _react2.default.createElement(FeeModals.AdminPayment, modalProps);
+
+        case 'FEE_ASSESS_FEE':
+          return _react2.default.createElement(FeeModals.AssessFee, modalProps);
+
+        case 'FEE_GENERATE_INVOICE':
+          return _react2.default.createElement(FeeModals.GenerateInvoice, modalProps);
+
+        case 'FEE_USER_PAY':
+          return _react2.default.createElement(FeeModals.UserPayment, modalProps);
 
         default:
           return _react2.default.createElement(_LoadingCube2.default, { show: true });
@@ -120,10 +140,10 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
           },
           _react2.default.createElement(
             'div',
-            { className: 'container spawnable-modal' },
+            { className: 'container-fluid spawnable-modal' },
             this.props.allowClose ? _react2.default.createElement(
               'span',
-              { className: 'pull-right close', onClick: this.props.markClosed },
+              { className: 'pull-xs-right close', onClick: this.props.markClosed },
               _react2.default.createElement(_Icon2.default, { shape: 'close' })
             ) : '',
             _react2.default.createElement(
@@ -136,11 +156,7 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
               ) : ''
             ),
             _react2.default.createElement('hr', null),
-            _react2.default.createElement(
-              'div',
-              { className: 'row' },
-              this.fetchModalBody()
-            )
+            this.fetchModalBody()
           )
         )
       );
@@ -172,3 +188,45 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 var SpawnableModal = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_SpawnableModal);
 exports.default = SpawnableModal;
+
+var _LaunchModalButton = (_temp2 = _class2 = function (_React$Component3) {
+  _inherits(_LaunchModalButton, _React$Component3);
+
+  function _LaunchModalButton() {
+    _classCallCheck(this, _LaunchModalButton);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_LaunchModalButton).apply(this, arguments));
+  }
+
+  _createClass(_LaunchModalButton, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'button',
+        _extends({ className: this.props.className }, this.props.buttonProps, { onClick: this.props.launch.bind(this) }),
+        this.props.buttonText
+      );
+    }
+  }]);
+
+  return _LaunchModalButton;
+}(_react2.default.Component), _class2.propTypes = {
+  buttonText: _react2.default.PropTypes.string.isRequired,
+  buttonProps: _react2.default.PropTypes.object,
+
+  title: _react2.default.PropTypes.string.isRequired,
+  componentName: _react2.default.PropTypes.string.isRequired,
+  modalProps: _react2.default.PropTypes.object
+}, _temp2);
+
+var mapDispatchToButtonProps = function mapDispatchToButtonProps(dispatch, props) {
+  return {
+    launch: function launch() {
+      dispatch(ModalActions.launch(props.title, props.componentName, props.modalProps));
+    }
+  };
+};
+
+var LaunchModalButton = exports.LaunchModalButton = (0, _reactRedux.connect)(function (state) {
+  return {};
+}, mapDispatchToButtonProps)(_LaunchModalButton);

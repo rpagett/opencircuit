@@ -33,7 +33,7 @@ var Prop = exports.Prop = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         "div",
-        { className: "prop col-xs-offset-2 col-xs-12 col-sm-offset-0 col-sm-5 text-sm-right" },
+        { className: "prop offset-xs-2 col-xs-12 offset-sm-0 col-sm-5 text-sm-right" },
         this.props.children
       );
     }
@@ -56,7 +56,7 @@ var Val = exports.Val = function (_React$Component2) {
     value: function render() {
       return _react2.default.createElement(
         "div",
-        { className: "val col-xs-offset-4 col-xs-8 col-sm-offset-0 col-sm-7" },
+        { className: "val offset-xs-4 col-xs-8 offset-sm-0 col-sm-7" },
         this.props.children
       );
     }

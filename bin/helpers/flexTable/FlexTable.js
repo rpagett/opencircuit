@@ -152,7 +152,8 @@ var mapStateToProps = function mapStateToProps(state, props) {
   return {
     isLoading: state.flexTable.isLoading,
     error: state.flexTable.error,
-    contents: state.flexTable[props.name]
+    contents: state.flexTable[props.name],
+    authUser: state.auth.user
   };
 };
 
@@ -171,7 +172,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
     },
 
     setLoading: function setLoading() {
-      dispatch(FlexTableActions.beginLoading());
+      dispatch(FlexTableActions.beginLoading(props.endpoint));
     }
   };
 };

@@ -6,7 +6,7 @@ import { LoginForm, RegistrationForm, PasswordRecovery } from './AuthForms';
 export class Login extends React.Component {
   render() {
     return (
-      <div className="vcenter-parent col-xs-12 col-md-offset-2 col-md-8">
+      <div className="vcenter-parent col-xs-12 offset-md-2 col-md-8">
         <div className="card text-xs-center light-shadow">
           <div className="card-header" style={{ 'padding': '0rem' }}>
             <img className="card-img-top" src="/assets/img/2016NavbarLogo.png" />
@@ -42,7 +42,7 @@ export class Login extends React.Component {
 export class Register extends React.Component {
   render() {
     return (
-      <div className="vcenter-parent registration-box col-xs-12 col-md-offset-2 col-md-8">
+      <div className="vcenter-parent registration-box col-xs-12 offset-md-2 col-md-8">
         <div className="card text-xs-center light-shadow">
           <div className="card-header" style={{ 'padding': '0rem' }}>
             <img className="card-img-top" src="/assets/img/2016NavbarLogo.png" />
@@ -67,7 +67,7 @@ export class Register extends React.Component {
 export class Forgot extends React.Component {
   render() {
     return (
-      <div className="vcenter-parent registration-box col-xs-12 col-md-offset-2 col-md-8">
+      <div className="vcenter-parent registration-box col-xs-12 offset-md-2 col-md-8">
         <div className="card text-xs-center light-shadow">
           <div className="card-header" style={{ 'padding': '0rem' }}>
             <img className="card-img-top" src="/assets/img/2016NavbarLogo.png" />

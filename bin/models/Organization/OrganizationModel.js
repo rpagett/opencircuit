@@ -49,4 +49,8 @@ var OrganizationSchema = new _mongoose2.default.Schema({
   }
 });
 
+OrganizationSchema.virtual('detailsUrl').get(function () {
+  return '/organizations/' + this.slug;
+});
+
 exports.default = _mongoose2.default.model('Organization', OrganizationSchema);

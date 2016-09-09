@@ -189,17 +189,25 @@ router.route('/:slug/units')
       })
   })
 
-router.get('/:type/classes', (req, res) => {
+router.get('/:type/classes(/:scholastic)?', (req, res) => {
   console.log('KNOCK KNOCK');
-  CompClass.find({ unit_type: req.params.type }, '_id name abbreviation')
-    .sort('name')
-    .exec()
+  let query = CompClass.find({ unit_type: req.params.type }, '_id name abbreviation')
+    .sort('name');
+
+  if (req.params.scholastic === 'scholastic') {
+    query.where('scholastic').equals(true);
+  }
+  else {
+    query.where('scholastic').equals(false);
+  }
+
+  query.exec()
     .then(classes => {
       let json = [ ];
       classes.map(compclass => {
         json.push({
           value: compclass._id.toString(),
-          label: compclass.name + ' (' + compclass.abbreviation + ')'
+          label: compclass.name + ' (' + compclass.abbreviation.toUpperCase() + ')'
         });
       })
 

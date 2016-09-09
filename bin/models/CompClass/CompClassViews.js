@@ -13,9 +13,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _ContentsView = require('../../helpers/ContentsView/ContentsView');
+var _ModelView = require('../../helpers/ModelView/ModelView');
 
-var _ContentsView2 = _interopRequireDefault(_ContentsView);
+var _ModelView2 = _interopRequireDefault(_ModelView);
 
 var _UserRoles = require('../User/UserRoles');
 
@@ -61,7 +61,20 @@ var Index = exports.Index = function (_React$Component) {
           { className: 'page-header' },
           'Competitive Classes'
         ),
-        _react2.default.createElement(_CompClassList2.default, { endpoint: '/api/compclasses' })
+        _react2.default.createElement(_CompClassList2.default, { endpoint: '/api/compclasses' }),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-12 offset-sm-1 col-sm-10' },
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/compclasses/new', className: 'btn btn-block btn-success-outline btn-sm' },
+              'Add a New Class'
+            )
+          )
+        )
       );
     }
   }]);
@@ -87,14 +100,14 @@ var New = exports.New = function (_React$Component2) {
         _react2.default.createElement(
           'h1',
           { className: 'page-header' },
-          'New Competitive Class'
+          'New Class'
         ),
         _react2.default.createElement(
           'div',
           { className: 'row' },
           _react2.default.createElement(
             'div',
-            { className: 'col-sm-offset-1 col-sm-10' },
+            { className: 'offset-sm-1 col-sm-10' },
             _react2.default.createElement(CompClassForms.Edit, { creationForm: true })
           )
         )
@@ -130,7 +143,7 @@ var Edit = exports.Edit = function (_React$Component3) {
           { className: 'row' },
           _react2.default.createElement(
             'div',
-            { className: 'col-sm-offset-1 col-sm-10' },
+            { className: 'offset-sm-1 col-sm-10' },
             _react2.default.createElement(CompClassForms.Edit, { abbreviation: this.props.params.abbreviation })
           )
         )
@@ -160,9 +173,9 @@ var _Show = function (_React$Component4) {
           'h1',
           { className: 'page-header' },
           'Units in ',
-          this.props.contents.formattedName
+          this.props.model.formattedName
         ),
-        _react2.default.createElement(_UnitList2.default, { endpoint: '/api/compclasses/' + this.props.contents._id + '/units' })
+        _react2.default.createElement(_UnitList2.default, { endpoint: '/api/compclasses/' + this.props.model._id + '/units' })
       );
     }
   }]);
@@ -182,7 +195,7 @@ var Show = exports.Show = function (_React$Component5) {
   _createClass(Show, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_ContentsView2.default, {
+      return _react2.default.createElement(_ModelView2.default, {
         subStore: 'compclass_show',
         endpoint: '/api/compclasses/' + this.props.params.abbreviation,
         component: _Show

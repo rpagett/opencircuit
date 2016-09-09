@@ -3,6 +3,7 @@ let app = express();
 
 // Frameworks and Dependencies
 import React from 'react';
+import DotEnv from 'dotenv';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
@@ -30,6 +31,8 @@ import AuthController from './models/Auth/AuthController';
 import APIDispatch from './APIDispatch';
 
 app.use(express.static('dist'));
+
+DotEnv.load();
 
 Mongoose.connect('mongodb://localhost/opencircuit');
 Mongoose.Promise = global.Promise;

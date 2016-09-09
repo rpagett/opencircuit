@@ -94,7 +94,7 @@ var New = exports.New = function (_React$Component2) {
           { className: 'row' },
           _react2.default.createElement(
             'div',
-            { className: 'col-sm-offset-1 col-sm-10' },
+            { className: 'offset-sm-1 col-sm-10' },
             _react2.default.createElement(EventForms.Edit, { creationForm: true })
           )
         )
@@ -130,7 +130,7 @@ var Edit = exports.Edit = function (_React$Component3) {
           { className: 'row' },
           _react2.default.createElement(
             'div',
-            { className: 'col-sm-offset-1 col-sm-10' },
+            { className: 'offset-sm-1 col-sm-10' },
             _react2.default.createElement(EventForms.Edit, { slug: this.props.params.slug })
           )
         )
@@ -326,10 +326,10 @@ var _Show = (_temp = _class = function (_React$Component4) {
               { className: 'row' },
               _react2.default.createElement(
                 'div',
-                { className: 'pull-center col-xs-12 col-sm-offset-4 col-sm-4' },
+                { className: 'pull-xs-center col-xs-12 offset-sm-4 col-sm-4' },
                 _react2.default.createElement(
                   _reactRouter.Link,
-                  { to: '/events/' + event.slug + '/edit', className: 'btn btn-sm btn-secondary-outline btn-block' },
+                  { to: '/events/' + event.slug + '/edit', className: 'btn btn-sm btn-outline-secondary btn-block' },
                   'Edit Event'
                 )
               )

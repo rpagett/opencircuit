@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.userHasRole = userHasRole;
 exports.userOrAdmin = userOrAdmin;
 exports.hasRole = hasRole;
 
@@ -14,10 +13,6 @@ var _UserModel2 = _interopRequireDefault(_UserModel);
 var _UserRoles = require('../models/User/UserRoles');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function userHasRole(user, role) {
-  return user.roles.includes(_UserRoles.UserRoles.Administrator) || user.roles.includes(role);
-}
 
 function userOrAdmin() {
   return function (req, res, next) {
@@ -38,7 +33,7 @@ function userOrAdmin() {
         });
       }
 
-      if (user.email !== req.body.email && !userHasRole(user, _UserRoles.UserRoles.Administrator)) {
+      if (user.email !== req.body.email && !(0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator)) {
         res.status(403).send({
           success: false,
           error: 'Access denied.'
@@ -71,7 +66,7 @@ function hasRole() {
         });
       }
 
-      if (role && !userHasRole(user, role)) {
+      if (role && !(0, _UserRoles.userHasRole)(user, role)) {
         res.status(403).send({
           success: false,
           error: 'Access denied.'

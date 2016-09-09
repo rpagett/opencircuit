@@ -1,9 +1,5 @@
 import User from '../models/User/UserModel';
-import { UserRoles } from '../models/User/UserRoles';
-
-export function userHasRole(user, role) {
-  return user.roles.includes(UserRoles.Administrator) || user.roles.includes(role);
-}
+import { UserRoles, userHasRole } from '../models/User/UserRoles';
 
 export function userOrAdmin() {
   return (req, res, next) => {

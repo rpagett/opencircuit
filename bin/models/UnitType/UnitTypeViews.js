@@ -11,9 +11,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouter = require('react-router');
+
 var _ContentsView = require('../../helpers/ContentsView/ContentsView');
 
 var _ContentsView2 = _interopRequireDefault(_ContentsView);
+
+var _UnitTypeForms = require('./UnitTypeForms');
+
+var UnitTypeForms = _interopRequireWildcard(_UnitTypeForms);
 
 var _UnitList = require('../Unit/UnitList');
 
@@ -22,6 +28,8 @@ var _UnitList2 = _interopRequireDefault(_UnitList);
 var _UnitTypeList = require('./UnitTypeList');
 
 var _UnitTypeList2 = _interopRequireDefault(_UnitTypeList);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51,7 +59,20 @@ var Index = exports.Index = function (_React$Component) {
           { className: 'page-header' },
           'Unit Types'
         ),
-        _react2.default.createElement(_UnitTypeList2.default, { endpoint: '/api/unittypes/table' })
+        _react2.default.createElement(_UnitTypeList2.default, { endpoint: '/api/unittypes/table' }),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-12 offset-sm-1 col-sm-10' },
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/unittypes/new', className: 'btn btn-block btn-outline-success btn-sm' },
+              'Add a New Unit Type'
+            )
+          )
+        )
       );
     }
   }]);
@@ -84,7 +105,7 @@ var New = exports.New = function (_React$Component2) {
           { className: 'row' },
           _react2.default.createElement(
             'div',
-            { className: 'col-sm-offset-1 col-sm-10' },
+            { className: 'offset-sm-1 col-sm-10' },
             _react2.default.createElement(UnitTypeForms.Edit, { creationForm: true })
           )
         )
@@ -120,8 +141,8 @@ var Edit = exports.Edit = function (_React$Component3) {
           { className: 'row' },
           _react2.default.createElement(
             'div',
-            { className: 'col-sm-offset-1 col-sm-10' },
-            _react2.default.createElement(UnitTypeForms.Edit, { abbreviation: this.props.params.slug })
+            { className: 'offset-sm-1 col-sm-10' },
+            _react2.default.createElement(UnitTypeForms.Edit, { slug: this.props.params.slug })
           )
         )
       );

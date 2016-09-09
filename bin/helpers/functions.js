@@ -21,7 +21,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function fetchAPI(url) {
   var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-  var finalUrl = typeof window === 'undefined' ? 'http://localhost:8080' + url : url;
+  var finalUrl = typeof window === 'undefined' ? process.env.BASE_URL + url : url;
 
   options.headers = options.headers || {
     'Accept': 'application/json',

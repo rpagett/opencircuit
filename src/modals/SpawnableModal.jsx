@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Icon from '../helpers/Icon';
 import LoadingCube from '../helpers/LoadingCube';
 import * as ModalActions from './ModalActions';
+import * as FeeModals from '../models/Fee/FeeModals';
 import * as UserModals from '../models/User/UserModals';
 
 class SpawnableModalTransition extends React.Component {
@@ -28,10 +29,26 @@ class _SpawnableModal extends React.Component {
   }
 
   fetchModalBody() {
+    const modalProps = {
+      ...this.props.modalProps,
+      markClosed: this.props.markClosed
+    }
     switch (this.props.componentName) {
 
       case 'USER_ROLES':
-        return <UserModals.ManageRoles { ...this.props.modalProps }/>;
+        return <UserModals.ManageRoles { ...modalProps } />;
+
+      case 'FEE_APPLY_PAYMENT':
+        return <FeeModals.AdminPayment { ...modalProps } />;
+
+      case 'FEE_ASSESS_FEE':
+        return <FeeModals.AssessFee { ...modalProps } />;
+
+      case 'FEE_GENERATE_INVOICE':
+        return <FeeModals.GenerateInvoice { ...modalProps } />;
+
+      case 'FEE_USER_PAY':
+        return <FeeModals.UserPayment { ...modalProps } />
 
       default:
         return (<LoadingCube show={ true } />)
@@ -62,9 +79,9 @@ class _SpawnableModal extends React.Component {
           onHide={ this.props.markClosed }
           transition={ SpawnableModalTransition }
         >
-          <div className="container spawnable-modal">
+          <div className="container-fluid spawnable-modal">
             { (this.props.allowClose ?
-              <span className="pull-right close" onClick={ this.props.markClosed }>
+              <span className="pull-xs-right close" onClick={ this.props.markClosed }>
                   <Icon shape="close" />
                 </span> : '') }
             <div className="row">
@@ -73,9 +90,7 @@ class _SpawnableModal extends React.Component {
 
             <hr />
 
-            <div className="row">
-              { this.fetchModalBody() }
-            </div>
+            { this.fetchModalBody() }
           </div>
         </Modal>
       </div>
@@ -103,3 +118,32 @@ const mapDispatchToProps = (dispatch) => {
 
 const SpawnableModal = connect(mapStateToProps, mapDispatchToProps)(_SpawnableModal);
 export default SpawnableModal;
+
+class _LaunchModalButton extends React.Component {
+  static propTypes = {
+    buttonText: React.PropTypes.string.isRequired,
+    buttonProps: React.PropTypes.object,
+
+    title: React.PropTypes.string.isRequired,
+    componentName: React.PropTypes.string.isRequired,
+    modalProps: React.PropTypes.object
+  }
+
+  render() {
+    return (
+      <button className={ this.props.className } { ...this.props.buttonProps } onClick={ this.props.launch.bind(this) }>
+        { this.props.buttonText }
+      </button>
+    )
+  }
+}
+
+const mapDispatchToButtonProps = (dispatch, props) => {
+  return {
+    launch: () => {
+      dispatch(ModalActions.launch(props.title, props.componentName, props.modalProps))
+    }
+  }
+}
+
+export const LaunchModalButton = connect(state => { return { } }, mapDispatchToButtonProps)(_LaunchModalButton);

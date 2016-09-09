@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 exports.launch = launch;
 exports.close = close;
 exports.open = open;
+
+var _flexTableActions = require('../helpers/flexTable/flexTableActions');
+
 function launch(title, component) {
   var props = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
@@ -27,8 +30,18 @@ function define(title, component) {
 }
 
 function close() {
-  return {
-    type: 'MODAL_CLOSE'
+  return function (dispatch, getState) {
+    dispatch({
+      type: 'MODAL_CLOSE'
+    });
+
+    var _getState = getState();
+
+    var modal = _getState.modal;
+
+    if (modal.props.refreshTable) {
+      dispatch((0, _flexTableActions.fetchContents)(modal.props.refreshTable, modal.props.refreshEndpoint));
+    }
   };
 }
 

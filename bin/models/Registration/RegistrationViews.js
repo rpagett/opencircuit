@@ -87,7 +87,7 @@ var Organization = exports.Organization = function (_React$Component) {
           _react2.default.createElement(_components.FormInput, { name: 'street', label: 'Street' }),
           _react2.default.createElement(_components.FormInput, { name: 'city', label: 'City' }),
           _react2.default.createElement(_components.StateSelect, { name: 'state', label: 'State' }),
-          _react2.default.createElement(_components.FormInput, { name: 'zip', label: 'ZIP' }),
+          _react2.default.createElement(_components.FormInput, { name: 'zip', label: 'ZIP', maxLength: 5 }),
           _react2.default.createElement(
             'button',
             { name: 'submit', type: 'submit', className: 'btn btn-primary btn-block' },
@@ -169,6 +169,7 @@ var Unit = exports.Unit = function (_React$Component3) {
           ),
           _react2.default.createElement(_ContentsView2.default, { subStore: 'register_unit_types', endpoint: '/api/unittypes', component: _UnitTypes }),
           _react2.default.createElement(_components.FormInput, { name: 'name', label: 'Unit Name' }),
+          _react2.default.createElement(_components.Checkbox, { name: 'circuit_member', label: 'Join the Circuit?', inForm: true, checked: true }),
           _react2.default.createElement(
             'button',
             { name: 'submit', type: 'submit', className: 'btn btn-primary btn-block' },
@@ -201,6 +202,7 @@ var _ClassBox = function (_React$Component4) {
           name: 'competition_class',
           label: 'Class',
           unitType: this.props.contents.unit_type,
+          scholastic: this.props.contents.scholastic,
           formStore: 'register_unit_details'
         })
       );
@@ -242,7 +244,7 @@ var Details = exports.Details = function (_React$Component5) {
             endpoint: '/api/register/unit/' + this.props.params.unit,
             component: _ClassBox
           }),
-          _react2.default.createElement(_components.FormInput, { name: 'members', label: 'Members' }),
+          _react2.default.createElement(_components.FormInput, { name: 'members', label: 'Member Count' }),
           _react2.default.createElement(
             'button',
             { name: 'submit', type: 'submit', className: 'btn btn-primary btn-block' },
@@ -415,13 +417,13 @@ var Confirm = exports.Confirm = function (_React$Component9) {
           { className: 'row' },
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-offset-1 col-xs-10 text-xs-center' },
+            { className: 'offset-xs-1 col-xs-10 text-xs-center' },
             _react2.default.createElement(
               'div',
               { className: 'row' },
               _react2.default.createElement(
                 _reactRouter.Link,
-                { to: '/', className: 'btn btn-success-outline btn-block btn-sm' },
+                { to: '/', className: 'btn btn-outline-success btn-block btn-sm' },
                 'Return to Dashboard'
               )
             )

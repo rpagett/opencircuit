@@ -36,4 +36,8 @@ const OrganizationSchema = new Mongoose.Schema({
   }
 });
 
+OrganizationSchema.virtual('detailsUrl').get(function() {
+  return `/organizations/${this.slug}`;
+})
+
 export default Mongoose.model('Organization', OrganizationSchema);

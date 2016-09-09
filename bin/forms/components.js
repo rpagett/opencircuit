@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ReduxForm = exports.EventChecks = exports.Radio = exports.Checkbox = exports.DateTime = exports.StateSelect = exports.UnitTypeSelect = exports.ClassSelect = exports.TextArea = exports.FormStatic = exports.PhoneInput = exports.FormInput = undefined;
+exports.ReduxForm = exports.EventChecks = exports.Radio = exports.Checkbox = exports.DateTime = exports.StateSelect = exports.UnitTypeSelect = exports.FeeCategorySelect = exports.UnitSelect = exports.PaymentTypeSelect = exports.ClassSelect = exports.TextArea = exports.FormStatic = exports.PhoneInput = exports.FormInput = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -99,14 +99,23 @@ var _InputWrapper = (_temp = _class = function (_React$Component2) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       if (this.props.value) {
-        this.props.updateField(this.props.value);
+        var value = this.props.value;
+
+        if (value instanceof Date) {
+          console.log('It\'s a Date!');
+          value = (0, _moment2.default)(value);
+        } else if (value instanceof Object) {
+          value = value._id;
+        }
+
+        this.props.updateField(value);
       }
     }
   }, {
     key: 'updateValue',
-    value: function updateValue(e, selected) {
+    value: function updateValue(e) {
       // React-select does some funky stuff
-      var child = _react2.default.Children.only(this.props.children);
+      //const child = React.Children.only(this.props.children);
 
       if (e.currentTarget) {
         this.props.updateField(e.currentTarget.value);
@@ -114,13 +123,12 @@ var _InputWrapper = (_temp = _class = function (_React$Component2) {
         this.props.updateField(e.toDate());
       } else {
         console.log('Nailed it!');
-        if (child.props.multiple) {
-          this.props.updateField(selected.map(function (option) {
-            return option.value;
-          }));
-        } else {
-          this.props.updateField(e.value);
-        }
+        //if (child.props.multiple) {
+        //  this.props.updateField(selected.map(option => option.value));
+        //}
+        //else {
+        this.props.updateField(e.value);
+        //}
       }
     }
   }, {
@@ -143,6 +151,9 @@ var _InputWrapper = (_temp = _class = function (_React$Component2) {
         if (_this3.props.value instanceof Date) {
           console.log('It\'s a Date!');
           childProps.value = (0, _moment2.default)(_this3.props.value);
+        } else if (_this3.props.value instanceof Object) {
+          console.log('Coercing object for ', _this3.props.name);
+          childProps.valueKey = _this3.props.value._id;
         }
 
         childProps.children = _this3.recursivelyCloneChildren(child.props.children);
@@ -366,7 +377,95 @@ var ClassSelect = exports.ClassSelect = (_temp2 = _class2 = function (_React$Com
   _createClass(ClassSelect, [{
     key: 'fetchList',
     value: function fetchList() {
-      return (0, _functions.fetchAPI)('/api/unittypes/' + this.props.unitType + '/classes').then(function (res) {
+      var endpoint = '/api/unittypes/' + this.props.unitType + '/classes';
+
+      if (this.props.scholastic) {
+        endpoint += '/scholastic';
+      }
+      return (0, _functions.fetchAPI)(endpoint).then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return { options: json };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        InputWrapper,
+        _extends({}, this.props, { style: { 'zIndex': '10' } }),
+        _react2.default.createElement(_reactSelect2.default.Async, {
+          className: 'form-control',
+          clearable: false,
+          loadOptions: this.fetchList.bind(this),
+          autosize: false,
+          searchable: false
+        })
+      );
+    }
+  }]);
+
+  return ClassSelect;
+}(_react2.default.Component), _class2.propTypes = {
+  unitType: _react2.default.PropTypes.string.isRequired,
+  scholastic: _react2.default.PropTypes.bool.isRequired
+}, _temp2);
+
+var PaymentTypeSelect = exports.PaymentTypeSelect = function (_React$Component9) {
+  _inherits(PaymentTypeSelect, _React$Component9);
+
+  function PaymentTypeSelect() {
+    _classCallCheck(this, PaymentTypeSelect);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(PaymentTypeSelect).apply(this, arguments));
+  }
+
+  _createClass(PaymentTypeSelect, [{
+    key: 'fetchList',
+    value: function fetchList() {
+      var endpoint = '/api/fees/paymentTypes';
+
+      return (0, _functions.fetchAPI)(endpoint).then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return { options: json };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        InputWrapper,
+        _extends({}, this.props, { style: { 'zIndex': '10' } }),
+        _react2.default.createElement(_reactSelect2.default.Async, {
+          className: 'form-control',
+          clearable: false,
+          loadOptions: this.fetchList.bind(this),
+          autosize: false,
+          searchable: false
+        })
+      );
+    }
+  }]);
+
+  return PaymentTypeSelect;
+}(_react2.default.Component);
+
+var UnitSelect = exports.UnitSelect = function (_React$Component10) {
+  _inherits(UnitSelect, _React$Component10);
+
+  function UnitSelect() {
+    _classCallCheck(this, UnitSelect);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(UnitSelect).apply(this, arguments));
+  }
+
+  _createClass(UnitSelect, [{
+    key: 'fetchList',
+    value: function fetchList() {
+      var endpoint = '/api/units/select';
+
+      return (0, _functions.fetchAPI)(endpoint).then(function (res) {
         return res.json();
       }).then(function (json) {
         return { options: json };
@@ -388,13 +487,51 @@ var ClassSelect = exports.ClassSelect = (_temp2 = _class2 = function (_React$Com
     }
   }]);
 
-  return ClassSelect;
-}(_react2.default.Component), _class2.propTypes = {
-  unitType: _react2.default.PropTypes.string.isRequired
-}, _temp2);
+  return UnitSelect;
+}(_react2.default.Component);
 
-var UnitTypeSelect = exports.UnitTypeSelect = function (_React$Component9) {
-  _inherits(UnitTypeSelect, _React$Component9);
+var FeeCategorySelect = exports.FeeCategorySelect = function (_React$Component11) {
+  _inherits(FeeCategorySelect, _React$Component11);
+
+  function FeeCategorySelect() {
+    _classCallCheck(this, FeeCategorySelect);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(FeeCategorySelect).apply(this, arguments));
+  }
+
+  _createClass(FeeCategorySelect, [{
+    key: 'fetchList',
+    value: function fetchList() {
+      var endpoint = '/api/feecategories/select';
+
+      return (0, _functions.fetchAPI)(endpoint).then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return { options: json };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        InputWrapper,
+        _extends({}, this.props, { style: { 'zIndex': '10' } }),
+        _react2.default.createElement(_reactSelect2.default.Async, {
+          className: 'form-control',
+          clearable: false,
+          loadOptions: this.fetchList.bind(this),
+          autosize: false,
+          searchable: false
+        })
+      );
+    }
+  }]);
+
+  return FeeCategorySelect;
+}(_react2.default.Component);
+
+var UnitTypeSelect = exports.UnitTypeSelect = function (_React$Component12) {
+  _inherits(UnitTypeSelect, _React$Component12);
 
   function UnitTypeSelect() {
     _classCallCheck(this, UnitTypeSelect);
@@ -421,6 +558,9 @@ var UnitTypeSelect = exports.UnitTypeSelect = function (_React$Component9) {
           className: 'form-control',
           clearable: false,
           loadOptions: this.fetchList.bind(this),
+          filterOption: function filterOption() {
+            return true;
+          },
           autosize: false
         })
       );
@@ -430,8 +570,8 @@ var UnitTypeSelect = exports.UnitTypeSelect = function (_React$Component9) {
   return UnitTypeSelect;
 }(_react2.default.Component);
 
-var StateSelect = exports.StateSelect = function (_React$Component10) {
-  _inherits(StateSelect, _React$Component10);
+var StateSelect = exports.StateSelect = function (_React$Component13) {
+  _inherits(StateSelect, _React$Component13);
 
   function StateSelect() {
     _classCallCheck(this, StateSelect);
@@ -463,8 +603,8 @@ var StateSelect = exports.StateSelect = function (_React$Component10) {
   return StateSelect;
 }(_react2.default.Component);
 
-var DateTime = exports.DateTime = function (_React$Component11) {
-  _inherits(DateTime, _React$Component11);
+var DateTime = exports.DateTime = function (_React$Component14) {
+  _inherits(DateTime, _React$Component14);
 
   function DateTime() {
     _classCallCheck(this, DateTime);
@@ -493,8 +633,8 @@ var DateTime = exports.DateTime = function (_React$Component11) {
   return DateTime;
 }(_react2.default.Component);
 
-var _Checkbox = (_temp3 = _class3 = function (_React$Component12) {
-  _inherits(_Checkbox, _React$Component12);
+var _Checkbox = (_temp3 = _class3 = function (_React$Component15) {
+  _inherits(_Checkbox, _React$Component15);
 
   function _Checkbox() {
     _classCallCheck(this, _Checkbox);
@@ -517,10 +657,10 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component12) {
       if (this.props.inForm) {
         return _react2.default.createElement(
           'div',
-          { className: 'form-group row' },
+          { className: 'form-check row' },
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-10 col-sm-4 form-control-label' },
+            { className: 'col-xs-10 col-sm-4 form-check-label' },
             this.props.label
           ),
           _react2.default.createElement(
@@ -528,6 +668,7 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component12) {
             { className: 'col-xs-2 col-sm-8' },
             _react2.default.createElement('input', {
               type: 'checkbox',
+              className: 'form-check-input',
               name: this.props.name,
               checked: this.props.formChecked,
               onChange: this.updateChecked.bind(this)
@@ -537,12 +678,13 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component12) {
       } else {
         return _react2.default.createElement(
           'div',
-          { className: 'checkbox' },
+          { className: 'checkbox form-check' },
           _react2.default.createElement(
             'label',
             null,
             _react2.default.createElement('input', {
               type: 'checkbox',
+              className: 'form-check-input',
               name: this.props.name,
               value: this.props.value,
               checked: this.props.checked,
@@ -550,7 +692,7 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component12) {
             }),
             _react2.default.createElement(
               'span',
-              { className: 'checkbox-label' },
+              { className: 'checkbox-label form-check-label' },
               this.props.label
             )
           )
@@ -585,8 +727,8 @@ var mapDispatchToCheckboxProps = function mapDispatchToCheckboxProps(dispatch, p
 
 var Checkbox = exports.Checkbox = (0, _reactRedux.connect)(mapStateToCheckboxProps, mapDispatchToCheckboxProps)(_Checkbox);
 
-var _Radio = (_temp4 = _class4 = function (_React$Component13) {
-  _inherits(_Radio, _React$Component13);
+var _Radio = (_temp4 = _class4 = function (_React$Component16) {
+  _inherits(_Radio, _React$Component16);
 
   function _Radio() {
     _classCallCheck(this, _Radio);
@@ -647,29 +789,29 @@ var mapDispatchToRadioProps = function mapDispatchToRadioProps(dispatch, props) 
 
 var Radio = exports.Radio = (0, _reactRedux.connect)(mapStateToCheckboxProps, mapDispatchToRadioProps)(_Radio);
 
-var _EventChecks = (_temp5 = _class5 = function (_React$Component14) {
-  _inherits(_EventChecks, _React$Component14);
+var _EventChecks = (_temp5 = _class5 = function (_React$Component17) {
+  _inherits(_EventChecks, _React$Component17);
 
   function _EventChecks() {
     _classCallCheck(this, _EventChecks);
 
-    var _this15 = _possibleConstructorReturn(this, Object.getPrototypeOf(_EventChecks).call(this));
+    var _this18 = _possibleConstructorReturn(this, Object.getPrototypeOf(_EventChecks).call(this));
 
-    _this15.state = {
+    _this18.state = {
       isLoading: true
     };
-    return _this15;
+    return _this18;
   }
 
   _createClass(_EventChecks, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this16 = this;
+      var _this19 = this;
 
       (0, _functions.fetchAPI)(this.props.endpoint).then(function (res) {
         return res.json();
       }).then(function (json) {
-        _this16.setState({
+        _this19.setState({
           isLoading: false,
           events: json.events
         });
@@ -678,7 +820,7 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component14) {
   }, {
     key: 'render',
     value: function render() {
-      var _this17 = this;
+      var _this20 = this;
 
       var boxes = [];
 
@@ -705,8 +847,8 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component14) {
           'div',
           { className: 'col-xs-12 col-sm-6', key: 'col-' + event.id },
           _react2.default.createElement(Checkbox, {
-            name: 'events[]',
-            formStore: _this17.props.formStore,
+            name: 'events',
+            formStore: _this20.props.formStore,
             key: event._id,
             label: event.name + ' (' + event.formattedDate + ')',
             value: event._id
@@ -727,8 +869,8 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component14) {
   endpoint: _react2.default.PropTypes.string.isRequired
 }, _temp5);
 
-var EventChecks = exports.EventChecks = function (_React$Component15) {
-  _inherits(EventChecks, _React$Component15);
+var EventChecks = exports.EventChecks = function (_React$Component18) {
+  _inherits(EventChecks, _React$Component18);
 
   function EventChecks() {
     _classCallCheck(this, EventChecks);
@@ -752,8 +894,8 @@ var EventChecks = exports.EventChecks = function (_React$Component15) {
   return EventChecks;
 }(_react2.default.Component);
 
-var _ReduxForm = (_temp6 = _class6 = function (_React$Component16) {
-  _inherits(_ReduxForm, _React$Component16);
+var _ReduxForm = (_temp6 = _class6 = function (_React$Component19) {
+  _inherits(_ReduxForm, _React$Component19);
 
   function _ReduxForm() {
     _classCallCheck(this, _ReduxForm);
@@ -769,15 +911,15 @@ var _ReduxForm = (_temp6 = _class6 = function (_React$Component16) {
   }, {
     key: 'recursivelyCloneChildren',
     value: function recursivelyCloneChildren(children) {
-      var _this20 = this;
+      var _this23 = this;
 
       return _react2.default.Children.map(children, function (child) {
         if (!_react2.default.isValidElement(child)) {
           return child;
         }
 
-        var childProps = { formStore: _this20.props.subStore };
-        childProps.children = _this20.recursivelyCloneChildren(child.props.children);
+        var childProps = { formStore: _this23.props.subStore, formModel: _this23.props.formModel };
+        childProps.children = _this23.recursivelyCloneChildren(child.props.children);
 
         return _react2.default.cloneElement(child, childProps);
       });
@@ -785,20 +927,22 @@ var _ReduxForm = (_temp6 = _class6 = function (_React$Component16) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      var _this21 = this;
+      var _this24 = this;
 
       event && event.preventDefault();
 
       this.props.submitData().then(function (res) {
         if (res && res.success === true) {
 
-          if (_this21.props.inModal) {
-            _this21.props.closeModal();
-          } else if (res.redirect) {
+          if (_this24.props.inModal) {
+            _this24.props.closeModal();
+          }
+
+          if (res.redirect) {
             if (res.external && window) {
               window.location = res.redirect;
             } else {
-              _this21.props.router.push(res.redirect);
+              _this24.props.router.push(res.redirect);
             }
           }
         }
@@ -847,7 +991,8 @@ var _ReduxForm = (_temp6 = _class6 = function (_React$Component16) {
 var mapStateToReduxFormProps = function mapStateToReduxFormProps(state, props) {
   return {
     isLoading: state.form.loading[props.subStore],
-    globalError: state.form.globalErrors[props.subStore]
+    globalError: state.form.globalErrors[props.subStore],
+    formModel: state.form[props.subStore]
   };
 };
 

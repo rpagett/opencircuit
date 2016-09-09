@@ -16,6 +16,14 @@ var _EventController = require('./models/Event/EventController');
 
 var _EventController2 = _interopRequireDefault(_EventController);
 
+var _FeeController = require('./models/Fee/FeeController');
+
+var _FeeController2 = _interopRequireDefault(_FeeController);
+
+var _FeeCategoryController = require('./models/FeeCategory/FeeCategoryController');
+
+var _FeeCategoryController2 = _interopRequireDefault(_FeeCategoryController);
+
 var _RegistrationController = require('./models/Registration/RegistrationController');
 
 var _RegistrationController2 = _interopRequireDefault(_RegistrationController);
@@ -38,6 +46,8 @@ var router = _express2.default.Router();
 
 router.use('/compclasses/', _CompClassController2.default);
 router.use('/events/', _EventController2.default);
+router.use('/fees/', _FeeController2.default);
+router.use('/feecategories/', _FeeCategoryController2.default);
 router.use('/register/', _RegistrationController2.default);
 router.use('/units/', _UnitController2.default);
 router.use('/unittypes/', _UnitTypeController2.default);

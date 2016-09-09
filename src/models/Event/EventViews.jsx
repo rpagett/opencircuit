@@ -26,7 +26,7 @@ export class New extends React.Component {
       <div className="container-fluid">
         <h1 className="page-header">New Event</h1>
         <div className="row">
-          <div className="col-sm-offset-1 col-sm-10">
+          <div className="offset-sm-1 col-sm-10">
             <EventForms.Edit creationForm={ true } />
           </div>
         </div>
@@ -41,7 +41,7 @@ export class Edit extends React.Component {
       <div className="container-fluid">
         <h1 className="page-header">Editing Event</h1>
         <div className="row">
-          <div className="col-sm-offset-1 col-sm-10">
+          <div className="offset-sm-1 col-sm-10">
             <EventForms.Edit slug={ this.props.params.slug } />
           </div>
         </div>
@@ -123,8 +123,8 @@ class _Show extends React.Component {
             <hr />
 
             <div className="row">
-              <div className="pull-center col-xs-12 col-sm-offset-4 col-sm-4">
-                <Link to={ `/events/${event.slug}/edit` } className="btn btn-sm btn-secondary-outline btn-block">
+              <div className="pull-xs-center col-xs-12 offset-sm-4 col-sm-4">
+                <Link to={ `/events/${event.slug}/edit` } className="btn btn-sm btn-outline-secondary btn-block">
                   Edit Event
                 </Link>
               </div>

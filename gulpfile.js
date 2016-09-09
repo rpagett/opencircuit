@@ -43,11 +43,12 @@ gulp.task('deploy', function (){
   bundleApp(true);
 });
 
-gulp.task('watch', function () {
+gulp.task('watch', ['scripts'], function () {
   gulp.watch(['./scss/**/*.scss'], ['styles']);
   var stream = nodemon({
     script: 'bin/server.js',
-    watch: 'src',
+    ext: 'jsx',
+    //watch: 'src/**/*',
     env: { 'NODE_ENV': 'development' },
     tasks: ['scripts']
   })
@@ -119,8 +120,8 @@ function bundleApp(isProduction) {
     })
     .bundle()
     .on('error', gutil.log)
-    .pipe(source('bundle.js'))
     .pipe(cache.cache())
+    .pipe(source('bundle.js'))
     //.pipe(buffer())
     //.pipe(plugins.uglify()).on('error', gutil.log)
     .pipe(gulp.dest('./dist/js/'));

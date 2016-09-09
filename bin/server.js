@@ -6,6 +6,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _dotenv = require('dotenv');
+
+var _dotenv2 = _interopRequireDefault(_dotenv);
+
 var _redux = require('redux');
 
 var _reduxThunk = require('redux-thunk');
@@ -80,6 +84,8 @@ var notifier = require('node-notifier');
 
 
 app.use(express.static('dist'));
+
+_dotenv2.default.load();
 
 _mongoose2.default.connect('mongodb://localhost/opencircuit');
 _mongoose2.default.Promise = global.Promise;

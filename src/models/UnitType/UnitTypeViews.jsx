@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import ContentsView from '../../helpers/ContentsView/ContentsView';
+import * as UnitTypeForms from './UnitTypeForms';
 import UnitList from '../Unit/UnitList';
 import UnitTypeList from './UnitTypeList';
 
@@ -11,6 +13,14 @@ export class Index extends React.Component {
         <h1 className="page-header">Unit Types</h1>
 
         <UnitTypeList endpoint="/api/unittypes/table" />
+
+        <div className="row">
+          <div className="col-xs-12 offset-sm-1 col-sm-10">
+            <Link to="/unittypes/new" className="btn btn-block btn-outline-success btn-sm">
+              Add a New Unit Type
+            </Link>
+          </div>
+        </div>
       </div>
     )
   }
@@ -22,7 +32,7 @@ export class New extends React.Component {
       <div className="container-fluid">
         <h1 className="page-header">New Unit Type</h1>
         <div className="row">
-          <div className="col-sm-offset-1 col-sm-10">
+          <div className="offset-sm-1 col-sm-10">
             <UnitTypeForms.Edit creationForm={ true } />
           </div>
         </div>
@@ -37,8 +47,8 @@ export class Edit extends React.Component {
       <div className="container-fluid">
         <h1 className="page-header">Editing Unit Type</h1>
         <div className="row">
-          <div className="col-sm-offset-1 col-sm-10">
-            <UnitTypeForms.Edit abbreviation={ this.props.params.slug } />
+          <div className="offset-sm-1 col-sm-10">
+            <UnitTypeForms.Edit slug={ this.props.params.slug } />
           </div>
         </div>
       </div>

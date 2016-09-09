@@ -65,7 +65,7 @@ var UnitList = function (_React$Component) {
               return unit.unit_type.name;
             },
             'Class': function Class(unit) {
-              return unit.competition_class.abbreviation;
+              return unit.competition_class.formattedName;
             }
           }
         })

@@ -1,4 +1,5 @@
 import Mongoose from 'mongoose';
+import mLifecycle from 'mongoose-lifecycle';
 
 const ObjectId = Mongoose.Schema.Types.ObjectId;
 const EventRegistrationSchema = new Mongoose.Schema({
@@ -20,6 +21,16 @@ const EventRegistrationSchema = new Mongoose.Schema({
   attending_critique: Boolean,
 
   score: Number
+}, {
+  timestamps: true,
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
 });
+
+EventRegistrationSchema.plugin(mLifecycle);
 
 export default Mongoose.model('EventRegistration', EventRegistrationSchema)

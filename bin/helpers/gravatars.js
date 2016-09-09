@@ -65,7 +65,7 @@ var ProfileGravatar = exports.ProfileGravatar = (_temp2 = _class2 = function (_R
 
       return _react2.default.createElement('img', {
         src: '//www.gravatar.com/avatar/' + hash + '?s=150&d=mm',
-        className: 'img-responsive center-block profile-gravatar',
+        className: 'img-fluid m-x-auto profile-gravatar',
         'aria-hidden': 'true'
       });
     }

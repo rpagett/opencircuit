@@ -23,6 +23,12 @@ function validateCompClass() {
     'required': 'This field is required.'
   };
 
+  if (data.name.match(/scholastic/i)) {
+    data.scholastic = true;
+  } else {
+    data.scholastic = false;
+  }
+
   data.abbreviation = data.abbreviation.toLowerCase();
 
   return _indicative2.default.validateAll(data, rules, messages);

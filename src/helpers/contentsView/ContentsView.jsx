@@ -34,10 +34,14 @@ class _ContentsView extends React.Component {
     }
 
     if (!this.props.contents) {
+      if (this.props.returnEmpty) {
+        return <div></div>
+      }
+
       return (<strong>Nothing to display.</strong>)
     }
 
-    return (<this.props.component contents={ this.props.contents } />)
+    return (<this.props.component contents={ this.props.contents } { ...this.props } />)
   }
 }
 

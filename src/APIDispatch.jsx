@@ -2,6 +2,8 @@ import Express from 'express';
 
 import CompClassController from './models/CompClass/CompClassController';
 import EventController from './models/Event/EventController';
+import FeeController from './models/Fee/FeeController';
+import FeeCategoryController from './models/FeeCategory/FeeCategoryController';
 import RegistrationController from './models/Registration/RegistrationController';
 import UnitController from './models/Unit/UnitController';
 import UnitTypeController from './models/UnitType/UnitTypeController';
@@ -11,7 +13,9 @@ let router = Express.Router();
 
 router.use('/compclasses/', CompClassController);
 router.use('/events/', EventController);
-router.use('/register/', RegistrationController)
+router.use('/fees/', FeeController);
+router.use('/feecategories/', FeeCategoryController);
+router.use('/register/', RegistrationController);
 router.use('/units/', UnitController);
 router.use('/unittypes/', UnitTypeController);
 router.use('/users/', UserController);

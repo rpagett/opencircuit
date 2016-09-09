@@ -20,17 +20,17 @@ var _UnitModel = require('../Unit/UnitModel');
 
 var _UnitModel2 = _interopRequireDefault(_UnitModel);
 
-var _OrganizationValidation = require('../Organization/OrganizationValidation');
+var _RegistrationValidation = require('./RegistrationValidation');
 
-var _OrganizationValidation2 = _interopRequireDefault(_OrganizationValidation);
-
-var _UnitValidation = require('../Unit/UnitValidation');
-
-var _UnitValidation2 = _interopRequireDefault(_UnitValidation);
+var Validate = _interopRequireWildcard(_RegistrationValidation);
 
 var _UserRoles = require('../User/UserRoles');
 
+var _functions = require('../../helpers/functions');
+
 var _authRoute = require('../../middleware/authRoute');
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,7 +38,7 @@ var router = _express2.default.Router();
 // All routes are '/api/register/...'
 
 router.post('/organization', function (req, res) {
-  (0, _OrganizationValidation2.default)(req.body).then(function (data) {
+  Validate.organization(req.body).then(function (data) {
     //Organization.search({ query: data.slug }) This is where I'll do fuzzy matching.
 
     var org = new _OrganizationModel2.default(data);
@@ -86,7 +86,7 @@ router.route('/organization/:org').get(function (req, res) {
     });
   });
 }).post(function (req, res) {
-  (0, _UnitValidation2.default)(req.body).then(function (data) {
+  Validate.unit(req.body).then(function (data) {
     var unit = new _UnitModel2.default(data);
 
     unit.organization = req.params.org;
@@ -107,7 +107,7 @@ router.route('/organization/:org').get(function (req, res) {
 });
 
 router.route('/unit/:unit').get(function (req, res) {
-  _UnitModel2.default.findOne({ _id: req.params.unit }, 'name unit_type director').then(function (unit) {
+  _UnitModel2.default.findOne({ _id: req.params.unit }, 'name unit_type director organization').populate('organization', 'is_school').then(function (unit) {
     if (!unit) {
       res.json({
         success: false,
@@ -125,7 +125,8 @@ router.route('/unit/:unit').get(function (req, res) {
     res.json({
       success: true,
       contents: {
-        unit_type: unit.unit_type
+        unit_type: unit.unit_type,
+        scholastic: unit.organization.is_school
       }
     });
   }).catch(function (errors) {
@@ -135,29 +136,47 @@ router.route('/unit/:unit').get(function (req, res) {
     });
   });
 }).post(function (req, res) {
-  console.log('Posting!');
-  _UnitModel2.default.findOneAndUpdate({ id: req.params.unit }, {
-    members: req.body.members,
-    competition_class: req.body.competition_class,
-    registered: true
-  }).exec().then(function (unit) {
+  Validate.unitDetails(req.body).then(function (data) {
+    return _UnitModel2.default.findOneAndUpdate({ _id: req.params.unit }, {
+      members: data.members,
+      competition_class: data.competition_class,
+      registered: true
+    }).exec();
+  }).then(function (unit) {
     res.json({
       success: true,
       redirect: '/register/unit/' + req.params.unit + '/events'
+    });
+  }).catch(function (errors) {
+    res.json({
+      success: false,
+      errors: errors
+    });
+  });
+});
+
+router.post('/unit/:unit/events', function (req, res) {
+  (0, _functions.fetchAPI)('/api/units/' + req.params.unit + '/events', {
+    credentials: 'same-origin',
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': req.user.apiToken
+    },
+    body: JSON.stringify({
+      events: req.body.events
+    })
+  }).then(function (result) {
+    res.json({
+      success: true,
+      redirect: '/register/unit/' + req.params.unit + '/confirm'
     });
   }).catch(function (err) {
     res.json({
       success: false,
       error: err.message
     });
-  });
-});
-
-router.post('/unit/:unit/events', function (req, res) {
-  console.log(req.body);
-  res.json({
-    success: true,
-    redirect: '/register/unit/' + req.params.unit + '/confirm'
   });
 });
 

@@ -1,7 +1,7 @@
 import libFetch from 'isomorphic-fetch';
 
 export function fetchAPI(url, options = { }) {
-  const finalUrl = ( typeof window === 'undefined' ? 'http://localhost:8080' + url : url );
+  const finalUrl = ( typeof window === 'undefined' ? process.env.BASE_URL + url : url );
 
   options.headers = options.headers || {
     'Accept': 'application/json',

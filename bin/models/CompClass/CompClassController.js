@@ -10,6 +10,10 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _CompClassModel = require('./CompClassModel');
 
 var _CompClassModel2 = _interopRequireDefault(_CompClassModel);
@@ -31,7 +35,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 // All routes are /api/compclasses/
 
-var GUARD_TYPE = '579000db0fceff06c51ae377';
+var GUARD_TYPE = '579000db0Oceff06c51ae377';
 var WINDS_TYPE = '579000db0fceff06c51ae379';
 
 router.route('/').get(function (req, res) {
@@ -84,7 +88,7 @@ router.get('/table', function (req, res) {
   }).then(function (counts) {
     for (var key in contents) {
       contents[key] = contents[key].toObject();
-      var count = _.find(counts, { _id: contents[key]._id });
+      var count = _lodash2.default.find(counts, { _id: contents[key]._id });
 
       contents[key] = _extends({}, contents[key], {
         unitCount: count ? count.count : 0
@@ -111,7 +115,7 @@ router.route('/:abbreviation').get(function (req, res) {
 
     res.json({
       success: true,
-      contents: compclass
+      model: compclass
     });
   }).catch(function (err) {
     res.json({
@@ -121,8 +125,7 @@ router.route('/:abbreviation').get(function (req, res) {
   });
 }).patch((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
   (0, _CompClassValidation2.default)(req.body).then(function (data) {
-    var fillableData = _.pick(data, _CompClassModel2.default.fillableFields());
-    _CompClassModel2.default.findOneAndUpdate({ abbreviation: data.abbreviation }, fillableData, {
+    _CompClassModel2.default.findOneAndUpdate({ abbreviation: data.abbreviation }, data, {
       fields: 'abbreviation detailsUrl'
     }).then(function (compclass) {
       res.send({
@@ -142,10 +145,7 @@ router.route('/:abbreviation').get(function (req, res) {
 });
 
 router.route('/:id/units').get(function (req, res) {
-  _UnitModel2.default.find({
-    registered: true,
-    competition_class: req.params.id
-  }, '_id name slug competition_class unit_type director').populate('unit_type', 'name').populate('competition_class', 'abbreviation').populate('director', 'first_name last_name formattedName email profileUrl').sort('name').exec().then(function (units) {
+  _UnitModel2.default.find({ registered: true, competition_class: req.params.id }, '_id name slug organization unit_type competition_class director').populate('organization', 'name detailsUrl').populate('unit_type', 'name').populate('competition_class', 'name abbreviation').populate('director', 'first_name last_name formattedName email profileUrl').sort('name').exec().then(function (units) {
     res.json({
       success: true,
       contents: units

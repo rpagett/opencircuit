@@ -39,6 +39,10 @@ var _CompClassViews = require('./models/CompClass/CompClassViews');
 
 var CompClassView = _interopRequireWildcard(_CompClassViews);
 
+var _FeeViews = require('./models/Fee/FeeViews');
+
+var FeeView = _interopRequireWildcard(_FeeViews);
+
 var _EventViews = require('./models/Event/EventViews');
 
 var EventView = _interopRequireWildcard(_EventViews);
@@ -131,6 +135,7 @@ function getAppRoutes(store) {
   var AppRoutes = _react2.default.createElement(
     _reactRouter.Route,
     { path: '/', component: _AppTemplate2.default },
+    _react2.default.createElement(_reactRouter.Route, { path: '/invoice/:org', component: FeeView.Invoice }),
     _react2.default.createElement(
       _reactRouter.Route,
       { component: _app2.default, onEnter: authOnly },
@@ -153,6 +158,11 @@ function getAppRoutes(store) {
       ),
       _react2.default.createElement(
         _reactRouter.Route,
+        { path: '/fees', onEnter: requiresRole.bind(this, _UserRoles.UserRoles.Administrator) },
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: FeeView.Index })
+      ),
+      _react2.default.createElement(
+        _reactRouter.Route,
         { path: '/register' },
         _react2.default.createElement(_reactRouter.IndexRoute, { component: RegistrationView.Organization }),
         _react2.default.createElement(_reactRouter.Route, { path: 'organization/:org', component: RegistrationView.Unit }),
@@ -163,13 +173,17 @@ function getAppRoutes(store) {
       _react2.default.createElement(
         _reactRouter.Route,
         { path: '/units' },
-        _react2.default.createElement(_reactRouter.IndexRoute, { component: UnitView.Index, onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector) })
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: UnitView.Index, onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector) }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':slug', component: UnitView.Show }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':slug/edit', component: UnitView.Edit })
       ),
       _react2.default.createElement(
         _reactRouter.Route,
         { path: '/unittypes', onEnter: requiresRole.bind(this, _UserRoles.UserRoles.Administrator) },
         _react2.default.createElement(_reactRouter.IndexRoute, { component: UnitTypeView.Index }),
-        _react2.default.createElement(_reactRouter.Route, { path: ':slug', component: UnitTypeView.Show })
+        _react2.default.createElement(_reactRouter.Route, { path: 'new', component: UnitTypeView.New }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':slug', component: UnitTypeView.Show }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':slug/edit', component: UnitTypeView.Edit })
       ),
       _react2.default.createElement(
         _reactRouter.Route,

@@ -85,7 +85,8 @@ const mapStateToProps = (state, props) => {
   return {
     isLoading: state.flexTable.isLoading,
     error: state.flexTable.error,
-    contents: state.flexTable[props.name]
+    contents: state.flexTable[props.name],
+    authUser: state.auth.user
   }
 }
 
@@ -102,7 +103,7 @@ const mapDispatchToProps = (dispatch, props) => {
     feedDispatch: () => { return dispatch },
 
     setLoading: () => {
-      dispatch(FlexTableActions.beginLoading());
+      dispatch(FlexTableActions.beginLoading(props.endpoint));
     }
   }
 }

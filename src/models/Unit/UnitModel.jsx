@@ -1,4 +1,6 @@
 import Mongoose from 'mongoose';
+import mLifecycle from 'mongoose-lifecycle';
+
 import UnitType from '../UnitType/UnitTypeModel';
 import CompClass from '../CompClass/CompClassModel';
 import User from '../User/UserModel';
@@ -12,7 +14,11 @@ const UnitSchema = Mongoose.Schema({
     unique: true
   },
   name: String,
+  members: Number,
   image_url: String,
+  notes: String,
+
+  circuit_member: Boolean,
 
   competition_class: {
     type: ObjectId,
@@ -41,6 +47,8 @@ const UnitSchema = Mongoose.Schema({
     virtuals: true
   }
 });
+
+UnitSchema.plugin(mLifecycle);
 
 UnitSchema.virtual('detailsLink').get(function() {
   return `/units/${this.slug}`;

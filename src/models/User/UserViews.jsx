@@ -53,9 +53,9 @@ export class _Show extends React.Component {
 
         <UserOrAdmin profileEmail={ user.email }>
           <div className="row">
-            <div className="pull-center col-xs-12 col-sm-offset-4 col-sm-4">
+            <div className="pull-xs-center col-xs-12 offset-sm-4 col-sm-4">
               <small>
-                <Link to={ `/users/${user.profileUrl}/edit` } className="btn btn-sm btn-secondary-outline btn-block">
+                <Link to={ `/users/${user.profileUrl}/edit` } className="btn btn-sm btn-outline-secondary btn-block">
                   Edit Profile
                 </Link>
               </small>
@@ -82,7 +82,7 @@ export class Edit extends React.Component {
       <div className="container-fluid">
         <h1 className="page-header">Editing User</h1>
         <div className="row">
-          <div className="col-sm-offset-1 col-sm-10">
+          <div className="offset-sm-1 col-sm-10">
             <UserForms.Edit email={ this.props.params.email } />
           </div>
         </div>

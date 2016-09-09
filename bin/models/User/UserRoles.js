@@ -9,6 +9,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _class, _temp, _class2, _temp2;
 
+exports.userHasRole = userHasRole;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -45,6 +47,10 @@ var userRoleLabel = exports.userRoleLabel = function userRoleLabel(id) {
   }
 };
 
+function userHasRole(user, role) {
+  return user.roles.includes(UserRoles.Administrator) || user.roles.includes(role);
+}
+
 var _HasRole = (_temp = _class = function (_React$Component) {
   _inherits(_HasRole, _React$Component);
 
@@ -63,10 +69,14 @@ var _HasRole = (_temp = _class = function (_React$Component) {
     key: 'render',
     value: function render() {
       if (!this.hasRole()) {
-        return '';
+        return _react2.default.createElement('div', null);
       }
 
-      return this.props.children;
+      return _react2.default.createElement(
+        'div',
+        this.props,
+        this.props.children
+      );
     }
   }]);
 

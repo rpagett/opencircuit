@@ -13,7 +13,19 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
+var _reactRouter = require('react-router');
+
+var _ContentsView = require('../../helpers/contentsView/ContentsView');
+
+var _ContentsView2 = _interopRequireDefault(_ContentsView);
+
+var _SpawnableModal = require('../../modals/SpawnableModal');
+
 var _UserRoles = require('../User/UserRoles');
+
+var _UserFeeList = require('../Fee/UserFeeList');
+
+var _UserFeeList2 = _interopRequireDefault(_UserFeeList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23,8 +35,84 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _Home = function (_React$Component) {
-  _inherits(_Home, _React$Component);
+var _FeeBox = function (_React$Component) {
+  _inherits(_FeeBox, _React$Component);
+
+  function _FeeBox() {
+    _classCallCheck(this, _FeeBox);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_FeeBox).apply(this, arguments));
+  }
+
+  _createClass(_FeeBox, [{
+    key: 'render',
+    value: function render() {
+      if (!this.props.contents.orgs.length) {
+        return _react2.default.createElement('div', null);
+      }
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'row' },
+        _react2.default.createElement(
+          'div',
+          { className: 'card col-xs-12' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card-header card-danger' },
+            'Outstanding Fees'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-block' },
+            _react2.default.createElement(_UserFeeList2.default, { endpoint: '/api/fees/forUser/' + this.props.user._id })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-footer' },
+            _react2.default.createElement(
+              'div',
+              { className: 'row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'col-xs-12 col-sm-6' },
+                _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
+                  className: 'btn btn-sm btn-block btn-outline-secondary',
+                  buttonText: 'Generate Invoice',
+
+                  title: 'Generate Invoice',
+                  componentName: 'FEE_GENERATE_INVOICE',
+                  modalProps: {
+                    orgs: this.props.contents.orgs
+                  }
+                })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'col-xs-12 col-sm-6' },
+                _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
+                  className: 'btn btn-sm btn-block btn-outline-success',
+                  buttonText: 'Pay Online',
+
+                  title: 'Pay Fees',
+                  componentName: 'FEE_USER_PAY',
+                  modalProps: {
+                    user: this.props.user
+                  }
+                })
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return _FeeBox;
+}(_react2.default.Component);
+
+var _Home = function (_React$Component2) {
+  _inherits(_Home, _React$Component2);
 
   function _Home() {
     _classCallCheck(this, _Home);
@@ -44,7 +132,7 @@ var _Home = function (_React$Component) {
           this.props.userToken ? 'You\'re logged in!' : 'Everything is wonderful!',
           _react2.default.createElement(
             'span',
-            { className: 'pull-right' },
+            { className: 'pull-xs-right' },
             _react2.default.createElement(
               'strong',
               null,
@@ -59,6 +147,26 @@ var _Home = function (_React$Component) {
             'div',
             { className: 'alert alert-warning' },
             'You have the right privileges.'
+          )
+        ),
+        _react2.default.createElement(_ContentsView2.default, {
+          subStore: 'dashboard_fees',
+          endpoint: '/api/fees/orgsForUser/' + this.props.user._id,
+          component: _FeeBox,
+          user: this.props.user,
+          returnEmpty: true
+        }),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-12 offset-sm-1 col-sm-10' },
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/register', className: 'btn btn-block btn-outline-success' },
+              'Register'
+            )
           )
         )
       );
@@ -81,8 +189,8 @@ var mapDispatchToHomeProps = function mapDispatchToHomeProps(dispatch) {
 
 var Home = exports.Home = (0, _reactRedux.connect)(mapStateToHomeProps, mapDispatchToHomeProps)(_Home);
 
-var About = exports.About = function (_React$Component2) {
-  _inherits(About, _React$Component2);
+var About = exports.About = function (_React$Component3) {
+  _inherits(About, _React$Component3);
 
   function About() {
     _classCallCheck(this, About);

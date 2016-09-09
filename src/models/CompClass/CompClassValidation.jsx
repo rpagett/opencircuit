@@ -10,6 +10,13 @@ export default function validateCompClass(data = { }) {
     'required': 'This field is required.',
   };
 
+  if (data.name.match(/scholastic/i)) {
+    data.scholastic = true;
+  }
+  else {
+    data.scholastic = false;
+  }
+
   data.abbreviation = data.abbreviation.toLowerCase();
 
   return Indicative.validateAll(data, rules, messages);

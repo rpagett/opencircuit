@@ -13,7 +13,8 @@ const CompClassSchema = new Mongoose.Schema({
   unit_type: {
     type: ObjectId,
     ref: 'UnitType'
-  }
+  },
+  scholastic: Boolean
 }, {
   timestamps: true,
   toObject: {

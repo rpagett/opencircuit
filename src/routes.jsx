@@ -8,6 +8,7 @@ import AuthTemplate from './templates/AuthTemplate';
 import * as RootView from './models/Dashboard/DashboardViews';
 import * as AuthView from './models/Auth/AuthViews';
 import * as CompClassView from './models/CompClass/CompClassViews';
+import * as FeeView from './models/Fee/FeeViews';
 import * as EventView from './models/Event/EventViews';
 import * as RegistrationView from './models/Registration/RegistrationViews'
 import * as UnitView from './models/Unit/UnitViews';
@@ -69,6 +70,7 @@ export function getAppRoutes(store) {
 
   const AppRoutes = (
     <Route path="/" component={ AppTemplate }>
+      <Route path="/invoice/:org" component={ FeeView.Invoice } />
 
       <Route component={ App } onEnter={ authOnly }>
         <IndexRoute component={ RootView.Home } />
@@ -87,6 +89,10 @@ export function getAppRoutes(store) {
           <Route path=":slug/edit" component={ EventView.Edit } onEnter={ requiresRole.bind(this, UserRoles.EventDirector) } />
         </Route>
 
+        <Route path="/fees" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
+          <IndexRoute component={ FeeView.Index } />
+        </Route>
+
         <Route path="/register">
           <IndexRoute component={ RegistrationView.Organization } />
           <Route path="organization/:org" component={ RegistrationView.Unit } />
@@ -97,11 +103,15 @@ export function getAppRoutes(store) {
 
         <Route path="/units">
           <IndexRoute component={ UnitView.Index } onEnter={ requiresRole.bind(this, UserRoles.EventDirector) } />
+          <Route path=":slug" component={ UnitView.Show } />
+          <Route path=":slug/edit" component={ UnitView.Edit } />
         </Route>
 
         <Route path="/unittypes" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
           <IndexRoute component={ UnitTypeView.Index } />
+          <Route path="new" component={ UnitTypeView.New } />
           <Route path=":slug" component={ UnitTypeView.Show } />
+          <Route path=":slug/edit" component={ UnitTypeView.Edit } />
         </Route>
 
         <Route path="/users">

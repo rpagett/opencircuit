@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import { ReduxForm, FormInput, ClassSelect, StateSelect, EventChecks, Radio } from '../../forms/components';
+import { ReduxForm, FormInput, Checkbox, ClassSelect, StateSelect, EventChecks, Radio } from '../../forms/components';
 import ContentsView from '../../helpers/contentsView/ContentsView';
 
 export class Organization extends React.Component {
@@ -43,7 +43,7 @@ export class Organization extends React.Component {
           <FormInput name="street" label="Street" />
           <FormInput name="city" label="City" />
           <StateSelect name="state" label="State" />
-          <FormInput name="zip" label="ZIP" />
+          <FormInput name="zip" label="ZIP" maxLength={ 5 } />
 
           <button name="submit" type="submit" className="btn btn-primary btn-block">
             Next
@@ -99,6 +99,7 @@ export class Unit extends React.Component {
 
           <ContentsView subStore="register_unit_types" endpoint="/api/unittypes" component={ _UnitTypes } />
           <FormInput name="name" label="Unit Name" />
+          <Checkbox name="circuit_member" label="Join the Circuit?" inForm={ true } checked={ true } />
 
           <button name="submit" type="submit" className="btn btn-primary btn-block">
             Next
@@ -117,6 +118,7 @@ class _ClassBox extends React.Component {
           name="competition_class"
           label="Class"
           unitType={ this.props.contents.unit_type }
+          scholastic={ this.props.contents.scholastic }
           formStore="register_unit_details"
         />
       </div>
@@ -144,7 +146,7 @@ export class Details extends React.Component {
             endpoint={ `/api/register/unit/${this.props.params.unit}` }
             component={ _ClassBox }
           />
-          <FormInput name="members" label="Members" />
+          <FormInput name="members" label="Member Count" />
 
           <button name="submit" type="submit" className="btn btn-primary btn-block">
             Next
@@ -240,9 +242,9 @@ export class Confirm extends React.Component {
         />
 
         <div className="row">
-          <div className="col-xs-offset-1 col-xs-10 text-xs-center">
+          <div className="offset-xs-1 col-xs-10 text-xs-center">
             <div className="row">
-              <Link to="/" className="btn btn-success-outline btn-block btn-sm">
+              <Link to="/" className="btn btn-outline-success btn-block btn-sm">
                 Return to Dashboard
               </Link>
             </div>

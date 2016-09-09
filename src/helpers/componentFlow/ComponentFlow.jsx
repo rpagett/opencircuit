@@ -51,7 +51,7 @@ class _ComponentFlow extends React.Component {
         <CurrentComponent { ...this.props }/>
 
         <div className="row">
-          <div className="col-xs-12 col-sm-offset-3 col-sm-6">
+          <div className="col-xs-12 offset-sm-4 col-sm-6">
             <button className={ buttonClasses } onClick={ this.dispatchButtonAction.bind(this) }>
               { (flow[step].buttonText ? flow[step].buttonText : 'Continue') }
             </button>

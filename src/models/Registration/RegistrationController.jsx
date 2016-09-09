@@ -3,16 +3,17 @@ import _ from 'lodash';
 
 import Organization from '../Organization/OrganizationModel';
 import Unit from '../Unit/UnitModel';
-import validateOrganization from '../Organization/OrganizationValidation'
-import validateUnit from '../Unit/UnitValidation';
+
+import * as Validate from './RegistrationValidation';
 import { UserRoles } from '../User/UserRoles';
+import { fetchAPI } from '../../helpers/functions';
 import { hasRole, userOrAdmin } from '../../middleware/authRoute';
 
 let router = Express.Router();
 // All routes are '/api/register/...'
 
 router.post('/organization', (req, res) => {
-  validateOrganization(req.body)
+  Validate.organization(req.body)
     .then(data => {
       //Organization.search({ query: data.slug }) This is where I'll do fuzzy matching.
 
@@ -68,7 +69,7 @@ router.route('/organization/:org')
   })
 
   .post((req, res) => {
-    validateUnit(req.body)
+    Validate.unit(req.body)
       .then(data => {
         let unit = new Unit(data);
 
@@ -93,7 +94,8 @@ router.route('/organization/:org')
 
 router.route('/unit/:unit')
   .get((req, res) => {
-    Unit.findOne({ _id: req.params.unit }, 'name unit_type director')
+    Unit.findOne({ _id: req.params.unit }, 'name unit_type director organization')
+      .populate('organization', 'is_school')
       .then(unit => {
         if (!unit) {
           res.json({
@@ -112,7 +114,8 @@ router.route('/unit/:unit')
         res.json({
           success: true,
           contents: {
-            unit_type: unit.unit_type
+            unit_type: unit.unit_type,
+            scholastic: unit.organization.is_school
           }
         })
       })
@@ -125,17 +128,46 @@ router.route('/unit/:unit')
     })
 
   .post((req, res) => {
-    console.log('Posting!');
-    Unit.findOneAndUpdate({ id: req.params.unit }, {
-      members: req.body.members,
-      competition_class: req.body.competition_class,
-      registered: true
+    Validate.unitDetails(req.body)
+      .then(data => {
+        return Unit.findOneAndUpdate({ _id: req.params.unit }, {
+          members: data.members,
+          competition_class: data.competition_class,
+          registered: true
+        })
+        .exec()
+      })
+      .then(unit => {
+        res.json({
+          success: true,
+          redirect: `/register/unit/${req.params.unit}/events`
+        })
+      })
+      .catch(errors => {
+        res.json({
+          success: false,
+          errors
+        })
+      })
+})
+
+router.post('/unit/:unit/events', (req, res) => {
+  fetchAPI(`/api/units/${req.params.unit}/events`, {
+    credentials: 'same-origin',
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': req.user.apiToken
+    },
+    body: JSON.stringify({
+      events: req.body.events
     })
-    .exec()
-    .then(unit => {
+  })
+    .then(result => {
       res.json({
         success: true,
-        redirect: `/register/unit/${req.params.unit}/events`
+        redirect: `/register/unit/${req.params.unit}/confirm`
       })
     })
     .catch(err => {
@@ -144,14 +176,6 @@ router.route('/unit/:unit')
         error: err.message
       })
     })
-})
-
-router.post('/unit/:unit/events', (req, res) => {
-  console.log(req.body);
-  res.json({
-    success: true,
-    redirect: `/register/unit/${req.params.unit}/confirm`
-  })
 })
 
 router.get('/unit/:unit/confirm', (req, res) => {

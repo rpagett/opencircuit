@@ -18,7 +18,7 @@ export default class UnitList extends React.Component {
               return (<Link to={ unit.director.profileUrl }>{ unit.director.formattedName }</Link>)
             },
             'Type': unit => { return unit.unit_type.name },
-            'Class': unit => { return unit.competition_class.abbreviation }
+            'Class': unit => { return unit.competition_class.formattedName }
           }}
         />
       </div>

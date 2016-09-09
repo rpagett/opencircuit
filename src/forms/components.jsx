@@ -42,13 +42,23 @@ class _InputWrapper extends React.Component {
 
   componentDidMount() {
     if (this.props.value) {
-      this.props.updateField(this.props.value)
+      let value = this.props.value;
+
+      if (value instanceof Date) {
+        console.log('It\'s a Date!')
+        value = Moment(value);
+      }
+      else if (value instanceof Object) {
+        value = value._id
+      }
+
+      this.props.updateField(value)
     }
   }
 
-  updateValue(e, selected) {
+  updateValue(e) {
     // React-select does some funky stuff
-    const child = React.Children.only(this.props.children);
+    //const child = React.Children.only(this.props.children);
 
     if (e.currentTarget) {
       this.props.updateField(e.currentTarget.value);
@@ -58,12 +68,12 @@ class _InputWrapper extends React.Component {
     }
     else {
       console.log('Nailed it!');
-      if (child.props.multiple) {
-        this.props.updateField(selected.map(option => option.value));
-      }
-      else {
+      //if (child.props.multiple) {
+      //  this.props.updateField(selected.map(option => option.value));
+      //}
+      //else {
         this.props.updateField(e.value);
-      }
+      //}
     }
   }
 
@@ -83,6 +93,10 @@ class _InputWrapper extends React.Component {
       if (this.props.value instanceof Date) {
         console.log('It\'s a Date!')
         childProps.value = Moment(this.props.value);
+      }
+      else if (this.props.value instanceof Object) {
+        console.log('Coercing object for ', this.props.name)
+        childProps.valueKey = this.props.value._id
       }
 
       childProps.children = this.recursivelyCloneChildren(child.props.children);
@@ -199,11 +213,17 @@ export class TextArea extends React.Component {
 
 export class ClassSelect extends React.Component {
   static propTypes = {
-    unitType: React.PropTypes.string.isRequired
+    unitType: React.PropTypes.string.isRequired,
+    scholastic: React.PropTypes.bool.isRequired
   }
 
   fetchList() {
-    return fetchAPI(`/api/unittypes/${this.props.unitType}/classes`)
+    let endpoint = `/api/unittypes/${this.props.unitType}/classes`;
+
+    if (this.props.scholastic) {
+      endpoint += '/scholastic';
+    }
+    return fetchAPI(endpoint)
       .then(res => {
         return res.json();
       })
@@ -220,6 +240,90 @@ export class ClassSelect extends React.Component {
           clearable={ false }
           loadOptions={ this.fetchList.bind(this) }
           autosize={ false }
+          searchable={ false }
+        />
+      </InputWrapper>
+    );
+  }
+}
+
+export class PaymentTypeSelect extends React.Component {
+  fetchList() {
+    let endpoint = `/api/fees/paymentTypes`;
+
+    return fetchAPI(endpoint)
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        return { options: json };
+      });
+  }
+
+  render() {
+    return (
+      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+        <Select.Async
+          className="form-control"
+          clearable={ false }
+          loadOptions={ this.fetchList.bind(this) }
+          autosize={ false }
+          searchable={ false }
+        />
+      </InputWrapper>
+    );
+  }
+}
+
+export class UnitSelect extends React.Component {
+  fetchList() {
+    let endpoint = `/api/units/select`;
+
+    return fetchAPI(endpoint)
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        return { options: json };
+      });
+  }
+
+  render() {
+    return (
+      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+        <Select.Async
+          className="form-control"
+          clearable={ false }
+          loadOptions={ this.fetchList.bind(this) }
+          autosize={ false }
+        />
+      </InputWrapper>
+    );
+  }
+}
+
+export class FeeCategorySelect extends React.Component {
+  fetchList() {
+    let endpoint = `/api/feecategories/select`;
+
+    return fetchAPI(endpoint)
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        return { options: json };
+      });
+  }
+
+  render() {
+    return (
+      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+        <Select.Async
+          className="form-control"
+          clearable={ false }
+          loadOptions={ this.fetchList.bind(this) }
+          autosize={ false }
+          searchable={ false }
         />
       </InputWrapper>
     );
@@ -244,6 +348,7 @@ export class UnitTypeSelect extends React.Component {
           className="form-control"
           clearable={ false }
           loadOptions={ this.fetchList.bind(this) }
+          filterOption={ () => { return true } }
           autosize={ false }
         />
       </InputWrapper>
@@ -359,13 +464,14 @@ class _Checkbox extends React.Component {
   render() {
     if (this.props.inForm) {
       return (
-        <div className="form-group row">
-          <div className="col-xs-10 col-sm-4 form-control-label">
+        <div className="form-check row">
+          <div className="col-xs-10 col-sm-4 form-check-label">
             { this.props.label }
           </div>
           <div className="col-xs-2 col-sm-8">
             <input
               type="checkbox"
+              className="form-check-input"
               name={ this.props.name }
               checked={ this.props.formChecked }
               onChange={ this.updateChecked.bind(this) }
@@ -376,16 +482,17 @@ class _Checkbox extends React.Component {
     }
     else {
       return (
-        <div className="checkbox">
+        <div className="checkbox form-check">
           <label>
             <input
               type="checkbox"
+              className="form-check-input"
               name={ this.props.name }
               value={ this.props.value }
               checked={ this.props.checked }
               onChange={ this.updateChecked.bind(this) }
             />
-            <span className="checkbox-label">{ this.props.label }</span>
+            <span className="checkbox-label form-check-label">{ this.props.label }</span>
           </label>
         </div>
       )
@@ -509,7 +616,7 @@ class _EventChecks extends React.Component {
       boxes.push(
         <div className="col-xs-12 col-sm-6" key={ `col-${event.id}` }>
           <Checkbox
-            name="events[]"
+            name="events"
             formStore={ this.props.formStore }
             key={ event._id }
             label={ event.name + ' (' + event.formattedDate + ')' }
@@ -564,7 +671,7 @@ class _ReduxForm extends React.Component {
         return child;
       }
 
-      let childProps = {formStore: this.props.subStore};
+      let childProps = {formStore: this.props.subStore, formModel: this.props.formModel};
       childProps.children = this.recursivelyCloneChildren(child.props.children);
 
       return React.cloneElement(child, childProps);
@@ -581,7 +688,8 @@ class _ReduxForm extends React.Component {
           if (this.props.inModal) {
             this.props.closeModal();
           }
-          else if (res.redirect) {
+
+          if (res.redirect) {
             if (res.external && window) {
               window.location = res.redirect;
             }
@@ -620,7 +728,8 @@ class _ReduxForm extends React.Component {
 const mapStateToReduxFormProps = (state, props) => {
   return {
     isLoading: state.form.loading[props.subStore],
-    globalError: state.form.globalErrors[props.subStore]
+    globalError: state.form.globalErrors[props.subStore],
+    formModel: state.form[props.subStore]
   }
 }
 

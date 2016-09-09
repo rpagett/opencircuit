@@ -50,20 +50,19 @@ class _NavBar extends React.Component {
               </IndexLink>
             </div>
 
-            <HasRole role={ UserRoles.Administrator }>
-              <div className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  <Icon shape="cog" /> Manage
-                </a>
-                <div className="dropdown-menu">
-                  <a className="dropdown-item" href="#">Circuit</a>
-                  <Link to="/classes" className="dropdown-item">Classes</Link>
-                  <Link to="/units" className="dropdown-item">Units</Link>
-                  <Link to="/unittypes" className="dropdown-item">Unit Types</Link>
-                  <Link to="/users" className="dropdown-item">Users</Link>
-                  <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="#">Separated link</a>
-                </div>
+            <HasRole role={ UserRoles.Administrator } className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <Icon shape="cog" /> Manage
+              </a>
+              <div className="dropdown-menu">
+                <a className="dropdown-item" href="#">Circuit</a>
+                <Link to="/compclasses" className="dropdown-item">Classes</Link>
+                <Link to="/fees" className="dropdown-item">Fees</Link>
+                <Link to="/units" className="dropdown-item">Units</Link>
+                <Link to="/unittypes" className="dropdown-item">Unit Types</Link>
+                <Link to="/users" className="dropdown-item">Users</Link>
+                <div className="dropdown-divider"></div>
+                <a className="dropdown-item" href="#">Separated link</a>
               </div>
             </HasRole>
 

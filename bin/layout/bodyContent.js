@@ -35,7 +35,7 @@ var BodyContent = function (_React$Component) {
         { className: 'row', style: { 'height': '100%' } },
         _react2.default.createElement(
           'div',
-          { className: 'content-container col-sm-offset-1 col-sm-10 body-container' },
+          { className: 'content-container offset-sm-1 col-sm-10 body-container' },
           this.props.children
         )
       );

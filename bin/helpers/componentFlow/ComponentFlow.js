@@ -85,7 +85,7 @@ var _ComponentFlow = (_temp = _class = function (_React$Component) {
           { className: 'row' },
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-12 col-sm-offset-3 col-sm-6' },
+            { className: 'col-xs-12 offset-sm-4 col-sm-6' },
             _react2.default.createElement(
               'button',
               { className: buttonClasses, onClick: this.dispatchButtonAction.bind(this) },

@@ -3,10 +3,6 @@
   padding-top: .3rem;
 }
 
-.input-group-addon {
-  padding-top: .6rem;
-}
-
 .form-control {
   z-index: 1
 }
@@ -21,18 +17,18 @@
   }
 }
 
-.Select--single {
+//.Select--single {
   //padding-right: .1rem !important;
   //padding-left: .1rem !important;
-}
+//}
 
 .Select-value {
   padding: 0 !important;
 }
 
-.Select-input {
-  height: 1.9rem;
-}
+//.Select-input {
+//  height: 1.9rem;
+//}
 
 .Select-arrow-zone {
   padding-right: 0;
@@ -42,31 +38,31 @@
   padding-bottom: 2rem;
 }
 
-.checkbox-group {
-  width: 100%;
-  padding-bottom: .5rem;
-
-  button {
-    margin-top: .6rem !important;
-    margin-top: .4rem !important;
-  }
-
-  .checkbox-label {
-    margin-left: 1.5rem;
-  }
-
-  input {
-    padding-left: 3rem;
-    padding-right: 1rem;
-  }
-}
-
-.checkbox {
-  label {
-    padding-left: 3rem;
-  }
-
-  &:last-of-type {
-    padding-bottom: .6rem;
-  }
-}
+//.checkbox-group {
+//  width: 100%;
+//  padding-bottom: .5rem;
+//
+//  button {
+//    margin-top: .6rem !important;
+//    margin-top: .4rem !important;
+//  }
+//
+//  .checkbox-label {
+//    margin-left: 1.5rem;
+//  }
+//
+//  input {
+//    padding-left: 3rem;
+//    padding-right: 1rem;
+//  }
+//}
+//
+//.checkbox {
+//  label {
+//    padding-left: 3rem;
+//  }
+//
+//  &:last-of-type {
+//    padding-bottom: .6rem;
+//  }
+//}

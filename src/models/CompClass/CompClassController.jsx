@@ -1,4 +1,5 @@
 import Express from 'express';
+import _ from 'lodash';
 
 import CompClass from './CompClassModel';
 import validateCompClass from './CompClassValidation';
@@ -10,7 +11,7 @@ import { hasRole, userOrAdmin } from '../../middleware/authRoute';
 let router = Express.Router();
 // All routes are /api/compclasses/
 
-const GUARD_TYPE = '579000db0fceff06c51ae377';
+const GUARD_TYPE = '579000db0Oceff06c51ae377';
 const WINDS_TYPE = '579000db0fceff06c51ae379';
 
 router.route('/')
@@ -114,7 +115,7 @@ router.route('/:abbreviation')
 
         res.json({
           success: true,
-          contents: compclass
+          model: compclass
         })
       })
       .catch(err => {
@@ -128,8 +129,7 @@ router.route('/:abbreviation')
   .patch(hasRole(UserRoles.Administrator), (req, res) => {
     validateCompClass(req.body)
       .then(data => {
-        const fillableData = _.pick(data, CompClass.fillableFields());
-        CompClass.findOneAndUpdate({ abbreviation: data.abbreviation }, fillableData, {
+        CompClass.findOneAndUpdate({ abbreviation: data.abbreviation }, data, {
             fields: 'abbreviation detailsUrl'
           })
           .then(compclass => {
@@ -153,12 +153,10 @@ router.route('/:abbreviation')
 
 router.route('/:id/units')
   .get((req, res) => {
-    Unit.find({
-      registered: true,
-      competition_class: req.params.id
-    }, '_id name slug competition_class unit_type director')
+    Unit.find({ registered: true, competition_class: req.params.id }, '_id name slug organization unit_type competition_class director')
+      .populate('organization', 'name detailsUrl')
       .populate('unit_type', 'name')
-      .populate('competition_class', 'abbreviation')
+      .populate('competition_class', 'name abbreviation')
       .populate('director', 'first_name last_name formattedName email profileUrl')
       .sort('name')
       .exec()

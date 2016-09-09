@@ -23,6 +23,10 @@ export const userRoleLabel = id => {
   }
 }
 
+export function userHasRole(user, role) {
+  return user.roles.includes(UserRoles.Administrator) || user.roles.includes(role);
+}
+
 class _HasRole extends React.Component {
   static propTypes = {
     user: React.PropTypes.object.isRequired,
@@ -35,10 +39,10 @@ class _HasRole extends React.Component {
 
   render() {
     if (!this.hasRole()) {
-      return '';
+      return (<div></div>);
     }
 
-    return this.props.children
+    return <div {...this.props}>{ this.props.children }</div>
   }
 }
 

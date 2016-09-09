@@ -177,14 +177,22 @@ router.route('/:slug/units').get(function (req, res) {
   });
 });
 
-router.get('/:type/classes', function (req, res) {
+router.get('/:type/classes(/:scholastic)?', function (req, res) {
   console.log('KNOCK KNOCK');
-  _CompClassModel2.default.find({ unit_type: req.params.type }, '_id name abbreviation').sort('name').exec().then(function (classes) {
+  var query = _CompClassModel2.default.find({ unit_type: req.params.type }, '_id name abbreviation').sort('name');
+
+  if (req.params.scholastic === 'scholastic') {
+    query.where('scholastic').equals(true);
+  } else {
+    query.where('scholastic').equals(false);
+  }
+
+  query.exec().then(function (classes) {
     var json = [];
     classes.map(function (compclass) {
       json.push({
         value: compclass._id.toString(),
-        label: compclass.name + ' (' + compclass.abbreviation + ')'
+        label: compclass.name + ' (' + compclass.abbreviation.toUpperCase() + ')'
       });
     });
 

@@ -6,7 +6,7 @@ export class Edit extends React.Component {
     let fetch = { };
 
     if (this.props.creationForm) {
-      fetch.submitEndpoint = `/api/unittypes`;
+      fetch.submitEndpoint = '/api/unittypes';
       fetch.submitMethod = 'POST';
     }
     else {

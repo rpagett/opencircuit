@@ -8,6 +8,10 @@ var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
+var _mongooseLifecycle = require('mongoose-lifecycle');
+
+var _mongooseLifecycle2 = _interopRequireDefault(_mongooseLifecycle);
+
 var _UnitTypeModel = require('../UnitType/UnitTypeModel');
 
 var _UnitTypeModel2 = _interopRequireDefault(_UnitTypeModel);
@@ -34,7 +38,11 @@ var UnitSchema = _mongoose2.default.Schema({
     unique: true
   },
   name: String,
+  members: Number,
   image_url: String,
+  notes: String,
+
+  circuit_member: Boolean,
 
   competition_class: {
     type: ObjectId,
@@ -63,6 +71,8 @@ var UnitSchema = _mongoose2.default.Schema({
     virtuals: true
   }
 });
+
+UnitSchema.plugin(_mongooseLifecycle2.default);
 
 UnitSchema.virtual('detailsLink').get(function () {
   return '/units/' + this.slug;
