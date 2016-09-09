@@ -42,12 +42,11 @@ router.post('/register', (req, res) => {
           })
         }
 
-        data = {
-          ...data,
+        let fillableData = _.pick(data, User.fillableFields());
+        fillableData = {
+          ...fillableData,
           apiToken: uuid.v4()
         }
-
-        const fillableData = _.pick(data, User.fillableFields());
 
         User.findOneAndUpdate({email: data.email}, fillableData, {'new': true})
           .then(user => {

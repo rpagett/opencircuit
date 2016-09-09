@@ -68,11 +68,10 @@ router.post('/register', function (req, res) {
         });
       }
 
-      data = _extends({}, data, {
+      var fillableData = _lodash2.default.pick(data, _UserModel2.default.fillableFields());
+      fillableData = _extends({}, fillableData, {
         apiToken: _nodeUuid2.default.v4()
       });
-
-      var fillableData = _lodash2.default.pick(data, _UserModel2.default.fillableFields());
 
       _UserModel2.default.findOneAndUpdate({ email: data.email }, fillableData, { 'new': true }).then(function (user) {
         req.login(user, function (err) {

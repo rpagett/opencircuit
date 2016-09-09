@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="" />
+    <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Auth/AuthController.jsx" afterPath="$PROJECT_DIR$/src/models/Auth/AuthController.jsx" />
+    </list>
     <ignored path="opencircuit.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,13 +26,13 @@
       <file leaf-file-name="AuthController.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/models/Auth/AuthController.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.6622341">
-              <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.26861703">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding>
-                <marker date="1473456622000" expanded="true" signature="2295:2471" placeholder="{...}" />
-                <marker date="1473456622000" expanded="true" signature="2296:2446" placeholder="{...}" />
-                <marker date="1473456622000" expanded="true" signature="2388:2445" placeholder="{...}" />
-                <marker date="1473456622000" expanded="true" signature="2394:2443" placeholder="{...}" />
+                <marker date="1473456989000" expanded="true" signature="2308:2484" placeholder="{...}" />
+                <marker date="1473456989000" expanded="true" signature="2309:2459" placeholder="{...}" />
+                <marker date="1473456989000" expanded="true" signature="2401:2458" placeholder="{...}" />
+                <marker date="1473456989000" expanded="true" signature="2407:2456" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -93,8 +95,8 @@
         <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/src/models/User/UserModel.jsx" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/src/models/Auth/AuthController.jsx" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_21" />
+        <option value="$PROJECT_DIR$/src/models/Auth/AuthController.jsx" />
       </list>
     </option>
   </component>
@@ -1938,13 +1940,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Auth/AuthController.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.6622341">
-          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.26861703">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
-            <marker date="1473456622000" expanded="true" signature="2295:2471" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="2296:2446" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="2388:2445" placeholder="{...}" />
-            <marker date="1473456622000" expanded="true" signature="2394:2443" placeholder="{...}" />
+            <marker date="1473456989000" expanded="true" signature="2308:2484" placeholder="{...}" />
+            <marker date="1473456989000" expanded="true" signature="2309:2459" placeholder="{...}" />
+            <marker date="1473456989000" expanded="true" signature="2401:2458" placeholder="{...}" />
+            <marker date="1473456989000" expanded="true" signature="2407:2456" placeholder="{...}" />
           </folding>
         </state>
       </provider>
