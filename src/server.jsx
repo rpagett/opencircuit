@@ -152,8 +152,8 @@ app.get('*', (req, res) => {
   dispatchReactRoute(req, res, getAppRoutes(res.store));
 });
 
-app.listen(process.env.SERVER_PORT || 80, function () {
-  console.log('OpenCircuit is live on port', process.env.SERVER_PORT || 80);
+app.listen(process.env.SERVER_PORT || 8080, function () {
+  console.log('OpenCircuit is live on port', process.env.SERVER_PORT || 8080);
 
   notifier.notify({
     'title': 'OpenCircuit',
