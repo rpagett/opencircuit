@@ -42,7 +42,6 @@ class _UserPayment extends React.Component {
         subStore="fee_userPay"
         submitEndpoint="/api/fees/userPay"
         submitMethod="POST"
-        inModal={ true }
       >
         { boxes }
 

@@ -129,15 +129,15 @@ router.get('/paypal-return', (req, res) => {
     }
     else {
       if (payment.state === 'approved') {
-        Fee.find({ paypal_id: payment.id }, 'payments')
+        Fee.find({ paypal_id: payment.id }, 'amount payments')
           .then(fees => {
             fees.map(fee => {
               fee.payments.push({
                 amount: fee.amount,
                 method: PaymentTypes.Paypal,
-                paid_date: Date.now()
               })
 
+              paid_date: Date.now()
               fee.save();
             })
             res.redirect(200, process.env.BASE_URL + '/confirm/payment');

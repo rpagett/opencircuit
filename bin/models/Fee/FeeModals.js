@@ -89,8 +89,7 @@ var _UserPayment = function (_React$Component2) {
         {
           subStore: 'fee_userPay',
           submitEndpoint: '/api/fees/userPay',
-          submitMethod: 'POST',
-          inModal: true
+          submitMethod: 'POST'
         },
         boxes,
         _react2.default.createElement(
