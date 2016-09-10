@@ -120,3 +120,66 @@ export class About extends React.Component {
     );
   }
 }
+
+export class PageNotFound extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1 className="page-header">Whoops!</h1>
+
+        <p>
+          Looks like we dropped our toss. If you reached this page by clicking a link, you should let its
+          provider know that there is an error in the URL.
+        </p>
+
+        <div className="row">
+          <div className="offset-xs-1 col-xs-10">
+            <Link role="button" to="/" className="btn btn-block btn-outline-info">Back to Dashboard</Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+export class ConfirmPayment extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1 className="page-header">You're all set!</h1>
+
+        <p>
+          PayPal has confirmed the payment of your selected fees. You should receive an email receipt
+          shortly, if you haven't already.
+        </p>
+
+        <div className="row">
+          <div className="offset-xs-1 col-xs-10">
+            <Link role="button" to="/" className="btn btn-block btn-outline-info">Back to Dashboard</Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+export class ErrorPayment extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1 className="page-header">Yikes!</h1>
+
+        <p>
+          Your PayPal transaction was unsuccessful. Feel free to try again, as your account was not charged.
+          If the issues persist, please contact us using the <strong>support</strong> link above.
+        </p>
+
+        <div className="row">
+          <div className="offset-xs-1 col-xs-10">
+            <Link role="button" to="/" className="btn btn-block btn-outline-info">Back to Dashboard</Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}

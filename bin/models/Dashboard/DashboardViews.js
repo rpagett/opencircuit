@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.About = exports.Home = undefined;
+exports.ErrorPayment = exports.ConfirmPayment = exports.PageNotFound = exports.About = exports.Home = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -214,4 +214,145 @@ var About = exports.About = function (_React$Component3) {
   }]);
 
   return About;
+}(_react2.default.Component);
+
+var PageNotFound = exports.PageNotFound = function (_React$Component4) {
+  _inherits(PageNotFound, _React$Component4);
+
+  function PageNotFound() {
+    _classCallCheck(this, PageNotFound);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(PageNotFound).apply(this, arguments));
+  }
+
+  _createClass(PageNotFound, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          'Whoops!'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Looks like we dropped our toss. If you reached this page by clicking a link, you should let its provider know that there is an error in the URL.'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'offset-xs-1 col-xs-10' },
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { role: 'button', to: '/', className: 'btn btn-block btn-outline-info' },
+              'Back to Dashboard'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return PageNotFound;
+}(_react2.default.Component);
+
+var ConfirmPayment = exports.ConfirmPayment = function (_React$Component5) {
+  _inherits(ConfirmPayment, _React$Component5);
+
+  function ConfirmPayment() {
+    _classCallCheck(this, ConfirmPayment);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(ConfirmPayment).apply(this, arguments));
+  }
+
+  _createClass(ConfirmPayment, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          'You\'re all set!'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'PayPal has confirmed the payment of your selected fees. You should receive an email receipt shortly, if you haven\'t already.'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'offset-xs-1 col-xs-10' },
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { role: 'button', to: '/', className: 'btn btn-block btn-outline-info' },
+              'Back to Dashboard'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return ConfirmPayment;
+}(_react2.default.Component);
+
+var ErrorPayment = exports.ErrorPayment = function (_React$Component6) {
+  _inherits(ErrorPayment, _React$Component6);
+
+  function ErrorPayment() {
+    _classCallCheck(this, ErrorPayment);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(ErrorPayment).apply(this, arguments));
+  }
+
+  _createClass(ErrorPayment, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          'Yikes!'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Your PayPal transaction was unsuccessful. Feel free to try again, as your account was not charged. If the issues persist, please contact us using the ',
+          _react2.default.createElement(
+            'strong',
+            null,
+            'support'
+          ),
+          ' link above.'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'offset-xs-1 col-xs-10' },
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { role: 'button', to: '/', className: 'btn btn-block btn-outline-info' },
+              'Back to Dashboard'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return ErrorPayment;
 }(_react2.default.Component);

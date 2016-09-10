@@ -47,7 +47,8 @@ var FeeSchema = new _mongoose2.default.Schema({
   amount: Number,
   assessed_date: Date,
   due_date: Date,
-  paid_date: Date
+  paid_date: Date,
+  paypal_id: String
 }, {
   timestamps: true,
   toObject: {

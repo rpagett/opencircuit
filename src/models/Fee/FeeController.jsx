@@ -128,8 +128,11 @@ router.get('/paypal-return', (req, res) => {
       throw error;
     }
     else {
-      console.log("Get Payment Response");
-      console.log(JSON.stringify(payment));
+      if (payment.state === 'approved') {
+        res.redirect(200, process.env.BASE_URL + '/confirm/payment');
+      }
+
+      res.redirect(200, process.env.BASE_URL + '/error/payment')
     }
   });
 })
@@ -216,11 +219,14 @@ router.post('/userPay', (req, res) => {
           console.log('REDIRECT', redirect);
 
           if (redirect) {
-            res.send({
-              success: true,
-              external: true,
-              redirect: redirect.href
-            })
+            Fee.update({ _id: {$in: _.map(fees, 'id')} }, { paypal_id: payment.id })
+              .then( () => {
+                res.send({
+                  success: true,
+                  external: true,
+                  redirect: redirect.href
+                })
+              })
           }
         }
       });

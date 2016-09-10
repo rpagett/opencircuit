@@ -136,7 +136,7 @@ function dispatchReactRoute(req, res, appRoutes) {
       res.status(200).send(HTML);
     }
     else {
-      res.status(404).send('Not found')
+      res.redirect('/404');
     }
   });
 }

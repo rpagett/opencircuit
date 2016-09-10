@@ -75,6 +75,16 @@ export function getAppRoutes(store) {
       <Route component={ App } onEnter={ authOnly }>
         <IndexRoute component={ RootView.Home } />
 
+        <Route path="/404" component={ RootView.PageNotFound } />
+
+        <Route path="/confirm">
+          <Route path="payment" component={ RootView.ConfirmPayment } />
+        </Route>
+
+        <Route path="/error">
+          <Route path="payment" component={ RootView.ErrorPayment } />
+        </Route>
+
         <Route path="/compclasses" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
           <IndexRoute component={ CompClassView.Index } />
           <Route path="new" component={ CompClassView.New } />

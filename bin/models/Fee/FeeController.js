@@ -148,8 +148,11 @@ router.get('/paypal-return', function (req, res) {
       console.log(error.response);
       throw error;
     } else {
-      console.log("Get Payment Response");
-      console.log(JSON.stringify(payment));
+      if (payment.state === 'approved') {
+        res.redirect(200, process.env.BASE_URL + '/confirm/payment');
+      }
+
+      res.redirect(200, process.env.BASE_URL + '/error/payment');
     }
   });
 });
@@ -224,19 +227,23 @@ router.post('/userPay', function (req, res) {
       if (error) {
         throw error;
       } else {
-        //console.log("Create Payment Response");
-        //console.log(payment);
+        (function () {
+          //console.log("Create Payment Response");
+          //console.log(payment);
 
-        var redirect = _lodash2.default.find(payment.links, { method: 'REDIRECT' });
-        console.log('REDIRECT', redirect);
+          var redirect = _lodash2.default.find(payment.links, { method: 'REDIRECT' });
+          console.log('REDIRECT', redirect);
 
-        if (redirect) {
-          res.send({
-            success: true,
-            external: true,
-            redirect: redirect.href
-          });
-        }
+          if (redirect) {
+            _FeeModel2.default.update({ _id: { $in: _lodash2.default.map(fees, 'id') } }, { paypal_id: payment.id }).then(function () {
+              res.send({
+                success: true,
+                external: true,
+                redirect: redirect.href
+              });
+            });
+          }
+        })();
       }
     });
   });

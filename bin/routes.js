@@ -140,6 +140,17 @@ function getAppRoutes(store) {
       _reactRouter.Route,
       { component: _app2.default, onEnter: authOnly },
       _react2.default.createElement(_reactRouter.IndexRoute, { component: RootView.Home }),
+      _react2.default.createElement(_reactRouter.Route, { path: '/404', component: RootView.PageNotFound }),
+      _react2.default.createElement(
+        _reactRouter.Route,
+        { path: '/confirm' },
+        _react2.default.createElement(_reactRouter.Route, { path: 'payment', component: RootView.ConfirmPayment })
+      ),
+      _react2.default.createElement(
+        _reactRouter.Route,
+        { path: '/error' },
+        _react2.default.createElement(_reactRouter.Route, { path: 'payment', component: RootView.ErrorPayment })
+      ),
       _react2.default.createElement(
         _reactRouter.Route,
         { path: '/compclasses', onEnter: requiresRole.bind(this, _UserRoles.UserRoles.Administrator) },

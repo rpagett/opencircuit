@@ -32,6 +32,7 @@ const FeeSchema = new Mongoose.Schema({
   assessed_date: Date,
   due_date: Date,
   paid_date: Date,
+  paypal_id: String
 }, {
   timestamps: true,
   toObject: {
