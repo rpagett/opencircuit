@@ -149,10 +149,21 @@ router.get('/paypal-return', function (req, res) {
       throw error;
     } else {
       if (payment.state === 'approved') {
-        res.redirect(200, process.env.BASE_URL + '/confirm/payment');
-      }
+        _FeeModel2.default.find({ paypal_id: payment.id }, 'payments').then(function (fees) {
+          fees.map(function (fee) {
+            fee.payments.push({
+              amount: fee.amount,
+              method: _PaymentTypes2.default.Paypal,
+              paid_date: Date.now()
+            });
 
-      res.redirect(200, process.env.BASE_URL + '/error/payment');
+            fee.save();
+          });
+          res.redirect(200, process.env.BASE_URL + '/confirm/payment');
+        });
+      } else {
+        res.redirect(200, process.env.BASE_URL + '/error/payment');
+      }
     }
   });
 });

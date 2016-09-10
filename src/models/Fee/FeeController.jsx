@@ -129,10 +129,23 @@ router.get('/paypal-return', (req, res) => {
     }
     else {
       if (payment.state === 'approved') {
-        res.redirect(200, process.env.BASE_URL + '/confirm/payment');
-      }
+        Fee.find({ paypal_id: payment.id }, 'payments')
+          .then(fees => {
+            fees.map(fee => {
+              fee.payments.push({
+                amount: fee.amount,
+                method: PaymentTypes.Paypal,
+                paid_date: Date.now()
+              })
 
-      res.redirect(200, process.env.BASE_URL + '/error/payment')
+              fee.save();
+            })
+            res.redirect(200, process.env.BASE_URL + '/confirm/payment');
+          })
+      }
+      else {
+        res.redirect(200, process.env.BASE_URL + '/error/payment')
+      }
     }
   });
 })
