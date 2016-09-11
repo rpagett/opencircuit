@@ -26,7 +26,7 @@ export function getAppRoutes(store) {
   const dumpAllContents = () => {
     dumpFlexTable();
     dumpContentsView();
-    dumpModelView();
+    //dumpModelView();
   }
 
   function authOnly(nextState, replace) {

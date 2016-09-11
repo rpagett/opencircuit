@@ -93,7 +93,7 @@ function getAppRoutes(store) {
   var dumpAllContents = function dumpAllContents() {
     (0, _FlexTableActions.dumpContents)();
     (0, _ContentsViewActions.dumpContents)();
-    (0, _ModelViewActions.dumpContents)();
+    //dumpModelView();
   };
 
   function authOnly(nextState, replace) {
