@@ -32,7 +32,7 @@ export const fetchModel = (endpoint, subStore) => {
   };
 }
 
-export function dumpContents(subStore = null) {
+export const dumpContents = (subStore = null) => {
   return {
     type: 'MODELVIEW_DUMP_CONTENTS',
     subStore

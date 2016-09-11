@@ -3,8 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchModel = undefined;
-exports.dumpContents = dumpContents;
+exports.dumpContents = exports.fetchModel = undefined;
 
 var _functions = require('../functions');
 
@@ -41,14 +40,14 @@ var fetchModel = exports.fetchModel = function fetchModel(endpoint, subStore) {
   };
 };
 
-function dumpContents() {
+var dumpContents = exports.dumpContents = function dumpContents() {
   var subStore = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
 
   return {
     type: 'MODELVIEW_DUMP_CONTENTS',
     subStore: subStore
   };
-}
+};
 
 function beginLoading() {
   return {

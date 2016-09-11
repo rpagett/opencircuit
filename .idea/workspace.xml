@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx" afterPath="$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes.jsx" afterPath="$PROJECT_DIR$/src/routes.jsx" />
     </list>
     <ignored path="opencircuit.iws" />
@@ -27,11 +27,11 @@
       <file leaf-file-name="routes.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/routes.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70212764">
+            <state vertical-scroll-proportion="0.7034575">
               <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
               <folding>
-                <marker date="1473571726000" expanded="true" signature="1267:6629" placeholder="{...}" />
-                <marker date="1473571726000" expanded="true" signature="2547:5796" placeholder="&lt;xml/&gt;" />
+                <marker date="1473571907000" expanded="true" signature="1267:6627" placeholder="{...}" />
+                <marker date="1473571907000" expanded="true" signature="2545:5794" placeholder="&lt;xml/&gt;" />
               </folding>
             </state>
           </provider>
@@ -93,8 +93,8 @@
         <option value="$PROJECT_DIR$/src/models/Dashboard/DashboardViews.jsx" />
         <option value="$PROJECT_DIR$/scss/_containers.scss" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_21" />
-        <option value="$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_23" />
+        <option value="$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx" />
         <option value="$PROJECT_DIR$/src/routes.jsx" />
       </list>
     </option>
@@ -357,6 +357,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="helpers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opencircuit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opencircuit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="helpers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ModelView" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2320,31 +2342,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8484042">
-          <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
-          <folding>
-            <marker date="1473478961000" expanded="true" signature="92:782" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="127:779" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="274:487" placeholder="{&quot;credentials&quot;: 'same-origin'...}" />
-            <marker date="1473478961000" expanded="true" signature="346:481" placeholder="{&quot;Accept&quot;: 'application/json'...}" />
-            <marker date="1473478961000" expanded="true" signature="508:544" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="565:705" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="593:642" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="729:773" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="830:898" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="841:896" placeholder="{&quot;type&quot;: 'MODELVIEW_DUMP_CONTENTS'...}" />
-            <marker date="1473478961000" expanded="true" signature="924:978" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="935:976" placeholder="{&quot;type&quot;: 'MODELVIEW_BEGIN_LOADING'...}" />
-            <marker date="1473478961000" expanded="true" signature="1020:1100" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="1031:1098" placeholder="{&quot;type&quot;: 'MODELVIEW_RECEIVED_MODEL'...}" />
-            <marker date="1473478961000" expanded="true" signature="1127:1199" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="1138:1197" placeholder="{&quot;type&quot;: 'MODELVIEW_ERROR'...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_23">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.3989363">
@@ -2365,13 +2362,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5851064">
+          <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
+          <folding>
+            <marker date="1473571903000" expanded="true" signature="92:782" placeholder="{...}" />
+            <marker date="1473571903000" expanded="true" signature="127:779" placeholder="{...}" />
+            <marker date="1473571903000" expanded="true" signature="274:487" placeholder="{&quot;credentials&quot;: 'same-origin'...}" />
+            <marker date="1473571903000" expanded="true" signature="346:481" placeholder="{&quot;Accept&quot;: 'application/json'...}" />
+            <marker date="1473571903000" expanded="true" signature="508:544" placeholder="{...}" />
+            <marker date="1473571903000" expanded="true" signature="565:705" placeholder="{...}" />
+            <marker date="1473571903000" expanded="true" signature="593:642" placeholder="{...}" />
+            <marker date="1473571903000" expanded="true" signature="729:773" placeholder="{...}" />
+            <marker date="1473571903000" expanded="true" signature="833:901" placeholder="{...}" />
+            <marker date="1473571903000" expanded="true" signature="844:899" placeholder="{&quot;type&quot;: 'MODELVIEW_DUMP_CONTENTS'...}" />
+            <marker date="1473571903000" expanded="true" signature="927:981" placeholder="{...}" />
+            <marker date="1473571903000" expanded="true" signature="938:979" placeholder="{&quot;type&quot;: 'MODELVIEW_BEGIN_LOADING'...}" />
+            <marker date="1473571903000" expanded="true" signature="1023:1103" placeholder="{...}" />
+            <marker date="1473571903000" expanded="true" signature="1034:1101" placeholder="{&quot;type&quot;: 'MODELVIEW_RECEIVED_MODEL'...}" />
+            <marker date="1473571903000" expanded="true" signature="1130:1202" placeholder="{...}" />
+            <marker date="1473571903000" expanded="true" signature="1141:1200" placeholder="{&quot;type&quot;: 'MODELVIEW_ERROR'...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/routes.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70212764">
+        <state vertical-scroll-proportion="0.7034575">
           <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
           <folding>
-            <marker date="1473571726000" expanded="true" signature="1267:6629" placeholder="{...}" />
-            <marker date="1473571726000" expanded="true" signature="2547:5796" placeholder="&lt;xml/&gt;" />
+            <marker date="1473571907000" expanded="true" signature="1267:6627" placeholder="{...}" />
+            <marker date="1473571907000" expanded="true" signature="2545:5794" placeholder="&lt;xml/&gt;" />
           </folding>
         </state>
       </provider>
