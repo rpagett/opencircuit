@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx" afterPath="$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes.jsx" afterPath="$PROJECT_DIR$/src/routes.jsx" />
     </list>
     <ignored path="opencircuit.iws" />
@@ -27,11 +26,11 @@
       <file leaf-file-name="routes.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/routes.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7034575">
+            <state vertical-scroll-proportion="0.8484042">
               <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
               <folding>
-                <marker date="1473571907000" expanded="true" signature="1267:6627" placeholder="{...}" />
-                <marker date="1473571907000" expanded="true" signature="2545:5794" placeholder="&lt;xml/&gt;" />
+                <marker date="1473572072000" expanded="true" signature="1267:6633" placeholder="{...}" />
+                <marker date="1473572072000" expanded="true" signature="2551:5800" placeholder="&lt;xml/&gt;" />
               </folding>
             </state>
           </provider>
@@ -2364,7 +2363,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5851064">
+        <state vertical-scroll-proportion="0.9946808">
           <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
           <folding>
             <marker date="1473571903000" expanded="true" signature="92:782" placeholder="{...}" />
@@ -2389,11 +2388,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/routes.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7034575">
+        <state vertical-scroll-proportion="0.8484042">
           <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
           <folding>
-            <marker date="1473571907000" expanded="true" signature="1267:6627" placeholder="{...}" />
-            <marker date="1473571907000" expanded="true" signature="2545:5794" placeholder="&lt;xml/&gt;" />
+            <marker date="1473572072000" expanded="true" signature="1267:6633" placeholder="{...}" />
+            <marker date="1473572072000" expanded="true" signature="2551:5800" placeholder="&lt;xml/&gt;" />
           </folding>
         </state>
       </provider>

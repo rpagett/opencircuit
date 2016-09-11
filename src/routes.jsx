@@ -23,7 +23,7 @@ import { dumpContents as dumpContentsView } from './helpers/ContentsView/Content
 import { dumpContents as dumpModelView } from './helpers/ModelView/ModelViewActions';
 
 export function getAppRoutes(store) {
-  const dumpContents = () => {
+  const dumpAllContents = () => {
     dumpFlexTable();
     dumpContentsView();
     dumpModelView();
@@ -32,7 +32,7 @@ export function getAppRoutes(store) {
   function authOnly(nextState, replace) {
     const authUser = store.getState().auth.user;
 
-    dumpContents();
+    dumpAllContents();
 
     if (!authUser) {
       replace('/auth/login');
