@@ -129,6 +129,16 @@ var _NavBar = function (_React$Component2) {
               )
             ),
             _react2.default.createElement(
+              'div',
+              { className: 'nav-item' },
+              _react2.default.createElement(
+                _reactRouter.IndexLink,
+                { to: '/support', className: 'nav-link', activeClassName: 'active' },
+                _react2.default.createElement(_Icon2.default, { shape: 'question-circle-o' }),
+                ' Support'
+              )
+            ),
+            _react2.default.createElement(
               _UserRoles.HasRole,
               { role: _UserRoles.UserRoles.Administrator, className: 'nav-item dropdown' },
               _react2.default.createElement(
@@ -141,11 +151,6 @@ var _NavBar = function (_React$Component2) {
                 'div',
                 { className: 'dropdown-menu' },
                 _react2.default.createElement(
-                  'a',
-                  { className: 'dropdown-item', href: '#' },
-                  'Circuit'
-                ),
-                _react2.default.createElement(
                   _reactRouter.Link,
                   { to: '/compclasses', className: 'dropdown-item' },
                   'Classes'
@@ -154,6 +159,11 @@ var _NavBar = function (_React$Component2) {
                   _reactRouter.Link,
                   { to: '/fees', className: 'dropdown-item' },
                   'Fees'
+                ),
+                _react2.default.createElement(
+                  _reactRouter.Link,
+                  { to: '/organizations', className: 'dropdown-item' },
+                  'Organizations'
                 ),
                 _react2.default.createElement(
                   _reactRouter.Link,
@@ -169,12 +179,6 @@ var _NavBar = function (_React$Component2) {
                   _reactRouter.Link,
                   { to: '/users', className: 'dropdown-item' },
                   'Users'
-                ),
-                _react2.default.createElement('div', { className: 'dropdown-divider' }),
-                _react2.default.createElement(
-                  'a',
-                  { className: 'dropdown-item', href: '#' },
-                  'Separated link'
                 )
               )
             ),

@@ -106,9 +106,11 @@ _UnitModel2.default.on('afterInsert', function (newUnit) {
 });
 
 _EventRegistrationModel2.default.on('afterInsert', function (registration) {
-  console.log('INSERTING REGISTRATION FEES', registration);
   _UnitModel2.default.findOne({ _id: registration.unit }).then(function (unit) {
-    assessFee(unit._di, _FeeModel2.default.NON_MEMBER_FEE(), 'non-member-fee', 'Event ' + registration.event);
+    if (unit && !unit.circuit_member) {
+      console.log('INSERTING REGISTRATION FEES', registration);
+      assessFee(unit._id, _FeeModel2.default.NON_MEMBER_FEE(), 'non-member-fee', 'Event ' + registration.event);
+    }
   }).catch(function (err) {
     console.log(err);
   });
@@ -156,13 +158,13 @@ router.get('/paypal-return', function (req, res) {
               method: _PaymentTypes2.default.Paypal
             });
 
-            paid_date: Date.now();
+            fee.paid_date = Date.now();
             fee.save();
           });
-          res.redirect(200, process.env.BASE_URL + '/confirm/payment');
+          res.redirect(302, process.env.BASE_URL + '/confirm/payment');
         });
       } else {
-        res.redirect(200, process.env.BASE_URL + '/error/payment');
+        res.redirect(302, process.env.BASE_URL + '/error/payment');
       }
     }
   });

@@ -47,9 +47,17 @@ var _EventViews = require('./models/Event/EventViews');
 
 var EventView = _interopRequireWildcard(_EventViews);
 
+var _OrganizationViews = require('./models/Organization/OrganizationViews');
+
+var OrganizationView = _interopRequireWildcard(_OrganizationViews);
+
 var _RegistrationViews = require('./models/Registration/RegistrationViews');
 
 var RegistrationView = _interopRequireWildcard(_RegistrationViews);
+
+var _SupportViews = require('./models/Support/SupportViews');
+
+var SupportView = _interopRequireWildcard(_SupportViews);
 
 var _UnitViews = require('./models/Unit/UnitViews');
 
@@ -69,6 +77,8 @@ var _FlexTableActions = require('./helpers/FlexTable/FlexTableActions');
 
 var _ContentsViewActions = require('./helpers/ContentsView/ContentsViewActions');
 
+var _ModelViewActions = require('./helpers/ModelView/ModelViewActions');
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -83,6 +93,7 @@ function getAppRoutes(store) {
   var dumpContents = function dumpContents() {
     (0, _FlexTableActions.dumpContents)();
     (0, _ContentsViewActions.dumpContents)();
+    (0, _ModelViewActions.dumpContents)();
   };
 
   function authOnly(nextState, replace) {
@@ -174,8 +185,16 @@ function getAppRoutes(store) {
       ),
       _react2.default.createElement(
         _reactRouter.Route,
+        { path: '/organizations' },
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: OrganizationView.Index }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':slug', component: OrganizationView.Show }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':slug/edit', component: OrganizationView.Edit })
+      ),
+      _react2.default.createElement(
+        _reactRouter.Route,
         { path: '/register' },
-        _react2.default.createElement(_reactRouter.IndexRoute, { component: RegistrationView.Organization }),
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: RegistrationView.DirectRegistration }),
+        _react2.default.createElement(_reactRouter.Route, { path: 'new', component: RegistrationView.Organization }),
         _react2.default.createElement(_reactRouter.Route, { path: 'organization/:org', component: RegistrationView.Unit }),
         _react2.default.createElement(_reactRouter.Route, { path: 'unit/:unit', component: RegistrationView.Details }),
         _react2.default.createElement(_reactRouter.Route, { path: 'unit/:unit/events', component: RegistrationView.EventRegistration }),
@@ -183,8 +202,17 @@ function getAppRoutes(store) {
       ),
       _react2.default.createElement(
         _reactRouter.Route,
+        { path: '/support' },
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: SupportView.Index }),
+        _react2.default.createElement(_reactRouter.Route, { path: 'success', component: SupportView.Success })
+      ),
+      _react2.default.createElement(
+        _reactRouter.Route,
         { path: '/units' },
-        _react2.default.createElement(_reactRouter.IndexRoute, { component: UnitView.Index, onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector) }),
+        _react2.default.createElement(_reactRouter.IndexRoute, {
+          component: UnitView.Index,
+          onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector)
+        }),
         _react2.default.createElement(_reactRouter.Route, { path: ':slug', component: UnitView.Show }),
         _react2.default.createElement(_reactRouter.Route, { path: ':slug/edit', component: UnitView.Edit })
       ),
@@ -209,7 +237,11 @@ function getAppRoutes(store) {
       { path: '/auth', component: _AuthTemplate2.default, onEnter: guestOnly },
       _react2.default.createElement(_reactRouter.Route, { path: 'login', component: AuthView.Login }),
       _react2.default.createElement(_reactRouter.Route, { path: 'register', component: AuthView.Register }),
-      _react2.default.createElement(_reactRouter.Route, { path: 'forgot', component: AuthView.Forgot })
+      _react2.default.createElement(_reactRouter.Route, { path: 'recover', component: AuthView.Recover }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'recover/:token', component: AuthView.ProcessRecovery }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'sent-recovery', component: AuthView.PostRecovery }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'must-confirm', component: AuthView.MustConfirm }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'confirm', component: AuthView.PostRegister })
     )
   );
 

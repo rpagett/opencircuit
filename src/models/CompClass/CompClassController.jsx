@@ -44,7 +44,7 @@ router.route('/')
       .then(compclass => {
         res.json({
           success: true,
-          redirect: compclass.detailsUrl
+          redirect: '/compclasses/new'
         })
       })
       .catch(errors => {

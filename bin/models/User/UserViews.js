@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Edit = exports.Show = exports._Show = exports.Index = undefined;
+exports.Confirm = exports.Edit = exports.Show = exports._Show = exports.Index = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -189,7 +189,11 @@ var Show = exports.Show = function (_React$Component3) {
   _createClass(Show, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_ModelView2.default, { endpoint: '/api/users/' + this.props.params.email, component: _Show });
+      return _react2.default.createElement(_ModelView2.default, {
+        subStore: 'user_show',
+        endpoint: '/api/users/' + this.props.params.email,
+        component: _Show
+      });
     }
   }]);
 
@@ -230,4 +234,70 @@ var Edit = exports.Edit = function (_React$Component4) {
   }]);
 
   return Edit;
+}(_react2.default.Component);
+
+var _Confirm = function (_React$Component5) {
+  _inherits(_Confirm, _React$Component5);
+
+  function _Confirm() {
+    _classCallCheck(this, _Confirm);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Confirm).apply(this, arguments));
+  }
+
+  _createClass(_Confirm, [{
+    key: 'render',
+    value: function render() {
+      if (this.props.model.confirmed == true) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'offset-xs-1 col-xs-10' },
+          _react2.default.createElement(
+            'div',
+            { className: 'content-container' },
+            _react2.default.createElement(
+              'p',
+              { className: 'lead' },
+              'You\'re all set!'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                _reactRouter.Link,
+                { to: '/' },
+                'Click here'
+              ),
+              ' to proceed to your dashboard.'
+            )
+          )
+        );
+      }
+    }
+  }]);
+
+  return _Confirm;
+}(_react2.default.Component);
+
+var Confirm = exports.Confirm = function (_React$Component6) {
+  _inherits(Confirm, _React$Component6);
+
+  function Confirm() {
+    _classCallCheck(this, Confirm);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Confirm).apply(this, arguments));
+  }
+
+  _createClass(Confirm, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_ModelView2.default, {
+        subStore: 'user_confirm',
+        endpoint: '/api/users/confirm/' + this.props.params.token,
+        component: _Confirm
+      });
+    }
+  }]);
+
+  return Confirm;
 }(_react2.default.Component);

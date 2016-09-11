@@ -25,8 +25,13 @@ const UserSchema = new Mongoose.Schema({
 
   roles: {
     type: [Number],
-    default: [ ]
+    default: []
   },
+
+  confirmed: Boolean,
+  confirmation_token: String,
+
+  recovery_token: String,
 
   apiToken: String
 }, {

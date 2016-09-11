@@ -2,10 +2,61 @@ import Express from 'express';
 import _ from 'lodash';
 
 import Unit from './UnitModel';
+import Event from '../Event/EventModel';
 import EventRegistration from '../Pivots/EventRegistrationModel';
 
 let router = Express.Router();
 // All routes are /api/units/
+
+function updateEvents(id, events) {
+  let inEvents = [ ];
+
+  for (let key in events) {
+    if (events[key]) {
+      inEvents.push(key);
+    }
+  }
+
+  //const inEvents = Object.keys(events);
+  console.log('IN EVENTS', inEvents);
+
+  let unit = { };
+  let addEvents = [ ];
+
+  return Unit.findOne({ _id: id }, 'competition_class')
+    .then(res_unit => {
+      if (!res_unit) {
+        throw new Error('Unit not found.');
+      }
+
+      unit = res_unit;
+
+      return EventRegistration.find({unit: unit._id}, 'event')
+    })
+    .then(registrations => {
+      const registeredEvents = _.map(registrations, 'event');
+      console.log('Registered Events', registeredEvents);
+
+      addEvents = _.difference(inEvents, registeredEvents);
+
+      const removeEvents = _.difference(registeredEvents, inEvents);
+      console.log('Removing events', removeEvents);
+
+      EventRegistration.remove({ unit: unit._id, event: {$in: removeEvents } }).exec()
+
+      let creation = [ ];
+      addEvents.forEach(ev => {
+        creation.push({
+          event: ev,
+          unit: unit._id,
+          competition_class: unit.competition_class
+        })
+      })
+
+      console.log('Adding events', addEvents);
+      return EventRegistration.create(creation)
+    })
+}
 
 router.route('/')
   .get((req, res) => {
@@ -69,9 +120,13 @@ router.route('/:slug')
   .patch((req, res) => {
     Unit.findOneAndUpdate({ slug: req.params.slug }, req.body, {
       upsert: true,
-      fields: 'slug detailsUrl'
+      fields: '_id slug detailsUrl'
     })
     .then(unit => {
+      console.log('ID is', unit._id, 'EVENTS are', req.body.events);
+      return updateEvents(unit._id, req.body.events);
+    })
+    .then( () => {
       res.send({
         success: true,
         redirect: `/units/${req.params.slug}`
@@ -106,46 +161,7 @@ router.route('/:id/events')
   })
 
   .post((req, res) => {
-    console.log('BODY', req.body);
-    const inEvents = Object.keys(req.body.events);
-    console.log('IN EVENTS', inEvents);
-
-    let unit = { };
-    let addEvents = [ ];
-
-    Unit.findOne({ _id: req.params.id }, 'competition_class')
-      .then(res_unit => {
-        if (!res_unit) {
-          throw new Error('Unit not found.');
-        }
-
-        unit = res_unit;
-
-        return EventRegistration.find({unit: unit._id}, 'event')
-      })
-      .then(registrations => {
-        const registeredEvents = _.map(registrations, 'event');
-        console.log('Registered Events', registeredEvents);
-
-        addEvents = _.difference(inEvents, registeredEvents);
-
-        const removeEvents = _.difference(registeredEvents, inEvents);
-        console.log('Removing events', removeEvents);
-
-        EventRegistration.remove({ unit: unit._id, event: {$in: removeEvents } }).exec()
-
-        let creation = [ ];
-        addEvents.forEach(ev => {
-          creation.push({
-            event: ev,
-            unit: unit._id,
-            competition_class: unit.competition_class
-          })
-        })
-
-        console.log('Adding events', addEvents);
-        return EventRegistration.create(creation).exec()
-      })
+    updateEvents(req.params.id, req.body.events)
       .then(() => {
         res.json({
           success: true
@@ -158,5 +174,75 @@ router.route('/:id/events')
         })
       })
   })
+
+router.get('/:slug/eventChecks', (req, res) => {
+  let type = '';
+  let storeRegistrations = [ ]
+  Unit.findOne({ slug: req.params.slug }, '_id type')
+    .then(unit => {
+      type = unit.unit_type;
+      return EventRegistration.find({ unit: unit._id }, 'event')
+    })
+    .then(registrations => {
+      storeRegistrations = registrations;
+
+      return Event.find({ types_allowed: type }, '_id name slug date')
+    })
+    .then(events => {
+      let outEvents = [ ];
+
+      console.log('registrations', storeRegistrations);
+      for (let key in events) {
+
+        const event = events[key].toObject();
+        const isAttending = (_.find(storeRegistrations, ['event', event._id]) ? true : false)
+
+        outEvents[key] = {
+          ...event,
+          attending: isAttending
+        }
+      }
+
+      console.log('EVENTS', outEvents);
+
+      res.json({
+        success: true,
+        events: outEvents
+      })
+    })
+    .catch(err => {
+      res.json({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
+router.get('/:slug/attending', (req, res) => {
+  Unit.findOne({ slug: req.params.slug }, '_id')
+    .then(unit => {
+      console.log('unit is', unit);
+      return EventRegistration.find({ unit: unit._id }, 'unit event')
+    })
+    .then(registrations => {
+      console.log('registrations/show', registrations);
+      const events = _.map(registrations, 'event');
+      console.log('events/show', events);
+      return Event.find({ _id: {$in: events} }, 'name slug date attendance_cap')
+    })
+    .then(events => {
+      console.log('fetched events/show', events);
+      res.json({
+        success: true,
+        contents: events
+      })
+    })
+    .catch(err => {
+      res.json({
+        success: false,
+        error: err.message
+      })
+    })
+})
 
 export default router;

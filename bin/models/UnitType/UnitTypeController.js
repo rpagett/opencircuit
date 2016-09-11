@@ -54,7 +54,7 @@ router.route('/').get(function (req, res) {
   }).then(function (type) {
     res.json({
       success: true,
-      redirect: type.detailsUrl
+      redirect: '/unittypes/new'
     });
   }).catch(function (errors) {
     console.log('We\'re in catch.', errors);

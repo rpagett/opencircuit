@@ -1,10 +1,11 @@
 import { fetchAPI } from '../functions';
 
-export const fetchModel = endpoint => {
+export const fetchModel = (endpoint, subStore) => {
   return (dispatch, getState) => {
     const { modelView, auth } = getState();
 
-    dispatch(beginLoading());
+    dispatch(dumpContents(subStore));
+    dispatch(beginLoading(subStore));
 
     fetchAPI(endpoint, {
       credentials: 'same-origin',
@@ -23,12 +24,19 @@ export const fetchModel = endpoint => {
           throw new Error(res.error);
         }
 
-        dispatch(receivedModel(res.model));
+        dispatch(receivedModel(res.model, subStore));
       })
       .catch(error => {
         dispatch(gotError(error));
       });
   };
+}
+
+export function dumpContents(subStore = null) {
+  return {
+    type: 'MODELVIEW_DUMP_CONTENTS',
+    subStore
+  }
 }
 
 function beginLoading() {
@@ -37,10 +45,11 @@ function beginLoading() {
   }
 }
 
-function receivedModel(model) {
+function receivedModel(model, subStore) {
   return {
     type: 'MODELVIEW_RECEIVED_MODEL',
-    model
+    model,
+    subStore
   }
 }
 

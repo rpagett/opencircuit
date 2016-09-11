@@ -140,7 +140,11 @@ class _Show extends React.Component {
 export class Show extends React.Component {
   render() {
     return (
-      <ModelView endpoint={ `/api/events/${ this.props.params.slug }` } component={ _Show } />
+      <ModelView
+        subStore="event_show"
+        endpoint={ `/api/events/${ this.props.params.slug }` }
+        component={ _Show }
+      />
     )
   }
 }

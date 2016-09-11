@@ -12,6 +12,22 @@ import { hasRole, userOrAdmin } from '../../middleware/authRoute';
 let router = Express.Router();
 // All routes are '/api/register/...'
 
+router.get('/orgList', (req, res) => {
+  Organization.find({ director: res.store.getState().auth.user._id }, 'name')
+    .then(orgs => {
+      res.json({
+        success: true,
+        contents: orgs
+      })
+    })
+    .catch(err => {
+      res.json({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
 router.post('/organization', (req, res) => {
   Validate.organization(req.body)
     .then(data => {

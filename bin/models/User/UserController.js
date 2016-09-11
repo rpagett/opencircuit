@@ -12,6 +12,18 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _nodeUuid = require('node-uuid');
+
+var _nodeUuid2 = _interopRequireDefault(_nodeUuid);
+
+var _UserEmails = require('./UserEmails');
+
+var UserEmail = _interopRequireWildcard(_UserEmails);
+
+var _mail = require('../../helpers/mail');
+
+var Email = _interopRequireWildcard(_mail);
+
 var _UserModel = require('./UserModel');
 
 var _UserModel2 = _interopRequireDefault(_UserModel);
@@ -23,6 +35,8 @@ var _UserValidation2 = _interopRequireDefault(_UserValidation);
 var _UserRoles = require('./UserRoles');
 
 var _authRoute = require('../../middleware/authRoute');
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37,6 +51,25 @@ router.get('/', (0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), fun
       success: true,
       contents: users
     });
+  }).catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
+router.get('/select', function (req, res) {
+  _UserModel2.default.find({}, 'first_name mi last_name').then(function (users) {
+    var json = [];
+    users.map(function (user) {
+      json.push({
+        value: user._id.toString(),
+        label: user.formattedName
+      });
+    });
+
+    res.json(json);
   }).catch(function (err) {
     res.json({
       success: false,

@@ -42,6 +42,11 @@ var _ModelView = (_temp = _class = function (_React$Component) {
   }
 
   _createClass(_ModelView, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.props.dumpContents();
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.props.fetchModel();
@@ -61,6 +66,18 @@ var _ModelView = (_temp = _class = function (_React$Component) {
         return _react2.default.createElement(_LoadingCube2.default, { show: true });
       }
 
+      if (!this.props.model) {
+        if (this.props.returnEmpty) {
+          return _react2.default.createElement('div', null);
+        }
+
+        return _react2.default.createElement(
+          'strong',
+          null,
+          'Nothing to display.'
+        );
+      }
+
       return _react2.default.createElement(this.props.component, { model: this.props.model });
     }
   }]);
@@ -68,15 +85,16 @@ var _ModelView = (_temp = _class = function (_React$Component) {
   return _ModelView;
 }(_react2.default.Component), _class.propTypes = {
   endpoint: _react2.default.PropTypes.string.isRequired,
+  subStore: _react2.default.PropTypes.string.isRequired,
   error: _react2.default.PropTypes.string,
   isLoading: _react2.default.PropTypes.bool
 }, _class.defaultProps = {
   isLoading: true
 }, _temp);
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, props) {
   return {
-    model: state.modelView.model,
+    model: state.modelView[props.subStore],
     error: state.modelView.error,
     isLoading: state.modelView.isLoading
   };
@@ -85,7 +103,10 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
   return {
     fetchModel: function fetchModel() {
-      return dispatch(actions.fetchModel(props.endpoint));
+      return dispatch(actions.fetchModel(props.endpoint, props.subStore));
+    },
+    dumpContents: function dumpContents() {
+      dispatch(actions.dumpContents(props.subStore));
     }
   };
 };

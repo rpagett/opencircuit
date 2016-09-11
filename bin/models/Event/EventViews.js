@@ -357,7 +357,11 @@ var Show = exports.Show = function (_React$Component5) {
   _createClass(Show, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_ModelView2.default, { endpoint: '/api/events/' + this.props.params.slug, component: _Show });
+      return _react2.default.createElement(_ModelView2.default, {
+        subStore: 'event_show',
+        endpoint: '/api/events/' + this.props.params.slug,
+        component: _Show
+      });
     }
   }]);
 

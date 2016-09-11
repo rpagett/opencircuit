@@ -71,7 +71,11 @@ export class _Show extends React.Component {
 export class Show extends React.Component {
   render() {
     return (
-      <ModelView endpoint={ `/api/users/${ this.props.params.email }` } component={ _Show } />
+      <ModelView
+        subStore="user_show"
+        endpoint={ `/api/users/${ this.props.params.email }` }
+        component={ _Show }
+      />
     );
   }
 }
@@ -87,6 +91,36 @@ export class Edit extends React.Component {
           </div>
         </div>
       </div>
+    )
+  }
+}
+
+class _Confirm extends React.Component {
+  render() {
+    if (this.props.model.confirmed == true) {
+      return (
+        <div className="offset-xs-1 col-xs-10">
+          <div className="content-container">
+            <p className="lead">You're all set!</p>
+
+            <p>
+              <Link to="/">Click here</Link> to proceed to your dashboard.
+            </p>
+          </div>
+        </div>
+      )
+    }
+  }
+}
+
+export class Confirm extends React.Component {
+  render() {
+    return (
+      <ModelView
+        subStore="user_confirm"
+        endpoint={ `/api/users/confirm/${ this.props.params.token }` }
+        component={ _Confirm }
+      />
     )
   }
 }

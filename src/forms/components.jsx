@@ -356,6 +356,31 @@ export class UnitTypeSelect extends React.Component {
   }
 }
 
+export class UserSelect extends React.Component {
+  fetchList() {
+    return fetchAPI('/api/users/select')
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        return { options: json };
+      });
+  }
+
+  render() {
+    return (
+      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+        <Select.Async
+          className="form-control"
+          clearable={ false }
+          loadOptions={ this.fetchList.bind(this) }
+          filterOption={ () => { return true } }
+          autosize={ false }
+        />
+      </InputWrapper>
+    );
+  }
+}
 
 export class StateSelect extends React.Component {
   selectOptions() {
@@ -452,6 +477,15 @@ class _Checkbox extends React.Component {
     name: React.PropTypes.string.isRequired,
   }
 
+  componentDidMount() {
+    if (this.props.inForm) {
+      this.props.updateField(this.props.preChecked);
+    }
+    else {
+      this.props.updateCheckbox(this.props.preChecked);
+    }
+  }
+
   updateChecked(e) {
     if (this.props.inForm) {
       this.props.updateField(e.target.checked);
@@ -473,7 +507,7 @@ class _Checkbox extends React.Component {
               type="checkbox"
               className="form-check-input"
               name={ this.props.name }
-              checked={ this.props.formChecked }
+              checked={ this.props.formChecked || this.props.preChecked }
               onChange={ this.updateChecked.bind(this) }
             />
           </div>
@@ -621,6 +655,7 @@ class _EventChecks extends React.Component {
             key={ event._id }
             label={ event.name + ' (' + event.formattedDate + ')' }
             value={ event._id }
+            preChecked={ event.attending }
           />
         </div>
       )

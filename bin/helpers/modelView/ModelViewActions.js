@@ -4,10 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.fetchModel = undefined;
+exports.dumpContents = dumpContents;
 
 var _functions = require('../functions');
 
-var fetchModel = exports.fetchModel = function fetchModel(endpoint) {
+var fetchModel = exports.fetchModel = function fetchModel(endpoint, subStore) {
   return function (dispatch, getState) {
     var _getState = getState();
 
@@ -15,7 +16,8 @@ var fetchModel = exports.fetchModel = function fetchModel(endpoint) {
     var auth = _getState.auth;
 
 
-    dispatch(beginLoading());
+    dispatch(dumpContents(subStore));
+    dispatch(beginLoading(subStore));
 
     (0, _functions.fetchAPI)(endpoint, {
       credentials: 'same-origin',
@@ -32,12 +34,21 @@ var fetchModel = exports.fetchModel = function fetchModel(endpoint) {
         throw new Error(res.error);
       }
 
-      dispatch(receivedModel(res.model));
+      dispatch(receivedModel(res.model, subStore));
     }).catch(function (error) {
       dispatch(gotError(error));
     });
   };
 };
+
+function dumpContents() {
+  var subStore = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+
+  return {
+    type: 'MODELVIEW_DUMP_CONTENTS',
+    subStore: subStore
+  };
+}
 
 function beginLoading() {
   return {
@@ -45,10 +56,11 @@ function beginLoading() {
   };
 }
 
-function receivedModel(model) {
+function receivedModel(model, subStore) {
   return {
     type: 'MODELVIEW_RECEIVED_MODEL',
-    model: model
+    model: model,
+    subStore: subStore
   };
 }
 

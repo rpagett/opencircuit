@@ -60,22 +60,7 @@ class _Home extends React.Component {
   render() {
     return (
       <div className="container">
-        <div className="alert alert-success">
-          { (this.props.userToken ? 'You\'re logged in!' : 'Everything is wonderful!') }
-
-          <span className="pull-xs-right">
-            <strong>
-              { (this.props.user ? this.props.user.email : 'Seriously!') }
-           </strong>
-          </span>
-        </div>
-
-        <HasRole role={ UserRoles.Administrator }>
-          <div className="alert alert-warning">
-            You have the right privileges.
-          </div>
-        </HasRole>
-
+        <h1 className="page-header">CWEA Dashboard</h1>
         <ContentsView
           subStore="dashboard_fees"
           endpoint={ `/api/fees/orgsForUser/${this.props.user._id}` }
@@ -87,7 +72,7 @@ class _Home extends React.Component {
         <div className="row">
           <div className="col-xs-12 offset-sm-1 col-sm-10">
             <Link to="/register" className="btn btn-block btn-outline-success">
-              Register
+              Register Your Unit(s)
             </Link>
           </div>
         </div>

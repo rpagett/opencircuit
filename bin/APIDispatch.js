@@ -24,9 +24,17 @@ var _FeeCategoryController = require('./models/FeeCategory/FeeCategoryController
 
 var _FeeCategoryController2 = _interopRequireDefault(_FeeCategoryController);
 
+var _OrganizationController = require('./models/Organization/OrganizationController');
+
+var _OrganizationController2 = _interopRequireDefault(_OrganizationController);
+
 var _RegistrationController = require('./models/Registration/RegistrationController');
 
 var _RegistrationController2 = _interopRequireDefault(_RegistrationController);
+
+var _SupportController = require('./models/Support/SupportController');
+
+var _SupportController2 = _interopRequireDefault(_SupportController);
 
 var _UnitController = require('./models/Unit/UnitController');
 
@@ -48,7 +56,9 @@ router.use('/compclasses/', _CompClassController2.default);
 router.use('/events/', _EventController2.default);
 router.use('/fees/', _FeeController2.default);
 router.use('/feecategories/', _FeeCategoryController2.default);
+router.use('/organizations/', _OrganizationController2.default);
 router.use('/register/', _RegistrationController2.default);
+router.use('/support/', _SupportController2.default);
 router.use('/units/', _UnitController2.default);
 router.use('/unittypes/', _UnitTypeController2.default);
 router.use('/users/', _UserController2.default);

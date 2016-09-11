@@ -3,6 +3,9 @@ import Indicative from 'indicative';
 import _ from 'lodash';
 import uuid from 'node-uuid';
 
+import * as UserEmail from '../User/UserEmails';
+import * as Email from '../../helpers/mail';
+
 import User from '../User/UserModel';
 import { loginUser, logoutUser } from './AuthActions';
 import validateUser from '../User/UserValidation';
@@ -12,12 +15,18 @@ let router = Express.Router();
 // All routes are '/auth/...'
 
 router.post('/login', (req, res) => {
-  User.authenticate()(req.body.email, req.body.password, (err, user, options) => {
+  User.authenticate()(req.body.email, req.body.password, function (err, user, options) {
     if (err || !user) {
       res.send({
         success: false,
         errors: [{field: 'email', message: options.message}],
       });
+    }
+    else if (!user.confirmed) {
+      res.send({
+        success: true,
+        redirect: '/auth/must-confirm'
+      })
     }
     else {
       req.login(user, function (err) {
@@ -34,7 +43,7 @@ router.post('/login', (req, res) => {
 router.post('/register', (req, res) => {
   validateUser(req.body)
     .then(data => {
-      User.register(new User({email: data.email}), data.password, (err, user) => {
+      User.register(new User({email: data.email}), data.password, function(err, user) {
         if (err) {
           res.json({
             success: false,
@@ -45,26 +54,18 @@ router.post('/register', (req, res) => {
         let fillableData = _.pick(data, User.fillableFields());
         fillableData = {
           ...fillableData,
-          apiToken: uuid.v4()
+          apiToken: uuid.v4(),
+          confirmation_token: uuid.v1()
         }
 
         User.findOneAndUpdate({email: data.email}, fillableData, {'new': true})
           .then(user => {
-            req.login(user, err => {
-              if (err) {
-                res.json({
-                  success: false,
-                  errors: [{field: 'email', message: err.message}]
-                });
-              }
+            Email.sendHTML(user.email, 'Please confirm your new account.', UserEmail.confirmationEmail(user))
 
-              res.store.dispatch(loginUser(user));
-              res.send({
-                success: true,
-                external: true,
-                redirect: '/'
-              });
-            })
+            res.send({
+              success: true,
+              redirect: '/auth/confirm'
+            });
           })
           .catch(error => {
             console.log('ERROR', error);
@@ -94,6 +95,102 @@ router.get('/reauth', (req, res) => {
       res.json({
         success: true
       })
+    })
+})
+
+router.post('/recover', (req, res) => {
+  User.findOneAndUpdate({ email: req.body.email }, { recovery_token: uuid.v1() }, { new: true, upsert: true })
+    .then(user => {
+      if (!user) {
+        throw new Error('There is no user associated with that email address. Please register.')
+      }
+
+      Email.sendHTML(user.email, 'Password Recovery Request', UserEmail.recoveryEmail(user))
+
+      res.send({
+        success: true,
+        redirect: '/auth/sent-recovery'
+      })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
+router.post('/recover/:token', (req, res) => {
+  User.findOne({ recovery_token: req.params.token }, 'first_name email recovery_token')
+    .then(user => {
+      if (!user) {
+        throw new Error('That recovery code is invalid.');
+      }
+
+      if (!req.body.password) {
+        res.json({
+          success: false,
+          errors: [{field: 'password', message: 'Password cannot be blank.'}]
+        })
+      }
+
+      if (req.body.password !== req.body.password_verify) {
+        res.json({
+          success: false,
+          errors: [{field: 'password', message: 'These passwords do not match.'}]
+        })
+      }
+
+      user.setPassword(req.body.password, function(err, user) {
+        if (err) {
+          throw new Error(err);
+        }
+
+        //user.recovery_token = null;
+        user.save()
+          .then(user => {
+            req.login(user, err => {
+              res.send({
+                success: true,
+                redirect: '/',
+                external: true
+              })
+            });
+          })
+      })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
+router.get('/confirm/:token', (req, res) => {
+  User.findOne({ confirmation_token: req.params.token }, '_id confirmation_token')
+    .then(user => {
+      if (!user) {
+        res.send('That confirmation token is invalid.');
+      }
+
+      req.login(user, err => {
+        if (err) {
+          throw new Error(err.message);
+        }
+
+        res.store.dispatch(loginUser(user));
+      })
+
+      user.confirmation_token = null;
+      user.confirmed = true;
+      return user.save()
+    })
+    .then( () => {
+      res.redirect(302, '/')
+    })
+    .catch(err => {
+      res.send(err.message)
     })
 })
 

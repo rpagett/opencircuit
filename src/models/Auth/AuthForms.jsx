@@ -58,13 +58,32 @@ export class PasswordRecovery extends React.Component {
     return (
       <ReduxForm
         subStore="auth_recover"
-        submitEndpoint={ `/auth/forgot` }
+        submitEndpoint={ `/auth/recover` }
         submitMethod="POST"
       >
         <FormInput type="email" name="email" label="Email" />
 
         <button type="submit" className="btn btn-success btn-block">
           Send Recovery Code
+        </button>
+      </ReduxForm>
+    )
+  }
+}
+
+export class ProcessPasswordRecovery extends React.Component {
+  render() {
+    return (
+      <ReduxForm
+        subStore="auth_process_recover"
+        submitEndpoint={ `/auth/recover/${this.props.token}` }
+        submitMethod="POST"
+      >
+        <FormInput type="password" name="password" label="New Password" />
+        <FormInput type="password" name="password_verify" label="Verify Password" />
+
+        <button type="submit" className="btn btn-success btn-block">
+          Set Password
         </button>
       </ReduxForm>
     )

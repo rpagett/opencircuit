@@ -7,12 +7,17 @@ import * as actions from './ModelViewActions';
 class _ModelView extends React.Component {
   static propTypes = {
     endpoint: React.PropTypes.string.isRequired,
+    subStore: React.PropTypes.string.isRequired,
     error: React.PropTypes.string,
-    isLoading: React.PropTypes.bool
+    isLoading: React.PropTypes.bool,
   }
 
   static defaultProps = {
     isLoading: true
+  }
+
+  componentWillMount() {
+    this.props.dumpContents();
   }
 
   componentDidMount() {
@@ -28,13 +33,21 @@ class _ModelView extends React.Component {
       return <LoadingCube show={ true } />
     }
 
+    if (!this.props.model) {
+      if (this.props.returnEmpty) {
+        return <div></div>
+      }
+
+      return (<strong>Nothing to display.</strong>)
+    }
+
     return (<this.props.component model={ this.props.model } />)
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
   return {
-    model: state.modelView.model,
+    model: state.modelView[props.subStore],
     error: state.modelView.error,
     isLoading: state.modelView.isLoading
   }
@@ -42,7 +55,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    fetchModel: () => dispatch(actions.fetchModel(props.endpoint))
+    fetchModel: () => dispatch(actions.fetchModel(props.endpoint, props.subStore)),
+    dumpContents: () => {
+      dispatch(actions.dumpContents(props.subStore));
+    },
   }
 }
 

@@ -70,10 +70,12 @@ Unit.on('afterInsert', newUnit => {
 });
 
 EventRegistration.on('afterInsert', registration => {
-  console.log('INSERTING REGISTRATION FEES', registration)
   Unit.findOne({ _id: registration.unit })
     .then(unit => {
-      assessFee(unit._di, Fee.NON_MEMBER_FEE(), 'non-member-fee', 'Event ' + registration.event)
+      if (unit && !unit.circuit_member) {
+        console.log('INSERTING REGISTRATION FEES', registration)
+        assessFee(unit._id, Fee.NON_MEMBER_FEE(), 'non-member-fee', 'Event ' + registration.event)
+      }
     })
     .catch(err => {
       console.log(err);
@@ -137,14 +139,14 @@ router.get('/paypal-return', (req, res) => {
                 method: PaymentTypes.Paypal,
               })
 
-              paid_date: Date.now()
+              fee.paid_date = Date.now();
               fee.save();
             })
-            res.redirect(200, process.env.BASE_URL + '/confirm/payment');
+            res.redirect(302, process.env.BASE_URL + '/confirm/payment');
           })
       }
       else {
-        res.redirect(200, process.env.BASE_URL + '/error/payment')
+        res.redirect(302, process.env.BASE_URL + '/error/payment')
       }
     }
   });

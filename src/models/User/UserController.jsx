@@ -1,5 +1,9 @@
 import Express from 'express';
 import _ from 'lodash';
+import uuid from 'node-uuid';
+
+import * as UserEmail from './UserEmails';
+import * as Email from '../../helpers/mail';
 
 import User from './UserModel';
 import validateUser from './UserValidation';
@@ -16,6 +20,27 @@ router.get('/', hasRole(UserRoles.Administrator), (req, res) => {
         success: true,
         contents: users
       });
+    })
+    .catch(err => {
+      res.json({
+        success: false,
+        error: err.message
+      });
+    })
+});
+
+router.get('/select', (req, res) => {
+  User.find({ }, 'first_name mi last_name')
+    .then(users => {
+      let json = [ ];
+      users.map(user => {
+        json.push({
+          value: user._id.toString(),
+          label: user.formattedName
+        });
+      })
+
+      res.json(json);
     })
     .catch(err => {
       res.json({

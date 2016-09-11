@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Icon from '../../helpers/Icon';
-import { LoginForm, RegistrationForm, PasswordRecovery } from './AuthForms';
+import { LoginForm, RegistrationForm, PasswordRecovery, ProcessPasswordRecovery } from './AuthForms';
 
 export class Login extends React.Component {
   render() {
@@ -16,6 +16,11 @@ export class Login extends React.Component {
           </div>
 
           <div className="card-block">
+            <div className="alert alert-warning">
+              If this is your first time logging into the new OpenCircuit, good news! Your account is
+              still around. Unfortunately, you'll need to reset your password. Click <strong>Recover
+              Password</strong> below to proceed.
+            </div>
             <LoginForm />
           </div>
 
@@ -28,7 +33,7 @@ export class Login extends React.Component {
               </div>
               <div className="col-xs-12 col-sm-6 pull-xs-center">
                 <Link to="/auth/recover" className="btn btn-link">
-                  <Icon shape="question" />Forgot Password
+                  <Icon shape="question" />Recover Password
                 </Link>
               </div>
             </div>
@@ -64,7 +69,7 @@ export class Register extends React.Component {
   }
 }
 
-export class Forgot extends React.Component {
+export class Recover extends React.Component {
   render() {
     return (
       <div className="vcenter-parent registration-box col-xs-12 offset-md-2 col-md-8">
@@ -82,5 +87,68 @@ export class Forgot extends React.Component {
         </div>
       </div>
     );
+  }
+}
+
+export class ProcessRecovery extends React.Component {
+  render() {
+    return (
+      <div className="vcenter-parent registration-box col-xs-12 offset-md-2 col-md-8">
+        <div className="card text-xs-center light-shadow">
+          <div className="card-header" style={{ 'padding': '0rem' }}>
+            <img className="card-img-top" src="/assets/img/2016NavbarLogo.png" />
+            <div className="container-fluid card-info card-inverse auth-card">
+              <strong className="h5">Recover Password</strong>
+            </div>
+          </div>
+
+          <div className="card-block">
+            <ProcessPasswordRecovery token={ this.props.params.token } />
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export class MustConfirm extends React.Component {
+  render() {
+    return (
+      <div className="offset-xs-1 col-xs-10">
+        <div className="content-container">
+          <p className="lead">You have not yet confirmed your membership.</p>
+
+          <p>Check your email for a confirmation link.</p>
+        </div>
+      </div>
+    )
+  }
+}
+
+export class PostRegister extends React.Component {
+  render() {
+    return (
+      <div className="offset-xs-1 col-xs-10">
+        <div className="content-container">
+          <p className="lead">Your registration is processing.</p>
+
+          <p>Check your email for a link to confirm your new membership.</p>
+        </div>
+      </div>
+    )
+  }
+}
+
+export class PostRecovery extends React.Component {
+  render() {
+    return (
+      <div className="offset-xs-1 col-xs-10">
+        <div className="content-container">
+          <p className="lead">Check your email!</p>
+
+          <p>There will be instructions there to process your password recovery.</p>
+        </div>
+      </div>
+    )
   }
 }

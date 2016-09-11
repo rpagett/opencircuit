@@ -6,9 +6,23 @@ const modelView = (state = { }, action) => {
         isLoading: true
       }
 
+    case 'MODELVIEW_DUMP_CONTENTS':
+      if (action.subStore) {
+        return {
+          ...state,
+          [action.subStore]: null,
+          isLoading: true
+        }
+      }
+
+      return {
+        isLoading: true
+      }
+
     case 'MODELVIEW_RECEIVED_MODEL':
       return {
-        model: action.model,
+        ...state,
+        [action.subStore]: action.model,
         isLoading: false
       }
 

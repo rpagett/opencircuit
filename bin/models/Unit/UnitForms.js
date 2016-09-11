@@ -88,10 +88,16 @@ var Edit = exports.Edit = function (_React$Component2) {
         _react2.default.createElement(_components.FormInput, { type: 'number', name: 'members', label: 'Member Count' }),
         _react2.default.createElement(
           _UserRoles.HasRole,
+          { role: _UserRoles.UserRoles.Administrator },
+          _react2.default.createElement(_components.UserSelect, { name: 'director', label: 'Director' })
+        ),
+        _react2.default.createElement(
+          _UserRoles.HasRole,
           { role: _UserRoles.UserRoles.EventDirector },
           _react2.default.createElement(_components.TextArea, { name: 'notes', label: 'Administrative Notes' }),
           _react2.default.createElement(_ClassBox, null)
         ),
+        _react2.default.createElement(_components.EventChecks, { endpoint: '/api/units/' + this.props.slug + '/eventChecks' }),
         _react2.default.createElement(
           'button',
           { name: 'submit', type: 'submit', className: 'btn btn-success btn-block' },

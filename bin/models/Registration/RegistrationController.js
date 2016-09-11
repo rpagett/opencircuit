@@ -37,6 +37,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 // All routes are '/api/register/...'
 
+router.get('/orgList', function (req, res) {
+  _OrganizationModel2.default.find({ director: res.store.getState().auth.user._id }, 'name').then(function (orgs) {
+    res.json({
+      success: true,
+      contents: orgs
+    });
+  }).catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
 router.post('/organization', function (req, res) {
   Validate.organization(req.body).then(function (data) {
     //Organization.search({ query: data.slug }) This is where I'll do fuzzy matching.

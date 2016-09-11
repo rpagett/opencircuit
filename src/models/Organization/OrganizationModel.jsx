@@ -1,8 +1,6 @@
 import Mongoose from 'mongoose';
-import UserModel from '../User/UserModel';
 
 const ObjectId = Mongoose.Schema.Types.ObjectId;
-
 const OrganizationSchema = new Mongoose.Schema({
   name: {
     type: String,
@@ -18,13 +16,13 @@ const OrganizationSchema = new Mongoose.Schema({
   street_2: String,
   city: String,
   state: String,
-  ZIP: String,
+  zip: String,
 
   is_school: Boolean,
 
   director: {
     type: ObjectId,
-    ref: UserModel
+    ref: 'User'
   }
 }, {
   timestamps: true,

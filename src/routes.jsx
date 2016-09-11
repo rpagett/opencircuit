@@ -10,19 +10,23 @@ import * as AuthView from './models/Auth/AuthViews';
 import * as CompClassView from './models/CompClass/CompClassViews';
 import * as FeeView from './models/Fee/FeeViews';
 import * as EventView from './models/Event/EventViews';
-import * as RegistrationView from './models/Registration/RegistrationViews'
+import * as OrganizationView from './models/Organization/OrganizationViews';
+import * as RegistrationView from './models/Registration/RegistrationViews';
+import * as SupportView from './models/Support/SupportViews';
 import * as UnitView from './models/Unit/UnitViews';
-import * as UnitTypeView from './models/UnitType/UnitTypeViews'
+import * as UnitTypeView from './models/UnitType/UnitTypeViews';
 import * as UserView from './models/User/UserViews';
 
 import { UserRoles } from './models/User/UserRoles';
 import { dumpContents as dumpFlexTable } from './helpers/FlexTable/FlexTableActions';
 import { dumpContents as dumpContentsView } from './helpers/ContentsView/ContentsViewActions';
+import { dumpContents as dumpModelView } from './helpers/ModelView/ModelViewActions';
 
 export function getAppRoutes(store) {
   const dumpContents = () => {
     dumpFlexTable();
     dumpContentsView();
+    dumpModelView();
   }
 
   function authOnly(nextState, replace) {
@@ -103,16 +107,31 @@ export function getAppRoutes(store) {
           <IndexRoute component={ FeeView.Index } />
         </Route>
 
+        <Route path="/organizations">
+          <IndexRoute component={ OrganizationView.Index } />
+          <Route path=":slug" component={ OrganizationView.Show } />
+          <Route path=":slug/edit" component={ OrganizationView.Edit } />
+        </Route>
+
         <Route path="/register">
-          <IndexRoute component={ RegistrationView.Organization } />
+          <IndexRoute component={ RegistrationView.DirectRegistration } />
+          <Route path="new" component={ RegistrationView.Organization } />
           <Route path="organization/:org" component={ RegistrationView.Unit } />
           <Route path="unit/:unit" component={ RegistrationView.Details } />
           <Route path="unit/:unit/events" component={ RegistrationView.EventRegistration } />
           <Route path="unit/:unit/confirm" component={ RegistrationView.Confirm } />
         </Route>
 
+        <Route path="/support">
+          <IndexRoute component={ SupportView.Index } />
+          <Route path="success" component={ SupportView.Success } />
+        </Route>
+
         <Route path="/units">
-          <IndexRoute component={ UnitView.Index } onEnter={ requiresRole.bind(this, UserRoles.EventDirector) } />
+          <IndexRoute
+            component={ UnitView.Index }
+            onEnter={ requiresRole.bind(this, UserRoles.EventDirector) }
+          />
           <Route path=":slug" component={ UnitView.Show } />
           <Route path=":slug/edit" component={ UnitView.Edit } />
         </Route>
@@ -134,7 +153,13 @@ export function getAppRoutes(store) {
       <Route path="/auth" component={ AuthTemplate } onEnter={ guestOnly }>
         <Route path="login" component={ AuthView.Login } />
         <Route path="register" component={ AuthView.Register } />
-        <Route path="forgot" component={ AuthView.Forgot } />
+
+        <Route path="recover" component={ AuthView.Recover } />
+        <Route path="recover/:token" component={ AuthView.ProcessRecovery } />
+
+        <Route path="sent-recovery" component={ AuthView.PostRecovery } />
+        <Route path="must-confirm" component={ AuthView.MustConfirm } />
+        <Route path="confirm" component={ AuthView.PostRegister } />
       </Route>
 
     </Route>

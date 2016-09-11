@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PasswordRecovery = exports.LoginForm = exports.RegistrationForm = undefined;
+exports.ProcessPasswordRecovery = exports.PasswordRecovery = exports.LoginForm = exports.RegistrationForm = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -114,7 +114,7 @@ var PasswordRecovery = exports.PasswordRecovery = function (_React$Component3) {
         _components.ReduxForm,
         {
           subStore: 'auth_recover',
-          submitEndpoint: '/auth/forgot',
+          submitEndpoint: '/auth/recover',
           submitMethod: 'POST'
         },
         _react2.default.createElement(_components.FormInput, { type: 'email', name: 'email', label: 'Email' }),
@@ -128,4 +128,37 @@ var PasswordRecovery = exports.PasswordRecovery = function (_React$Component3) {
   }]);
 
   return PasswordRecovery;
+}(_react2.default.Component);
+
+var ProcessPasswordRecovery = exports.ProcessPasswordRecovery = function (_React$Component4) {
+  _inherits(ProcessPasswordRecovery, _React$Component4);
+
+  function ProcessPasswordRecovery() {
+    _classCallCheck(this, ProcessPasswordRecovery);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(ProcessPasswordRecovery).apply(this, arguments));
+  }
+
+  _createClass(ProcessPasswordRecovery, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _components.ReduxForm,
+        {
+          subStore: 'auth_process_recover',
+          submitEndpoint: '/auth/recover/' + this.props.token,
+          submitMethod: 'POST'
+        },
+        _react2.default.createElement(_components.FormInput, { type: 'password', name: 'password', label: 'New Password' }),
+        _react2.default.createElement(_components.FormInput, { type: 'password', name: 'password_verify', label: 'Verify Password' }),
+        _react2.default.createElement(
+          'button',
+          { type: 'submit', className: 'btn btn-success btn-block' },
+          'Set Password'
+        )
+      );
+    }
+  }]);
+
+  return ProcessPasswordRecovery;
 }(_react2.default.Component);

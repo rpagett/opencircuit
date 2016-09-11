@@ -46,6 +46,11 @@ var UserSchema = new _mongoose2.default.Schema({
     default: []
   },
 
+  confirmed: Boolean,
+  confirmation_token: String,
+
+  recovery_token: String,
+
   apiToken: String
 }, {
   timestamps: true,

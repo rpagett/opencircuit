@@ -54,6 +54,65 @@ export class Organization extends React.Component {
   }
 }
 
+class _DirectRegistration extends React.Component {
+  render() {
+    if (!this.props.contents) {
+      return <_Organization { ...this.props } />
+    }
+
+    let buttons = [ ];
+    this.props.contents.map(org => {
+      buttons.push(
+        <div className="col-xs-12 col-sm-6" key={ org._id + '-div' }>
+          <Link
+            role="button"
+            className="btn btn-block btn-secondary"
+            to={ `/register/organization/${org._id}` }
+            key={ org._id }
+          >
+            { org.name }
+          </Link>
+        </div>
+      )
+    })
+    return (
+      <div>
+        <p className="lead">Register a new unit for:</p>
+
+        <p></p>
+
+        <div className="row">
+          { buttons }
+        </div>
+
+        <p></p><hr /><p></p>
+
+        <div className="offset-xs-1 col-xs-10">
+          <Link
+            role="button"
+            className="btn btn-block btn-outline-success"
+            to="/register/new"
+          >
+            Register a New Organization
+          </Link>
+        </div>
+      </div>
+    )
+  }
+}
+
+export class DirectRegistration extends React.Component {
+  render() {
+    return (
+      <ContentsView
+        subStore="register_dispatch"
+        endpoint="/api/register/orgList"
+        component={ _DirectRegistration }
+      />
+    )
+  }
+}
+
 class _UnitTypes extends React.Component {
   render() {
     let options = [];

@@ -35,7 +35,7 @@ router.route('/')
       .then(type => {
         res.json({
           success: true,
-          redirect: type.detailsUrl
+          redirect: '/unittypes/new'
         })
       })
       .catch(errors => {

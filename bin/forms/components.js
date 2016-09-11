@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ReduxForm = exports.EventChecks = exports.Radio = exports.Checkbox = exports.DateTime = exports.StateSelect = exports.UnitTypeSelect = exports.FeeCategorySelect = exports.UnitSelect = exports.PaymentTypeSelect = exports.ClassSelect = exports.TextArea = exports.FormStatic = exports.PhoneInput = exports.FormInput = undefined;
+exports.ReduxForm = exports.EventChecks = exports.Radio = exports.Checkbox = exports.DateTime = exports.StateSelect = exports.UserSelect = exports.UnitTypeSelect = exports.FeeCategorySelect = exports.UnitSelect = exports.PaymentTypeSelect = exports.ClassSelect = exports.TextArea = exports.FormStatic = exports.PhoneInput = exports.FormInput = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -570,8 +570,48 @@ var UnitTypeSelect = exports.UnitTypeSelect = function (_React$Component12) {
   return UnitTypeSelect;
 }(_react2.default.Component);
 
-var StateSelect = exports.StateSelect = function (_React$Component13) {
-  _inherits(StateSelect, _React$Component13);
+var UserSelect = exports.UserSelect = function (_React$Component13) {
+  _inherits(UserSelect, _React$Component13);
+
+  function UserSelect() {
+    _classCallCheck(this, UserSelect);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(UserSelect).apply(this, arguments));
+  }
+
+  _createClass(UserSelect, [{
+    key: 'fetchList',
+    value: function fetchList() {
+      return (0, _functions.fetchAPI)('/api/users/select').then(function (res) {
+        return res.json();
+      }).then(function (json) {
+        return { options: json };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        InputWrapper,
+        _extends({}, this.props, { style: { 'zIndex': '10' } }),
+        _react2.default.createElement(_reactSelect2.default.Async, {
+          className: 'form-control',
+          clearable: false,
+          loadOptions: this.fetchList.bind(this),
+          filterOption: function filterOption() {
+            return true;
+          },
+          autosize: false
+        })
+      );
+    }
+  }]);
+
+  return UserSelect;
+}(_react2.default.Component);
+
+var StateSelect = exports.StateSelect = function (_React$Component14) {
+  _inherits(StateSelect, _React$Component14);
 
   function StateSelect() {
     _classCallCheck(this, StateSelect);
@@ -603,8 +643,8 @@ var StateSelect = exports.StateSelect = function (_React$Component13) {
   return StateSelect;
 }(_react2.default.Component);
 
-var DateTime = exports.DateTime = function (_React$Component14) {
-  _inherits(DateTime, _React$Component14);
+var DateTime = exports.DateTime = function (_React$Component15) {
+  _inherits(DateTime, _React$Component15);
 
   function DateTime() {
     _classCallCheck(this, DateTime);
@@ -633,8 +673,8 @@ var DateTime = exports.DateTime = function (_React$Component14) {
   return DateTime;
 }(_react2.default.Component);
 
-var _Checkbox = (_temp3 = _class3 = function (_React$Component15) {
-  _inherits(_Checkbox, _React$Component15);
+var _Checkbox = (_temp3 = _class3 = function (_React$Component16) {
+  _inherits(_Checkbox, _React$Component16);
 
   function _Checkbox() {
     _classCallCheck(this, _Checkbox);
@@ -643,6 +683,15 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component15) {
   }
 
   _createClass(_Checkbox, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.inForm) {
+        this.props.updateField(this.props.preChecked);
+      } else {
+        this.props.updateCheckbox(this.props.preChecked);
+      }
+    }
+  }, {
     key: 'updateChecked',
     value: function updateChecked(e) {
       if (this.props.inForm) {
@@ -670,7 +719,7 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component15) {
               type: 'checkbox',
               className: 'form-check-input',
               name: this.props.name,
-              checked: this.props.formChecked,
+              checked: this.props.formChecked || this.props.preChecked,
               onChange: this.updateChecked.bind(this)
             })
           )
@@ -727,8 +776,8 @@ var mapDispatchToCheckboxProps = function mapDispatchToCheckboxProps(dispatch, p
 
 var Checkbox = exports.Checkbox = (0, _reactRedux.connect)(mapStateToCheckboxProps, mapDispatchToCheckboxProps)(_Checkbox);
 
-var _Radio = (_temp4 = _class4 = function (_React$Component16) {
-  _inherits(_Radio, _React$Component16);
+var _Radio = (_temp4 = _class4 = function (_React$Component17) {
+  _inherits(_Radio, _React$Component17);
 
   function _Radio() {
     _classCallCheck(this, _Radio);
@@ -789,29 +838,29 @@ var mapDispatchToRadioProps = function mapDispatchToRadioProps(dispatch, props) 
 
 var Radio = exports.Radio = (0, _reactRedux.connect)(mapStateToCheckboxProps, mapDispatchToRadioProps)(_Radio);
 
-var _EventChecks = (_temp5 = _class5 = function (_React$Component17) {
-  _inherits(_EventChecks, _React$Component17);
+var _EventChecks = (_temp5 = _class5 = function (_React$Component18) {
+  _inherits(_EventChecks, _React$Component18);
 
   function _EventChecks() {
     _classCallCheck(this, _EventChecks);
 
-    var _this18 = _possibleConstructorReturn(this, Object.getPrototypeOf(_EventChecks).call(this));
+    var _this19 = _possibleConstructorReturn(this, Object.getPrototypeOf(_EventChecks).call(this));
 
-    _this18.state = {
+    _this19.state = {
       isLoading: true
     };
-    return _this18;
+    return _this19;
   }
 
   _createClass(_EventChecks, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this19 = this;
+      var _this20 = this;
 
       (0, _functions.fetchAPI)(this.props.endpoint).then(function (res) {
         return res.json();
       }).then(function (json) {
-        _this19.setState({
+        _this20.setState({
           isLoading: false,
           events: json.events
         });
@@ -820,7 +869,7 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component17) {
   }, {
     key: 'render',
     value: function render() {
-      var _this20 = this;
+      var _this21 = this;
 
       var boxes = [];
 
@@ -848,10 +897,11 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component17) {
           { className: 'col-xs-12 col-sm-6', key: 'col-' + event.id },
           _react2.default.createElement(Checkbox, {
             name: 'events',
-            formStore: _this20.props.formStore,
+            formStore: _this21.props.formStore,
             key: event._id,
             label: event.name + ' (' + event.formattedDate + ')',
-            value: event._id
+            value: event._id,
+            preChecked: event.attending
           })
         ));
       });
@@ -869,8 +919,8 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component17) {
   endpoint: _react2.default.PropTypes.string.isRequired
 }, _temp5);
 
-var EventChecks = exports.EventChecks = function (_React$Component18) {
-  _inherits(EventChecks, _React$Component18);
+var EventChecks = exports.EventChecks = function (_React$Component19) {
+  _inherits(EventChecks, _React$Component19);
 
   function EventChecks() {
     _classCallCheck(this, EventChecks);
@@ -894,8 +944,8 @@ var EventChecks = exports.EventChecks = function (_React$Component18) {
   return EventChecks;
 }(_react2.default.Component);
 
-var _ReduxForm = (_temp6 = _class6 = function (_React$Component19) {
-  _inherits(_ReduxForm, _React$Component19);
+var _ReduxForm = (_temp6 = _class6 = function (_React$Component20) {
+  _inherits(_ReduxForm, _React$Component20);
 
   function _ReduxForm() {
     _classCallCheck(this, _ReduxForm);
@@ -911,15 +961,15 @@ var _ReduxForm = (_temp6 = _class6 = function (_React$Component19) {
   }, {
     key: 'recursivelyCloneChildren',
     value: function recursivelyCloneChildren(children) {
-      var _this23 = this;
+      var _this24 = this;
 
       return _react2.default.Children.map(children, function (child) {
         if (!_react2.default.isValidElement(child)) {
           return child;
         }
 
-        var childProps = { formStore: _this23.props.subStore, formModel: _this23.props.formModel };
-        childProps.children = _this23.recursivelyCloneChildren(child.props.children);
+        var childProps = { formStore: _this24.props.subStore, formModel: _this24.props.formModel };
+        childProps.children = _this24.recursivelyCloneChildren(child.props.children);
 
         return _react2.default.cloneElement(child, childProps);
       });
@@ -927,22 +977,22 @@ var _ReduxForm = (_temp6 = _class6 = function (_React$Component19) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      var _this24 = this;
+      var _this25 = this;
 
       event && event.preventDefault();
 
       this.props.submitData().then(function (res) {
         if (res && res.success === true) {
 
-          if (_this24.props.inModal) {
-            _this24.props.closeModal();
+          if (_this25.props.inModal) {
+            _this25.props.closeModal();
           }
 
           if (res.redirect) {
             if (res.external && window) {
               window.location = res.redirect;
             } else {
-              _this24.props.router.push(res.redirect);
+              _this25.props.router.push(res.redirect);
             }
           }
         }

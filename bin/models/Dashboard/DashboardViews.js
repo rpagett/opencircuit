@@ -127,27 +127,9 @@ var _Home = function (_React$Component2) {
         'div',
         { className: 'container' },
         _react2.default.createElement(
-          'div',
-          { className: 'alert alert-success' },
-          this.props.userToken ? 'You\'re logged in!' : 'Everything is wonderful!',
-          _react2.default.createElement(
-            'span',
-            { className: 'pull-xs-right' },
-            _react2.default.createElement(
-              'strong',
-              null,
-              this.props.user ? this.props.user.email : 'Seriously!'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          _UserRoles.HasRole,
-          { role: _UserRoles.UserRoles.Administrator },
-          _react2.default.createElement(
-            'div',
-            { className: 'alert alert-warning' },
-            'You have the right privileges.'
-          )
+          'h1',
+          { className: 'page-header' },
+          'CWEA Dashboard'
         ),
         _react2.default.createElement(_ContentsView2.default, {
           subStore: 'dashboard_fees',
@@ -165,7 +147,7 @@ var _Home = function (_React$Component2) {
             _react2.default.createElement(
               _reactRouter.Link,
               { to: '/register', className: 'btn btn-block btn-outline-success' },
-              'Register'
+              'Register Your Unit(s)'
             )
           )
         )

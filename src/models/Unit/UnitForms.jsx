@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ModelView from '../../helpers/ModelView/ModelView';
-import { ReduxForm, FormInput, FormStatic, Checkbox, ClassSelect, TextArea } from '../../forms/components';
+import { ReduxForm, FormInput, FormStatic, UserSelect, EventChecks, Checkbox, ClassSelect, TextArea } from '../../forms/components';
 import { UserRoles, HasRole } from '../User/UserRoles';
 
 class _ClassBox extends React.Component {
@@ -42,10 +42,16 @@ export class Edit extends React.Component {
         <FormStatic name="name" label="Name" />
         <FormInput type="number" name="members" label="Member Count" />
 
+        <HasRole role={ UserRoles.Administrator }>
+          <UserSelect name="director" label="Director" />
+        </HasRole>
+
         <HasRole role={ UserRoles.EventDirector }>
           <TextArea name="notes" label="Administrative Notes" />
           <_ClassBox />
         </HasRole>
+
+        <EventChecks endpoint={ `/api/units/${this.props.slug}/eventChecks` } />
 
         <button name="submit" type="submit" className="btn btn-success btn-block">
           {( this.props.creationForm ? 'Create Unit' : 'Save Changes' )}

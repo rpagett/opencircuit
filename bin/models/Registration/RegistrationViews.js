@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Confirm = exports.EventRegistration = exports.Details = exports.Unit = exports.Organization = undefined;
+exports.Confirm = exports.EventRegistration = exports.Details = exports.Unit = exports.DirectRegistration = exports.Organization = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -101,8 +101,101 @@ var Organization = exports.Organization = function (_React$Component) {
   return Organization;
 }(_react2.default.Component);
 
-var _UnitTypes = function (_React$Component2) {
-  _inherits(_UnitTypes, _React$Component2);
+var _DirectRegistration = function (_React$Component2) {
+  _inherits(_DirectRegistration, _React$Component2);
+
+  function _DirectRegistration() {
+    _classCallCheck(this, _DirectRegistration);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_DirectRegistration).apply(this, arguments));
+  }
+
+  _createClass(_DirectRegistration, [{
+    key: 'render',
+    value: function render() {
+      if (!this.props.contents) {
+        return _react2.default.createElement(_Organization, this.props);
+      }
+
+      var buttons = [];
+      this.props.contents.map(function (org) {
+        buttons.push(_react2.default.createElement(
+          'div',
+          { className: 'col-xs-12 col-sm-6', key: org._id + '-div' },
+          _react2.default.createElement(
+            _reactRouter.Link,
+            {
+              role: 'button',
+              className: 'btn btn-block btn-secondary',
+              to: '/register/organization/' + org._id,
+              key: org._id
+            },
+            org.name
+          )
+        ));
+      });
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'p',
+          { className: 'lead' },
+          'Register a new unit for:'
+        ),
+        _react2.default.createElement('p', null),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          buttons
+        ),
+        _react2.default.createElement('p', null),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement('p', null),
+        _react2.default.createElement(
+          'div',
+          { className: 'offset-xs-1 col-xs-10' },
+          _react2.default.createElement(
+            _reactRouter.Link,
+            {
+              role: 'button',
+              className: 'btn btn-block btn-outline-success',
+              to: '/register/new'
+            },
+            'Register a New Organization'
+          )
+        )
+      );
+    }
+  }]);
+
+  return _DirectRegistration;
+}(_react2.default.Component);
+
+var DirectRegistration = exports.DirectRegistration = function (_React$Component3) {
+  _inherits(DirectRegistration, _React$Component3);
+
+  function DirectRegistration() {
+    _classCallCheck(this, DirectRegistration);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(DirectRegistration).apply(this, arguments));
+  }
+
+  _createClass(DirectRegistration, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_ContentsView2.default, {
+        subStore: 'register_dispatch',
+        endpoint: '/api/register/orgList',
+        component: _DirectRegistration
+      });
+    }
+  }]);
+
+  return DirectRegistration;
+}(_react2.default.Component);
+
+var _UnitTypes = function (_React$Component4) {
+  _inherits(_UnitTypes, _React$Component4);
 
   function _UnitTypes() {
     _classCallCheck(this, _UnitTypes);
@@ -135,8 +228,8 @@ var _UnitTypes = function (_React$Component2) {
   return _UnitTypes;
 }(_react2.default.Component);
 
-var Unit = exports.Unit = function (_React$Component3) {
-  _inherits(Unit, _React$Component3);
+var Unit = exports.Unit = function (_React$Component5) {
+  _inherits(Unit, _React$Component5);
 
   function Unit() {
     _classCallCheck(this, Unit);
@@ -183,8 +276,8 @@ var Unit = exports.Unit = function (_React$Component3) {
   return Unit;
 }(_react2.default.Component);
 
-var _ClassBox = function (_React$Component4) {
-  _inherits(_ClassBox, _React$Component4);
+var _ClassBox = function (_React$Component6) {
+  _inherits(_ClassBox, _React$Component6);
 
   function _ClassBox() {
     _classCallCheck(this, _ClassBox);
@@ -212,8 +305,8 @@ var _ClassBox = function (_React$Component4) {
   return _ClassBox;
 }(_react2.default.Component);
 
-var Details = exports.Details = function (_React$Component5) {
-  _inherits(Details, _React$Component5);
+var Details = exports.Details = function (_React$Component7) {
+  _inherits(Details, _React$Component7);
 
   function Details() {
     _classCallCheck(this, Details);
@@ -258,8 +351,8 @@ var Details = exports.Details = function (_React$Component5) {
   return Details;
 }(_react2.default.Component);
 
-var _EventBox = function (_React$Component6) {
-  _inherits(_EventBox, _React$Component6);
+var _EventBox = function (_React$Component8) {
+  _inherits(_EventBox, _React$Component8);
 
   function _EventBox() {
     _classCallCheck(this, _EventBox);
@@ -280,8 +373,8 @@ var _EventBox = function (_React$Component6) {
   return _EventBox;
 }(_react2.default.Component);
 
-var EventRegistration = exports.EventRegistration = function (_React$Component7) {
-  _inherits(EventRegistration, _React$Component7);
+var EventRegistration = exports.EventRegistration = function (_React$Component9) {
+  _inherits(EventRegistration, _React$Component9);
 
   function EventRegistration() {
     _classCallCheck(this, EventRegistration);
@@ -322,8 +415,8 @@ var EventRegistration = exports.EventRegistration = function (_React$Component7)
   return EventRegistration;
 }(_react2.default.Component);
 
-var _Confirmation = function (_React$Component8) {
-  _inherits(_Confirmation, _React$Component8);
+var _Confirmation = function (_React$Component10) {
+  _inherits(_Confirmation, _React$Component10);
 
   function _Confirmation() {
     _classCallCheck(this, _Confirmation);
@@ -383,8 +476,8 @@ var _Confirmation = function (_React$Component8) {
   return _Confirmation;
 }(_react2.default.Component);
 
-var Confirm = exports.Confirm = function (_React$Component9) {
-  _inherits(Confirm, _React$Component9);
+var Confirm = exports.Confirm = function (_React$Component11) {
+  _inherits(Confirm, _React$Component11);
 
   function Confirm() {
     _classCallCheck(this, Confirm);
