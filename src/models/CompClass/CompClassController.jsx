@@ -60,7 +60,7 @@ router.get('/table', (req, res) => {
   let contents = { };
   CompClass.find({ }, '_id name abbreviation unit_type detailsUrl')
     .populate('unit_type', 'name')
-    .sort('unit_type.name name')
+    .sort('unit_type name')
     .exec()
     .then(classes => {
       let ids = [];
