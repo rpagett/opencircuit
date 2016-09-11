@@ -14,7 +14,7 @@ export class Index extends React.Component {
       <div>
         <h1 className="page-header">Competitive Classes</h1>
 
-        <CompClassList endpoint="/api/compclasses" />
+        <CompClassList endpoint="/api/compclasses/table" />
 
         <div className="row">
           <div className="col-xs-12 offset-sm-1 col-sm-10">

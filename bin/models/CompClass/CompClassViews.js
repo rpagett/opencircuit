@@ -61,7 +61,7 @@ var Index = exports.Index = function (_React$Component) {
           { className: 'page-header' },
           'Competitive Classes'
         ),
-        _react2.default.createElement(_CompClassList2.default, { endpoint: '/api/compclasses' }),
+        _react2.default.createElement(_CompClassList2.default, { endpoint: '/api/compclasses/table' }),
         _react2.default.createElement(
           'div',
           { className: 'row' },
