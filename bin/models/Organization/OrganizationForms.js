@@ -60,6 +60,11 @@ var Edit = exports.Edit = function (_React$Component) {
         _react2.default.createElement(_components.StateSelect, { name: 'state', label: 'State' }),
         _react2.default.createElement(_components.FormInput, { name: 'zip', label: 'ZIP' }),
         _react2.default.createElement(
+          _UserRoles.HasRole,
+          { role: _UserRoles.UserRoles.Administrator },
+          _react2.default.createElement(_components.UserSelect, { name: 'director', label: 'Director' })
+        ),
+        _react2.default.createElement(
           'button',
           { name: 'submit', type: 'submit', className: 'btn btn-success btn-block' },
           this.props.creationForm ? 'Create Organization' : 'Save Changes'

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ReduxForm, FormInput, FormStatic, StateSelect } from '../../forms/components';
+import { ReduxForm, FormInput, FormStatic, UserSelect, StateSelect } from '../../forms/components';
 import { UserRoles, HasRole } from '../User/UserRoles';
 
 export class Edit extends React.Component {
@@ -28,6 +28,10 @@ export class Edit extends React.Component {
         <FormInput name="city" label="City" />
         <StateSelect name="state" label="State" />
         <FormInput name="zip" label="ZIP" />
+
+        <HasRole role={ UserRoles.Administrator }>
+          <UserSelect name="director" label="Director" />
+        </HasRole>
 
         <button name="submit" type="submit" className="btn btn-success btn-block">
           {( this.props.creationForm ? 'Create Organization' : 'Save Changes' )}
