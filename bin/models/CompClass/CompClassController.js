@@ -71,7 +71,7 @@ router.route('/').get(function (req, res) {
 
 router.get('/table', function (req, res) {
   var contents = {};
-  _CompClassModel2.default.find({}, '_id name abbreviation unit_type detailsUrl').populate('unit_type', 'name').sort('name').exec().then(function (classes) {
+  _CompClassModel2.default.find({}, '_id name abbreviation unit_type detailsUrl').populate('unit_type', 'name').sort('unit_type.name name').exec().then(function (classes) {
     var ids = [];
 
     contents = classes;

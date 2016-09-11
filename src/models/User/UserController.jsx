@@ -15,6 +15,8 @@ let router = Express.Router();
 
 router.get('/', hasRole(UserRoles.Administrator), (req, res) => {
   User.find({ }, 'email first_name mi last_name formattedName profileUrl phone')
+    .sort('last_name')
+    .exec()
     .then(users => {
       res.json({
         success: true,

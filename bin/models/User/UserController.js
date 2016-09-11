@@ -46,7 +46,7 @@ var router = _express2.default.Router();
 // routes are '/api/users/...'
 
 router.get('/', (0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
-  _UserModel2.default.find({}, 'email first_name mi last_name formattedName profileUrl phone').then(function (users) {
+  _UserModel2.default.find({}, 'email first_name mi last_name formattedName profileUrl phone').sort('last_name').exec().then(function (users) {
     res.json({
       success: true,
       contents: users
