@@ -2,69 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/helpers/mail.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Judge/JudgeModel.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Organization/OrganizationForms.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Organization/OrganizationList.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Organization/OrganizationViews.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Support/SupportController.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/Support/SupportViews.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/User/UserEmails.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/APIDispatch.js" afterPath="$PROJECT_DIR$/bin/APIDispatch.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/forms/components.js" afterPath="$PROJECT_DIR$/bin/forms/components.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/helpers/modelView/ModelView.js" afterPath="$PROJECT_DIR$/bin/helpers/modelView/ModelView.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/helpers/modelView/ModelViewActions.js" afterPath="$PROJECT_DIR$/bin/helpers/modelView/ModelViewActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/helpers/modelView/ModelViewReducer.js" afterPath="$PROJECT_DIR$/bin/helpers/modelView/ModelViewReducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/layout/navbar.js" afterPath="$PROJECT_DIR$/bin/layout/navbar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Auth/AuthController.js" afterPath="$PROJECT_DIR$/bin/models/Auth/AuthController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Auth/AuthForms.js" afterPath="$PROJECT_DIR$/bin/models/Auth/AuthForms.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Auth/AuthValidation.js" afterPath="$PROJECT_DIR$/bin/models/Auth/AuthValidation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Auth/AuthViews.js" afterPath="$PROJECT_DIR$/bin/models/Auth/AuthViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/CompClass/CompClassController.js" afterPath="$PROJECT_DIR$/bin/models/CompClass/CompClassController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Dashboard/DashboardViews.js" afterPath="$PROJECT_DIR$/bin/models/Dashboard/DashboardViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Event/EventViews.js" afterPath="$PROJECT_DIR$/bin/models/Event/EventViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Fee/FeeController.js" afterPath="$PROJECT_DIR$/bin/models/Fee/FeeController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Organization/OrganizationController.js" afterPath="$PROJECT_DIR$/bin/models/Organization/OrganizationController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Organization/OrganizationModel.js" afterPath="$PROJECT_DIR$/bin/models/Organization/OrganizationModel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Registration/RegistrationController.js" afterPath="$PROJECT_DIR$/bin/models/Registration/RegistrationController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Registration/RegistrationViews.js" afterPath="$PROJECT_DIR$/bin/models/Registration/RegistrationViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Unit/UnitController.js" afterPath="$PROJECT_DIR$/bin/models/Unit/UnitController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Unit/UnitForms.js" afterPath="$PROJECT_DIR$/bin/models/Unit/UnitForms.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/Unit/UnitViews.js" afterPath="$PROJECT_DIR$/bin/models/Unit/UnitViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/UnitType/UnitTypeController.js" afterPath="$PROJECT_DIR$/bin/models/UnitType/UnitTypeController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/User/UserController.js" afterPath="$PROJECT_DIR$/bin/models/User/UserController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/User/UserModel.js" afterPath="$PROJECT_DIR$/bin/models/User/UserModel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/models/User/UserViews.js" afterPath="$PROJECT_DIR$/bin/models/User/UserViews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/routes.js" afterPath="$PROJECT_DIR$/bin/routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/app.min.css" afterPath="$PROJECT_DIR$/dist/css/app.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/bundle.js" afterPath="$PROJECT_DIR$/dist/js/bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scss/_containers.scss" afterPath="$PROJECT_DIR$/scss/_containers.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/APIDispatch.jsx" afterPath="$PROJECT_DIR$/src/APIDispatch.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/forms/components.jsx" afterPath="$PROJECT_DIR$/src/forms/components.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helpers/ModelView/ModelView.jsx" afterPath="$PROJECT_DIR$/src/helpers/ModelView/ModelView.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx" afterPath="$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helpers/ModelView/ModelViewReducer.jsx" afterPath="$PROJECT_DIR$/src/helpers/ModelView/ModelViewReducer.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layout/NavBar.jsx" afterPath="$PROJECT_DIR$/src/layout/NavBar.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Auth/AuthController.jsx" afterPath="$PROJECT_DIR$/src/models/Auth/AuthController.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Auth/AuthForms.jsx" afterPath="$PROJECT_DIR$/src/models/Auth/AuthForms.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Auth/AuthViews.jsx" afterPath="$PROJECT_DIR$/src/models/Auth/AuthViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/CompClass/CompClassController.jsx" afterPath="$PROJECT_DIR$/src/models/CompClass/CompClassController.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Dashboard/DashboardViews.jsx" afterPath="$PROJECT_DIR$/src/models/Dashboard/DashboardViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Event/EventViews.jsx" afterPath="$PROJECT_DIR$/src/models/Event/EventViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Fee/FeeController.jsx" afterPath="$PROJECT_DIR$/src/models/Fee/FeeController.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Organization/OrganizationController.jsx" afterPath="$PROJECT_DIR$/src/models/Organization/OrganizationController.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Organization/OrganizationModel.jsx" afterPath="$PROJECT_DIR$/src/models/Organization/OrganizationModel.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Registration/RegistrationController.jsx" afterPath="$PROJECT_DIR$/src/models/Registration/RegistrationController.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Registration/RegistrationViews.jsx" afterPath="$PROJECT_DIR$/src/models/Registration/RegistrationViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Unit/UnitController.jsx" afterPath="$PROJECT_DIR$/src/models/Unit/UnitController.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Unit/UnitForms.jsx" afterPath="$PROJECT_DIR$/src/models/Unit/UnitForms.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Unit/UnitViews.jsx" afterPath="$PROJECT_DIR$/src/models/Unit/UnitViews.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/UnitType/UnitTypeController.jsx" afterPath="$PROJECT_DIR$/src/models/UnitType/UnitTypeController.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/User/UserController.jsx" afterPath="$PROJECT_DIR$/src/models/User/UserController.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/User/UserModel.jsx" afterPath="$PROJECT_DIR$/src/models/User/UserModel.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/User/UserViews.jsx" afterPath="$PROJECT_DIR$/src/models/User/UserViews.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes.jsx" afterPath="$PROJECT_DIR$/src/routes.jsx" />
     </list>
     <ignored path="opencircuit.iws" />
@@ -86,12 +24,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_containers.scss" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scss/_containers.scss">
+      <file leaf-file-name="routes.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/routes.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27235213">
-              <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-              <folding />
+            <state vertical-scroll-proportion="0.70212764">
+              <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
+              <folding>
+                <marker date="1473571726000" expanded="true" signature="1267:6629" placeholder="{...}" />
+                <marker date="1473571726000" expanded="true" signature="2547:5796" placeholder="&lt;xml/&gt;" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,7 +45,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/modals/SpawnableModal.jsx" />
         <option value="$PROJECT_DIR$/scss/_typography.scss" />
         <option value="$PROJECT_DIR$/src/helpers/functions.jsx" />
         <option value="$PROJECT_DIR$/package.json" />
@@ -118,7 +58,6 @@
         <option value="$PROJECT_DIR$/src/models/Fee/FeeModel.jsx" />
         <option value="$PROJECT_DIR$/src/models/Fee/FeeModals.jsx" />
         <option value="$PROJECT_DIR$/src/models/Event/EventViews.jsx" />
-        <option value="$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx" />
         <option value="$PROJECT_DIR$/src/helpers/ModelView/ModelViewReducer.jsx" />
         <option value="$PROJECT_DIR$/src/helpers/ModelView/ModelView.jsx" />
         <option value="$PROJECT_DIR$/src/models/Judge/JudgeModel.jsx" />
@@ -144,8 +83,6 @@
         <option value="$PROJECT_DIR$/src/models/Support/SupportViews.jsx" />
         <option value="$PROJECT_DIR$/src/APIDispatch.jsx" />
         <option value="$PROJECT_DIR$/src/models/Support/SupportController.jsx" />
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_21" />
-        <option value="$PROJECT_DIR$/src/routes.jsx" />
         <option value="$PROJECT_DIR$/src/middleware/authRoute.jsx" />
         <option value="$PROJECT_DIR$/src/models/Registration/RegistrationController.jsx" />
         <option value="$PROJECT_DIR$/src/models/Registration/RegistrationViews.jsx" />
@@ -155,6 +92,10 @@
         <option value="$PROJECT_DIR$/src/models/Unit/UnitController.jsx" />
         <option value="$PROJECT_DIR$/src/models/Dashboard/DashboardViews.jsx" />
         <option value="$PROJECT_DIR$/scss/_containers.scss" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_21" />
+        <option value="$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_23" />
+        <option value="$PROJECT_DIR$/src/routes.jsx" />
       </list>
     </option>
   </component>
@@ -688,87 +629,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9126984">
-          <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
-          <folding>
-            <marker date="1473478961000" expanded="true" signature="92:782" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="127:779" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="274:487" placeholder="{&quot;credentials&quot;: 'same-origin'...}" />
-            <marker date="1473478961000" expanded="true" signature="346:481" placeholder="{&quot;Accept&quot;: 'application/json'...}" />
-            <marker date="1473478961000" expanded="true" signature="508:544" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="565:705" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="593:642" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="729:773" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="830:898" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="841:896" placeholder="{&quot;type&quot;: 'MODELVIEW_DUMP_CONTENTS'...}" />
-            <marker date="1473478961000" expanded="true" signature="924:978" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="935:976" placeholder="{&quot;type&quot;: 'MODELVIEW_BEGIN_LOADING'...}" />
-            <marker date="1473478961000" expanded="true" signature="1020:1100" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="1031:1098" placeholder="{&quot;type&quot;: 'MODELVIEW_RECEIVED_MODEL'...}" />
-            <marker date="1473478961000" expanded="true" signature="1127:1199" placeholder="{...}" />
-            <marker date="1473478961000" expanded="true" signature="1138:1197" placeholder="{&quot;type&quot;: 'MODELVIEW_ERROR'...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helpers/ModelView/ModelViewReducer.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43650794">
-          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
-          <folding>
-            <marker date="1473479118000" expanded="true" signature="43:709" placeholder="{...}" />
-            <marker date="1473479118000" expanded="true" signature="68:707" placeholder="{...}" />
-            <marker date="1473479118000" expanded="true" signature="119:170" placeholder="{&quot;isLoading&quot;: true...}" />
-            <marker date="1473479118000" expanded="true" signature="235:352" placeholder="{...}" />
-            <marker date="1473479118000" expanded="true" signature="252:344" placeholder="{&quot;isLoading&quot;: true...}" />
-            <marker date="1473479118000" expanded="true" signature="367:400" placeholder="{&quot;isLoading&quot;: true...}" />
-            <marker date="1473479118000" expanded="true" signature="452:545" placeholder="{&quot;isLoading&quot;: false...}" />
-            <marker date="1473479118000" expanded="true" signature="588:669" placeholder="{&quot;isLoading&quot;: false...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helpers/ContentsView/ContentsViewReducer.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5674603">
-          <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
-          <folding>
-            <marker date="1473018630000" expanded="true" signature="46:757" placeholder="{...}" />
-            <marker date="1473018630000" expanded="true" signature="71:755" placeholder="{...}" />
-            <marker date="1473018630000" expanded="true" signature="125:177" placeholder="{&quot;isLoading&quot;: true...}" />
-            <marker date="1473018630000" expanded="true" signature="245:362" placeholder="{...}" />
-            <marker date="1473018630000" expanded="true" signature="262:354" placeholder="{&quot;isLoading&quot;: true...}" />
-            <marker date="1473018630000" expanded="true" signature="374:436" placeholder="{...}" />
-            <marker date="1473018630000" expanded="true" signature="391:428" placeholder="{&quot;isLoading&quot;: true...}" />
-            <marker date="1473018630000" expanded="true" signature="494:590" placeholder="{&quot;isLoading&quot;: false...}" />
-            <marker date="1473018630000" expanded="true" signature="636:717" placeholder="{&quot;isLoading&quot;: false...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helpers/FlexTable/FlexTableReducer.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1473252012000" expanded="true" signature="43:686" placeholder="{...}" />
-            <marker date="1473252012000" expanded="true" signature="68:684" placeholder="{...}" />
-            <marker date="1473252012000" expanded="true" signature="124:198" placeholder="{&quot;isLoading&quot;: false...}" />
-            <marker date="1473252012000" expanded="true" signature="250:283" placeholder="{&quot;isLoading&quot;: true...}" />
-            <marker date="1473252012000" expanded="true" signature="326:407" placeholder="{&quot;isLoading&quot;: false...}" />
-            <marker date="1473252012000" expanded="true" signature="458:545" placeholder="{&quot;isLoading&quot;: true...}" />
-            <marker date="1473252012000" expanded="true" signature="595:647" placeholder="{&quot;isLoading&quot;: false...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/helpers/FlexTable/FlexTableActions.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.0992064">
@@ -1158,14 +1023,6 @@
             <marker date="1473116453000" expanded="true" signature="1081:1155" placeholder="{...}" />
             <marker date="1473116453000" expanded="true" signature="1092:1152" placeholder="[...]" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23404256">
-          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1711,64 +1568,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_21">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5265958">
-          <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
-          <folding>
-            <marker date="1473565417000" expanded="true" signature="0:662" placeholder="/*...*/" />
-            <marker date="1473565417000" expanded="true" signature="664:930" placeholder="/*...*/" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/APIDispatch.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4973404">
           <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
           <folding>
             <marker date="1473564568000" expanded="true" signature="1247:1285" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40957448">
-          <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
-          <folding>
-            <marker date="1473566138000" expanded="true" signature="1267:6431" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="1267:6627" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="1298:1369" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="1411:1544" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="1503:1540" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="1591:1858" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="1708:1735" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="1827:1854" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="1917:2149" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="1988:2015" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="2118:2145" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="2192:2293" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="2262:2289" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="2321:6403" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="2438:5809" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="2545:5794" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="2612:2725" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="2735:2844" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="2854:3234" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="3244:3648" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="3658:3809" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="3819:4070" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="4080:4608" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="4618:4784" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="4794:5108" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="4826:4964" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="5118:5476" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="5486:5794" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="5817:6389" placeholder="&lt;xml/&gt;" />
-            <marker date="1473566138000" expanded="true" signature="6480:6626" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="6493:6624" placeholder="{...}" />
-            <marker date="1473566138000" expanded="true" signature="6514:6613" placeholder="&lt;xml/&gt;" />
           </folding>
         </state>
       </provider>
@@ -1798,33 +1603,6 @@
             <marker date="1473566567000" expanded="true" signature="1369:1446" placeholder="{&quot;success&quot;: false...}" />
             <marker date="1473566567000" expanded="true" signature="1504:1610" placeholder="{...}" />
             <marker date="1473566567000" expanded="true" signature="1535:1601" placeholder="{&quot;success&quot;: false...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21542554">
-          <caret line="75" column="2" selection-start-line="75" selection-start-column="2" selection-end-line="75" selection-end-column="2" />
-          <folding>
-            <marker date="1473471079000" expanded="true" signature="1288:1448" placeholder="{&quot;secret&quot;: 'asdlfkj243@#R@#POFSDfic'...}" />
-            <marker date="1473471079000" expanded="true" signature="1396:1445" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="1553:1609" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="1657:1869" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="1803:1865" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="2166:2203" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="2256:4391" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="2260:2373" placeholder="//..." />
-            <marker date="1473471079000" expanded="true" signature="2466:4387" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="2483:2532" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="2564:2648" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="2675:4338" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="2731:2827" placeholder="&lt;xml/&gt;" />
-            <marker date="1473471079000" expanded="true" signature="4348:4383" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="4485:4639" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="4531:4580" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="4699:4963" placeholder="{...}" />
-            <marker date="1473471079000" expanded="true" signature="4799:4959" placeholder="{&quot;title&quot;: 'OpenCircuit'...}" />
           </folding>
         </state>
       </provider>
@@ -2389,10 +2167,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scss/_containers.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27235213">
+          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+          <folding>
+            <marker date="1473568213000" expanded="true" signature="82:136" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="144:228" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="182:226" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="249:334" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="352:377" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="412:614" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="432:536" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="558:612" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="630:666" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="673:932" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="945:966" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="971:1321" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="1334:1626" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="1341:1624" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="1645:1731" placeholder="{...}" />
+            <marker date="1473568213000" expanded="true" signature="1702:1729" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_21">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38031915">
+          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+          <folding>
+            <marker date="1473569404000" expanded="true" signature="0:663" placeholder="/*...*/" />
+            <marker date="1473569404000" expanded="true" signature="665:931" placeholder="/*...*/" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpers/ContentsView/ContentsViewActions.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7606383">
+          <caret line="46" column="1" selection-start-line="46" selection-start-column="1" selection-end-line="46" selection-end-column="1" />
+          <folding>
+            <marker date="1473018494000" expanded="true" signature="95:833" placeholder="{...}" />
+            <marker date="1473018494000" expanded="true" signature="130:830" placeholder="{...}" />
+            <marker date="1473018494000" expanded="true" signature="257:470" placeholder="{&quot;credentials&quot;: 'same-origin'...}" />
+            <marker date="1473018494000" expanded="true" signature="329:464" placeholder="{&quot;Accept&quot;: 'application/json'...}" />
+            <marker date="1473018494000" expanded="true" signature="491:527" placeholder="{...}" />
+            <marker date="1473018494000" expanded="true" signature="548:694" placeholder="{...}" />
+            <marker date="1473018494000" expanded="true" signature="576:625" placeholder="{...}" />
+            <marker date="1473018494000" expanded="true" signature="718:824" placeholder="{...}" />
+            <marker date="1473018494000" expanded="true" signature="859:916" placeholder="{...}" />
+            <marker date="1473018494000" expanded="true" signature="870:914" placeholder="{&quot;type&quot;: 'CONTENTSVIEW_BEGIN_LOADING'...}" />
+            <marker date="1473018494000" expanded="true" signature="964:1035" placeholder="{...}" />
+            <marker date="1473018494000" expanded="true" signature="975:1033" placeholder="{&quot;type&quot;: 'CONTENTSVIEW_DUMP_CONTENTS'...}" />
+            <marker date="1473018494000" expanded="true" signature="1083:1172" placeholder="{...}" />
+            <marker date="1473018494000" expanded="true" signature="1094:1170" placeholder="{&quot;type&quot;: 'CONTENTSVIEW_RECEIVED_CONTENTS'...}" />
+            <marker date="1473018494000" expanded="true" signature="1199:1274" placeholder="{...}" />
+            <marker date="1473018494000" expanded="true" signature="1210:1272" placeholder="{&quot;type&quot;: 'CONTENTSVIEW_ERROR'...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23404256">
+          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Dashboard/DashboardViews.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2925532">
-          <caret line="62" column="55" selection-start-line="62" selection-start-column="55" selection-end-line="62" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.5851064">
+          <caret line="72" column="59" selection-start-line="72" selection-start-column="59" selection-end-line="72" selection-end-column="59" />
           <folding>
             <marker date="1473568139000" expanded="true" signature="378:1807" placeholder="{...}" />
             <marker date="1473568139000" expanded="true" signature="391:1805" placeholder="{...}" />
@@ -2446,11 +2293,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scss/_containers.scss">
+    <entry file="file://$PROJECT_DIR$/src/server.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27235213">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+        <state vertical-scroll-proportion="1.0292553">
+          <caret line="155" column="78" selection-start-line="155" selection-start-column="78" selection-end-line="155" selection-end-column="78" />
+          <folding>
+            <marker date="1473471079000" expanded="true" signature="1288:1448" placeholder="{&quot;secret&quot;: 'asdlfkj243@#R@#POFSDfic'...}" />
+            <marker date="1473471079000" expanded="true" signature="1396:1445" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="1553:1609" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="1657:1869" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="1803:1865" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="2166:2203" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="2256:4391" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="2260:2373" placeholder="//..." />
+            <marker date="1473471079000" expanded="true" signature="2466:4387" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="2483:2532" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="2564:2648" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="2675:4338" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="2731:2827" placeholder="&lt;xml/&gt;" />
+            <marker date="1473471079000" expanded="true" signature="4348:4383" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="4485:4639" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="4531:4580" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="4699:4963" placeholder="{...}" />
+            <marker date="1473471079000" expanded="true" signature="4799:4959" placeholder="{&quot;title&quot;: 'OpenCircuit'...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpers/ModelView/ModelViewActions.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8484042">
+          <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
+          <folding>
+            <marker date="1473478961000" expanded="true" signature="92:782" placeholder="{...}" />
+            <marker date="1473478961000" expanded="true" signature="127:779" placeholder="{...}" />
+            <marker date="1473478961000" expanded="true" signature="274:487" placeholder="{&quot;credentials&quot;: 'same-origin'...}" />
+            <marker date="1473478961000" expanded="true" signature="346:481" placeholder="{&quot;Accept&quot;: 'application/json'...}" />
+            <marker date="1473478961000" expanded="true" signature="508:544" placeholder="{...}" />
+            <marker date="1473478961000" expanded="true" signature="565:705" placeholder="{...}" />
+            <marker date="1473478961000" expanded="true" signature="593:642" placeholder="{...}" />
+            <marker date="1473478961000" expanded="true" signature="729:773" placeholder="{...}" />
+            <marker date="1473478961000" expanded="true" signature="830:898" placeholder="{...}" />
+            <marker date="1473478961000" expanded="true" signature="841:896" placeholder="{&quot;type&quot;: 'MODELVIEW_DUMP_CONTENTS'...}" />
+            <marker date="1473478961000" expanded="true" signature="924:978" placeholder="{...}" />
+            <marker date="1473478961000" expanded="true" signature="935:976" placeholder="{&quot;type&quot;: 'MODELVIEW_BEGIN_LOADING'...}" />
+            <marker date="1473478961000" expanded="true" signature="1020:1100" placeholder="{...}" />
+            <marker date="1473478961000" expanded="true" signature="1031:1098" placeholder="{&quot;type&quot;: 'MODELVIEW_RECEIVED_MODEL'...}" />
+            <marker date="1473478961000" expanded="true" signature="1127:1199" placeholder="{...}" />
+            <marker date="1473478961000" expanded="true" signature="1138:1197" placeholder="{&quot;type&quot;: 'MODELVIEW_ERROR'...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_23">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.3989363">
+          <caret line="79" column="1" selection-start-line="79" selection-start-column="1" selection-end-line="79" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1473554658000" expanded="true" signature="0:2334" placeholder="{&quot;name&quot;: &quot;OpenCircuit&quot;...}" />
+            <marker date="1473554658000" expanded="true" signature="163:290" placeholder="{&quot;start&quot;: &quot;nodemon --watch dist/js/bundle.js bin/server.js&quot;...}" />
+            <marker date="1473554658000" expanded="true" signature="346:2332" placeholder="{&quot;babel&quot;: &quot;^6.5.2&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.70212764">
+          <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
+          <folding>
+            <marker date="1473571726000" expanded="true" signature="1267:6629" placeholder="{...}" />
+            <marker date="1473571726000" expanded="true" signature="2547:5796" placeholder="&lt;xml/&gt;" />
+          </folding>
         </state>
       </provider>
     </entry>
