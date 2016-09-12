@@ -706,10 +706,10 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component16) {
       if (this.props.inForm) {
         return _react2.default.createElement(
           'div',
-          { className: 'form-check row' },
+          { className: 'form-group row' },
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-10 col-sm-4 form-check-label' },
+            { className: 'col-xs-10 col-sm-4 form-control-label' },
             this.props.label
           ),
           _react2.default.createElement(
@@ -717,7 +717,7 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component16) {
             { className: 'col-xs-2 col-sm-8' },
             _react2.default.createElement('input', {
               type: 'checkbox',
-              className: 'form-check-input',
+              className: 'form-control',
               name: this.props.name,
               checked: this.props.formChecked || this.props.preChecked,
               onChange: this.updateChecked.bind(this)

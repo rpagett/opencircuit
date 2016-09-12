@@ -498,14 +498,14 @@ class _Checkbox extends React.Component {
   render() {
     if (this.props.inForm) {
       return (
-        <div className="form-check row">
-          <div className="col-xs-10 col-sm-4 form-check-label">
+        <div className="form-group row">
+          <div className="col-xs-10 col-sm-4 form-control-label">
             { this.props.label }
           </div>
           <div className="col-xs-2 col-sm-8">
             <input
               type="checkbox"
-              className="form-check-input"
+              className="form-control"
               name={ this.props.name }
               checked={ this.props.formChecked || this.props.preChecked }
               onChange={ this.updateChecked.bind(this) }
