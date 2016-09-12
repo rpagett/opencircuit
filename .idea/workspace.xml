@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Organization/OrganizationForms.jsx" afterPath="$PROJECT_DIR$/src/models/Organization/OrganizationForms.jsx" />
-    </list>
+    <list default="true" id="66cb4659-2dbf-4063-b2e3-93af1851583b" name="Default" comment="" />
     <ignored path="opencircuit.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,8 +24,8 @@
       <file leaf-file-name="OrganizationForms.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/models/Organization/OrganizationForms.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6984127">
-              <caret line="32" column="57" selection-start-line="32" selection-start-column="57" selection-end-line="32" selection-end-column="57" />
+            <state vertical-scroll-proportion="0.52380955">
+              <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
               <folding>
                 <marker date="1473573240000" expanded="true" signature="240:1312" placeholder="{...}" />
                 <marker date="1473573240000" expanded="true" signature="779:1281" placeholder="&lt;xml/&gt;" />
@@ -2409,8 +2407,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Organization/OrganizationForms.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6984127">
-          <caret line="32" column="57" selection-start-line="32" selection-start-column="57" selection-end-line="32" selection-end-column="57" />
+        <state vertical-scroll-proportion="0.52380955">
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
           <folding>
             <marker date="1473573240000" expanded="true" signature="240:1312" placeholder="{...}" />
             <marker date="1473573240000" expanded="true" signature="779:1281" placeholder="&lt;xml/&gt;" />
