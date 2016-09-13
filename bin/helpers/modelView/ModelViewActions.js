@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.fetchModel = fetchModel;
-exports.dumpModelContents = dumpModelContents;
 
 var _functions = require('../functions');
 
@@ -41,14 +40,12 @@ function fetchModel(endpoint, subStore) {
   };
 }
 
-function dumpModelContents() {
-  var subStore = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
-
-  return {
-    type: 'MODELVIEW_DUMP_CONTENTS',
-    subStore: subStore
-  };
-}
+//export function dumpModelContents(subStore = null) {
+//  return {
+//    type: 'MODELVIEW_DUMP_CONTENTS',
+//    subStore
+//  }
+//}
 
 function beginLoading() {
   return {

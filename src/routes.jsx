@@ -19,8 +19,7 @@ import * as UserView from './models/User/UserViews';
 
 import { UserRoles } from './models/User/UserRoles';
 import { dumpContents as dumpFlexTable } from './helpers/FlexTable/FlexTableActions';
-import { dumpContents as dumpContentsView } from './helpers/ContentsView/ContentsViewActions';
-import { dumpModelContents } from './helpers/ModelView/ModelViewActions';
+import { dumpContents as dumpContentsView, dumpModelContents } from './helpers/ContentsView/ContentsViewActions';
 
 export function getAppRoutes(store) {
   const dumpAllContents = () => {

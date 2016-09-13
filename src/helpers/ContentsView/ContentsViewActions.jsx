@@ -46,6 +46,14 @@ export function dumpContents(subStore = null) {
   }
 }
 
+export function dumpModelContents(subStore = null) {
+  return {
+    type: 'MODELVIEW_DUMP_CONTENTS',
+    subStore
+  }
+}
+
+
 function receivedContents(contents, subStore) {
   return {
     type: 'CONTENTSVIEW_RECEIVED_CONTENTS',

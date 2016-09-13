@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchContents = undefined;
 exports.dumpContents = dumpContents;
+exports.dumpModelContents = dumpModelContents;
 
 var _functions = require('../functions');
 
@@ -52,6 +53,15 @@ function dumpContents() {
 
   return {
     type: 'CONTENTSVIEW_DUMP_CONTENTS',
+    subStore: subStore
+  };
+}
+
+function dumpModelContents() {
+  var subStore = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+
+  return {
+    type: 'MODELVIEW_DUMP_CONTENTS',
     subStore: subStore
   };
 }
