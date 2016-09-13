@@ -16,7 +16,7 @@ export default class OrganizationList extends React.Component {
           columns={{
             'Name': org => { return (<Link to={ org.detailsUrl }>{ org.name }</Link>) },
             'Director': org => { return (
-              <Link to={ org.director.profileUrl }>{ org.director.formattedName }</Link>
+              <Link to={ (org.director ? org.director.profileUrl : '#') }>{ org.director.formattedName }</Link>
             )},
             'Units': org => { return org.unitCount },
             'Type': org => { return (org.is_school ? 'Scholastic' : 'Independent')}

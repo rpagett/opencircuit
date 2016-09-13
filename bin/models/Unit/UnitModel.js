@@ -43,6 +43,7 @@ var UnitSchema = _mongoose2.default.Schema({
   notes: String,
 
   circuit_member: Boolean,
+  plus_pass: Boolean,
 
   competition_class: {
     type: ObjectId,

@@ -58,7 +58,7 @@ router.route('/').get(function (req, res) {
   }).then(function (compclass) {
     res.json({
       success: true,
-      redirect: '/compclasses/new'
+      redirect: '/compclasses'
     });
   }).catch(function (errors) {
     console.log('We\'re in catch.', errors);

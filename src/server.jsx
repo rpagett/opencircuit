@@ -5,6 +5,7 @@ let app = express();
 import React from 'react';
 import DotEnv from 'dotenv';
 import { createStore, applyMiddleware, compose } from 'redux';
+import universalMiddleware from 'redux-universal';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
@@ -24,7 +25,7 @@ import { getAppRoutes } from './routes';
 // Models and Repos
 import User from './models/User/UserModel';
 import { appReducers } from './redux';
-import { loginUser } from './models/Auth/AuthActions';
+import { loginUser, logoutUser } from './models/Auth/AuthActions';
 
 // API Endpoints
 import AuthController from './models/Auth/AuthController';
@@ -68,33 +69,20 @@ app.use(Passport.initialize());
 app.use(Passport.session());
 
 const appStore = createStore(appReducers,
-  compose(applyMiddleware(thunk),
+  compose(universalMiddleware(thunk),
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   ));
+//console.log('APP STORE IS', appStore.getState(), '-----------');
 
 app.use((req, res, next) => {
   res.store = appStore;
+  //console.log('RES STORE IS', res.store.getState(), '-----------');
   next();
 });
 
-function dispatchReactRoute(req, res, appRoutes) {
-  // Note that req.url here should be the full URL path from
-  // the original request, including the query string.
-  match({ routes: appRoutes, location: req.url }, (error, redirectLocation, renderProps) => {
-    if (error) {
-      res.status(500).send(error.message)
-    }
-    else if (redirectLocation) {
-      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-    }
-    else if (renderProps) {
-      const routerComponent = renderToString(
-        <Provider store={ appStore }>
-          <RouterContext { ...renderProps } />
-        </Provider>
-      );
-      const preloadedState = appStore.getState();
-      const HTML = `<!DOCTYPE html>
+function renderHTML(routerComponent, preloadedState) {
+  console.log('In render function');
+  return `<!DOCTYPE html>
         <html>
         <head>
           <meta charSet="UTF-8" />
@@ -132,8 +120,32 @@ function dispatchReactRoute(req, res, appRoutes) {
           </script>
         </body>
         </html>`;
+}
 
-      res.status(200).send(HTML);
+function dispatchReactRoute(req, res, appRoutes) {
+  // Note that req.url here should be the full URL path from
+  // the original request, including the query string.
+  match({ routes: appRoutes, location: req.url }, (error, redirectLocation, renderProps) => {
+    if (error) {
+      res.status(500).send(error.message)
+    }
+    else if (redirectLocation) {
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+    }
+    else if (renderProps) {
+      appStore.renderUniversal(renderToString, (
+        <Provider store={ appStore }>
+          <RouterContext { ...renderProps } />
+        </Provider>
+      ))
+        .then(({ output }) => {
+          const state = appStore.getState();
+          res.status(200).send(renderHTML(output, state));
+        })
+        .catch(({ output, error }) => {
+          const state = appStore.getState();
+          res.status(200).send(renderHTML(output, state));
+        });
     }
     else {
       res.redirect('/404');
@@ -146,8 +158,12 @@ app.use('/auth', AuthController);
 
 app.get('*', (req, res) => {
   console.log(req.session);
+  console.log('REQ USER is', req.user);
   if (req.user) {
     appStore.dispatch(loginUser(req.user));
+  }
+  else {
+    appStore.dispatch(logoutUser());
   }
   dispatchReactRoute(req, res, getAppRoutes(res.store));
 });

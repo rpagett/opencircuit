@@ -12,6 +12,10 @@ var _dotenv2 = _interopRequireDefault(_dotenv);
 
 var _redux = require('redux');
 
+var _reduxUniversal = require('redux-universal');
+
+var _reduxUniversal2 = _interopRequireDefault(_reduxUniversal);
+
 var _reduxThunk = require('redux-thunk');
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
@@ -122,14 +126,21 @@ _passport2.default.deserializeUser(function (user_id, done) {
 app.use(_passport2.default.initialize());
 app.use(_passport2.default.session());
 
-var appStore = (0, _redux.createStore)(_redux2.appReducers, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : function (f) {
+var appStore = (0, _redux.createStore)(_redux2.appReducers, (0, _redux.compose)((0, _reduxUniversal2.default)(_reduxThunk2.default), (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : function (f) {
   return f;
 }));
+//console.log('APP STORE IS', appStore.getState(), '-----------');
 
 app.use(function (req, res, next) {
   res.store = appStore;
+  //console.log('RES STORE IS', res.store.getState(), '-----------');
   next();
 });
+
+function renderHTML(routerComponent, preloadedState) {
+  console.log('In render function');
+  return '<!DOCTYPE html>\n        <html>\n        <head>\n          <meta charSet="UTF-8" />\n          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />\n          <title>OpenCircuit</title>\n          <link rel="stylesheet" href="/css/app.min.css" />\n          <link rel="shortcut icon" href="/assets/img/favicon.ico" />\n        </head>\n        <body>\n          <div className="container-fluid" id="react-container">\n            <div>' + routerComponent + '</div>\n          </div>\n          <script id="injected-state">\n            window.__PRELOADED_STATE__ = ' + JSON.stringify(preloadedState) + '\n          </script>\n          <script type="text/javascript" src="/js/vendor.js"></script>\n          <script type="text/javascript" src="/js/bundle.js"></script>\n          <script>\n            $(document).ready(function()\n            {\n                function reset_dimensions()\n                {\n                    doc_height = $(document).height();\n                    $(\'.content-container\').css(\'min-height\', doc_height + \'px\');\n                }\n\n                reset_dimensions();\n                $(window).resize(function() {\n                    reset_dimensions();\n                });\n                $(document).resize(function () {\n                    reset_dimensions();\n                });\n            });\n          </script>\n        </body>\n        </html>';
+}
 
 function dispatchReactRoute(req, res, appRoutes) {
   // Note that req.url here should be the full URL path from
@@ -140,15 +151,22 @@ function dispatchReactRoute(req, res, appRoutes) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      var routerComponent = (0, _server.renderToString)(_react2.default.createElement(
+      appStore.renderUniversal(_server.renderToString, _react2.default.createElement(
         _reactRedux.Provider,
         { store: appStore },
         _react2.default.createElement(_reactRouter.RouterContext, renderProps)
-      ));
-      var preloadedState = appStore.getState();
-      var HTML = '<!DOCTYPE html>\n        <html>\n        <head>\n          <meta charSet="UTF-8" />\n          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />\n          <title>OpenCircuit</title>\n          <link rel="stylesheet" href="/css/app.min.css" />\n          <link rel="shortcut icon" href="/assets/img/favicon.ico" />\n        </head>\n        <body>\n          <div className="container-fluid" id="react-container">\n            <div>' + routerComponent + '</div>\n          </div>\n          <script id="injected-state">\n            window.__PRELOADED_STATE__ = ' + JSON.stringify(preloadedState) + '\n          </script>\n          <script type="text/javascript" src="/js/vendor.js"></script>\n          <script type="text/javascript" src="/js/bundle.js"></script>\n          <script>\n            $(document).ready(function()\n            {\n                function reset_dimensions()\n                {\n                    doc_height = $(document).height();\n                    $(\'.content-container\').css(\'min-height\', doc_height + \'px\');\n                }\n\n                reset_dimensions();\n                $(window).resize(function() {\n                    reset_dimensions();\n                });\n                $(document).resize(function () {\n                    reset_dimensions();\n                });\n            });\n          </script>\n        </body>\n        </html>';
+      )).then(function (_ref) {
+        var output = _ref.output;
 
-      res.status(200).send(HTML);
+        var state = appStore.getState();
+        res.status(200).send(renderHTML(output, state));
+      }).catch(function (_ref2) {
+        var output = _ref2.output;
+        var error = _ref2.error;
+
+        var state = appStore.getState();
+        res.status(200).send(renderHTML(output, state));
+      });
     } else {
       res.redirect('/404');
     }
@@ -160,8 +178,11 @@ app.use('/auth', _AuthController2.default);
 
 app.get('*', function (req, res) {
   console.log(req.session);
+  console.log('REQ USER is', req.user);
   if (req.user) {
     appStore.dispatch((0, _AuthActions.loginUser)(req.user));
+  } else {
+    appStore.dispatch((0, _AuthActions.logoutUser)());
   }
   dispatchReactRoute(req, res, (0, _routes.getAppRoutes)(res.store));
 });

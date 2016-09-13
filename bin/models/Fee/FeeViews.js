@@ -163,12 +163,22 @@ var _Invoice = function (_React$Component3) {
           { className: 'row', key: fee._id },
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-8', key: fee._id + '-name' },
+            { className: 'col-xs-3', key: fee._id + '-name' },
             fee.unit.name
           ),
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-4 text-xs-right', key: fee._id + '-AR' },
+            { className: 'col-xs-3', key: fee._id + '-assessed' },
+            fee.formattedAssessedDate
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-3', key: fee._id + '-due' },
+            fee.formattedDueDate
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-3 text-xs-right', key: fee._id + '-AR' },
             '$',
             fee.amountRemaining
           )
@@ -184,7 +194,7 @@ var _Invoice = function (_React$Component3) {
           _react2.default.createElement(
             'div',
             { className: 'col-xs-12 invoice-header' },
-            'Account Statement'
+            'Account Invoice'
           )
         ),
         _react2.default.createElement(
@@ -219,7 +229,7 @@ var _Invoice = function (_React$Component3) {
             { className: 'card card-block offset-xs-1 col-xs-10' },
             _react2.default.createElement(
               'div',
-              { className: 'card-header' },
+              { className: 'card-header black' },
               'Outstanding Fees for ',
               this.props.contents.orgName
             ),
@@ -231,7 +241,7 @@ var _Invoice = function (_React$Component3) {
                 { className: 'row' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'col-xs-8' },
+                  { className: 'col-xs-3' },
                   _react2.default.createElement(
                     'strong',
                     null,
@@ -240,7 +250,25 @@ var _Invoice = function (_React$Component3) {
                 ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'col-xs-4 text-xs-right' },
+                  { className: 'col-xs-3' },
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Date Assessed'
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'col-xs-3' },
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Date Due'
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'col-xs-3 text-xs-right' },
                   _react2.default.createElement(
                     'strong',
                     null,

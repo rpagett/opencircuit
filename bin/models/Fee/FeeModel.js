@@ -63,9 +63,17 @@ FeeSchema.statics.NON_MEMBER_FEE = function () {
   return 75;
 };
 
+FeeSchema.statics.PLUS_PASS_FEE = function () {
+  return 100;
+};
+
 FeeSchema.statics.DUE_DATE = function () {
   return Date.parse('Nov 30, 2016');
 };
+
+FeeSchema.virtual('formattedAssessedDate').get(function () {
+  return (0, _moment2.default)(this.created_at).format('MMM. Do, YYYY');
+});
 
 FeeSchema.virtual('formattedPaidDate').get(function () {
   return (0, _moment2.default)(this.paid_date).format('MMM. Do, YYYY');

@@ -36,7 +36,8 @@ export class Organization extends React.Component {
 
           <p className="lead">
             Remember, these should be about your <strong>school or independent non-profit</strong>,
-            not about the competing team itself.
+            not about the competing team itself. Use the address of your school or the current mailing address
+            of your non-profit.
           </p>
 
           <FormInput name="name" label="Organization Name" />
@@ -147,8 +148,8 @@ export class Unit extends React.Component {
         >
           <p className="lead">
             The information here should be about a competing unit from your school or organization. If you
-            have multiple teams from the same school, please use A/B or JV/Varsity designations to better
-            indicate relative skill levels at a glance. You will be able to provide more creative names to be
+            have multiple teams from the same school, please use A/B or JV/Varsity designations to
+            differentiate them. You will be able to provide more creative names to be
             announced at shows through your Spiel Sheet.
           </p>
 
@@ -158,7 +159,17 @@ export class Unit extends React.Component {
 
           <ContentsView subStore="register_unit_types" endpoint="/api/unittypes" component={ _UnitTypes } />
           <FormInput name="name" label="Unit Name" />
-          <Checkbox name="circuit_member" label="Join the Circuit?" inForm={ true } checked={ true } />
+          <Radio
+            label="Circuit Member"
+            name="circuit_member"
+            value="true"
+          />
+          <Radio
+            label="Non-Member (pay-per-event)"
+            name="circuit_member"
+            value="false"
+          />
+          <Checkbox name="plus_pass" label="PLUS Pass Member" inForm={ true } />
 
           <button name="submit" type="submit" className="btn btn-primary btn-block">
             Next

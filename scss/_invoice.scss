@@ -10,6 +10,10 @@ div.invoice-header
   font-size: 16px;
 }
 
+div.black {
+  color: black !important;
+}
+
 .invoice-address {
   padding-bottom: 1rem;
 }
@@ -22,11 +26,6 @@ img.circuit-logo
 {
   height: 80px;
   vertical-align: middle;
-}
-
-div.panel-default
-{
-  margin-top: 40px;
 }
 
 img.app-logo

@@ -177,6 +177,10 @@ var _InputWrapper = (_temp = _class = function (_React$Component2) {
         labelClass += ' col-sm-4';
       }
 
+      if (this.props.inputClass) {
+        inputClass += ' ' + this.props.inputClass;
+      }
+
       return _react2.default.createElement(
         'div',
         { className: className },
@@ -393,7 +397,7 @@ var ClassSelect = exports.ClassSelect = (_temp2 = _class2 = function (_React$Com
     value: function render() {
       return _react2.default.createElement(
         InputWrapper,
-        _extends({}, this.props, { style: { 'zIndex': '10' } }),
+        _extends({}, this.props, { inputClass: 'select-group' }),
         _react2.default.createElement(_reactSelect2.default.Async, {
           className: 'form-control',
           clearable: false,
@@ -436,7 +440,7 @@ var PaymentTypeSelect = exports.PaymentTypeSelect = function (_React$Component9)
     value: function render() {
       return _react2.default.createElement(
         InputWrapper,
-        _extends({}, this.props, { style: { 'zIndex': '10' } }),
+        _extends({}, this.props, { inputClass: 'select-group' }),
         _react2.default.createElement(_reactSelect2.default.Async, {
           className: 'form-control',
           clearable: false,
@@ -476,7 +480,7 @@ var UnitSelect = exports.UnitSelect = function (_React$Component10) {
     value: function render() {
       return _react2.default.createElement(
         InputWrapper,
-        _extends({}, this.props, { style: { 'zIndex': '10' } }),
+        _extends({}, this.props, { inputClass: 'select-group' }),
         _react2.default.createElement(_reactSelect2.default.Async, {
           className: 'form-control',
           clearable: false,
@@ -515,7 +519,7 @@ var FeeCategorySelect = exports.FeeCategorySelect = function (_React$Component11
     value: function render() {
       return _react2.default.createElement(
         InputWrapper,
-        _extends({}, this.props, { style: { 'zIndex': '10' } }),
+        _extends({}, this.props, { inputClass: 'select-group' }),
         _react2.default.createElement(_reactSelect2.default.Async, {
           className: 'form-control',
           clearable: false,
@@ -553,7 +557,7 @@ var UnitTypeSelect = exports.UnitTypeSelect = function (_React$Component12) {
     value: function render() {
       return _react2.default.createElement(
         InputWrapper,
-        _extends({}, this.props, { style: { 'zIndex': '10' } }),
+        _extends({}, this.props, { inputSelect: 'select-group' }),
         _react2.default.createElement(_reactSelect2.default.Async, {
           className: 'form-control',
           clearable: false,
@@ -593,7 +597,7 @@ var UserSelect = exports.UserSelect = function (_React$Component13) {
     value: function render() {
       return _react2.default.createElement(
         InputWrapper,
-        _extends({}, this.props, { style: { 'zIndex': '10' } }),
+        _extends({}, this.props, { inputClass: 'select-group' }),
         _react2.default.createElement(_reactSelect2.default.Async, {
           className: 'form-control',
           clearable: false,
@@ -629,7 +633,7 @@ var StateSelect = exports.StateSelect = function (_React$Component14) {
     value: function render() {
       return _react2.default.createElement(
         InputWrapper,
-        _extends({}, this.props, { style: { 'zIndex': '10' } }),
+        _extends({}, this.props, { inputClass: 'select-group' }),
         _react2.default.createElement(_reactSelect2.default, {
           className: 'form-control',
           clearable: false,

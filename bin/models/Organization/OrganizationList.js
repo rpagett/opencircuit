@@ -57,7 +57,7 @@ var OrganizationList = function (_React$Component) {
             'Director': function Director(org) {
               return _react2.default.createElement(
                 _reactRouter.Link,
-                { to: org.director.profileUrl },
+                { to: org.director ? org.director.profileUrl : '#' },
                 org.director.formattedName
               );
             },

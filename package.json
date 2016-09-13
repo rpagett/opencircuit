@@ -73,6 +73,7 @@
     "react-select": "^1.0.0-beta13",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
+    "redux-universal": "0.0.2",
     "tether": "^1.3.2",
     "uglify": "^0.1.5",
     "vinyl-buffer": "^1.0.0",

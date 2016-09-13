@@ -101,6 +101,10 @@ _UnitModel2.default.on('afterInsert', function (newUnit) {
       console.log(count, 'existing units. Fee should be $', amount);
 
       assessFee(unit._id, amount, 'member-fee');
+
+      if (unit.plus_pass) {
+        assessFee(unit._id, _FeeModel2.default.PLUS_PASS_FEE(), 'plus-pass-fee');
+      }
     });
   }
 });
@@ -306,7 +310,7 @@ router.post('/:fee_id/applyPayment', function (req, res) {
 });
 
 router.get('/seed', function (req, res) {
-  var creation = [{ name: 'Member Fee', slug: 'member-fee' }, { name: 'Non-member Fee', slug: 'non-member-fee' }];
+  var creation = [{ name: 'Member Fee', slug: 'member-fee' }, { name: 'Non-member Fee', slug: 'non-member-fee' }, { name: 'PLUS Pass Fee', slug: 'plus-pass-fee' }];
 
   _FeeCategoryModel2.default.create(creation).then(function () {
     res.json({
@@ -360,7 +364,7 @@ router.get('/invoice/:org', function (req, res) {
     return _UnitModel2.default.find({ organization: storeOrg._id, registered: true }, '_id');
   }).then(function (units) {
     var ids = _lodash2.default.map(units, '_id');
-    return _FeeModel2.default.find({ paid_date: null, unit: { $in: ids } }, 'unit payments due_date amount').populate('unit', '_id name')
+    return _FeeModel2.default.find({ paid_date: null, unit: { $in: ids } }, 'unit payments due_date created_at amount').populate('unit', '_id name')
     //.populate('payments', 'amount')
     .exec();
   }).then(function (fees) {

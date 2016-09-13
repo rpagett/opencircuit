@@ -119,6 +119,10 @@ class _InputWrapper extends React.Component {
       labelClass += ' col-sm-4';
     }
 
+    if (this.props.inputClass) {
+      inputClass += ' ' + this.props.inputClass;
+    }
+
     return (
       <div className={ className }>
         { (this.props.label ?
@@ -234,7 +238,7 @@ export class ClassSelect extends React.Component {
 
   render() {
     return (
-      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+      <InputWrapper { ...this.props } inputClass="select-group">
         <Select.Async
           className="form-control"
           clearable={ false }
@@ -262,7 +266,7 @@ export class PaymentTypeSelect extends React.Component {
 
   render() {
     return (
-      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+      <InputWrapper { ...this.props } inputClass="select-group">
         <Select.Async
           className="form-control"
           clearable={ false }
@@ -290,7 +294,7 @@ export class UnitSelect extends React.Component {
 
   render() {
     return (
-      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+      <InputWrapper { ...this.props } inputClass="select-group">
         <Select.Async
           className="form-control"
           clearable={ false }
@@ -317,7 +321,7 @@ export class FeeCategorySelect extends React.Component {
 
   render() {
     return (
-      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+      <InputWrapper { ...this.props } inputClass="select-group">
         <Select.Async
           className="form-control"
           clearable={ false }
@@ -343,7 +347,7 @@ export class UnitTypeSelect extends React.Component {
 
   render() {
     return (
-      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+      <InputWrapper { ...this.props } inputSelect="select-group">
         <Select.Async
           className="form-control"
           clearable={ false }
@@ -369,7 +373,7 @@ export class UserSelect extends React.Component {
 
   render() {
     return (
-      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+      <InputWrapper { ...this.props } inputClass="select-group">
         <Select.Async
           className="form-control"
           clearable={ false }
@@ -441,7 +445,7 @@ export class StateSelect extends React.Component {
 
   render() {
     return (
-      <InputWrapper { ...this.props } style={{ 'zIndex': '10' }}>
+      <InputWrapper { ...this.props } inputClass="select-group">
         <Select
           className="form-control"
           clearable={ false }

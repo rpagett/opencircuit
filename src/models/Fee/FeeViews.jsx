@@ -76,8 +76,10 @@ class _Invoice extends React.Component {
       total += ( fee.amount - amountPaid );
       rows.push(
         <div className="row" key={ fee._id }>
-          <div className="col-xs-8" key={ `${fee._id}-name` }>{ fee.unit.name }</div>
-          <div className="col-xs-4 text-xs-right" key={ `${fee._id}-AR` }>${ fee.amountRemaining }</div>
+          <div className="col-xs-3" key={ `${fee._id}-name` }>{ fee.unit.name }</div>
+          <div className="col-xs-3" key={ `${fee._id}-assessed`}>{ fee.formattedAssessedDate }</div>
+          <div className="col-xs-3" key={ `${fee._id}-due`}>{ fee.formattedDueDate }</div>
+          <div className="col-xs-3 text-xs-right" key={ `${fee._id}-AR` }>${ fee.amountRemaining }</div>
         </div>
       )
     })
@@ -85,7 +87,7 @@ class _Invoice extends React.Component {
     return (
       <div className="container-fluid invoice-container col-xs-12">
         <div className="row">
-          <div className="col-xs-12 invoice-header">Account Statement</div>
+          <div className="col-xs-12 invoice-header">Account Invoice</div>
         </div>
 
         <div className="row invoice-address">
@@ -102,13 +104,15 @@ class _Invoice extends React.Component {
 
         <div className="row">
           <div className="card card-block offset-xs-1 col-xs-10">
-            <div className="card-header">
+            <div className="card-header black">
               Outstanding Fees for { this.props.contents.orgName }
             </div>
             <div className="card-block">
               <div className="row">
-                <div className="col-xs-8"><strong>Unit Name</strong></div>
-                <div className="col-xs-4 text-xs-right"><strong>Amount Due</strong></div>
+                <div className="col-xs-3"><strong>Unit Name</strong></div>
+                <div className="col-xs-3"><strong>Date Assessed</strong></div>
+                <div className="col-xs-3"><strong>Date Due</strong></div>
+                <div className="col-xs-3 text-xs-right"><strong>Amount Due</strong></div>
               </div>
               { rows }
             </div>

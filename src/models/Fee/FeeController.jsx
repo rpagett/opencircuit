@@ -65,6 +65,10 @@ Unit.on('afterInsert', newUnit => {
         console.log(count, 'existing units. Fee should be $', amount);
 
         assessFee(unit._id, amount, 'member-fee')
+
+        if (unit.plus_pass) {
+          assessFee(unit._id, Fee.PLUS_PASS_FEE(), 'plus-pass-fee');
+        }
       })
   }
 });
@@ -81,7 +85,6 @@ EventRegistration.on('afterInsert', registration => {
       console.log(err);
     })
 })
-
 
 router.route('/')
   .get(hasRole(UserRoles.Administrator), (req, res) => {
@@ -302,7 +305,8 @@ router.post('/:fee_id/applyPayment', (req, res) => {
 router.get('/seed', (req, res) => {
   const creation = [
     {name: 'Member Fee', slug: 'member-fee'},
-    {name: 'Non-member Fee', slug: 'non-member-fee'}
+    {name: 'Non-member Fee', slug: 'non-member-fee'},
+    {name: 'PLUS Pass Fee', slug: 'plus-pass-fee'}
   ]
 
   FeeCategory.create(creation)
@@ -366,7 +370,7 @@ router.get('/invoice/:org', (req, res) => {
     })
     .then(units => {
       const ids = _.map(units, '_id');
-      return Fee.find({ paid_date: null, unit: {$in: ids} }, 'unit payments due_date amount')
+      return Fee.find({ paid_date: null, unit: {$in: ids} }, 'unit payments due_date created_at amount')
         .populate('unit', '_id name')
         //.populate('payments', 'amount')
         .exec()

@@ -81,7 +81,7 @@ var Organization = exports.Organization = function (_React$Component) {
               null,
               'school or independent non-profit'
             ),
-            ', not about the competing team itself.'
+            ', not about the competing team itself. Use the address of your school or the current mailing address of your non-profit.'
           ),
           _react2.default.createElement(_components.FormInput, { name: 'name', label: 'Organization Name' }),
           _react2.default.createElement(_components.FormInput, { name: 'street', label: 'Street' }),
@@ -253,7 +253,7 @@ var Unit = exports.Unit = function (_React$Component5) {
           _react2.default.createElement(
             'p',
             { className: 'lead' },
-            'The information here should be about a competing unit from your school or organization. If you have multiple teams from the same school, please use A/B or JV/Varsity designations to better indicate relative skill levels at a glance. You will be able to provide more creative names to be announced at shows through your Spiel Sheet.'
+            'The information here should be about a competing unit from your school or organization. If you have multiple teams from the same school, please use A/B or JV/Varsity designations to differentiate them. You will be able to provide more creative names to be announced at shows through your Spiel Sheet.'
           ),
           _react2.default.createElement(
             'p',
@@ -262,7 +262,17 @@ var Unit = exports.Unit = function (_React$Component5) {
           ),
           _react2.default.createElement(_ContentsView2.default, { subStore: 'register_unit_types', endpoint: '/api/unittypes', component: _UnitTypes }),
           _react2.default.createElement(_components.FormInput, { name: 'name', label: 'Unit Name' }),
-          _react2.default.createElement(_components.Checkbox, { name: 'circuit_member', label: 'Join the Circuit?', inForm: true, checked: true }),
+          _react2.default.createElement(_components.Radio, {
+            label: 'Circuit Member',
+            name: 'circuit_member',
+            value: 'true'
+          }),
+          _react2.default.createElement(_components.Radio, {
+            label: 'Non-Member (pay-per-event)',
+            name: 'circuit_member',
+            value: 'false'
+          }),
+          _react2.default.createElement(_components.Checkbox, { name: 'plus_pass', label: 'PLUS Pass Member', inForm: true }),
           _react2.default.createElement(
             'button',
             { name: 'submit', type: 'submit', className: 'btn btn-primary btn-block' },
