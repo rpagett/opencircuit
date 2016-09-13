@@ -53,6 +53,13 @@ export function dumpModelContents(subStore = null) {
   }
 }
 
+export const modelDump = (substore = null) => {
+  return {
+    type: 'MODELVIEW_DUMP_CONTENTS',
+    subStore: substore
+  }
+}
+
 function receivedContents(contents, subStore) {
   return {
     type: 'CONTENTSVIEW_RECEIVED_CONTENTS',
