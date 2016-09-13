@@ -22,16 +22,16 @@ import { dumpContents as dumpFlexTable } from './helpers/FlexTable/FlexTableActi
 var ContentsViewActions = require('./helpers/ContentsView/ContentsViewActions');
 
 export function getAppRoutes(store) {
-  const dumpAllContents = () => {
-    dumpFlexTable();
-    ContentsViewActions.dumpModelContents();
-    ContentsViewActions.dumpContentsView();
+  const dumpAllContents = store => {
+    store.dispatch(dumpFlexTable());
+    store.dispatch(ContentsViewActions.dumpModelContents());
+    store.dispatch(ContentsViewActions.dumpContentsView());
   }
 
   function authOnly(nextState, replace) {
     const authUser = store.getState().auth.user;
 
-    dumpAllContents();
+    dumpAllContents(store);
 
     if (!authUser) {
       replace('/auth/login');

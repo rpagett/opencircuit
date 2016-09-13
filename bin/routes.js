@@ -88,16 +88,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ContentsViewActions = require('./helpers/ContentsView/ContentsViewActions');
 
 function getAppRoutes(store) {
-  var dumpAllContents = function dumpAllContents() {
-    (0, _FlexTableActions.dumpContents)();
-    ContentsViewActions.dumpModelContents();
-    ContentsViewActions.dumpContentsView();
+  var dumpAllContents = function dumpAllContents(store) {
+    store.dispatch((0, _FlexTableActions.dumpContents)());
+    store.dispatch(ContentsViewActions.dumpModelContents());
+    store.dispatch(ContentsViewActions.dumpContentsView());
   };
 
   function authOnly(nextState, replace) {
     var authUser = store.getState().auth.user;
 
-    dumpAllContents();
+    dumpAllContents(store);
 
     if (!authUser) {
       replace('/auth/login');
