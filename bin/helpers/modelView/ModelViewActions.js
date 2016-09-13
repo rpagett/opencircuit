@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.fetchModel = undefined;
-exports.dumpContents = dumpContents;
+exports.dumpModelContents = dumpModelContents;
 
 var _functions = require('../functions');
 
@@ -41,7 +41,7 @@ var fetchModel = exports.fetchModel = function fetchModel(endpoint, subStore) {
   };
 };
 
-function dumpContents() {
+function dumpModelContents() {
   var subStore = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
 
   return {
