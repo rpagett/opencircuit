@@ -90,7 +90,7 @@ var ContentsViewActions = require('./helpers/ContentsView/ContentsViewActions');
 function getAppRoutes(store) {
   var dumpAllContents = function dumpAllContents(store) {
     store.dispatch((0, _FlexTableActions.dumpContents)());
-    store.dispatch(ContentsViewActions.modelDump());
+    store.dispatch(ContentsViewActions.dumpTheThing());
     store.dispatch(ContentsViewActions.dumpContentsView());
   };
 

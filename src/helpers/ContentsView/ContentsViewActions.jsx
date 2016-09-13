@@ -53,7 +53,7 @@ export function dumpModelContents(subStore = null) {
   }
 }
 
-export const modelDump = (substore = null) => {
+export const dumpTheThing = (substore = null) => {
   return {
     type: 'MODELVIEW_DUMP_CONTENTS',
     subStore: substore

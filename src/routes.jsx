@@ -24,7 +24,7 @@ var ContentsViewActions = require('./helpers/ContentsView/ContentsViewActions');
 export function getAppRoutes(store) {
   const dumpAllContents = store => {
     store.dispatch(dumpFlexTable());
-    store.dispatch(ContentsViewActions.modelDump());
+    store.dispatch(ContentsViewActions.dumpTheThing());
     store.dispatch(ContentsViewActions.dumpContentsView());
   }
 
