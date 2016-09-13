@@ -75,8 +75,6 @@ var _UserRoles = require('./models/User/UserRoles');
 
 var _FlexTableActions = require('./helpers/FlexTable/FlexTableActions');
 
-var _ContentsViewActions = require('./helpers/ContentsView/ContentsViewActions');
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -87,11 +85,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var ContentsViewActions = require('./helpers/ContentsView/ContentsViewActions');
+
 function getAppRoutes(store) {
   var dumpAllContents = function dumpAllContents() {
     (0, _FlexTableActions.dumpContents)();
-    (0, _ContentsViewActions.dumpModelContents)();
-    (0, _ContentsViewActions.dumpContents)();
+    ContentsViewActions.dumpModelContents();
+    ContentsViewActions.dumpContentsView();
   };
 
   function authOnly(nextState, replace) {

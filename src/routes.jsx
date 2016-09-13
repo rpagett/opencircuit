@@ -19,13 +19,13 @@ import * as UserView from './models/User/UserViews';
 
 import { UserRoles } from './models/User/UserRoles';
 import { dumpContents as dumpFlexTable } from './helpers/FlexTable/FlexTableActions';
-import { dumpContents as dumpContentsView, dumpModelContents } from './helpers/ContentsView/ContentsViewActions';
+var ContentsViewActions = require('./helpers/ContentsView/ContentsViewActions');
 
 export function getAppRoutes(store) {
   const dumpAllContents = () => {
     dumpFlexTable();
-    dumpModelContents();
-    dumpContentsView();
+    ContentsViewActions.dumpModelContents();
+    ContentsViewActions.dumpContentsView();
   }
 
   function authOnly(nextState, replace) {

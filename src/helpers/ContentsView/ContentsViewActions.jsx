@@ -53,7 +53,6 @@ export function dumpModelContents(subStore = null) {
   }
 }
 
-
 function receivedContents(contents, subStore) {
   return {
     type: 'CONTENTSVIEW_RECEIVED_CONTENTS',
