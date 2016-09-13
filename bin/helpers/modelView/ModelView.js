@@ -54,18 +54,6 @@ var _ModelView = (_temp = _class = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (this.props.error) {
-        return _react2.default.createElement(
-          'strong',
-          null,
-          this.props.error
-        );
-      }
-
-      if (this.props.isLoading) {
-        return _react2.default.createElement(_LoadingCube2.default, { show: true });
-      }
-
       if (!this.props.model) {
         if (this.props.returnEmpty) {
           return _react2.default.createElement('div', null);
@@ -76,6 +64,18 @@ var _ModelView = (_temp = _class = function (_React$Component) {
           null,
           'Nothing to display.'
         );
+      }
+
+      if (this.props.error) {
+        return _react2.default.createElement(
+          'strong',
+          null,
+          this.props.error
+        );
+      }
+
+      if (this.props.isLoading) {
+        return _react2.default.createElement(_LoadingCube2.default, { show: true });
       }
 
       return _react2.default.createElement(this.props.component, { model: this.props.model });

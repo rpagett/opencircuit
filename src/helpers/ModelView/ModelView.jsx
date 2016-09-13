@@ -25,20 +25,20 @@ class _ModelView extends React.Component {
   }
 
   render() {
-    if (this.props.error) {
-      return (<strong>{ this.props.error }</strong>);
-    }
-
-    if (this.props.isLoading) {
-      return <LoadingCube show={ true } />
-    }
-
     if (!this.props.model) {
       if (this.props.returnEmpty) {
         return <div></div>
       }
 
       return (<strong>Nothing to display.</strong>)
+    }
+    
+    if (this.props.error) {
+      return (<strong>{ this.props.error }</strong>);
+    }
+
+    if (this.props.isLoading) {
+      return <LoadingCube show={ true } />
     }
 
     return (<this.props.component model={ this.props.model } />)
