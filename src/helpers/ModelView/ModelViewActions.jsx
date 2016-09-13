@@ -1,6 +1,6 @@
 import { fetchAPI } from '../functions';
 
-export const fetchModel = (endpoint, subStore) => {
+export function fetchModel(endpoint, subStore) {
   return (dispatch, getState) => {
     const { modelView, auth } = getState();
 
