@@ -19,13 +19,14 @@ import * as UserView from './models/User/UserViews';
 
 import { UserRoles } from './models/User/UserRoles';
 import { dumpContents as dumpFlexTable } from './helpers/FlexTable/FlexTableActions';
-var ContentsViewActions = require('./helpers/ContentsView/ContentsViewActions');
+import * as ContentsViewActions from './helpers/ContentsView/ContentsViewActions'
+import * as ModelViewActions from './helpers/ModelView/ModelViewActions';
 
 export function getAppRoutes(store) {
   const dumpAllContents = store => {
     store.dispatch(dumpFlexTable());
-    //store.dispatch(ContentsViewActions.dumpTheThing());
-    store.dispatch(ContentsViewActions.dumpContentsView());
+    store.dispatch(ModelViewactions.dumpContents());
+    store.dispatch(ContentsViewActions.dumpContents());
   }
 
   function authOnly(nextState, replace) {

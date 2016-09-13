@@ -32,7 +32,7 @@ class _ModelView extends React.Component {
 
       return (<strong>Nothing to display.</strong>)
     }
-    
+
     if (this.props.error) {
       return (<strong>{ this.props.error }</strong>);
     }
