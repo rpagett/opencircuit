@@ -25,7 +25,7 @@ import * as ModelViewActions from './helpers/ModelView/ModelViewActions';
 export function getAppRoutes(store) {
   const dumpAllContents = store => {
     store.dispatch(dumpFlexTable());
-    store.dispatch(ModelViewactions.dumpContents());
+    store.dispatch(ModelViewActions.dumpContents());
     store.dispatch(ContentsViewActions.dumpContents());
   }
 

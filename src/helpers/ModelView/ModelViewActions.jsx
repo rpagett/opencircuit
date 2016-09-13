@@ -32,12 +32,12 @@ export function fetchModel(endpoint, subStore) {
   };
 }
 
-//export function dumpModelContents(subStore = null) {
-//  return {
-//    type: 'MODELVIEW_DUMP_CONTENTS',
-//    subStore
-//  }
-//}
+export function dumpContents(subStore = null) {
+  return {
+    type: 'MODELVIEW_DUMP_CONTENTS',
+    subStore
+  }
+}
 
 function beginLoading() {
   return {
