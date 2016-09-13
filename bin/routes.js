@@ -92,8 +92,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function getAppRoutes(store) {
   var dumpAllContents = function dumpAllContents() {
     (0, _FlexTableActions.dumpContents)();
+    (0, _ModelViewActions.dumpContents)();
     (0, _ContentsViewActions.dumpContents)();
-    //dumpModelView();
   };
 
   function authOnly(nextState, replace) {

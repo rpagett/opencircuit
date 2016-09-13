@@ -19,7 +19,8 @@ function validateOrganization() {
     'street': 'required',
     'city': 'required',
     'state': 'required|min:2|max:2|alpha',
-    'zip': ['required', 'regex:^[0-9]{5}$']
+    'zip': ['required', 'regex:^[0-9]{5}$'],
+    'director': 'required'
   };
 
   var messages = {

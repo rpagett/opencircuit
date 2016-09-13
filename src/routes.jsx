@@ -25,8 +25,8 @@ import { dumpContents as dumpModelView } from './helpers/ModelView/ModelViewActi
 export function getAppRoutes(store) {
   const dumpAllContents = () => {
     dumpFlexTable();
+    dumpModelView();
     dumpContentsView();
-    //dumpModelView();
   }
 
   function authOnly(nextState, replace) {
