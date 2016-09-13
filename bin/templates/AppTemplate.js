@@ -49,3 +49,4 @@ var AppTemplate = function (_React$Component) {
 
 exports.default = AppTemplate;
 ;
+module.exports = exports['default'];

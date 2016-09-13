@@ -46,3 +46,4 @@ var JudgeSchema = new _mongoose2.default.Schema({
 });
 
 exports.default = _mongoose2.default.model('Judge', JudgeSchema);
+module.exports = exports['default'];

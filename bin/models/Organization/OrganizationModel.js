@@ -49,3 +49,4 @@ OrganizationSchema.virtual('detailsUrl').get(function () {
 });
 
 exports.default = _mongoose2.default.model('Organization', OrganizationSchema);
+module.exports = exports['default'];

@@ -22,3 +22,4 @@ var componentFlow = function componentFlow() {
 };
 
 exports.default = componentFlow;
+module.exports = exports['default'];

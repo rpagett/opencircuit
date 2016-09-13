@@ -68,3 +68,4 @@ router.all('*', function (req, res) {
 });
 
 exports.default = router;
+module.exports = exports['default'];

@@ -46,3 +46,4 @@ CompClassSchema.virtual('detailsUrl').get(function () {
 });
 
 exports.default = _mongoose2.default.model('CompClass', CompClassSchema);
+module.exports = exports['default'];

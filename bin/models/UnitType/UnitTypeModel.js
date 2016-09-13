@@ -32,3 +32,4 @@ UnitTypeSchema.virtual('detailsUrl').get(function () {
 });
 
 exports.default = _mongoose2.default.model('UnitType', UnitTypeSchema);
+module.exports = exports['default'];

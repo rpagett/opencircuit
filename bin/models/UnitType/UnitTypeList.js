@@ -68,3 +68,4 @@ var UnitTypeList = function (_React$Component) {
 
 exports.default = UnitTypeList;
 ;
+module.exports = exports['default'];

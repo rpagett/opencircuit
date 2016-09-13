@@ -15,3 +15,4 @@ var VenueSchema = new _mongoose2.default.Schema({}, {
 });
 
 exports.default = _mongoose2.default.model('Venue', VenueSchema);
+module.exports = exports['default'];

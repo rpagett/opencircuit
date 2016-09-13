@@ -115,3 +115,4 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
 
 var ContentsView = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ContentsView);
 exports.default = ContentsView;
+module.exports = exports['default'];

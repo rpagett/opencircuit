@@ -68,3 +68,4 @@ var App = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = App;
+module.exports = exports['default'];

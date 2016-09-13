@@ -122,3 +122,4 @@ router.route('/:slug/units').get(function (req, res) {
 });
 
 exports.default = router;
+module.exports = exports['default'];

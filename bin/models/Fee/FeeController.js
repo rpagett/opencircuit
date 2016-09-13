@@ -402,3 +402,4 @@ router.get('/forUser/:user_id', function (req, res) {
 });
 
 exports.default = router;
+module.exports = exports['default'];

@@ -53,3 +53,4 @@ var LoadingCube = (_temp = _class = function (_React$Component) {
   show: _react2.default.PropTypes.bool.isRequired
 }, _temp);
 exports.default = LoadingCube;
+module.exports = exports["default"];

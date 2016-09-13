@@ -13,3 +13,4 @@ var PaymentTypes = {
 };
 
 exports.default = PaymentTypes;
+module.exports = exports['default'];

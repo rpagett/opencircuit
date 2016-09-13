@@ -52,3 +52,4 @@ var AuthTemplate = function (_React$Component) {
 
 exports.default = AuthTemplate;
 ;
+module.exports = exports['default'];

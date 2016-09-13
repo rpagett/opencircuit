@@ -25,3 +25,4 @@ function determineFeeStructure(count) {
 
   return _lodash2.default.last(FeeStructure);
 }
+module.exports = exports['default'];

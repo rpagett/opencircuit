@@ -206,3 +206,4 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 var NavBar = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_NavBar);
 exports.default = NavBar;
+module.exports = exports['default'];

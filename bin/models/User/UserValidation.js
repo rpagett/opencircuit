@@ -54,3 +54,4 @@ function validateUser() {
     return _indicative2.default.sanitize(data, sanitation);
   });
 }
+module.exports = exports['default'];

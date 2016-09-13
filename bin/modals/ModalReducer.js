@@ -40,3 +40,4 @@ var modal = function modal() {
 };
 
 exports.default = modal;
+module.exports = exports['default'];

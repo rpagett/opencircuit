@@ -46,3 +46,4 @@ var modelView = function modelView() {
 };
 
 exports.default = modelView;
+module.exports = exports['default'];

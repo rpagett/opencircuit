@@ -22,3 +22,4 @@ var auth = function auth() {
 };
 
 exports.default = auth;
+module.exports = exports['default'];

@@ -84,3 +84,4 @@ UnitSchema.statics.fillableFields = function () {
 };
 
 exports.default = _mongoose2.default.model('Unit', UnitSchema);
+module.exports = exports['default'];

@@ -61,3 +61,4 @@ var form = function form() {
 };
 
 exports.default = form;
+module.exports = exports['default'];

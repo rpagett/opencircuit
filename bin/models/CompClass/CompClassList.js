@@ -74,3 +74,4 @@ var CompClassList = function (_React$Component) {
 
 exports.default = CompClassList;
 ;
+module.exports = exports['default'];

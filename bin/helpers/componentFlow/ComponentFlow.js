@@ -121,3 +121,4 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 var ComponentFlow = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ComponentFlow);
 exports.default = ComponentFlow;
+module.exports = exports['default'];

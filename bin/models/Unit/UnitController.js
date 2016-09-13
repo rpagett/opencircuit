@@ -229,3 +229,4 @@ router.get('/:slug/attending', function (req, res) {
 });
 
 exports.default = router;
+module.exports = exports['default'];

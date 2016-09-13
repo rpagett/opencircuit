@@ -189,3 +189,4 @@ router.route('/:email/roles').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.A
 });
 
 exports.default = router;
+module.exports = exports['default'];

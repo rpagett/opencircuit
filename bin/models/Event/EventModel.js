@@ -67,3 +67,4 @@ EventSchema.statics.fillableFields = function () {
 };
 
 exports.default = _mongoose2.default.model('Event', EventSchema);
+module.exports = exports['default'];

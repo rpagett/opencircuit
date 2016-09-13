@@ -42,3 +42,4 @@ var AppContent = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = AppContent;
+module.exports = exports["default"];

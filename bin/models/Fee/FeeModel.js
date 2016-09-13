@@ -88,3 +88,4 @@ FeeSchema.virtual('amountRemaining').get(function () {
 });
 
 exports.default = _mongoose2.default.model('Fee', FeeSchema);
+module.exports = exports['default'];

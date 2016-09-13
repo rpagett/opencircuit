@@ -47,3 +47,4 @@ var EventRegistrationSchema = new _mongoose2.default.Schema({
 EventRegistrationSchema.plugin(_mongooseLifecycle2.default);
 
 exports.default = _mongoose2.default.model('EventRegistration', EventRegistrationSchema);
+module.exports = exports['default'];

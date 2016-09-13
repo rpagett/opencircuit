@@ -47,3 +47,4 @@ var Header = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Header;
+module.exports = exports['default'];

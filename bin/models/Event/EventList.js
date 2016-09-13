@@ -69,3 +69,4 @@ var EventList = function (_React$Component) {
 
 exports.default = EventList;
 ;
+module.exports = exports['default'];

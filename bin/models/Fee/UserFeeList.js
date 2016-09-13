@@ -79,3 +79,4 @@ var UserFeeList = function (_React$Component) {
 
 exports.default = UserFeeList;
 ;
+module.exports = exports['default'];

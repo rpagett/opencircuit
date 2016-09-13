@@ -118,3 +118,4 @@ router.get('/by_type/:type', function (req, res) {
 });
 
 exports.default = router;
+module.exports = exports['default'];

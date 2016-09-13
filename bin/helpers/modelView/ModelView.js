@@ -113,3 +113,4 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
 
 var ModelView = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ModelView);
 exports.default = ModelView;
+module.exports = exports['default'];

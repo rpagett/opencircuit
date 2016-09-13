@@ -47,3 +47,4 @@ var flexTable = function flexTable() {
 };
 
 exports.default = flexTable;
+module.exports = exports['default'];

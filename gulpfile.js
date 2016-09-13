@@ -107,7 +107,7 @@ function bundleApp(isProduction) {
   gulp.src('./src/**/*.jsx')
     .pipe(plugins.babel({
       presets: ['es2015', 'react', 'stage-1'],
-      plugins: ["transform-decorators-legacy"]
+      plugins: ["transform-decorators-legacy", "add-module-exports"]
     }))
     .on('error', gutil.log)
     .pipe(gulp.dest('./bin/'));
@@ -116,7 +116,7 @@ function bundleApp(isProduction) {
   // transform ES6 and JSX to ES5 with babelify
     .transform("babelify", {
       presets: ["es2015", "react", "stage-1"],
-      plugins: ["transform-decorators-legacy"],
+      plugins: ["transform-decorators-legacy", "add-module-exports"],
       extensions: ['.jsx']
     })
     .bundle()

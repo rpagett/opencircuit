@@ -91,3 +91,4 @@ var UserList = function (_React$Component) {
 
 exports.default = UserList;
 ;
+module.exports = exports['default'];

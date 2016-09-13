@@ -213,3 +213,4 @@ var flow = {
 };
 
 exports.default = flow;
+module.exports = exports['default'];

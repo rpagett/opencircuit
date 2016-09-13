@@ -33,3 +33,4 @@ function validateCompClass() {
 
   return _indicative2.default.validateAll(data, rules, messages);
 }
+module.exports = exports['default'];

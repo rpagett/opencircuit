@@ -28,3 +28,4 @@ var FeeCategorySchema = new _mongoose2.default.Schema({
 });
 
 exports.default = _mongoose2.default.model('FeeCategory', FeeCategorySchema);
+module.exports = exports['default'];

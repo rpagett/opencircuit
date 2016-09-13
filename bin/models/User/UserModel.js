@@ -91,3 +91,4 @@ UserSchema.plugin(_passportLocalMongoose2.default, {
 
 var UserModel = _mongoose2.default.model('User', UserSchema);
 exports.default = UserModel;
+module.exports = exports['default'];

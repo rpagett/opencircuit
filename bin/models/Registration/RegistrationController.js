@@ -211,3 +211,4 @@ router.get('/unit/:unit/confirm', function (req, res) {
 });
 
 exports.default = router;
+module.exports = exports['default'];

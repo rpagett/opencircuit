@@ -46,3 +46,4 @@ var contentsView = function contentsView() {
 };
 
 exports.default = contentsView;
+module.exports = exports['default'];

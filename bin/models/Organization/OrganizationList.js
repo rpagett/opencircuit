@@ -78,3 +78,4 @@ var OrganizationList = function (_React$Component) {
 
 exports.default = OrganizationList;
 ;
+module.exports = exports['default'];

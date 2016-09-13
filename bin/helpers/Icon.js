@@ -49,3 +49,4 @@ var Icon = (_temp = _class = function (_React$Component) {
 }, _temp);
 exports.default = Icon;
 ;
+module.exports = exports['default'];

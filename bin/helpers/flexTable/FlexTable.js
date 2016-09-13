@@ -179,3 +179,4 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
 
 var FlexTable = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_FlexTable);
 exports.default = FlexTable;
+module.exports = exports['default'];
