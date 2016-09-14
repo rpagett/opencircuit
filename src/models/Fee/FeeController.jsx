@@ -31,16 +31,27 @@ function configurePaypal() {
 }
 
 function assessFee(unit_id, amount, category, notes = '', due_date = Fee.DUE_DATE()) {
+  let category_obj = { };
+
   FeeCategory.findOne({ slug: category }, '_id name')
     .then(feecat => {
       if (!feecat) {
         throw new Error('Invalid category.');
       }
 
+      category_obj = feecat;
+
+      return Fee.count({category: feecat_.id, unit: unit_id})
+    })
+    .then(count => {
+      if (category == 'member-fee' && count) {
+        throw new Error('Fee has already been assessed for this unit.')
+      }
+
       return Fee.create({
         unit: unit_id,
         amount: amount,
-        category: feecat._id,
+        category: category_obj._id,
         assessed_date: Date.now(),
         due_date: due_date,
         notes
@@ -375,8 +386,9 @@ router.get('/invoice/:org', (req, res) => {
     })
     .then(units => {
       const ids = _.map(units, '_id');
-      return Fee.find({ paid_date: null, unit: {$in: ids} }, 'unit payments due_date created_at amount')
+      return Fee.find({ paid_date: null, unit: {$in: ids} })
         .populate('unit', '_id name')
+        .populate('category', 'name')
         //.populate('payments', 'amount')
         .exec()
     })

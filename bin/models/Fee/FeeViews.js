@@ -169,13 +169,18 @@ var _Invoice = function (_React$Component3) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-3', key: fee._id + '-assessed' },
+            { className: 'col-xs-2', key: fee._id + '-assessed' },
             fee.formattedAssessedDate
           ),
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-3', key: fee._id + '-due' },
+            { className: 'col-xs-2', key: fee._id + '-due' },
             fee.formattedDueDate
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-2', key: fee._id + '-notes' },
+            fee.notes ? fee.notes : fee.category.name
           ),
           _react2.default.createElement(
             'div',
@@ -251,20 +256,29 @@ var _Invoice = function (_React$Component3) {
                 ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'col-xs-3' },
+                  { className: 'col-xs-2' },
                   _react2.default.createElement(
                     'strong',
                     null,
-                    'Date Assessed'
+                    'Assessed'
                   )
                 ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'col-xs-3' },
+                  { className: 'col-xs-2' },
                   _react2.default.createElement(
                     'strong',
                     null,
-                    'Date Due'
+                    'Due'
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'col-xs-2' },
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Notes'
                   )
                 ),
                 _react2.default.createElement(

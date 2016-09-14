@@ -44,7 +44,7 @@ const FeeSchema = new Mongoose.Schema({
 })
 
 FeeSchema.statics.NON_MEMBER_FEE = () => {
-  return 75;
+  return 175;
 }
 
 FeeSchema.statics.PLUS_PASS_FEE = () => {
@@ -52,7 +52,7 @@ FeeSchema.statics.PLUS_PASS_FEE = () => {
 }
 
 FeeSchema.statics.DUE_DATE = () => {
-  return Date.parse('Nov 30, 2016');
+  return Date.parse('Dec 31, 2016');
 }
 
 FeeSchema.virtual('formattedAssessedDate').get(function() {

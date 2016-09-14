@@ -60,7 +60,7 @@ var FeeSchema = new _mongoose2.default.Schema({
 });
 
 FeeSchema.statics.NON_MEMBER_FEE = function () {
-  return 75;
+  return 175;
 };
 
 FeeSchema.statics.PLUS_PASS_FEE = function () {
@@ -68,7 +68,7 @@ FeeSchema.statics.PLUS_PASS_FEE = function () {
 };
 
 FeeSchema.statics.DUE_DATE = function () {
-  return Date.parse('Nov 30, 2016');
+  return Date.parse('Dec 31, 2016');
 };
 
 FeeSchema.virtual('formattedAssessedDate').get(function () {

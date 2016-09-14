@@ -69,13 +69,19 @@ class _Home extends React.Component {
           returnEmpty={ true }
         />
 
-        <div className="row">
+        <div className="alert alert-warning" role="alert">
+          Event registration will open Friday, September 16th at 12pm.
+        </div>
+
+        <HasRole role={ UserRoles.FormsManager } className="row">
+          {/* <div className="row"> */}
           <div className="col-xs-12 offset-sm-1 col-sm-10">
             <Link to="/register" className="btn btn-block btn-outline-success">
               Register Your Unit(s)
             </Link>
           </div>
-        </div>
+          {/*</div>*/}
+        </HasRole>
       </div>
     );
   }

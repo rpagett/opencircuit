@@ -14,11 +14,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var FeeStructure = [475, 425, 400, 375, 350];
 
 function determineFeeStructure(count) {
-  count = count - 1;
-  if (count < 1) {
-    count = 1;
-  }
-
   if (FeeStructure[count - 1]) {
     return FeeStructure[count - 1];
   }

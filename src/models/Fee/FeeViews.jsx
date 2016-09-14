@@ -79,8 +79,11 @@ class _Invoice extends React.Component {
       rows.push(
         <div className="row" key={ fee._id }>
           <div className="col-xs-3" key={ `${fee._id}-name` }>{ fee.unit.name }</div>
-          <div className="col-xs-3" key={ `${fee._id}-assessed`}>{ fee.formattedAssessedDate }</div>
-          <div className="col-xs-3" key={ `${fee._id}-due`}>{ fee.formattedDueDate }</div>
+          <div className="col-xs-2" key={ `${fee._id}-assessed`}>{ fee.formattedAssessedDate }</div>
+          <div className="col-xs-2" key={ `${fee._id}-due`}>{ fee.formattedDueDate }</div>
+          <div className="col-xs-2" key={ `${fee._id}-notes`}>
+            {( fee.notes ? fee.notes : fee.category.name )}
+          </div>
           <div className="col-xs-3 text-xs-right" key={ `${fee._id}-AR` }>${ fee.amountRemaining }</div>
         </div>
       )
@@ -112,8 +115,9 @@ class _Invoice extends React.Component {
             <div className="card-block">
               <div className="row">
                 <div className="col-xs-3"><strong>Unit Name</strong></div>
-                <div className="col-xs-3"><strong>Date Assessed</strong></div>
-                <div className="col-xs-3"><strong>Date Due</strong></div>
+                <div className="col-xs-2"><strong>Assessed</strong></div>
+                <div className="col-xs-2"><strong>Due</strong></div>
+                <div className="col-xs-2"><strong>Notes</strong></div>
                 <div className="col-xs-3 text-xs-right"><strong>Amount Due</strong></div>
               </div>
               { rows }

@@ -72,15 +72,25 @@ function assessFee(unit_id, amount, category) {
   var notes = arguments.length <= 3 || arguments[3] === undefined ? '' : arguments[3];
   var due_date = arguments.length <= 4 || arguments[4] === undefined ? _FeeModel2.default.DUE_DATE() : arguments[4];
 
+  var category_obj = {};
+
   _FeeCategoryModel2.default.findOne({ slug: category }, '_id name').then(function (feecat) {
     if (!feecat) {
       throw new Error('Invalid category.');
     }
 
+    category_obj = feecat;
+
+    return _FeeModel2.default.count({ category: feecat_.id, unit: unit_id });
+  }).then(function (count) {
+    if (category == 'member-fee' && count) {
+      throw new Error('Fee has already been assessed for this unit.');
+    }
+
     return _FeeModel2.default.create({
       unit: unit_id,
       amount: amount,
-      category: feecat._id,
+      category: category_obj._id,
       assessed_date: Date.now(),
       due_date: due_date,
       notes: notes
@@ -368,7 +378,7 @@ router.get('/invoice/:org', function (req, res) {
     return _UnitModel2.default.find({ organization: storeOrg._id, registered: true }, '_id');
   }).then(function (units) {
     var ids = _lodash2.default.map(units, '_id');
-    return _FeeModel2.default.find({ paid_date: null, unit: { $in: ids } }, 'unit payments due_date created_at amount').populate('unit', '_id name')
+    return _FeeModel2.default.find({ paid_date: null, unit: { $in: ids } }).populate('unit', '_id name').populate('category', 'name')
     //.populate('payments', 'amount')
     .exec();
   }).then(function (fees) {
