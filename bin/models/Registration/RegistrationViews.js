@@ -114,7 +114,7 @@ var _DirectRegistration = function (_React$Component2) {
     key: 'render',
     value: function render() {
       if (!this.props.contents.length) {
-        return _react2.default.createElement(_Organization, this.props);
+        return _react2.default.createElement(Organization, this.props);
       }
 
       var buttons = [];

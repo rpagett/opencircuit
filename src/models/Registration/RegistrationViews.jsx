@@ -58,7 +58,7 @@ export class Organization extends React.Component {
 class _DirectRegistration extends React.Component {
   render() {
     if (!this.props.contents.length) {
-      return <_Organization { ...this.props } />
+      return <Organization { ...this.props } />
     }
 
     let buttons = [ ];
