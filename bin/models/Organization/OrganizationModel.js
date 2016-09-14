@@ -8,6 +8,10 @@ var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
+var _mongooseLifecycle = require('mongoose-lifecycle');
+
+var _mongooseLifecycle2 = _interopRequireDefault(_mongooseLifecycle);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ObjectId = _mongoose2.default.Schema.Types.ObjectId;
@@ -43,6 +47,8 @@ var OrganizationSchema = new _mongoose2.default.Schema({
     virtuals: true
   }
 });
+
+OrganizationSchema.plugin(_mongooseLifecycle2.default);
 
 OrganizationSchema.virtual('detailsUrl').get(function () {
   return '/organizations/' + this.slug;

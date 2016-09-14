@@ -136,7 +136,7 @@ var _DirectRegistration = function (_React$Component2) {
       });
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'row form-group' },
         _react2.default.createElement(
           'p',
           { className: 'lead' },
@@ -256,22 +256,46 @@ var Unit = exports.Unit = function (_React$Component5) {
             'The information here should be about a competing unit from your school or organization. If you have multiple teams from the same school, please use A/B or JV/Varsity designations to differentiate them. You will be able to provide more creative names to be announced at shows through your Spiel Sheet.'
           ),
           _react2.default.createElement(
-            'p',
-            null,
-            'This unit is:'
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-xs-12 col-sm-4' },
+              'This unit is:'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-xs-12 col-sm-8' },
+              _react2.default.createElement(_ContentsView2.default, { subStore: 'register_unit_types', endpoint: '/api/unittypes', component: _UnitTypes })
+            )
           ),
-          _react2.default.createElement(_ContentsView2.default, { subStore: 'register_unit_types', endpoint: '/api/unittypes', component: _UnitTypes }),
+          _react2.default.createElement('hr', null),
           _react2.default.createElement(_components.FormInput, { name: 'name', label: 'Unit Name' }),
-          _react2.default.createElement(_components.Radio, {
-            label: 'Circuit Member',
-            name: 'circuit_member',
-            value: 'true'
-          }),
-          _react2.default.createElement(_components.Radio, {
-            label: 'Non-Member (pay-per-event)',
-            name: 'circuit_member',
-            value: 'false'
-          }),
+          _react2.default.createElement('p', null),
+          _react2.default.createElement(
+            'div',
+            { className: 'row form-group' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-xs-12 col-sm-4' },
+              'Membership'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-xs-12 col-sm-8' },
+              _react2.default.createElement(_components.Radio, {
+                label: 'Circuit Member',
+                name: 'circuit_member',
+                value: 'true'
+              }),
+              _react2.default.createElement(_components.Radio, {
+                label: 'Non-Member (pay-per-event)',
+                name: 'circuit_member',
+                value: 'false'
+              })
+            )
+          ),
+          _react2.default.createElement('p', null),
           _react2.default.createElement(_components.Checkbox, { name: 'plus_pass', label: 'PLUS Pass Member', inForm: true }),
           _react2.default.createElement(
             'button',

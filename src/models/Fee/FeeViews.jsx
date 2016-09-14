@@ -50,6 +50,8 @@ export class Index extends React.Component {
           </div>
         </div>
 
+        <p></p>
+
         <div className="row">
           <ContentsView
             subStore="fee_categories"

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 import ContentsView from '../../helpers/ContentsView/ContentsView';
 import { ReduxForm, FormInput, Checkbox, DateTime, TextArea, PaymentTypeSelect, FeeCategorySelect, UnitSelect } from '../../forms/components';
+import PaymentTypes from './PaymentTypes';
 
 export class AdminPayment extends React.Component {
   render() {
@@ -115,6 +116,30 @@ export class GenerateInvoice extends React.Component {
         <p>Select the organization to invoice.</p>
 
         { buttons }
+      </div>
+    )
+  }
+}
+
+export class Payments extends React.Component {
+  render() {
+    let lines = [ ];
+
+    this.props.payments.map(payment => {
+      lines.push(
+        <div className="row">
+          <div className="col-xs-6">${ payment.amount }</div>
+          <div className="col-xs-6">{ PaymentTypes[payment.method] }</div>
+        </div>
+      )
+    })
+    return (
+      <div>
+        <div className="row">
+          <div className="col-xs-6"><strong>Amount</strong></div>
+          <div className="col-xs-6"><strong>Method</strong></div>
+        </div>
+        { lines }
       </div>
     )
   }

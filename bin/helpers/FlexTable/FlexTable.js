@@ -14,9 +14,17 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
+var _reactRouter = require('react-router');
+
+var _Icon = require('../Icon');
+
+var _Icon2 = _interopRequireDefault(_Icon);
+
 var _LoadingCube = require('../LoadingCube');
 
 var _LoadingCube2 = _interopRequireDefault(_LoadingCube);
+
+var _SpawnableModal = require('../../modals/SpawnableModal');
 
 var _FlexTableActions = require('./FlexTableActions');
 
@@ -52,11 +60,48 @@ var _FlexTable = (_temp = _class = function (_React$Component) {
       this.props.fetchContents();
     }
   }, {
+    key: 'editButton',
+    value: function editButton(route) {
+      return _react2.default.createElement(
+        _reactRouter.Link,
+        { to: route, key: route + '-edit' },
+        _react2.default.createElement(_Icon2.default, { shape: 'pencil' })
+      );
+    }
+  }, {
+    key: 'deleteButton',
+    value: function deleteButton(route, name) {
+      return _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
+        className: 'btn-link',
+        buttonText: _react2.default.createElement(_Icon2.default, { shape: 'trash' }),
+        key: route + '-delete',
+
+        title: 'Confirm Deletion',
+        componentName: 'FLEXTABLE_CONFIRM_DELETION',
+        modalProps: {
+          name: name,
+          endpoint: route,
+          refreshTable: this.props.name,
+          refreshEndpoint: this.props.endpoint
+        }
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
       console.log('Rendering');
+      var showOptionsColumn = false;
+      var tryEdit = false;
+      var tryDelete = false;
+
+      if (this.props.canEdit) {
+        tryEdit = true;
+      }
+      if (this.props.canDelete) {
+        tryDelete = true;
+      }
 
       if (this.props.isLoading) {
         return _react2.default.createElement(_LoadingCube2.default, { show: true });
@@ -91,6 +136,54 @@ var _FlexTable = (_temp = _class = function (_React$Component) {
         ));
       }
 
+      var contents = [];
+      this.props.contents.map(function (line) {
+        var cells = [];
+
+        var editRoute = null;
+        if (tryEdit) {
+          editRoute = _this2.props.canEdit(line, _this2.props.authUser);
+        }
+
+        var deleteRoute = null;
+        if (tryDelete) {
+          deleteRoute = _this2.props.canDelete(line, _this2.props.authUser);
+        }
+
+        for (var _key in columns) {
+          cells.push(_react2.default.createElement(
+            'td',
+            { key: line._id + '-' + _key, 'data-title': _key },
+            columns[_key](line, _this2.props.feedDispatch())
+          ));
+        }
+
+        if (editRoute || deleteRoute) {
+          cells.push(_react2.default.createElement(
+            'td',
+            { key: line._id + '-opts', 'data-title': 'Options' },
+            editRoute ? _this2.editButton(editRoute) : null,
+            deleteRoute ? _this2.deleteButton(deleteRoute, _this2.props.deriveName(line)) : null
+          ));
+
+          showOptionsColumn = true;
+        }
+
+        contents.push(_react2.default.createElement(
+          'tr',
+          { key: line._id },
+          cells
+        ));
+      });
+
+      if (showOptionsColumn) {
+        header.push(_react2.default.createElement(
+          'th',
+          null,
+          'Options'
+        ));
+      }
+
       return _react2.default.createElement(
         'div',
         null,
@@ -114,23 +207,7 @@ var _FlexTable = (_temp = _class = function (_React$Component) {
           _react2.default.createElement(
             'tbody',
             null,
-            this.props.contents.map(function (line) {
-              var cells = [];
-
-              for (var _key in columns) {
-                cells.push(_react2.default.createElement(
-                  'td',
-                  { key: line._id + '-' + _key, 'data-title': _key },
-                  columns[_key](line, _this2.props.feedDispatch())
-                ));
-              }
-
-              return _react2.default.createElement(
-                'tr',
-                { key: line._id },
-                cells
-              );
-            })
+            contents
           )
         )
       );
@@ -143,7 +220,11 @@ var _FlexTable = (_temp = _class = function (_React$Component) {
   emptyMessage: _react2.default.PropTypes.string.isRequired,
   endpoint: _react2.default.PropTypes.string.isRequired,
   isLoading: _react2.default.PropTypes.bool,
-  title: _react2.default.PropTypes.string
+  title: _react2.default.PropTypes.string,
+
+  canEdit: _react2.default.PropTypes.func,
+  canDelete: _react2.default.PropTypes.func,
+  deriveName: _react2.default.PropTypes.func
 }, _class.defaultProps = {
   isLoading: true
 }, _temp);

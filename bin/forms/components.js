@@ -898,7 +898,7 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component18) {
       this.state.events.map(function (event) {
         boxes.push(_react2.default.createElement(
           'div',
-          { className: 'col-xs-12 col-sm-6', key: 'col-' + event.id },
+          { className: 'col-xs-12', key: 'col-' + event.id },
           _react2.default.createElement(Checkbox, {
             name: 'events',
             formStore: _this21.props.formStore,

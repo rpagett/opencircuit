@@ -75,7 +75,7 @@ var UnitSchema = _mongoose2.default.Schema({
 
 UnitSchema.plugin(_mongooseLifecycle2.default);
 
-UnitSchema.virtual('detailsLink').get(function () {
+UnitSchema.virtual('detailsUrl').get(function () {
   return '/units/' + this.slug;
 });
 

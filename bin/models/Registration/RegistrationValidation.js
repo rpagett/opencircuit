@@ -42,7 +42,8 @@ function unit() {
 
   var rules = {
     'unit_type': 'required',
-    'name': 'required'
+    'name': 'required',
+    'is_member': 'required'
   };
 
   var messages = {

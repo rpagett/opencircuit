@@ -652,7 +652,7 @@ class _EventChecks extends React.Component {
 
     this.state.events.map(event => {
       boxes.push(
-        <div className="col-xs-12 col-sm-6" key={ `col-${event.id}` }>
+        <div className="col-xs-12" key={ `col-${event.id}` }>
           <Checkbox
             name="events"
             formStore={ this.props.formStore }

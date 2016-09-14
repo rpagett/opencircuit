@@ -99,7 +99,24 @@ router.route('/:email')
           errors
         })
       })
-  });
+  })
+
+  .delete(hasRole(UserRoles.Administrator), (req, res) => {
+    User.findOneAndRemove({ email: req.params.email })
+      .exec()
+      .then( () => {
+        res.json({
+          success: true,
+          //redirect: '/users'
+        })
+      })
+      .catch( err => {
+        res.json({
+          success: false,
+          error: err.message
+        })
+      })
+  })
 
 router.route('/:email/roles')
   .get(hasRole(UserRoles.Administrator), (req, res) => {

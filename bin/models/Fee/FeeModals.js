@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.GenerateInvoice = exports.AssessFee = exports.UserPayment = exports.AdminPayment = undefined;
+exports.Payments = exports.GenerateInvoice = exports.AssessFee = exports.UserPayment = exports.AdminPayment = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18,6 +18,10 @@ var _ContentsView = require('../../helpers/ContentsView/ContentsView');
 var _ContentsView2 = _interopRequireDefault(_ContentsView);
 
 var _components = require('../../forms/components');
+
+var _PaymentTypes = require('./PaymentTypes');
+
+var _PaymentTypes2 = _interopRequireDefault(_PaymentTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -214,4 +218,68 @@ var GenerateInvoice = exports.GenerateInvoice = function (_React$Component5) {
   }]);
 
   return GenerateInvoice;
+}(_react2.default.Component);
+
+var Payments = exports.Payments = function (_React$Component6) {
+  _inherits(Payments, _React$Component6);
+
+  function Payments() {
+    _classCallCheck(this, Payments);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Payments).apply(this, arguments));
+  }
+
+  _createClass(Payments, [{
+    key: 'render',
+    value: function render() {
+      var lines = [];
+
+      this.props.payments.map(function (payment) {
+        lines.push(_react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-6' },
+            '$',
+            payment.amount
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-6' },
+            _PaymentTypes2.default[payment.method]
+          )
+        ));
+      });
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-6' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Amount'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-6' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Method'
+            )
+          )
+        ),
+        lines
+      );
+    }
+  }]);
+
+  return Payments;
 }(_react2.default.Component);

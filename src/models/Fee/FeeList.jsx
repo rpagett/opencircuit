@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router';
+import Icon from '../../helpers/Icon';
 
 import FlexTable from '../../helpers/FlexTable/FlexTable'
 import { LaunchModalButton } from '../../modals/SpawnableModal';
@@ -14,11 +15,33 @@ export default class FeeList extends React.Component {
           endpoint={ this.props.endpoint }
           emptyMessage="There are no fees."
           columns={{
-            'Unit': fee => { return (<Link to={ fee.unit.detailsLink }>{ fee.unit.name }</Link>) },
+            'Unit': fee => { return (<Link to={ fee.unit.detailsUrl }>{ fee.unit.name }</Link>) },
             'Amount': fee => { return '$'+fee.amount },
             'Due': fee => { return fee.formattedDueDate },
             'Category': fee => { return fee.category.name },
-            'Amount Paid': fee => { return '$' + _.sumBy(fee.payments, 'amount') },
+            'Payments': fee => {
+              const amountPaid = _.sumBy(fee.payments, 'amount');
+
+              if (!amountPaid) {
+                return '$0';
+              }
+
+              return (
+                <span>
+                  { '$' + amountPaid }
+                  <LaunchModalButton
+                    className="btn-link"
+                    buttonText={ <Icon shape="info-circle" /> }
+
+                    title="Payments"
+                    componentName="FEE_PAYMENTS"
+                    modalProps={{
+                      payments: fee.payments
+                    }}
+                  />
+                </span>
+              )
+            },
             'Date Paid': fee => {
               if (fee.paid_date) {
                 return <div>{ fee.formattedPaidDate }</div>

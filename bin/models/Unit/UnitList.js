@@ -13,6 +13,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
+var _UserRoles = require('../User/UserRoles');
+
 var _FlexTable = require('../../helpers/FlexTable/FlexTable');
 
 var _FlexTable2 = _interopRequireDefault(_FlexTable);
@@ -37,6 +39,22 @@ var UnitList = function (_React$Component) {
   }
 
   _createClass(UnitList, [{
+    key: 'canEdit',
+    value: function canEdit(unit, user) {
+      if (unit.director._id.toString() == user._id.toString() || (0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.EventDirector)) {
+        return unit.detailsUrl + '/edit';
+      }
+
+      return null;
+    }
+  }, {
+    key: 'canDelete',
+    value: function canDelete(unit, user) {
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator)) {
+        return '/api' + unit.detailsUrl;
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -50,7 +68,7 @@ var UnitList = function (_React$Component) {
             'Name': function Name(unit) {
               return _react2.default.createElement(
                 _reactRouter.Link,
-                { to: unit.detailsLink },
+                { to: unit.detailsUrl },
                 unit.name
               );
             },
@@ -67,6 +85,11 @@ var UnitList = function (_React$Component) {
             'Class': function Class(unit) {
               return unit.competition_class.formattedName;
             }
+          },
+          canEdit: this.canEdit,
+          canDelete: this.canDelete,
+          deriveName: function deriveName(unit) {
+            return unit.name;
           }
         })
       );

@@ -3,12 +3,31 @@ import { Link } from 'react-router';
 
 import FlexTable from '../../helpers/FlexTable/FlexTable'
 import {launch as launchModal} from '../../modals/ModalActions';
+import { UserRoles, userHasRole } from './UserRoles';
+
 
 export default class UserList extends React.Component {
   launchRolesOverlay(dispatch) {
     dispatch(launchModal(this.formattedName + '\'s Roles', 'USER_ROLES', {
       email: this.email
     }));
+  }
+
+  canEdit(modelUser, authUser) {
+    if (authUser._id == modelUser._id || userHasRole(authUser, UserRoles.Administrator)) {
+      return `${modelUser.profileUrl}/edit`
+    }
+
+    return null;
+  }
+
+  canDelete(modelUser, authUser) {
+    if (authUser._id.toString() == '5768b81d855f632839aacd3b')
+    {
+      return `/api${modelUser.profileUrl}`
+    }
+
+    return null;
   }
 
   render() {
@@ -30,6 +49,9 @@ export default class UserList extends React.Component {
               );
             }
           }}
+          canEdit={ this.canEdit }
+          canDelete={ this.canDelete }
+          deriveName={ user => user.formattedName }
         />
       </div>
     );

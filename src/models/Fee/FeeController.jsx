@@ -73,6 +73,11 @@ Unit.on('afterInsert', newUnit => {
   }
 });
 
+Unit.on('afterRemove', unit => {
+  Fee.remove({ unit: unit._id })
+    .exec()
+})
+
 EventRegistration.on('afterInsert', registration => {
   Unit.findOne({ _id: registration.unit })
     .then(unit => {

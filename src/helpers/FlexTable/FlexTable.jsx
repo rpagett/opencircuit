@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
+import Icon from '../Icon';
 import LoadingCube from '../LoadingCube';
+import { LaunchModalButton } from '../../modals/SpawnableModal';
+
 import * as FlexTableActions from './FlexTableActions';
 
 class _FlexTable extends React.Component {
@@ -10,7 +14,11 @@ class _FlexTable extends React.Component {
     emptyMessage: React.PropTypes.string.isRequired,
     endpoint: React.PropTypes.string.isRequired,
     isLoading: React.PropTypes.bool,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+
+    canEdit: React.PropTypes.func,
+    canDelete: React.PropTypes.func,
+    deriveName: React.PropTypes.func
   }
 
   static defaultProps = {
@@ -25,8 +33,45 @@ class _FlexTable extends React.Component {
     this.props.fetchContents();
   }
 
+  editButton(route) {
+    return (
+      <Link to={ route } key={ route + '-edit'}>
+        <Icon shape="pencil" />
+      </Link>
+    )
+  }
+
+  deleteButton(route, name) {
+    return (
+      <LaunchModalButton
+        className="btn-link"
+        buttonText={ <Icon shape="trash" /> }
+        key={ route + '-delete' }
+
+        title="Confirm Deletion"
+        componentName="FLEXTABLE_CONFIRM_DELETION"
+        modalProps={{
+          name,
+          endpoint: route,
+          refreshTable: this.props.name,
+          refreshEndpoint: this.props.endpoint
+        }}
+      />
+    )
+  }
+
   render() {
     console.log('Rendering');
+    let showOptionsColumn = false;
+    let tryEdit = false;
+    let tryDelete = false;
+
+    if (this.props.canEdit) {
+      tryEdit = true;
+    }
+    if (this.props.canDelete) {
+      tryDelete = true;
+    }
 
     if (this.props.isLoading) {
       return (
@@ -53,6 +98,46 @@ class _FlexTable extends React.Component {
       header.push(<th key={ key }>{ key }</th>);
     }
 
+    let contents = [ ];
+    this.props.contents.map(line => {
+      let cells = [ ];
+
+      let editRoute = null;
+      if (tryEdit) {
+        editRoute = this.props.canEdit(line, this.props.authUser);
+      }
+
+      let deleteRoute = null;
+      if (tryDelete) {
+        deleteRoute = this.props.canDelete(line, this.props.authUser);
+      }
+
+      for (let key in columns) {
+        cells.push(
+          <td key={ line._id + '-' + key } data-title={ key }>
+            { columns[key](line, this.props.feedDispatch()) }
+          </td>
+        );
+      }
+
+      if (editRoute || deleteRoute) {
+        cells.push(
+          <td key={ line._id + '-opts' } data-title="Options">
+            { (editRoute ? this.editButton(editRoute) : null) }
+            { (deleteRoute ? this.deleteButton(deleteRoute, this.props.deriveName(line)) : null) }
+          </td>
+        )
+
+        showOptionsColumn = true;
+      }
+
+      contents.push(<tr key={ line._id }>{ cells }</tr>);
+    })
+
+    if (showOptionsColumn) {
+      header.push(<th>Options</th>)
+    }
+
     return (
       <div>
         { (this.props.title ? <h3>{ this.props.title }</h3> : '') }
@@ -61,19 +146,7 @@ class _FlexTable extends React.Component {
             <tr>{ header }</tr>
           </thead>
           <tbody>
-            { this.props.contents.map(line => {
-              let cells = [ ];
-
-              for (let key in columns) {
-                cells.push(
-                  <td key={ line._id + '-' + key } data-title={ key }>
-                    { columns[key](line, this.props.feedDispatch()) }
-                  </td>
-                );
-              }
-
-              return (<tr key={ line._id }>{ cells }</tr>);
-            }) }
+          { contents }
           </tbody>
         </table>
       </div>

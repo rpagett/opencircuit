@@ -1,4 +1,5 @@
 import Mongoose from 'mongoose';
+import mLifecycle from 'mongoose-lifecycle';
 
 const ObjectId = Mongoose.Schema.Types.ObjectId;
 const OrganizationSchema = new Mongoose.Schema({
@@ -33,6 +34,8 @@ const OrganizationSchema = new Mongoose.Schema({
     virtuals: true
   }
 });
+
+OrganizationSchema.plugin(mLifecycle);
 
 OrganizationSchema.virtual('detailsUrl').get(function() {
   return `/organizations/${this.slug}`;

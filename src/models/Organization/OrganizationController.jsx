@@ -10,6 +10,11 @@ import { hasRole, userOrAdmin } from '../../middleware/authRoute';
 let router = Express.Router();
 // All routes are '/api/organizations/...'
 
+Organization.on('afterRemove', org => {
+  Unit.findAndRemove({ organization: org._id })
+    .exec();
+})
+
 router.route('/')
   .get(hasRole(UserRoles.Administrator), (req, res) => {
     let contents = [ ];

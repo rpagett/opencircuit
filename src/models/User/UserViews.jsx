@@ -55,7 +55,7 @@ export class _Show extends React.Component {
           <div className="row">
             <div className="pull-xs-center col-xs-12 offset-sm-4 col-sm-4">
               <small>
-                <Link to={ `/users/${user.profileUrl}/edit` } className="btn btn-sm btn-outline-secondary btn-block">
+                <Link to={ `${user.profileUrl}/edit` } className="btn btn-sm btn-outline-secondary btn-block">
                   Edit Profile
                 </Link>
               </small>

@@ -1,5 +1,9 @@
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(md) {
   /* Force table to not be like tables anymore */
+  .btn-link {
+    cursor: pointer;
+  }
+
   .flex-table {
     table, thead, tbody, tr, th, td {
       display: block;

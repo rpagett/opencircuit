@@ -13,7 +13,7 @@ export default class UserFeeList extends React.Component {
           endpoint={ this.props.endpoint }
           emptyMessage="You owe no fees."
           columns={{
-            'Unit': fee => { return (<Link to={ fee.unit.detailsLink }>{ fee.unit.name }</Link>) },
+            'Unit': fee => { return (<Link to={ fee.unit.detailsUrl }>{ fee.unit.name }</Link>) },
             'Amount': fee => { return '$'+fee.amount },
             'Due': fee => { return fee.formattedDueDate },
             'Category': fee => { return fee.category.name },

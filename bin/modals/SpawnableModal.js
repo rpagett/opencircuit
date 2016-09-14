@@ -35,6 +35,10 @@ var _FeeModals = require('../models/Fee/FeeModals');
 
 var FeeModals = _interopRequireWildcard(_FeeModals);
 
+var _FlexTableModals = require('../helpers/FlexTable/FlexTableModals');
+
+var FlexTableModals = _interopRequireWildcard(_FlexTableModals);
+
 var _UserModals = require('../models/User/UserModals');
 
 var UserModals = _interopRequireWildcard(_UserModals);
@@ -105,6 +109,12 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
 
         case 'FEE_USER_PAY':
           return _react2.default.createElement(FeeModals.UserPayment, modalProps);
+
+        case 'FEE_PAYMENTS':
+          return _react2.default.createElement(FeeModals.Payments, modalProps);
+
+        case 'FLEXTABLE_CONFIRM_DELETION':
+          return _react2.default.createElement(FlexTableModals.ConfirmDeletion, modalProps);
 
         default:
           return _react2.default.createElement(_LoadingCube2.default, { show: true });
@@ -211,7 +221,6 @@ var _LaunchModalButton = (_temp2 = _class2 = function (_React$Component3) {
 
   return _LaunchModalButton;
 }(_react2.default.Component), _class2.propTypes = {
-  buttonText: _react2.default.PropTypes.string.isRequired,
   buttonProps: _react2.default.PropTypes.object,
 
   title: _react2.default.PropTypes.string.isRequired,

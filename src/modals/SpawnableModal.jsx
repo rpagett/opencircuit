@@ -6,6 +6,7 @@ import Icon from '../helpers/Icon';
 import LoadingCube from '../helpers/LoadingCube';
 import * as ModalActions from './ModalActions';
 import * as FeeModals from '../models/Fee/FeeModals';
+import * as FlexTableModals from '../helpers/FlexTable/FlexTableModals';
 import * as UserModals from '../models/User/UserModals';
 
 class SpawnableModalTransition extends React.Component {
@@ -49,6 +50,12 @@ class _SpawnableModal extends React.Component {
 
       case 'FEE_USER_PAY':
         return <FeeModals.UserPayment { ...modalProps } />
+
+      case 'FEE_PAYMENTS':
+        return <FeeModals.Payments { ...modalProps } />
+
+      case 'FLEXTABLE_CONFIRM_DELETION':
+        return <FlexTableModals.ConfirmDeletion { ...modalProps } />
 
       default:
         return (<LoadingCube show={ true } />)
@@ -121,7 +128,6 @@ export default SpawnableModal;
 
 class _LaunchModalButton extends React.Component {
   static propTypes = {
-    buttonText: React.PropTypes.string.isRequired,
     buttonProps: React.PropTypes.object,
 
     title: React.PropTypes.string.isRequired,

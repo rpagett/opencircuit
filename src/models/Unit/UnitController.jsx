@@ -1,6 +1,8 @@
 import Express from 'express';
 import _ from 'lodash';
 
+import { hasRole } from '../../middleware/authRoute';
+import { userHasRole, UserRoles } from '../User/UserRoles';
 import Unit from './UnitModel';
 import Event from '../Event/EventModel';
 import EventRegistration from '../Pivots/EventRegistrationModel';
@@ -117,6 +119,7 @@ router.route('/:slug')
         })
       })
   })
+
   .patch((req, res) => {
     Unit.findOneAndUpdate({ slug: req.params.slug }, req.body, {
       upsert: true,
@@ -138,6 +141,22 @@ router.route('/:slug')
         error: err.message
       })
     })
+  })
+
+  .delete(hasRole(UserRoles.Administrator), (req, res) => {
+    Unit.findOneAndRemove({ slug: req.params.slug })
+      .exec()
+      .then( () => {
+        res.json({
+          success: true
+        })
+      })
+      .catch( err => {
+        res.json({
+          success: false,
+          error: err.message
+        })
+      })
   })
 
 // Mostly just for the registration flow / event modal

@@ -77,7 +77,7 @@ class _DirectRegistration extends React.Component {
       )
     })
     return (
-      <div>
+      <div className="row form-group">
         <p className="lead">Register a new unit for:</p>
 
         <p></p>
@@ -153,22 +153,40 @@ export class Unit extends React.Component {
             announced at shows through your Spiel Sheet.
           </p>
 
-          <p>
-            This unit is:
-          </p>
+          <div className="row">
+            <div className="col-xs-12 col-sm-4">
+              This unit is:
+            </div>
 
-          <ContentsView subStore="register_unit_types" endpoint="/api/unittypes" component={ _UnitTypes } />
+            <div className="col-xs-12 col-sm-8">
+              <ContentsView subStore="register_unit_types" endpoint="/api/unittypes" component={ _UnitTypes } />
+            </div>
+          </div>
+
+          <hr />
+
           <FormInput name="name" label="Unit Name" />
-          <Radio
-            label="Circuit Member"
-            name="circuit_member"
-            value="true"
-          />
-          <Radio
-            label="Non-Member (pay-per-event)"
-            name="circuit_member"
-            value="false"
-          />
+
+          <p></p>
+
+          <div className="row form-group">
+            <div className="col-xs-12 col-sm-4">Membership</div>
+            <div className="col-xs-12 col-sm-8">
+              <Radio
+                label="Circuit Member"
+                name="circuit_member"
+                value="true"
+              />
+              <Radio
+                label="Non-Member (pay-per-event)"
+                name="circuit_member"
+                value="false"
+              />
+            </div>
+          </div>
+
+          <p></p>
+
           <Checkbox name="plus_pass" label="PLUS Pass Member" inForm={ true } />
 
           <button name="submit" type="submit" className="btn btn-primary btn-block">

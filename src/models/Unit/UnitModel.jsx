@@ -51,7 +51,7 @@ const UnitSchema = Mongoose.Schema({
 
 UnitSchema.plugin(mLifecycle);
 
-UnitSchema.virtual('detailsLink').get(function() {
+UnitSchema.virtual('detailsUrl').get(function() {
   return `/units/${this.slug}`;
 });
 

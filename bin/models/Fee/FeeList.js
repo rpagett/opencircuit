@@ -17,6 +17,10 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 var _reactRouter = require('react-router');
 
+var _Icon = require('../../helpers/Icon');
+
+var _Icon2 = _interopRequireDefault(_Icon);
+
 var _FlexTable = require('../../helpers/FlexTable/FlexTable');
 
 var _FlexTable2 = _interopRequireDefault(_FlexTable);
@@ -56,7 +60,7 @@ var FeeList = function (_React$Component) {
             'Unit': function Unit(fee) {
               return _react2.default.createElement(
                 _reactRouter.Link,
-                { to: fee.unit.detailsLink },
+                { to: fee.unit.detailsUrl },
                 fee.unit.name
               );
             },
@@ -69,8 +73,28 @@ var FeeList = function (_React$Component) {
             'Category': function Category(fee) {
               return fee.category.name;
             },
-            'Amount Paid': function AmountPaid(fee) {
-              return '$' + _lodash2.default.sumBy(fee.payments, 'amount');
+            'Payments': function Payments(fee) {
+              var amountPaid = _lodash2.default.sumBy(fee.payments, 'amount');
+
+              if (!amountPaid) {
+                return '$0';
+              }
+
+              return _react2.default.createElement(
+                'span',
+                null,
+                '$' + amountPaid,
+                _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
+                  className: 'btn-link',
+                  buttonText: _react2.default.createElement(_Icon2.default, { shape: 'info-circle' }),
+
+                  title: 'Payments',
+                  componentName: 'FEE_PAYMENTS',
+                  modalProps: {
+                    payments: fee.payments
+                  }
+                })
+              );
             },
             'Date Paid': function DatePaid(fee) {
               if (fee.paid_date) {

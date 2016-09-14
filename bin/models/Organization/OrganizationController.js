@@ -35,6 +35,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 // All routes are '/api/organizations/...'
 
+_OrganizationModel2.default.on('afterRemove', function (org) {
+  _UnitModel2.default.findAndRemove({ organization: org._id }).exec();
+});
+
 router.route('/').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
   var contents = [];
   var ids = [];

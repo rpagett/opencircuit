@@ -14,6 +14,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _authRoute = require('../../middleware/authRoute');
+
+var _UserRoles = require('../User/UserRoles');
+
 var _UnitModel = require('./UnitModel');
 
 var _UnitModel2 = _interopRequireDefault(_UnitModel);
@@ -133,6 +137,17 @@ router.route('/:slug').get(function (req, res) {
     });
   }).catch(function (err) {
     res.send({
+      success: false,
+      error: err.message
+    });
+  });
+}).delete((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
+  _UnitModel2.default.findOneAndRemove({ slug: req.params.slug }).exec().then(function () {
+    res.json({
+      success: true
+    });
+  }).catch(function (err) {
+    res.json({
       success: false,
       error: err.message
     });

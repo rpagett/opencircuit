@@ -25,7 +25,8 @@ export function organization(data = { }) {
 export function unit(data = { }) {
   const rules = {
     'unit_type': 'required',
-    'name': 'required'
+    'name': 'required',
+    'is_member': 'required'
   };
 
   const messages = {

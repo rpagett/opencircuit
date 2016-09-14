@@ -19,6 +19,8 @@ var _FlexTable2 = _interopRequireDefault(_FlexTable);
 
 var _ModalActions = require('../../modals/ModalActions');
 
+var _UserRoles = require('./UserRoles');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42,6 +44,24 @@ var UserList = function (_React$Component) {
       dispatch((0, _ModalActions.launch)(this.formattedName + '\'s Roles', 'USER_ROLES', {
         email: this.email
       }));
+    }
+  }, {
+    key: 'canEdit',
+    value: function canEdit(modelUser, authUser) {
+      if (authUser._id == modelUser._id || (0, _UserRoles.userHasRole)(authUser, _UserRoles.UserRoles.Administrator)) {
+        return modelUser.profileUrl + '/edit';
+      }
+
+      return null;
+    }
+  }, {
+    key: 'canDelete',
+    value: function canDelete(modelUser, authUser) {
+      if (authUser._id.toString() == '5768b81d855f632839aacd3b') {
+        return '/api' + modelUser.profileUrl;
+      }
+
+      return null;
     }
   }, {
     key: 'render',
@@ -80,6 +100,11 @@ var UserList = function (_React$Component) {
                 'Manage...'
               );
             }
+          },
+          canEdit: this.canEdit,
+          canDelete: this.canDelete,
+          deriveName: function deriveName(user) {
+            return user.formattedName;
           }
         })
       );
