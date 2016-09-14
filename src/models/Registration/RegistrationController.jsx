@@ -85,6 +85,7 @@ router.route('/organization/:org')
   })
 
   .post((req, res) => {
+    console.log(req.body);
     Validate.unit(req.body)
       .then(data => {
         let unit = new Unit(data);

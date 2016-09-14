@@ -146,6 +146,10 @@ router.post('/recover/:token', (req, res) => {
           throw new Error(err);
         }
 
+        if (!user.apiToken) {
+          user.apiToken = uuid.v4();
+        }
+
         //user.recovery_token = null;
         user.save()
           .then(user => {

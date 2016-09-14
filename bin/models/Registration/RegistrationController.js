@@ -100,6 +100,7 @@ router.route('/organization/:org').get(function (req, res) {
     });
   });
 }).post(function (req, res) {
+  console.log(req.body);
   Validate.unit(req.body).then(function (data) {
     var unit = new _UnitModel2.default(data);
 

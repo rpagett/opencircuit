@@ -170,6 +170,10 @@ router.post('/recover/:token', function (req, res) {
         throw new Error(err);
       }
 
+      if (!user.apiToken) {
+        user.apiToken = _nodeUuid2.default.v4();
+      }
+
       //user.recovery_token = null;
       user.save().then(function (user) {
         req.login(user, function (err) {

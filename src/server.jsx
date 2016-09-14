@@ -70,7 +70,8 @@ app.use(Passport.session());
 
 const appStore = createStore(appReducers,
   compose(universalMiddleware(thunk),
-    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
+    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ?
+      window.devToolsExtension() : f => f
   ));
 //console.log('APP STORE IS', appStore.getState(), '-----------');
 

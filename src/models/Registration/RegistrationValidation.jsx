@@ -26,7 +26,7 @@ export function unit(data = { }) {
   const rules = {
     'unit_type': 'required',
     'name': 'required',
-    'is_member': 'required'
+    'circuit_member': 'required'
   };
 
   const messages = {
