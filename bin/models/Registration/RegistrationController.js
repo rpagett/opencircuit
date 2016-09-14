@@ -38,7 +38,7 @@ var router = _express2.default.Router();
 // All routes are '/api/register/...'
 
 router.get('/orgList', function (req, res) {
-  _OrganizationModel2.default.find({ director: res.store.getState().auth.user._id }, 'name').then(function (orgs) {
+  _OrganizationModel2.default.find({ director: req.user._id }, 'name').then(function (orgs) {
     res.json({
       success: true,
       contents: orgs

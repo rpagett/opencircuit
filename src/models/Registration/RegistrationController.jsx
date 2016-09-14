@@ -13,7 +13,7 @@ let router = Express.Router();
 // All routes are '/api/register/...'
 
 router.get('/orgList', (req, res) => {
-  Organization.find({ director: res.store.getState().auth.user._id }, 'name')
+  Organization.find({ director: req.user._id }, 'name')
     .then(orgs => {
       res.json({
         success: true,
