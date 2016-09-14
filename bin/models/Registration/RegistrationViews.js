@@ -113,7 +113,7 @@ var _DirectRegistration = function (_React$Component2) {
   _createClass(_DirectRegistration, [{
     key: 'render',
     value: function render() {
-      if (!this.props.contents) {
+      if (!this.props.contents.length) {
         return _react2.default.createElement(_Organization, this.props);
       }
 
