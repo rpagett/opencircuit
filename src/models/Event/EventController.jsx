@@ -50,6 +50,22 @@ router.route('/')
           errors
         })
       })
+  })
+
+  .delete(hasRole(UserRoles.Administrator), (req, res) => {
+    Unit.findOneAndRemove({ slug: req.params.slug })
+      .exec()
+      .then( () => {
+        res.json({
+          success: true
+        })
+      })
+      .catch( err => {
+        res.json({
+          success: false,
+          error: err.message
+        })
+      })
   });
 
 router.route('/:slug')
@@ -98,6 +114,22 @@ router.route('/:slug')
         })
       })
   })
+
+  .delete(hasRole(UserRoles.Administrator), (req, res) => {
+    Unit.findOneAndRemove({ slug: req.params.slug })
+      .exec()
+      .then( () => {
+        res.json({
+          success: true
+        })
+      })
+      .catch( err => {
+        res.json({
+          success: false,
+          error: err.message
+        })
+      })
+  });
 
 // :type is a UnitType _id
 router.get('/by_type/:type', (req, res) => {

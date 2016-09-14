@@ -1,9 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import { userHasRole, UserRoles } from '../User/UserRoles';
 import FlexTable from '../../helpers/FlexTable/FlexTable'
 
 export default class EventList extends React.Component {
+  canEdit(event, user) {
+    if (userHasRole(user, UserRoles.EventDirector)) {
+      return event.detailsUrl + '/edit'
+    }
+
+    return null;
+  }
+
+  canDelete(event, user) {
+    if (userHasRole(user, UserRoles.Administrator)) {
+      return '/api' + event.detailsUrl;
+    }
+
+    return null;
+  }
+
   render() {
     return (
       <div>
@@ -16,6 +33,9 @@ export default class EventList extends React.Component {
             'Date': event => { return event.formattedDate },
             'Cap': event => { return event.attendance_cap },
           }}
+          deriveName={ event => event.name }
+          canEdit={ this.canEdit }
+          canDelete={ this.canDelete }
         />
       </div>
     );

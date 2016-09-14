@@ -13,6 +13,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
+var _UserRoles = require('../User/UserRoles');
+
 var _FlexTable = require('../../helpers/FlexTable/FlexTable');
 
 var _FlexTable2 = _interopRequireDefault(_FlexTable);
@@ -35,6 +37,24 @@ var EventList = function (_React$Component) {
   }
 
   _createClass(EventList, [{
+    key: 'canEdit',
+    value: function canEdit(event, user) {
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.EventDirector)) {
+        return event.detailsUrl + '/edit';
+      }
+
+      return null;
+    }
+  }, {
+    key: 'canDelete',
+    value: function canDelete(event, user) {
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator)) {
+        return '/api' + event.detailsUrl;
+      }
+
+      return null;
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -58,7 +78,12 @@ var EventList = function (_React$Component) {
             'Cap': function Cap(event) {
               return event.attendance_cap;
             }
-          }
+          },
+          deriveName: function deriveName(event) {
+            return event.name;
+          },
+          canEdit: this.canEdit,
+          canDelete: this.canDelete
         })
       );
     }

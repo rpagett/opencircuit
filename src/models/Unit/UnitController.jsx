@@ -10,6 +10,11 @@ import EventRegistration from '../Pivots/EventRegistrationModel';
 let router = Express.Router();
 // All routes are /api/units/
 
+Unit.on('afterRemove', unit => {
+  EventRegistration.remove({ unit: unit._id })
+    .exec();
+})
+
 function updateEvents(id, events) {
   let inEvents = [ ];
 
@@ -157,7 +162,7 @@ router.route('/:slug')
           error: err.message
         })
       })
-  })
+  });
 
 // Mostly just for the registration flow / event modal
 router.route('/:id/events')
