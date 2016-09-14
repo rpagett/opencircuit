@@ -61,7 +61,23 @@ var Index = exports.Index = function (_React$Component) {
           { className: 'page-header' },
           'Events'
         ),
-        _react2.default.createElement(_EventList2.default, { endpoint: '/api/events' })
+        _react2.default.createElement(_EventList2.default, { endpoint: '/api/events' }),
+        _react2.default.createElement('p', null),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement('p', null),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-12 offset-sm-1 col-sm-10' },
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/events/new', className: 'btn btn-block btn-success-outline btn-sm' },
+              'Create an Event'
+            )
+          )
+        )
       );
     }
   }]);

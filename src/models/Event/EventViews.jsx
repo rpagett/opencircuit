@@ -15,6 +15,20 @@ export class Index extends React.Component {
         <h1 className="page-header">Events</h1>
 
         <EventList endpoint="/api/events" />
+
+        <p></p>
+
+        <hr />
+
+        <p></p>
+
+        <div className="row">
+          <div className="col-xs-12 offset-sm-1 col-sm-10">
+            <Link to="/events/new" className="btn btn-block btn-success-outline btn-sm">
+              Create an Event
+            </Link>
+          </div>
+        </div>
       </div>
     )
   }
