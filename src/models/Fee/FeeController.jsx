@@ -41,7 +41,7 @@ function assessFee(unit_id, amount, category, notes = '', due_date = Fee.DUE_DAT
 
       category_obj = feecat;
 
-      return Fee.count({category: feecat_.id, unit: unit_id})
+      return Fee.count({category: feecat._id, unit: unit_id})
     })
     .then(count => {
       if (category == 'member-fee' && count) {

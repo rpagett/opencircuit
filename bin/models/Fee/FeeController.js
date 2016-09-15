@@ -81,7 +81,7 @@ function assessFee(unit_id, amount, category) {
 
     category_obj = feecat;
 
-    return _FeeModel2.default.count({ category: feecat_.id, unit: unit_id });
+    return _FeeModel2.default.count({ category: feecat._id, unit: unit_id });
   }).then(function (count) {
     if (category == 'member-fee' && count) {
       throw new Error('Fee has already been assessed for this unit.');
