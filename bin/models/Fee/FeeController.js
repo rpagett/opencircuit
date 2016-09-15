@@ -119,7 +119,7 @@ _UnitModel2.default.on('afterInsert', function (newUnit) {
   }
 });
 
-_UnitModel2.default.on('afterRemove', function (unit) {
+_UnitModel2.default.on('beforeRemove', function (unit) {
   _FeeModel2.default.remove({ unit: unit._id }).exec();
 });
 

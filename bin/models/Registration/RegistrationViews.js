@@ -136,7 +136,7 @@ var _DirectRegistration = function (_React$Component2) {
       });
       return _react2.default.createElement(
         'div',
-        { className: 'row form-group' },
+        null,
         _react2.default.createElement(
           'p',
           { className: 'lead' },

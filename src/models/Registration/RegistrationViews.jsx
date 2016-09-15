@@ -77,7 +77,7 @@ class _DirectRegistration extends React.Component {
       )
     })
     return (
-      <div className="row form-group">
+      <div>
         <p className="lead">Register a new unit for:</p>
 
         <p></p>

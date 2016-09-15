@@ -84,7 +84,7 @@ Unit.on('afterInsert', newUnit => {
   }
 });
 
-Unit.on('afterRemove', unit => {
+Unit.on('beforeRemove', unit => {
   Fee.remove({ unit: unit._id })
     .exec()
 })
