@@ -107,6 +107,17 @@ router.route('/:slug').get(function (req, res) {
       });
     });
   });
+}).delete((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
+  Event.findOneAndRemove({ slug: req.params.slug }).exec().then(function () {
+    res.json({
+      success: true
+    });
+  }).catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
+    });
+  });
 });
 
 router.route('/:slug/units').get(function (req, res) {

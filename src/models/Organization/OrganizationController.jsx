@@ -104,6 +104,22 @@ router.route('/:slug')
           })
       });
   })
+  
+  .delete(hasRole(UserRoles.Administrator), (req, res) => {
+    Event.findOneAndRemove({ slug: req.params.slug })
+      .exec()
+      .then( () => {
+        res.json({
+          success: true
+        })
+      })
+      .catch( err => {
+        res.json({
+          success: false,
+          error: err.message
+        })
+      })
+  });
 
 router.route('/:slug/units')
   .get((req, res) => {

@@ -197,7 +197,7 @@ router.route('/:slug').get(function (req, res) {
     });
   });
 }).delete((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
-  _UnitModel2.default.findOneAndRemove({ slug: req.params.slug }).exec().then(function () {
+  _EventModel2.default.findOneAndRemove({ slug: req.params.slug }).exec().then(function () {
     res.json({
       success: true
     });
