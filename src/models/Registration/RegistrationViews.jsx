@@ -159,7 +159,11 @@ export class Unit extends React.Component {
             </div>
 
             <div className="col-xs-12 col-sm-8">
-              <ContentsView subStore="register_unit_types" endpoint="/api/unittypes" component={ _UnitTypes } />
+              <ContentsView
+                subStore="register_unit_types"
+                endpoint="/api/unittypes"
+                component={ _UnitTypes }
+              />
             </div>
           </div>
 
@@ -183,6 +187,15 @@ export class Unit extends React.Component {
                 value="false"
               />
             </div>
+          </div>
+
+          <p></p>
+
+          <div className="col-xs-12 alert alert-info">
+            Organizations have the option to purchase a PLUS Pass (additional five wristbands for staff and
+            chaperones) for $100.00. Only one PLUS Pass may be purchased per Organization (not per unit). No
+            more than twenty-five total chaperone/staff wristbands will be issued per Organization,
+            regardless of number of teams and/or PLUS Pass purchase.
           </div>
 
           <p></p>
@@ -234,6 +247,16 @@ export class Details extends React.Component {
             endpoint={ `/api/register/unit/${this.props.params.unit}` }
             component={ _ClassBox }
           />
+
+          <p></p>
+
+          <div className="col-xs-12 alert alert-info">
+            Your member count tells event coordinators how many performer wristbands your unit will need. You
+            are free to update this number at any time.
+          </div>
+
+          <p></p>
+
           <FormInput name="members" label="Member Count" />
 
           <button name="submit" type="submit" className="btn btn-primary btn-block">
@@ -305,7 +328,7 @@ class _Confirmation extends React.Component {
               <p className="card-text">
                 I represent an additional organization or school.
               </p>
-              <Link to="/register" className="btn btn-block btn-warning">
+              <Link to="/register/new" className="btn btn-block btn-warning">
                 Register Another Organization
               </Link>
             </div>

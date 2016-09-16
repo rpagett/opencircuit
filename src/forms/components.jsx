@@ -243,8 +243,8 @@ export class ClassSelect extends React.Component {
           className="form-control"
           clearable={ false }
           loadOptions={ this.fetchList.bind(this) }
+          //filterOption={ function() { return true; } }
           autosize={ false }
-          searchable={ false }
         />
       </InputWrapper>
     );
@@ -378,7 +378,6 @@ export class UserSelect extends React.Component {
           className="form-control"
           clearable={ false }
           loadOptions={ this.fetchList.bind(this) }
-          filterOption={ () => { return true } }
           autosize={ false }
         />
       </InputWrapper>

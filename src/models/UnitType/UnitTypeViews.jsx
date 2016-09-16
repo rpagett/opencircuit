@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import ContentsView from '../../helpers/ContentsView/ContentsView';
+import ModelView from '../../helpers/ModelView/ModelView';
 import * as UnitTypeForms from './UnitTypeForms';
 import UnitList from '../Unit/UnitList';
 import UnitTypeList from './UnitTypeList';
@@ -58,7 +58,7 @@ export class Edit extends React.Component {
 
 class _Show extends React.Component {
   render() {
-    const type = this.props.contents;
+    const type = this.props.model;
 
     return (
       <div>
@@ -73,7 +73,7 @@ class _Show extends React.Component {
 export class Show extends React.Component {
   render() {
     return (
-      <ContentsView
+      <ModelView
         subStore="unittype_show"
         endpoint={ `/api/unittypes/${this.props.params.slug}` }
         component={ _Show }

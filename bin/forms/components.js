@@ -401,9 +401,9 @@ var ClassSelect = exports.ClassSelect = (_temp2 = _class2 = function (_React$Com
         _react2.default.createElement(_reactSelect2.default.Async, {
           className: 'form-control',
           clearable: false,
-          loadOptions: this.fetchList.bind(this),
-          autosize: false,
-          searchable: false
+          loadOptions: this.fetchList.bind(this)
+          //filterOption={ function() { return true; } }
+          , autosize: false
         })
       );
     }
@@ -602,9 +602,6 @@ var UserSelect = exports.UserSelect = function (_React$Component13) {
           className: 'form-control',
           clearable: false,
           loadOptions: this.fetchList.bind(this),
-          filterOption: function filterOption() {
-            return true;
-          },
           autosize: false
         })
       );

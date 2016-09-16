@@ -151,6 +151,22 @@ router.route('/:abbreviation')
       })
   })
 
+  .delete(hasRole(UserRoles.Administrator), (req, res) => {
+    CompClass.findOneAndRemove({ abbreviation: req.params.abbreviation })
+      .exec()
+      .then( () => {
+        res.json({
+          success: true
+        })
+      })
+      .catch( err => {
+        res.json({
+          success: false,
+          error: err.message
+        })
+      })
+  });
+
 router.route('/:id/units')
   .get((req, res) => {
     Unit.find({ registered: true, competition_class: req.params.id }, '_id name slug organization unit_type competition_class director')

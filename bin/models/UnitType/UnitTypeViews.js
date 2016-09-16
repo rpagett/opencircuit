@@ -13,9 +13,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
-var _ContentsView = require('../../helpers/ContentsView/ContentsView');
+var _ModelView = require('../../helpers/ModelView/ModelView');
 
-var _ContentsView2 = _interopRequireDefault(_ContentsView);
+var _ModelView2 = _interopRequireDefault(_ModelView);
 
 var _UnitTypeForms = require('./UnitTypeForms');
 
@@ -164,7 +164,7 @@ var _Show = function (_React$Component4) {
   _createClass(_Show, [{
     key: 'render',
     value: function render() {
-      var type = this.props.contents;
+      var type = this.props.model;
 
       return _react2.default.createElement(
         'div',
@@ -195,7 +195,7 @@ var Show = exports.Show = function (_React$Component5) {
   _createClass(Show, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_ContentsView2.default, {
+      return _react2.default.createElement(_ModelView2.default, {
         subStore: 'unittype_show',
         endpoint: '/api/unittypes/' + this.props.params.slug,
         component: _Show

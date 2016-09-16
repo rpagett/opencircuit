@@ -140,12 +140,7 @@ var _Home = function (_React$Component2) {
         }),
         _react2.default.createElement(
           'div',
-          { className: 'alert alert-warning', role: 'alert' },
-          'Event registration will open Friday, September 16th at 12pm.'
-        ),
-        _react2.default.createElement(
-          _UserRoles.HasRole,
-          { role: _UserRoles.UserRoles.FormsManager, className: 'row' },
+          { className: 'row' },
           _react2.default.createElement(
             'div',
             { className: 'col-xs-12 offset-sm-1 col-sm-10' },

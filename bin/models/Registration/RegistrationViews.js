@@ -266,7 +266,11 @@ var Unit = exports.Unit = function (_React$Component5) {
             _react2.default.createElement(
               'div',
               { className: 'col-xs-12 col-sm-8' },
-              _react2.default.createElement(_ContentsView2.default, { subStore: 'register_unit_types', endpoint: '/api/unittypes', component: _UnitTypes })
+              _react2.default.createElement(_ContentsView2.default, {
+                subStore: 'register_unit_types',
+                endpoint: '/api/unittypes',
+                component: _UnitTypes
+              })
             )
           ),
           _react2.default.createElement('hr', null),
@@ -294,6 +298,12 @@ var Unit = exports.Unit = function (_React$Component5) {
                 value: 'false'
               })
             )
+          ),
+          _react2.default.createElement('p', null),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-12 alert alert-info' },
+            'Organizations have the option to purchase a PLUS Pass (additional five wristbands for staff and chaperones) for $100.00. Only one PLUS Pass may be purchased per Organization (not per unit). No more than twenty-five total chaperone/staff wristbands will be issued per Organization, regardless of number of teams and/or PLUS Pass purchase.'
           ),
           _react2.default.createElement('p', null),
           _react2.default.createElement(_components.Checkbox, { name: 'plus_pass', label: 'PLUS Pass Member', inForm: true }),
@@ -371,6 +381,13 @@ var Details = exports.Details = function (_React$Component7) {
             endpoint: '/api/register/unit/' + this.props.params.unit,
             component: _ClassBox
           }),
+          _react2.default.createElement('p', null),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-12 alert alert-info' },
+            'Your member count tells event coordinators how many performer wristbands your unit will need. You are free to update this number at any time.'
+          ),
+          _react2.default.createElement('p', null),
           _react2.default.createElement(_components.FormInput, { name: 'members', label: 'Member Count' }),
           _react2.default.createElement(
             'button',
@@ -498,7 +515,7 @@ var _Confirmation = function (_React$Component10) {
             ),
             _react2.default.createElement(
               _reactRouter.Link,
-              { to: '/register', className: 'btn btn-block btn-warning' },
+              { to: '/register/new', className: 'btn btn-block btn-warning' },
               'Register Another Organization'
             )
           )

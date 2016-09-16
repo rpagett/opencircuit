@@ -250,6 +250,16 @@ router.post('/userPay', function (req, res) {
       });
 
       feeTotal += fee.amountRemaining;
+
+      feeItems.push({
+        "name": fee.unit.name,
+        "description": "Paypal Processing Fee",
+        "price": "10",
+        "currency": "USD",
+        "quantity": "1"
+      });
+
+      feeTotal += 10;
     });
 
     console.log('Paypal mode is ', process.env.PAYPAL_MODE);

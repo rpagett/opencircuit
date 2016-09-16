@@ -153,20 +153,6 @@ class _Show extends React.Component {
             </div>
           </div> : null) }
 
-        { (event.unpaidUnits.length ?
-          <div>
-            <div className="row">
-              <div className="card col-xs-12">
-                <div className="card-header card-danger">
-                  Units Awaiting Payment
-                </div>
-                <div className="card-block">
-                  <UnitsInEventList name="event_unpaid_units" contents={ event.unpaidUnits } />
-                </div>
-              </div>
-            </div>
-          </div> : null) }
-
         { (event.waitlistUnits.length ?
           <div>
             <div className="row">
@@ -176,6 +162,20 @@ class _Show extends React.Component {
                 </div>
                 <div className="card-block">
                   <UnitsInEventList name="event_waitlist_units" contents={ event.waitlistUnits } />
+                </div>
+              </div>
+            </div>
+          </div> : null) }
+
+        { (event.unpaidUnits.length ?
+          <div>
+            <div className="row">
+              <div className="card col-xs-12">
+                <div className="card-header card-danger">
+                  Units Awaiting Payment
+                </div>
+                <div className="card-block">
+                  <UnitsInEventList name="event_unpaid_units" contents={ event.unpaidUnits } />
                 </div>
               </div>
             </div>

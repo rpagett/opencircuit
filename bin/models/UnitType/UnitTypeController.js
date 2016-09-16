@@ -128,7 +128,7 @@ router.route('/:slug').get(function (req, res) {
 
     res.json({
       success: true,
-      contents: type
+      model: type
     });
   }).catch(function (err) {
     res.json({
@@ -153,6 +153,17 @@ router.route('/:slug').get(function (req, res) {
     res.json({
       success: false,
       errors: errors
+    });
+  });
+}).delete((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
+  _UnitTypeModel2.default.findOneAndRemove({ slug: req.params.slug }).exec().then(function () {
+    res.json({
+      success: true
+    });
+  }).catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
     });
   });
 });

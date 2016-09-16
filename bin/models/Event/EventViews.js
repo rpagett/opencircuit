@@ -365,28 +365,6 @@ var _Show = (_temp = _class = function (_React$Component4) {
             )
           )
         ) : null,
-        event.unpaidUnits.length ? _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(
-            'div',
-            { className: 'row' },
-            _react2.default.createElement(
-              'div',
-              { className: 'card col-xs-12' },
-              _react2.default.createElement(
-                'div',
-                { className: 'card-header card-danger' },
-                'Units Awaiting Payment'
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'card-block' },
-                _react2.default.createElement(_UnitsInEventList2.default, { name: 'event_unpaid_units', contents: event.unpaidUnits })
-              )
-            )
-          )
-        ) : null,
         event.waitlistUnits.length ? _react2.default.createElement(
           'div',
           null,
@@ -405,6 +383,28 @@ var _Show = (_temp = _class = function (_React$Component4) {
                 'div',
                 { className: 'card-block' },
                 _react2.default.createElement(_UnitsInEventList2.default, { name: 'event_waitlist_units', contents: event.waitlistUnits })
+              )
+            )
+          )
+        ) : null,
+        event.unpaidUnits.length ? _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card col-xs-12' },
+              _react2.default.createElement(
+                'div',
+                { className: 'card-header card-danger' },
+                'Units Awaiting Payment'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'card-block' },
+                _react2.default.createElement(_UnitsInEventList2.default, { name: 'event_unpaid_units', contents: event.unpaidUnits })
               )
             )
           )

@@ -17,6 +17,8 @@ var _FlexTable = require('../../helpers/FlexTable/FlexTable');
 
 var _FlexTable2 = _interopRequireDefault(_FlexTable);
 
+var _UserRoles = require('../User/UserRoles');
+
 var _ModalActions = require('../../modals/ModalActions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -37,6 +39,24 @@ var CompClassList = function (_React$Component) {
   }
 
   _createClass(CompClassList, [{
+    key: 'canEdit',
+    value: function canEdit(compclass, user) {
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator)) {
+        return compclass.detailsUrl + '/edit';
+      }
+
+      return null;
+    }
+  }, {
+    key: 'canDelete',
+    value: function canDelete(compclass, user) {
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator) && compclass.unitCount == 0) {
+        return '/api' + compclass.detailsUrl;
+      }
+
+      return null;
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -63,7 +83,12 @@ var CompClassList = function (_React$Component) {
             'Unit Count': function UnitCount(compclass) {
               return compclass.unitCount;
             }
-          }
+          },
+          deriveName: function deriveName(compclass) {
+            return compclass.formattedName;
+          },
+          canEdit: this.canEdit,
+          canDelete: this.canDelete
         })
       );
     }

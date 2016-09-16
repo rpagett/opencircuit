@@ -142,6 +142,17 @@ router.route('/:abbreviation').get(function (req, res) {
       errors: errors
     });
   });
+}).delete((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
+  _CompClassModel2.default.findOneAndRemove({ abbreviation: req.params.abbreviation }).exec().then(function () {
+    res.json({
+      success: true
+    });
+  }).catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
+    });
+  });
 });
 
 router.route('/:id/units').get(function (req, res) {

@@ -211,7 +211,7 @@ router.get('/:slug/eventChecks', (req, res) => {
     .then(registrations => {
       storeRegistrations = registrations;
 
-      return Event.find({ types_allowed: type }, '_id name slug date')
+      return Event.find({ /*types_allowed: type*/ }, '_id name slug date')
     })
     .then(events => {
       let outEvents = [ ];

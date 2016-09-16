@@ -124,7 +124,7 @@ router.route('/:slug')
 
         res.json({
           success: true,
-          contents: type
+          model: type
         })
       })
       .catch(err => {
@@ -159,6 +159,22 @@ router.route('/:slug')
         })
       })
   })
+
+  .delete(hasRole(UserRoles.Administrator), (req, res) => {
+    UnitType.findOneAndRemove({ slug: req.params.slug })
+      .exec()
+      .then( () => {
+        res.json({
+          success: true
+        })
+      })
+      .catch( err => {
+        res.json({
+          success: false,
+          error: err.message
+        })
+      })
+  });
 
 router.route('/:slug/units')
   .get((req, res) => {
