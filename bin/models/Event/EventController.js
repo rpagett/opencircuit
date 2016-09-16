@@ -142,25 +142,27 @@ router.route('/:slug').get(function (req, res) {
         unpaidUnits = [],
         waitlistUnits = [];
 
-    unpaidUnits = _lodash2.default.filter(registrations, function (reg) {
-      return reg.unit.confirmed_paid_date == null;
-    });
-    console.log('Unpaid units', unpaidUnits);
+    if (registrations) {
+      unpaidUnits = _lodash2.default.filter(registrations, function (reg) {
+        return reg.unit.confirmed_paid_date == null;
+      });
+      console.log('Unpaid units', unpaidUnits);
 
-    confirmedUnits = _lodash2.default.filter(registrations, function (reg) {
-      return reg.unit.confirmed_paid_date != null;
-    });
-
-    if (registrations.length >= event.attendance_cap) {
-      var unitList = _lodash2.default.sortBy(confirmedUnits, function (reg) {
-        return reg.unit.confirmed_paid_date;
+      confirmedUnits = _lodash2.default.filter(registrations, function (reg) {
+        return reg.unit.confirmed_paid_date != null;
       });
 
-      confirmedUnits = _lodash2.default.slice(unitList, 0, event.attendance_cap);
-      waitlistUnits = _lodash2.default.slice(unitList, event.attendance_cap);
-    }
+      if (registrations.length >= event.attendance_cap) {
+        var unitList = _lodash2.default.sortBy(confirmedUnits, function (reg) {
+          return reg.unit.confirmed_paid_date;
+        });
 
-    confirmedUnits = _lodash2.default.sortBy(confirmedUnits, ['unit.unit_type', 'competition_class.abbreviation']);
+        confirmedUnits = _lodash2.default.slice(unitList, 0, event.attendance_cap);
+        waitlistUnits = _lodash2.default.slice(unitList, event.attendance_cap);
+      }
+
+      confirmedUnits = _lodash2.default.sortBy(confirmedUnits, ['unit.unit_type', 'competition_class.abbreviation']);
+    }
 
     res.json({
       success: true,

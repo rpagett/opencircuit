@@ -245,7 +245,6 @@ router.get('/:slug/eventChecks', (req, res) => {
 
 router.get('/:slug/attending', (req, res) => {
   let contents = [ ];
-  let unpaidFees = false;
   let unit = { };
   let inEvents = [ ];
   let allRegistrations = [ ];
@@ -254,14 +253,6 @@ router.get('/:slug/attending', (req, res) => {
     .then(inUnit => {
       unit = inUnit;
       console.log('unit is', unit);
-
-      return Fee.count({unit: unit._id, paid_date: null})
-    })
-    .then(fees => {
-      console.log('fees', fees);
-      if (fees) {
-        unpaidFees = true;
-      }
 
       return EventRegistration.find({ unit: {$ne: null} })
         .populate('unit', '_id confirmed_paid_date director')
@@ -289,7 +280,7 @@ router.get('/:slug/attending', (req, res) => {
 
         console.log('obj at unitkey', unitKey, unitList[unitKey]);
 
-        if (!unpaidFees) {
+        if (unit.confirmed_paid_date) {
           if (unitList.length >= event.attendance_cap) {
             unitList = _.sortBy(unitList, u => u.confirmed_paid_date);
             unitKey = _.findKey(unitList, u => u.id == unit.id)

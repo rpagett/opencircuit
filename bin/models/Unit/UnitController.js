@@ -230,7 +230,6 @@ router.get('/:slug/eventChecks', function (req, res) {
 
 router.get('/:slug/attending', function (req, res) {
   var contents = [];
-  var unpaidFees = false;
   var unit = {};
   var inEvents = [];
   var allRegistrations = [];
@@ -238,13 +237,6 @@ router.get('/:slug/attending', function (req, res) {
   _UnitModel2.default.findOne({ slug: req.params.slug }, '_id').then(function (inUnit) {
     unit = inUnit;
     console.log('unit is', unit);
-
-    return _FeeModel2.default.count({ unit: unit._id, paid_date: null });
-  }).then(function (fees) {
-    console.log('fees', fees);
-    if (fees) {
-      unpaidFees = true;
-    }
 
     return _EventRegistrationModel2.default.find({ unit: { $ne: null } }).populate('unit', '_id confirmed_paid_date director').populate('competition_class', 'name abbreviation').exec();
   }).then(function (registrations) {
@@ -273,7 +265,7 @@ router.get('/:slug/attending', function (req, res) {
 
       console.log('obj at unitkey', unitKey, unitList[unitKey]);
 
-      if (!unpaidFees) {
+      if (unit.confirmed_paid_date) {
         if (unitList.length >= event.attendance_cap) {
           unitList = _lodash2.default.sortBy(unitList, function (u) {
             return u.confirmed_paid_date;

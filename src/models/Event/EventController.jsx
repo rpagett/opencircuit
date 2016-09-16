@@ -136,25 +136,27 @@ router.route('/:slug')
       .then(registrations => {
         let confirmedUnits = [], unpaidUnits = [], waitlistUnits = [];
 
-        unpaidUnits = _.filter(registrations, reg => {
-          return reg.unit.confirmed_paid_date == null;
-        });
-        console.log('Unpaid units', unpaidUnits);
+        if (registrations) {
+          unpaidUnits = _.filter(registrations, reg => {
+            return reg.unit.confirmed_paid_date == null;
+          });
+          console.log('Unpaid units', unpaidUnits);
 
-        confirmedUnits = _.filter(registrations, reg => {
-          return reg.unit.confirmed_paid_date != null;
-        })
-
-        if (registrations.length >= event.attendance_cap) {
-          const unitList = _.sortBy(confirmedUnits, reg => {
-            return reg.unit.confirmed_paid_date;
+          confirmedUnits = _.filter(registrations, reg => {
+            return reg.unit.confirmed_paid_date != null;
           })
 
-          confirmedUnits = _.slice(unitList, 0, event.attendance_cap);
-          waitlistUnits = _.slice(unitList, event.attendance_cap);
-        }
+          if (registrations.length >= event.attendance_cap) {
+            const unitList = _.sortBy(confirmedUnits, reg => {
+              return reg.unit.confirmed_paid_date;
+            })
 
-        confirmedUnits = _.sortBy(confirmedUnits, ['unit.unit_type', 'competition_class.abbreviation'])
+            confirmedUnits = _.slice(unitList, 0, event.attendance_cap);
+            waitlistUnits = _.slice(unitList, event.attendance_cap);
+          }
+
+          confirmedUnits = _.sortBy(confirmedUnits, ['unit.unit_type', 'competition_class.abbreviation'])
+        }
 
         res.json({
           success: true,
