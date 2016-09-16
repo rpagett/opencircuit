@@ -6,6 +6,7 @@ import { Prop, Val } from '../../layout/ModelInfo';
 import { UserRoles, HasRole } from '../User/UserRoles';
 
 import EventList from './EventList';
+import UnitsInEventList from '../Unit/UnitsInEventList';
 import * as EventForms from './EventForms';
 
 export class Index extends React.Component {
@@ -128,20 +129,68 @@ class _Show extends React.Component {
         </div>
 
         <HasRole role={ UserRoles.EventDirector }>
+          <div className="row">
+            <Prop>Notes</Prop>
+            <Val>{ event.notes }</Val>
+          </div>
+        </HasRole>
+
+        { (event.confirmedUnits ?
           <div>
             <div className="row">
-              <Prop>Notes</Prop>
-              <Val>{ event.notes }</Val>
+              <hr />
             </div>
 
-            <hr />
-
             <div className="row">
-              <div className="pull-xs-center col-xs-12 offset-sm-4 col-sm-4">
-                <Link to={ `/events/${event.slug}/edit` } className="btn btn-sm btn-outline-secondary btn-block">
-                  Edit Event
-                </Link>
+              <div className="card col-xs-12">
+                <div className="card-header card-success">
+                  Confirmed Units
+                </div>
+                <div className="card-block">
+                  <UnitsInEventList name="event_confirmed_units" contents={ event.confirmedUnits } />
+                </div>
               </div>
+            </div>
+          </div> : null) }
+
+        { (event.unpaidUnits.length ?
+          <div>
+            <div className="row">
+              <div className="card col-xs-12">
+                <div className="card-header card-danger">
+                  Units Awaiting Payment
+                </div>
+                <div className="card-block">
+                  <UnitsInEventList name="event_unpaid_units" contents={ event.unpaidUnits } />
+                </div>
+              </div>
+            </div>
+          </div> : null) }
+
+        { (event.waitlistUnits.length ?
+          <div>
+            <div className="row">
+              <div className="card col-xs-12">
+                <div className="card-header card-warning">
+                  Units on Waitlist
+                </div>
+                <div className="card-block">
+                  <UnitsInEventList name="event_waitlist_units" contents={ event.waitlistUnits } />
+                </div>
+              </div>
+            </div>
+          </div> : null) }
+
+        <HasRole role={ UserRoles.EventDirector }>
+          <div className="row">
+            <hr />
+          </div>
+
+          <div className="row">
+            <div className="pull-xs-center col-xs-12 offset-sm-4 col-sm-4">
+              <Link to={ `/events/${event.slug}/edit` } className="btn btn-sm btn-outline-secondary btn-block">
+                Edit Event
+              </Link>
             </div>
           </div>
         </HasRole>

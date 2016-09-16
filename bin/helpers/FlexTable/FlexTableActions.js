@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.fetchContents = undefined;
 exports.dumpContents = dumpContents;
 exports.beginLoading = beginLoading;
+exports.receivedContents = receivedContents;
 
 var _functions = require('../functions');
 
@@ -43,8 +44,11 @@ var fetchContents = exports.fetchContents = function fetchContents(name, endpoin
 };
 
 function dumpContents() {
+  var name = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+
   return {
-    type: 'FLEXTABLE_DUMP_CONTENTS'
+    type: 'FLEXTABLE_DUMP_CONTENTS',
+    name: name
   };
 }
 

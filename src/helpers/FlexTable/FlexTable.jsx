@@ -12,7 +12,7 @@ class _FlexTable extends React.Component {
   static propTypes = {
     columns: React.PropTypes.object.isRequired,
     emptyMessage: React.PropTypes.string.isRequired,
-    endpoint: React.PropTypes.string.isRequired,
+    endpoint: React.PropTypes.string,
     isLoading: React.PropTypes.bool,
     title: React.PropTypes.string,
 
@@ -30,7 +30,12 @@ class _FlexTable extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchContents();
+    if (this.props.fedContents) {
+      this.props.preloadContents();
+    }
+    else {
+      this.props.fetchContents();
+    }
   }
 
   editButton(route) {
@@ -73,7 +78,7 @@ class _FlexTable extends React.Component {
       tryDelete = true;
     }
 
-    if (this.props.isLoading) {
+    if (this.props.isLoading && !this.props.contents) {
       return (
         <LoadingCube show={ true } />
       );
@@ -169,8 +174,12 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(FlexTableActions.fetchContents(props.name, props.endpoint));
     },
 
+    preloadContents: () => {
+      dispatch(FlexTableActions.receivedContents(props.name, props.fedContents));
+    },
+
     dumpContents: () => {
-      dispatch(FlexTableActions.dumpContents());
+      dispatch(FlexTableActions.dumpContents(props.name));
     },
 
     feedDispatch: () => { return dispatch },

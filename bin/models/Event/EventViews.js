@@ -27,6 +27,10 @@ var _EventList = require('./EventList');
 
 var _EventList2 = _interopRequireDefault(_EventList);
 
+var _UnitsInEventList = require('../Unit/UnitsInEventList');
+
+var _UnitsInEventList2 = _interopRequireDefault(_UnitsInEventList);
+
 var _EventForms = require('./EventForms');
 
 var EventForms = _interopRequireWildcard(_EventForms);
@@ -321,33 +325,108 @@ var _Show = (_temp = _class = function (_React$Component4) {
           { role: _UserRoles.UserRoles.EventDirector },
           _react2.default.createElement(
             'div',
-            null,
+            { className: 'row' },
             _react2.default.createElement(
-              'div',
-              { className: 'row' },
-              _react2.default.createElement(
-                _ModelInfo.Prop,
-                null,
-                'Notes'
-              ),
-              _react2.default.createElement(
-                _ModelInfo.Val,
-                null,
-                event.notes
-              )
+              _ModelInfo.Prop,
+              null,
+              'Notes'
             ),
-            _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              _ModelInfo.Val,
+              null,
+              event.notes
+            )
+          )
+        ),
+        event.confirmedUnits ? _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement('hr', null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
             _react2.default.createElement(
               'div',
-              { className: 'row' },
+              { className: 'card col-xs-12' },
               _react2.default.createElement(
                 'div',
-                { className: 'pull-xs-center col-xs-12 offset-sm-4 col-sm-4' },
-                _react2.default.createElement(
-                  _reactRouter.Link,
-                  { to: '/events/' + event.slug + '/edit', className: 'btn btn-sm btn-outline-secondary btn-block' },
-                  'Edit Event'
-                )
+                { className: 'card-header card-success' },
+                'Confirmed Units'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'card-block' },
+                _react2.default.createElement(_UnitsInEventList2.default, { name: 'event_confirmed_units', contents: event.confirmedUnits })
+              )
+            )
+          )
+        ) : null,
+        event.unpaidUnits.length ? _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card col-xs-12' },
+              _react2.default.createElement(
+                'div',
+                { className: 'card-header card-danger' },
+                'Units Awaiting Payment'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'card-block' },
+                _react2.default.createElement(_UnitsInEventList2.default, { name: 'event_unpaid_units', contents: event.unpaidUnits })
+              )
+            )
+          )
+        ) : null,
+        event.waitlistUnits.length ? _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card col-xs-12' },
+              _react2.default.createElement(
+                'div',
+                { className: 'card-header card-warning' },
+                'Units on Waitlist'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'card-block' },
+                _react2.default.createElement(_UnitsInEventList2.default, { name: 'event_waitlist_units', contents: event.waitlistUnits })
+              )
+            )
+          )
+        ) : null,
+        _react2.default.createElement(
+          _UserRoles.HasRole,
+          { role: _UserRoles.UserRoles.EventDirector },
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement('hr', null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'pull-xs-center col-xs-12 offset-sm-4 col-sm-4' },
+              _react2.default.createElement(
+                _reactRouter.Link,
+                { to: '/events/' + event.slug + '/edit', className: 'btn btn-sm btn-outline-secondary btn-block' },
+                'Edit Event'
               )
             )
           )

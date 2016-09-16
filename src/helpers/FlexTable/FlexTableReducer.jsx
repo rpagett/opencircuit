@@ -3,13 +3,22 @@ const flexTable = (state = { }, action) => {
 
     case 'FLEXTABLE_RECEIVED_CONTENTS':
       return {
+        ...state,
         [action.name]: action.contents,
         isLoading: false
       };
 
     case 'FLEXTABLE_DUMP_CONTENTS':
-      return {
-        isLoading: true
+      if (action.name) {
+        return {
+          ...state,
+          [action.name]: null
+        }
+      }
+      else {
+        return {
+          isLoading: true
+        }
       }
 
     case 'FLEXTABLE_ERROR':

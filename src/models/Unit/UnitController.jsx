@@ -5,6 +5,7 @@ import { hasRole } from '../../middleware/authRoute';
 import { userHasRole, UserRoles } from '../User/UserRoles';
 import Unit from './UnitModel';
 import Event from '../Event/EventModel';
+import Fee from '../Fee/FeeModel';
 import EventRegistration from '../Pivots/EventRegistrationModel';
 
 let router = Express.Router();
@@ -243,24 +244,94 @@ router.get('/:slug/eventChecks', (req, res) => {
 })
 
 router.get('/:slug/attending', (req, res) => {
+  let contents = [ ];
+  let unpaidFees = false;
+  let unit = { };
+  let inEvents = [ ];
+  let allRegistrations = [ ];
+
   Unit.findOne({ slug: req.params.slug }, '_id')
-    .then(unit => {
+    .then(inUnit => {
+      unit = inUnit;
       console.log('unit is', unit);
-      return EventRegistration.find({ unit: unit._id }, 'unit event')
+
+      return Fee.count({unit: unit._id, paid_date: null})
+    })
+    .then(fees => {
+      console.log('fees', fees);
+      if (fees) {
+        unpaidFees = true;
+      }
+
+      return EventRegistration.find({ unit: {$ne: null} })
+        .populate('unit', '_id confirmed_paid_date director')
+        .populate('competition_class', 'name abbreviation')
+        .exec()
     })
     .then(registrations => {
-      console.log('registrations/show', registrations);
-      const events = _.map(registrations, 'event');
-      console.log('events/show', events);
-      return Event.find({ _id: {$in: events} }, 'name slug date attendance_cap')
+      allRegistrations = _.groupBy(registrations, 'event');
+
+      return Event.find({ _id: {$in: Object.keys(allRegistrations)}})
     })
     .then(events => {
-      console.log('fetched events/show', events);
+      for (let key in events) {
+        const event = events[key];
+
+        let status = 'Confirmed';
+        console.log('all registrations', allRegistrations);
+        console.log('this event', allRegistrations[event._id])
+        let unitList = _.map(allRegistrations[event._id], reg => reg.unit);
+        console.log('unitList', unitList);
+        let unitKey = _.findKey(unitList, u => u.id == unit.id)
+        console.log('key', unitKey);
+
+        if (!unitKey && unitKey !== 0) { console.log('cnting'); continue; }
+
+        console.log('obj at unitkey', unitKey, unitList[unitKey]);
+
+        if (!unpaidFees) {
+          if (unitList.length >= event.attendance_cap) {
+            unitList = _.sortBy(unitList, u => u.confirmed_paid_date);
+            unitKey = _.findKey(unitList, u => u.id == unit.id)
+
+            if (unitKey >= event.attendance_cap) {
+              status = 'On Waitlist';
+            }
+          }
+        }
+        else {
+          status = 'Owes Fees'
+        }
+
+        const found = _.find(allRegistrations[event._id], reg => { return reg.unit.id == unit.id });
+        console.log('found', found);
+
+        contents.push({
+          ...event.toObject(),
+          status,
+          competition_class: found.competition_class.formattedName
+        })
+      }
+
+      console.log('CONTENTS', contents);
       res.json({
         success: true,
-        contents: events
+        contents
       })
     })
+    //.then(registrations => {
+      //console.log('registrations/show', registrations);
+    //  const events = _.map(registrations, 'event');
+    //  //console.log('events/show', events);
+    //  return Event.find({ _id: {$in: events} }, 'name slug date attendance_cap')
+    //})
+    //.then(events => {
+    //  console.log('fetched events/show', events);
+    //  res.json({
+    //    success: true,
+    //    contents: events
+    //  })
+    //})
     .catch(err => {
       res.json({
         success: false,

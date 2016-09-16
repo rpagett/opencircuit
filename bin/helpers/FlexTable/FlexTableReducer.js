@@ -9,7 +9,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var flexTable = function flexTable() {
-  var _ref;
+  var _extends2;
 
   var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
   var action = arguments[1];
@@ -17,12 +17,16 @@ var flexTable = function flexTable() {
   switch (action.type) {
 
     case 'FLEXTABLE_RECEIVED_CONTENTS':
-      return _ref = {}, _defineProperty(_ref, action.name, action.contents), _defineProperty(_ref, 'isLoading', false), _ref;
+      return _extends({}, state, (_extends2 = {}, _defineProperty(_extends2, action.name, action.contents), _defineProperty(_extends2, 'isLoading', false), _extends2));
 
     case 'FLEXTABLE_DUMP_CONTENTS':
-      return {
-        isLoading: true
-      };
+      if (action.name) {
+        return _extends({}, state, _defineProperty({}, action.name, null));
+      } else {
+        return {
+          isLoading: true
+        };
+      }
 
     case 'FLEXTABLE_ERROR':
       return _extends({}, state, {

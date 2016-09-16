@@ -31,6 +31,7 @@ export default class EventList extends React.Component {
           columns={{
             'Name': event => { return (<Link to={ event.detailsUrl }>{ event.name }</Link>) },
             'Date': event => { return event.formattedDate },
+            'Registered': event => { return event.unitCount },
             'Cap': event => { return event.attendance_cap },
           }}
           deriveName={ event => event.name }

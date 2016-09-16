@@ -97,6 +97,8 @@ function assessFee(unit_id, amount, category) {
     });
   }).then(function (fee) {
     console.log('Assessed a fee of $', fee.amount, 'on', fee.assessed_date, '. It is due', fee.due_date);
+
+    _UnitModel2.default.findOneAndUpdate({ _id: unit_id }, { confirmed_paid_date: null }).exec();
   }).catch(function (err) {
     console.log('Error assessing fee.', err.message);
   });
@@ -155,6 +157,7 @@ router.route('/').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator
 });
 
 router.get('/paypal-return', function (req, res) {
+  var ids = [];
   console.log('Returning!', req.query);
 
   configurePaypal();
@@ -169,16 +172,37 @@ router.get('/paypal-return', function (req, res) {
       throw error;
     } else {
       if (payment.state === 'approved') {
-        _FeeModel2.default.find({ paypal_id: payment.id }, 'amount payments').then(function (fees) {
-          fees.map(function (fee) {
+        return _FeeModel2.default.find({ paypal_id: payment.id }, 'unit amount payments').then(function (fees) {
+          return Promise.all(fees.map(function (fee) {
             fee.payments.push({
               amount: fee.amount,
               method: _PaymentTypes2.default.Paypal
             });
 
+            ids.push(fee.unit);
+
             fee.paid_date = Date.now();
-            fee.save();
-          });
+            return fee.save();
+          }));
+        }).then(function () {
+          return _FeeModel2.default.aggregate([{ $match: { unit: { $in: ids }, paid_date: null } }, {
+            $group: {
+              _id: '$unit',
+              count: { $sum: 1 }
+            }
+          }]);
+        }).then(function (aggregate) {
+          console.log('aggregate', aggregate);
+          if (!aggregate.length) {
+            return _UnitModel2.default.update({ _id: { $in: ids } }, { confirmed_paid_date: Date.now() }).exec();
+          } else {
+            return Promise.all(aggregate.map(function (unit) {
+              if (!unit.count) {
+                return _UnitModel2.default.findOneAndUpdate({ _id: unit._id }, { confirmed_paid_date: Date.now() }).exec();
+              }
+            }));
+          }
+        }).then(function () {
           res.redirect(302, process.env.BASE_URL + '/confirm/payment');
         });
       } else {
@@ -282,6 +306,8 @@ router.post('/userPay', function (req, res) {
 
 router.post('/:fee_id/applyPayment', function (req, res) {
   var data = {};
+  var updateUnit = false;
+
   (0, _FeeValidation.validatePayment)(req.body).then(function (validatedData) {
     data = validatedData;
 
@@ -307,10 +333,19 @@ router.post('/:fee_id/applyPayment', function (req, res) {
 
     if (amountToPay <= 0 || fee.amountRemaining - amountToPay <= 0) {
       fee.paid_date = Date.now();
+      updateUnit = true;
     }
 
     return fee.save();
-  }).then(function () {
+  }).then(function (fee) {
+    if (updateUnit) {
+      _FeeModel2.default.count({ unit: fee.unit._id, paid_date: null }).exec().then(function (count) {
+        if (!count) {
+          _UnitModel2.default.findOneAndUpdate({ _id: fee.unit }, { confirmed_paid_date: Date.now() }).exec();
+        }
+      });
+    }
+
     res.json({
       success: true,
       redirect: '/fees'

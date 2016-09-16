@@ -29,9 +29,9 @@ var _UnitList = require('./UnitList');
 
 var _UnitList2 = _interopRequireDefault(_UnitList);
 
-var _EventList = require('../Event/EventList');
+var _UnitEventsList = require('../Event/UnitEventsList');
 
-var _EventList2 = _interopRequireDefault(_EventList);
+var _UnitEventsList2 = _interopRequireDefault(_UnitEventsList);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -208,7 +208,7 @@ var _Show = function (_React$Component2) {
             _react2.default.createElement(
               'div',
               { className: 'card-block' },
-              _react2.default.createElement(_EventList2.default, { endpoint: '/api/units/' + unit.slug + '/attending' })
+              _react2.default.createElement(_UnitEventsList2.default, { endpoint: '/api/units/' + unit.slug + '/attending' })
             )
           )
         ),

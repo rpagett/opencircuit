@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
@@ -15,6 +17,22 @@ var _lodash2 = _interopRequireDefault(_lodash);
 var _EventModel = require('./EventModel');
 
 var _EventModel2 = _interopRequireDefault(_EventModel);
+
+var _EventRegistrationModel = require('../Pivots/EventRegistrationModel');
+
+var _EventRegistrationModel2 = _interopRequireDefault(_EventRegistrationModel);
+
+var _UnitModel = require('../Unit/UnitModel');
+
+var _UnitModel2 = _interopRequireDefault(_UnitModel);
+
+var _UnitTypeModel = require('../UnitType/UnitTypeModel');
+
+var _UnitTypeModel2 = _interopRequireDefault(_UnitTypeModel);
+
+var _UserModel = require('../User/UserModel');
+
+var _UserModel2 = _interopRequireDefault(_UserModel);
 
 var _EventValidation = require('./EventValidation');
 
@@ -30,10 +48,34 @@ var router = _express2.default.Router();
 // All routes are '/api/events/...'
 
 router.route('/').get(function (req, res) {
+  var contents = [];
   _EventModel2.default.find({}, 'name slug detailsUrl date formattedDate attendance_cap').sort('date').exec().then(function (events) {
+    contents = events;
+
+    var ids = [];
+    events.map(function (event) {
+      ids.push(event._id);
+    });
+
+    return _EventRegistrationModel2.default.aggregate([{ $match: { event: { $in: ids } } }, { $project: { event: 1 } }, {
+      $group: {
+        _id: '$event',
+        count: { $sum: 1 }
+      }
+    }]);
+  }).then(function (counts) {
+    for (var key in contents) {
+      contents[key] = contents[key].toObject();
+      var count = _lodash2.default.find(counts, { _id: contents[key]._id });
+
+      contents[key] = _extends({}, contents[key], {
+        unitCount: count ? count.count : 0
+      });
+    }
+
     res.json({
       success: true,
-      contents: events
+      contents: contents
     });
   }).catch(function (err) {
     res.json({
@@ -61,7 +103,7 @@ router.route('/').get(function (req, res) {
     });
   });
 }).delete((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
-  Unit.findOneAndRemove({ slug: req.params.slug }).exec().then(function () {
+  _UnitModel2.default.findOneAndRemove({ slug: req.params.slug }).exec().then(function () {
     res.json({
       success: true
     });
@@ -74,14 +116,59 @@ router.route('/').get(function (req, res) {
 });
 
 router.route('/:slug').get(function (req, res) {
-  _EventModel2.default.findOne({ slug: req.params.slug }).then(function (event) {
+  var event = {};
+  _EventModel2.default.findOne({ slug: req.params.slug }).then(function (inEvent) {
+    event = inEvent;
+
     if (!event) {
       throw new Error("That event does not exist.");
     }
 
+    return _EventRegistrationModel2.default.find({ event: event._id }).populate('unit', 'slug name director unit_type confirmed_paid_date')
+    //.populate('unit.director', 'first_name middle_initial last_name email')
+    .populate('competition_class', 'name abbreviation').exec();
+  }).then(function (registrations) {
+    return _UnitModel2.default.populate(registrations, [{
+      path: 'unit.director',
+      model: _UserModel2.default,
+      select: 'first_name middle_initial last_name email'
+    }, {
+      path: 'unit.unit_type',
+      model: _UnitTypeModel2.default,
+      select: 'name'
+    }]);
+  }).then(function (registrations) {
+    var confirmedUnits = [],
+        unpaidUnits = [],
+        waitlistUnits = [];
+
+    unpaidUnits = _lodash2.default.filter(registrations, function (reg) {
+      return reg.unit.confirmed_paid_date == null;
+    });
+    console.log('Unpaid units', unpaidUnits);
+
+    confirmedUnits = _lodash2.default.filter(registrations, function (reg) {
+      return reg.unit.confirmed_paid_date != null;
+    });
+
+    if (registrations.length >= event.attendance_cap) {
+      var unitList = _lodash2.default.sortBy(confirmedUnits, function (reg) {
+        return reg.unit.confirmed_paid_date;
+      });
+
+      confirmedUnits = _lodash2.default.slice(unitList, 0, event.attendance_cap);
+      waitlistUnits = _lodash2.default.slice(unitList, event.attendance_cap);
+    }
+
+    confirmedUnits = _lodash2.default.sortBy(confirmedUnits, ['unit.unit_type', 'competition_class.abbreviation']);
+
     res.json({
       success: true,
-      model: event
+      model: _extends({}, event.toObject(), {
+        confirmedUnits: confirmedUnits,
+        waitlistUnits: waitlistUnits,
+        unpaidUnits: unpaidUnits
+      })
     });
   }).catch(function (err) {
     res.json({
@@ -110,7 +197,7 @@ router.route('/:slug').get(function (req, res) {
     });
   });
 }).delete((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
-  Unit.findOneAndRemove({ slug: req.params.slug }).exec().then(function () {
+  _UnitModel2.default.findOneAndRemove({ slug: req.params.slug }).exec().then(function () {
     res.json({
       success: true
     });

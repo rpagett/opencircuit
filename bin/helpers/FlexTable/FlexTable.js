@@ -57,7 +57,11 @@ var _FlexTable = (_temp = _class = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.props.fetchContents();
+      if (this.props.fedContents) {
+        this.props.preloadContents();
+      } else {
+        this.props.fetchContents();
+      }
     }
   }, {
     key: 'editButton',
@@ -103,7 +107,7 @@ var _FlexTable = (_temp = _class = function (_React$Component) {
         tryDelete = true;
       }
 
-      if (this.props.isLoading) {
+      if (this.props.isLoading && !this.props.contents) {
         return _react2.default.createElement(_LoadingCube2.default, { show: true });
       }
 
@@ -218,7 +222,7 @@ var _FlexTable = (_temp = _class = function (_React$Component) {
 }(_react2.default.Component), _class.propTypes = {
   columns: _react2.default.PropTypes.object.isRequired,
   emptyMessage: _react2.default.PropTypes.string.isRequired,
-  endpoint: _react2.default.PropTypes.string.isRequired,
+  endpoint: _react2.default.PropTypes.string,
   isLoading: _react2.default.PropTypes.bool,
   title: _react2.default.PropTypes.string,
 
@@ -244,8 +248,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
       dispatch(FlexTableActions.fetchContents(props.name, props.endpoint));
     },
 
+    preloadContents: function preloadContents() {
+      dispatch(FlexTableActions.receivedContents(props.name, props.fedContents));
+    },
+
     dumpContents: function dumpContents() {
-      dispatch(FlexTableActions.dumpContents());
+      dispatch(FlexTableActions.dumpContents(props.name));
     },
 
     feedDispatch: function feedDispatch() {

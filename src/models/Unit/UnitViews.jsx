@@ -8,7 +8,7 @@ import { UserRoles, HasRole } from '../User/UserRoles';
 import * as UnitForms from './UnitForms';
 import UnitList from './UnitList';
 
-import EventList from '../Event/EventList';
+import UnitEventsList from '../Event/UnitEventsList';
 
 export class Index extends React.Component {
   render() {
@@ -78,7 +78,7 @@ class _Show extends React.Component {
               Attending Events
             </div>
             <div className="card-block">
-              <EventList endpoint={ `/api/units/${unit.slug}/attending` } />
+              <UnitEventsList endpoint={ `/api/units/${unit.slug}/attending` } />
             </div>
           </div>
         </div>

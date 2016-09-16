@@ -75,6 +75,9 @@ var EventList = function (_React$Component) {
             'Date': function Date(event) {
               return event.formattedDate;
             },
+            'Registered': function Registered(event) {
+              return event.unitCount;
+            },
             'Cap': function Cap(event) {
               return event.attendance_cap;
             }

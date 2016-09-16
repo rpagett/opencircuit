@@ -26,6 +26,10 @@ var _EventModel = require('../Event/EventModel');
 
 var _EventModel2 = _interopRequireDefault(_EventModel);
 
+var _FeeModel = require('../Fee/FeeModel');
+
+var _FeeModel2 = _interopRequireDefault(_FeeModel);
+
 var _EventRegistrationModel = require('../Pivots/EventRegistrationModel');
 
 var _EventRegistrationModel2 = _interopRequireDefault(_EventRegistrationModel);
@@ -225,21 +229,98 @@ router.get('/:slug/eventChecks', function (req, res) {
 });
 
 router.get('/:slug/attending', function (req, res) {
-  _UnitModel2.default.findOne({ slug: req.params.slug }, '_id').then(function (unit) {
+  var contents = [];
+  var unpaidFees = false;
+  var unit = {};
+  var inEvents = [];
+  var allRegistrations = [];
+
+  _UnitModel2.default.findOne({ slug: req.params.slug }, '_id').then(function (inUnit) {
+    unit = inUnit;
     console.log('unit is', unit);
-    return _EventRegistrationModel2.default.find({ unit: unit._id }, 'unit event');
+
+    return _FeeModel2.default.count({ unit: unit._id, paid_date: null });
+  }).then(function (fees) {
+    console.log('fees', fees);
+    if (fees) {
+      unpaidFees = true;
+    }
+
+    return _EventRegistrationModel2.default.find({ unit: { $ne: null } }).populate('unit', '_id confirmed_paid_date director').populate('competition_class', 'name abbreviation').exec();
   }).then(function (registrations) {
-    console.log('registrations/show', registrations);
-    var events = _lodash2.default.map(registrations, 'event');
-    console.log('events/show', events);
-    return _EventModel2.default.find({ _id: { $in: events } }, 'name slug date attendance_cap');
+    allRegistrations = _lodash2.default.groupBy(registrations, 'event');
+
+    return _EventModel2.default.find({ _id: { $in: Object.keys(allRegistrations) } });
   }).then(function (events) {
-    console.log('fetched events/show', events);
+    for (var key in events) {
+      var event = events[key];
+
+      var status = 'Confirmed';
+      console.log('all registrations', allRegistrations);
+      console.log('this event', allRegistrations[event._id]);
+      var unitList = _lodash2.default.map(allRegistrations[event._id], function (reg) {
+        return reg.unit;
+      });
+      console.log('unitList', unitList);
+      var unitKey = _lodash2.default.findKey(unitList, function (u) {
+        return u.id == unit.id;
+      });
+      console.log('key', unitKey);
+
+      if (!unitKey && unitKey !== 0) {
+        console.log('cnting');continue;
+      }
+
+      console.log('obj at unitkey', unitKey, unitList[unitKey]);
+
+      if (!unpaidFees) {
+        if (unitList.length >= event.attendance_cap) {
+          unitList = _lodash2.default.sortBy(unitList, function (u) {
+            return u.confirmed_paid_date;
+          });
+          unitKey = _lodash2.default.findKey(unitList, function (u) {
+            return u.id == unit.id;
+          });
+
+          if (unitKey >= event.attendance_cap) {
+            status = 'On Waitlist';
+          }
+        }
+      } else {
+        status = 'Owes Fees';
+      }
+
+      var found = _lodash2.default.find(allRegistrations[event._id], function (reg) {
+        return reg.unit.id == unit.id;
+      });
+      console.log('found', found);
+
+      contents.push(_extends({}, event.toObject(), {
+        status: status,
+        competition_class: found.competition_class.formattedName
+      }));
+    }
+
+    console.log('CONTENTS', contents);
     res.json({
       success: true,
-      contents: events
+      contents: contents
     });
-  }).catch(function (err) {
+  })
+  //.then(registrations => {
+  //console.log('registrations/show', registrations);
+  //  const events = _.map(registrations, 'event');
+  //  //console.log('events/show', events);
+  //  return Event.find({ _id: {$in: events} }, 'name slug date attendance_cap')
+  //})
+  //.then(events => {
+  //  console.log('fetched events/show', events);
+  //  res.json({
+  //    success: true,
+  //    contents: events
+  //  })
+  //})
+  .catch(function (err) {
     res.json({
       success: false,
       error: err.message

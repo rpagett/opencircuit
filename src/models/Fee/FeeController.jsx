@@ -60,6 +60,8 @@ function assessFee(unit_id, amount, category, notes = '', due_date = Fee.DUE_DAT
     .then(fee => {
       console.log('Assessed a fee of $', fee.amount, 'on', fee.assessed_date,
         '. It is due', fee.due_date);
+
+      Unit.findOneAndUpdate({ _id: unit_id }, { confirmed_paid_date: null }).exec()
     })
     .catch(err => {
       console.log('Error assessing fee.', err.message);
@@ -135,6 +137,7 @@ router.route('/')
   });
 
 router.get('/paypal-return', (req, res) => {
+  let ids = [ ] ;
   console.log('Returning!', req.query)
 
   configurePaypal();
@@ -150,17 +153,45 @@ router.get('/paypal-return', (req, res) => {
     }
     else {
       if (payment.state === 'approved') {
-        Fee.find({ paypal_id: payment.id }, 'amount payments')
+        return Fee.find({ paypal_id: payment.id }, 'unit amount payments')
           .then(fees => {
-            fees.map(fee => {
+            return Promise.all(fees.map(fee => {
               fee.payments.push({
                 amount: fee.amount,
                 method: PaymentTypes.Paypal,
               })
 
+              ids.push(fee.unit);
+
               fee.paid_date = Date.now();
-              fee.save();
-            })
+              return fee.save()
+            }))
+          })
+          .then(() => {
+            return Fee.aggregate([
+              { $match: { unit: {$in: ids}, paid_date: null } },
+              {
+                $group: {
+                  _id: '$unit',
+                  count: { $sum: 1 }
+                }
+              }
+            ])
+          })
+          .then(aggregate => {
+            console.log('aggregate', aggregate);
+            if (!aggregate.length) {
+              return Unit.update({_id: {$in: ids}}, {confirmed_paid_date: Date.now()}).exec();
+            }
+            else {
+              return Promise.all(aggregate.map(unit => {
+                if (!unit.count) {
+                  return Unit.findOneAndUpdate({_id: unit._id}, {confirmed_paid_date: Date.now()}).exec();
+                }
+              }))
+            }
+          })
+          .then(() => {
             res.redirect(302, process.env.BASE_URL + '/confirm/payment');
           })
       }
@@ -269,6 +300,8 @@ router.post('/userPay', (req, res) => {
 
 router.post('/:fee_id/applyPayment', (req, res) => {
   let data = { };
+  let updateUnit = false;
+
   validatePayment(req.body)
     .then(validatedData => {
       data = validatedData;
@@ -300,11 +333,23 @@ router.post('/:fee_id/applyPayment', (req, res) => {
 
       if (amountToPay <= 0 || (fee.amountRemaining - amountToPay) <= 0) {
         fee.paid_date = Date.now();
+        updateUnit = true;
       }
 
       return fee.save()
     })
-    .then(() => {
+    .then(fee => {
+      if (updateUnit) {
+        Fee.count({unit: fee.unit._id, paid_date: null})
+          .exec()
+          .then(count => {
+            if (!count) {
+              Unit.findOneAndUpdate({_id: fee.unit}, { confirmed_paid_date: Date.now() })
+                .exec()
+            }
+          })
+      }
+
       res.json({
         success: true,
         redirect: '/fees'

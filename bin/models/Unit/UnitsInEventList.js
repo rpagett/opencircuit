@@ -29,29 +29,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var OrganizationList = function (_React$Component) {
-  _inherits(OrganizationList, _React$Component);
+var UnitsInEventList = function (_React$Component) {
+  _inherits(UnitsInEventList, _React$Component);
 
-  function OrganizationList() {
-    _classCallCheck(this, OrganizationList);
+  function UnitsInEventList() {
+    _classCallCheck(this, UnitsInEventList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(OrganizationList).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(UnitsInEventList).apply(this, arguments));
   }
 
-  _createClass(OrganizationList, [{
+  _createClass(UnitsInEventList, [{
     key: 'canEdit',
-    value: function canEdit(org, user) {
-      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator)) {
-        return org.detailsUrl + '/edit';
-      }
-
-      return null;
-    }
-  }, {
-    key: 'canDelete',
-    value: function canDelete(org, user) {
-      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator) && org.unitCount == 0) {
-        return '/api' + org.detailsUrl;
+    value: function canEdit(reg, user) {
+      if (reg.unit.director._id.toString() == user._id.toString() || (0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.EventDirector)) {
+        return reg.unit.detailsUrl + '/edit';
       }
 
       return null;
@@ -63,44 +54,43 @@ var OrganizationList = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(_FlexTable2.default, {
-          name: 'organizationList',
-          endpoint: this.props.endpoint,
-          emptyMessage: 'There are no registered organizations.',
+          name: this.props.name,
+          fedContents: this.props.contents,
+          emptyMessage: 'There are no registered units.',
           columns: {
-            'Name': function Name(org) {
+            'Name': function Name(reg) {
               return _react2.default.createElement(
                 _reactRouter.Link,
-                { to: org.detailsUrl },
-                org.name
+                { to: reg.unit.detailsUrl },
+                reg.unit.name
               );
             },
-            'Director': function Director(org) {
+            'Director': function Director(reg) {
               return _react2.default.createElement(
                 _reactRouter.Link,
-                { to: org.director ? org.director.profileUrl : '#' },
-                org.director.formattedName
+                { to: reg.unit.director.profileUrl },
+                reg.unit.director.formattedName
               );
             },
-            'Units': function Units(org) {
-              return org.unitCount;
+            'Type': function Type(reg) {
+              return reg.unit.unit_type.name;
             },
-            'Type': function Type(org) {
-              return org.is_school ? 'Scholastic' : 'Independent';
+            'Class': function Class(reg) {
+              return reg.competition_class.formattedName;
             }
           },
-          deriveName: function deriveName(org) {
-            return org.name;
-          },
           canEdit: this.canEdit,
-          canDelete: this.canDelete
+          deriveName: function deriveName(reg) {
+            return reg.unit.name;
+          }
         })
       );
     }
   }]);
 
-  return OrganizationList;
+  return UnitsInEventList;
 }(_react2.default.Component);
 
-exports.default = OrganizationList;
+exports.default = UnitsInEventList;
 ;
 module.exports = exports['default'];

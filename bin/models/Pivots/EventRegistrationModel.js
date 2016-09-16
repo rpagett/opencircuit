@@ -26,7 +26,7 @@ var EventRegistrationSchema = new _mongoose2.default.Schema({
   },
   competition_class: {
     type: ObjectId,
-    ref: 'CompetitionClass'
+    ref: 'CompClass'
   },
 
   performance_time: Date,

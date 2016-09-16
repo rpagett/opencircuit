@@ -13,7 +13,7 @@ const EventRegistrationSchema = new Mongoose.Schema({
   },
   competition_class: {
     type: ObjectId,
-    ref: 'CompetitionClass'
+    ref: 'CompClass'
   },
 
   performance_time: Date,

@@ -32,9 +32,10 @@ export const fetchContents = (name, endpoint) => {
   };
 }
 
-export function dumpContents() {
+export function dumpContents(name = null) {
   return {
-    type: 'FLEXTABLE_DUMP_CONTENTS'
+    type: 'FLEXTABLE_DUMP_CONTENTS',
+    name
   }
 }
 
@@ -44,7 +45,7 @@ export function beginLoading() {
   }
 }
 
-function receivedContents(name, contents) {
+export function receivedContents(name, contents) {
   return {
     type: 'FLEXTABLE_RECEIVED_CONTENTS',
     name,
