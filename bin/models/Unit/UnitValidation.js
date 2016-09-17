@@ -23,12 +23,12 @@ function validateUnit() {
     'required': 'This field is required.'
   };
 
+  data.name = data.name.replace(/middle school/i, 'MS');
+  data.name = data.name.replace(/high school/i, 'HS');
+
   if (!data.slug) {
     data.slug = _indicative2.default.sanitizor.slug(data.name);
   }
-
-  data.name = data.name.replace(/middle school/i, 'MS');
-  data.name = data.name.replace(/high school/i, 'HS');
 
   return _indicative2.default.validateAll(data, rules, messages);
 }

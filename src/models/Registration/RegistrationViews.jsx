@@ -173,6 +173,13 @@ export class Unit extends React.Component {
 
           <p></p>
 
+          <div className="col-xs-12 alert alert-info">
+            Circuit membership grants units an opportunity to enter all competitive events for a single
+            flat fee, which is discounted for each registered member unit from your organization. Membership
+            is also required in order to perform at Circuit Championships. Non-members will be eligible to
+            compete at regular-season shows for a fee of $175 per event.
+          </div>
+
           <div className="row form-group">
             <div className="col-xs-12 col-sm-4">Membership</div>
             <div className="col-xs-12 col-sm-8">

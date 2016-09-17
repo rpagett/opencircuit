@@ -10,12 +10,12 @@ export default function validateUnit(data = { }) {
     'required': 'This field is required.',
   };
 
+  data.name = data.name.replace(/middle school/i, 'MS');
+  data.name = data.name.replace(/high school/i, 'HS');
+
   if (!data.slug) {
     data.slug = Indicative.sanitizor.slug(data.name);
   }
-
-  data.name = data.name.replace(/middle school/i, 'MS');
-  data.name = data.name.replace(/high school/i, 'HS');
 
   return Indicative.validateAll(data, rules, messages);
 }

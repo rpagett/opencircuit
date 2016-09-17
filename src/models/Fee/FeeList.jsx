@@ -3,10 +3,17 @@ import _ from 'lodash';
 import { Link } from 'react-router';
 import Icon from '../../helpers/Icon';
 
+import { userHasRole, UserRoles } from '../User/UserRoles';
 import FlexTable from '../../helpers/FlexTable/FlexTable'
 import { LaunchModalButton } from '../../modals/SpawnableModal';
 
 export default class FeeList extends React.Component {
+  canDelete(fee, user) {
+    if (userHasRole(user, UserRoles.Administrator)) {
+      return '/api/fees/' + fee._id
+    }
+  }
+
   render() {
     return (
       <div>
@@ -70,6 +77,7 @@ export default class FeeList extends React.Component {
               )
             }
           }}
+          canDelete={ this.canDelete }
         />
       </div>
     );

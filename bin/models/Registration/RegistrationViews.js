@@ -278,6 +278,11 @@ var Unit = exports.Unit = function (_React$Component5) {
           _react2.default.createElement('p', null),
           _react2.default.createElement(
             'div',
+            { className: 'col-xs-12 alert alert-info' },
+            'Circuit membership grants units an opportunity to enter all competitive events for a single flat fee, which is discounted for each registered member unit from your organization. Membership is also required in order to perform at Circuit Championships. Non-members will be eligible to compete at regular-season shows for a fee of $175 per event.'
+          ),
+          _react2.default.createElement(
+            'div',
             { className: 'row form-group' },
             _react2.default.createElement(
               'div',

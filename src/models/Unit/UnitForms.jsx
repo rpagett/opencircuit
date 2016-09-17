@@ -40,6 +40,11 @@ export class Edit extends React.Component {
         { ...fetch }
       >
         <FormStatic name="name" label="Name" />
+
+        <HasRole role={ UserRoles.Administrator }>
+          <FormInput name="name" label="Name" />
+        </HasRole>
+
         <FormInput type="number" name="members" label="Member Count" />
 
         <HasRole role={ UserRoles.Administrator }>

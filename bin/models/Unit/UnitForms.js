@@ -85,6 +85,11 @@ var Edit = exports.Edit = function (_React$Component2) {
           subStore: 'unit_edit'
         }, fetch),
         _react2.default.createElement(_components.FormStatic, { name: 'name', label: 'Name' }),
+        _react2.default.createElement(
+          _UserRoles.HasRole,
+          { role: _UserRoles.UserRoles.Administrator },
+          _react2.default.createElement(_components.FormInput, { name: 'name', label: 'Name' })
+        ),
         _react2.default.createElement(_components.FormInput, { type: 'number', name: 'members', label: 'Member Count' }),
         _react2.default.createElement(
           _UserRoles.HasRole,

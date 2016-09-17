@@ -156,6 +156,19 @@ router.route('/').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator
   });
 });
 
+router.delete('/:id', function (req, res) {
+  _FeeModel2.default.findOneAndRemove({ _id: req.params.id }).exec().then(function () {
+    res.json({
+      success: true
+    });
+  }).catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
 router.get('/paypal-return', function (req, res) {
   var ids = [];
   console.log('Returning!', req.query);

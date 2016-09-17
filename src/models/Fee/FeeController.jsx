@@ -136,6 +136,22 @@ router.route('/')
     })
   });
 
+router.delete('/:id', (req, res) => {
+  Fee.findOneAndRemove({ _id: req.params.id })
+    .exec()
+    .then(() => {
+      res.json({
+        success: true
+      })
+    })
+    .catch( err => {
+      res.json({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
 router.get('/paypal-return', (req, res) => {
   let ids = [ ] ;
   console.log('Returning!', req.query)

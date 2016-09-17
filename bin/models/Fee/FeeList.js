@@ -21,6 +21,8 @@ var _Icon = require('../../helpers/Icon');
 
 var _Icon2 = _interopRequireDefault(_Icon);
 
+var _UserRoles = require('../User/UserRoles');
+
 var _FlexTable = require('../../helpers/FlexTable/FlexTable');
 
 var _FlexTable2 = _interopRequireDefault(_FlexTable);
@@ -45,6 +47,13 @@ var FeeList = function (_React$Component) {
   }
 
   _createClass(FeeList, [{
+    key: 'canDelete',
+    value: function canDelete(fee, user) {
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator)) {
+        return '/api/fees/' + fee._id;
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -122,7 +131,8 @@ var FeeList = function (_React$Component) {
                 })
               );
             }
-          }
+          },
+          canDelete: this.canDelete
         })
       );
     }
