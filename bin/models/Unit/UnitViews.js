@@ -29,6 +29,10 @@ var _UnitList = require('./UnitList');
 
 var _UnitList2 = _interopRequireDefault(_UnitList);
 
+var _UserFeeList = require('../Fee/UserFeeList');
+
+var _UserFeeList2 = _interopRequireDefault(_UserFeeList);
+
 var _UnitEventsList = require('../Event/UnitEventsList');
 
 var _UnitEventsList2 = _interopRequireDefault(_UnitEventsList);
@@ -209,6 +213,24 @@ var _Show = function (_React$Component2) {
               'div',
               { className: 'card-block' },
               _react2.default.createElement(_UnitEventsList2.default, { endpoint: '/api/units/' + unit.slug + '/attending' })
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card col-xs-12' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-header card-info' },
+              'Fees and Payments'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-block' },
+              _react2.default.createElement(_UserFeeList2.default, { endpoint: '/api/fees/forUnit/' + unit.slug })
             )
           )
         ),

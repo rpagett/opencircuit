@@ -60,8 +60,8 @@ var FeeList = function (_React$Component) {
             'Unit': function Unit(fee) {
               return _react2.default.createElement(
                 _reactRouter.Link,
-                { to: fee.unit.detailsUrl },
-                fee.unit.name
+                { to: fee.unit ? fee.unit.detailsUrl : '#err' },
+                fee.unit ? fee.unit.name : 'unit error'
               );
             },
             'Amount': function Amount(fee) {

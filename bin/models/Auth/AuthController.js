@@ -126,7 +126,7 @@ router.get('/reauth', function (req, res) {
 });
 
 router.post('/recover', function (req, res) {
-  _UserModel2.default.findOneAndUpdate({ email: req.body.email }, { recovery_token: _nodeUuid2.default.v1() }, { new: true, upsert: true }).then(function (user) {
+  _UserModel2.default.findOneAndUpdate({ email: req.body.email }, { recovery_token: _nodeUuid2.default.v1() }, { new: true }).then(function (user) {
     if (!user) {
       throw new Error('There is no user associated with that email address. Please register.');
     }

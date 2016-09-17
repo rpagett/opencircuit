@@ -136,7 +136,7 @@ router.route('/:slug')
       .then(registrations => {
         let confirmedUnits = [], unpaidUnits = [], waitlistUnits = [];
 
-        if (registrations) {
+        if (registrations.length) {
           unpaidUnits = _.filter(registrations, reg => {
             return reg.unit.confirmed_paid_date == null;
           });

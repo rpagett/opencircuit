@@ -9,6 +9,7 @@ import * as RootView from './models/Dashboard/DashboardViews';
 import * as AuthView from './models/Auth/AuthViews';
 import * as CompClassView from './models/CompClass/CompClassViews';
 import * as FeeView from './models/Fee/FeeViews';
+import * as JudgeView from './models/Judge/JudgeViews';
 import * as EventView from './models/Event/EventViews';
 import * as OrganizationView from './models/Organization/OrganizationViews';
 import * as RegistrationView from './models/Registration/RegistrationViews';
@@ -105,6 +106,10 @@ export function getAppRoutes(store) {
 
         <Route path="/fees" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
           <IndexRoute component={ FeeView.Index } />
+        </Route>
+
+        <Route path="/judges" onEnter={ requiresRole.bind(this, UserRoles.EventDirector) }>
+          <IndexRoute component={ JudgeView.Index } />
         </Route>
 
         <Route path="/organizations">

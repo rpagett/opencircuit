@@ -460,5 +460,21 @@ router.get('/forUser/:user_id', function (req, res) {
   });
 });
 
+router.get('/forUnit/:slug', function (req, res) {
+  _UnitModel2.default.findOne({ slug: req.params.slug }, '_id').then(function (unit) {
+    return _FeeModel2.default.find({ unit: unit._id }).populate('unit', 'name slug organization').populate('category', 'name slug').populate('payments').sort('paid_date').sort('due_date').exec();
+  }).then(function (fees) {
+    res.json({
+      success: true,
+      contents: fees
+    });
+  }).catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
 exports.default = router;
 module.exports = exports['default'];

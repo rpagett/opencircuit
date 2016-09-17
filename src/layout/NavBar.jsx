@@ -63,6 +63,7 @@ class _NavBar extends React.Component {
               <div className="dropdown-menu">
                 <Link to="/compclasses" className="dropdown-item">Classes</Link>
                 <Link to="/fees" className="dropdown-item">Fees</Link>
+                <Link to="/judges" className="dropdown-item">Judges</Link>
                 <Link to="/organizations" className="dropdown-item">Organizations</Link>
                 <Link to="/units" className="dropdown-item">Units</Link>
                 <Link to="/unittypes" className="dropdown-item">Unit Types</Link>

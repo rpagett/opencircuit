@@ -234,9 +234,9 @@ router.get('/:slug/attending', function (req, res) {
   var inEvents = [];
   var allRegistrations = [];
 
-  _UnitModel2.default.findOne({ slug: req.params.slug }, '_id').then(function (inUnit) {
+  _UnitModel2.default.findOne({ slug: req.params.slug }, '_id confirmed_paid_date').then(function (inUnit) {
     unit = inUnit;
-    console.log('unit is', unit);
+    //console.log('unit is', unit);
 
     return _EventRegistrationModel2.default.find({ unit: { $ne: null } }).populate('unit', '_id confirmed_paid_date director').populate('competition_class', 'name abbreviation').exec();
   }).then(function (registrations) {
@@ -248,22 +248,22 @@ router.get('/:slug/attending', function (req, res) {
       var event = events[key];
 
       var status = 'Confirmed';
-      console.log('all registrations', allRegistrations);
-      console.log('this event', allRegistrations[event._id]);
+      //console.log('all registrations', allRegistrations);
+      //console.log('this event', allRegistrations[event._id])
       var unitList = _lodash2.default.map(allRegistrations[event._id], function (reg) {
         return reg.unit;
       });
-      console.log('unitList', unitList);
+      //console.log('unitList', unitList);
       var unitKey = _lodash2.default.findKey(unitList, function (u) {
         return u.id == unit.id;
       });
-      console.log('key', unitKey);
+      //console.log('key', unitKey);
 
       if (!unitKey && unitKey !== 0) {
         console.log('cnting');continue;
       }
 
-      console.log('obj at unitkey', unitKey, unitList[unitKey]);
+      //console.log('obj at unitkey', unitKey, unitList[unitKey]);
 
       if (unit.confirmed_paid_date) {
         if (unitList.length >= event.attendance_cap) {
@@ -285,7 +285,7 @@ router.get('/:slug/attending', function (req, res) {
       var found = _lodash2.default.find(allRegistrations[event._id], function (reg) {
         return reg.unit.id == unit.id;
       });
-      console.log('found', found);
+      //console.log('found', found);
 
       contents.push(_extends({}, event.toObject(), {
         status: status,

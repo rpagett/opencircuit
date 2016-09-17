@@ -35,4 +35,8 @@ const JudgeSchema = new Mongoose.Schema({
   }
 })
 
+JudgeSchema.virtual('formattedName').get(function() {
+  return this.first_name + ' ' + (this.middle_initial ? this.middle_initial + '. ' : '') + this.last_name;
+});
+
 export default Mongoose.model('Judge', JudgeSchema);

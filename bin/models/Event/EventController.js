@@ -142,7 +142,7 @@ router.route('/:slug').get(function (req, res) {
         unpaidUnits = [],
         waitlistUnits = [];
 
-    if (registrations) {
+    if (registrations.length) {
       unpaidUnits = _lodash2.default.filter(registrations, function (reg) {
         return reg.unit.confirmed_paid_date == null;
       });

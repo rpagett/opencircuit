@@ -15,7 +15,12 @@ export default class FeeList extends React.Component {
           endpoint={ this.props.endpoint }
           emptyMessage="There are no fees."
           columns={{
-            'Unit': fee => { return (<Link to={ fee.unit.detailsUrl }>{ fee.unit.name }</Link>) },
+            'Unit': fee => {
+              return (
+                <Link to={ ( fee.unit ? fee.unit.detailsUrl : '#err' ) }>
+                  { ( fee.unit ? fee.unit.name : 'unit error' ) }
+                </Link>)
+              },
             'Amount': fee => { return '$'+fee.amount },
             'Due': fee => { return fee.formattedDueDate },
             'Category': fee => { return fee.category.name },

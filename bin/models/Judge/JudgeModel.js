@@ -45,5 +45,9 @@ var JudgeSchema = new _mongoose2.default.Schema({
   }
 });
 
+JudgeSchema.virtual('formattedName').get(function () {
+  return this.first_name + ' ' + (this.middle_initial ? this.middle_initial + '. ' : '') + this.last_name;
+});
+
 exports.default = _mongoose2.default.model('Judge', JudgeSchema);
 module.exports = exports['default'];

@@ -43,6 +43,10 @@ var _FeeViews = require('./models/Fee/FeeViews');
 
 var FeeView = _interopRequireWildcard(_FeeViews);
 
+var _JudgeViews = require('./models/Judge/JudgeViews');
+
+var JudgeView = _interopRequireWildcard(_JudgeViews);
+
 var _EventViews = require('./models/Event/EventViews');
 
 var EventView = _interopRequireWildcard(_EventViews);
@@ -186,6 +190,11 @@ function getAppRoutes(store) {
         _reactRouter.Route,
         { path: '/fees', onEnter: requiresRole.bind(this, _UserRoles.UserRoles.Administrator) },
         _react2.default.createElement(_reactRouter.IndexRoute, { component: FeeView.Index })
+      ),
+      _react2.default.createElement(
+        _reactRouter.Route,
+        { path: '/judges', onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector) },
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: JudgeView.Index })
       ),
       _react2.default.createElement(
         _reactRouter.Route,

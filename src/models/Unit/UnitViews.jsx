@@ -7,6 +7,7 @@ import { UserRoles, HasRole } from '../User/UserRoles';
 
 import * as UnitForms from './UnitForms';
 import UnitList from './UnitList';
+import UserFeeList from '../Fee/UserFeeList'
 
 import UnitEventsList from '../Event/UnitEventsList';
 
@@ -79,6 +80,17 @@ class _Show extends React.Component {
             </div>
             <div className="card-block">
               <UnitEventsList endpoint={ `/api/units/${unit.slug}/attending` } />
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="card col-xs-12">
+            <div className="card-header card-info">
+              Fees and Payments
+            </div>
+            <div className="card-block">
+              <UserFeeList endpoint={ `/api/fees/forUnit/${unit.slug}` } />
             </div>
           </div>
         </div>

@@ -99,7 +99,7 @@ router.get('/reauth', (req, res) => {
 })
 
 router.post('/recover', (req, res) => {
-  User.findOneAndUpdate({ email: req.body.email }, { recovery_token: uuid.v1() }, { new: true, upsert: true })
+  User.findOneAndUpdate({ email: req.body.email }, { recovery_token: uuid.v1() }, { new: true })
     .then(user => {
       if (!user) {
         throw new Error('There is no user associated with that email address. Please register.')

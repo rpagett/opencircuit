@@ -492,4 +492,29 @@ router.get('/forUser/:user_id', (req, res) => {
     })
   })
 
+router.get('/forUnit/:slug', (req, res) => {
+  Unit.findOne({ slug: req.params.slug }, '_id')
+    .then(unit => {
+      return Fee.find({ unit: unit._id })
+        .populate('unit', 'name slug organization')
+        .populate('category', 'name slug')
+        .populate('payments')
+        .sort('paid_date')
+        .sort('due_date')
+        .exec()
+    })
+    .then(fees => {
+      res.json({
+        success: true,
+        contents: fees
+      })
+    })
+    .catch(err => {
+      res.json({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
 export default router;

@@ -24,6 +24,10 @@ var _FeeCategoryController = require('./models/FeeCategory/FeeCategoryController
 
 var _FeeCategoryController2 = _interopRequireDefault(_FeeCategoryController);
 
+var _JudgeController = require('./models/Judge/JudgeController');
+
+var _JudgeController2 = _interopRequireDefault(_JudgeController);
+
 var _OrganizationController = require('./models/Organization/OrganizationController');
 
 var _OrganizationController2 = _interopRequireDefault(_OrganizationController);
@@ -56,6 +60,7 @@ router.use('/compclasses/', _CompClassController2.default);
 router.use('/events/', _EventController2.default);
 router.use('/fees/', _FeeController2.default);
 router.use('/feecategories/', _FeeCategoryController2.default);
+router.use('/judges/', _JudgeController2.default);
 router.use('/organizations/', _OrganizationController2.default);
 router.use('/register/', _RegistrationController2.default);
 router.use('/support/', _SupportController2.default);

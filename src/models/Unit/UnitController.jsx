@@ -249,10 +249,10 @@ router.get('/:slug/attending', (req, res) => {
   let inEvents = [ ];
   let allRegistrations = [ ];
 
-  Unit.findOne({ slug: req.params.slug }, '_id')
+  Unit.findOne({ slug: req.params.slug }, '_id confirmed_paid_date')
     .then(inUnit => {
       unit = inUnit;
-      console.log('unit is', unit);
+      //console.log('unit is', unit);
 
       return EventRegistration.find({ unit: {$ne: null} })
         .populate('unit', '_id confirmed_paid_date director')
@@ -269,16 +269,16 @@ router.get('/:slug/attending', (req, res) => {
         const event = events[key];
 
         let status = 'Confirmed';
-        console.log('all registrations', allRegistrations);
-        console.log('this event', allRegistrations[event._id])
+        //console.log('all registrations', allRegistrations);
+        //console.log('this event', allRegistrations[event._id])
         let unitList = _.map(allRegistrations[event._id], reg => reg.unit);
-        console.log('unitList', unitList);
+        //console.log('unitList', unitList);
         let unitKey = _.findKey(unitList, u => u.id == unit.id)
-        console.log('key', unitKey);
+        //console.log('key', unitKey);
 
         if (!unitKey && unitKey !== 0) { console.log('cnting'); continue; }
 
-        console.log('obj at unitkey', unitKey, unitList[unitKey]);
+        //console.log('obj at unitkey', unitKey, unitList[unitKey]);
 
         if (unit.confirmed_paid_date) {
           if (unitList.length >= event.attendance_cap) {
@@ -295,7 +295,7 @@ router.get('/:slug/attending', (req, res) => {
         }
 
         const found = _.find(allRegistrations[event._id], reg => { return reg.unit.id == unit.id });
-        console.log('found', found);
+        //console.log('found', found);
 
         contents.push({
           ...event.toObject(),
