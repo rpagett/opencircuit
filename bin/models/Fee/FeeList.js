@@ -132,7 +132,10 @@ var FeeList = function (_React$Component) {
               );
             }
           },
-          canDelete: this.canDelete
+          canDelete: this.canDelete,
+          deriveName: function deriveName(fee) {
+            return '$' + fee.amount + ' - ' + fee.unit.name;
+          }
         })
       );
     }

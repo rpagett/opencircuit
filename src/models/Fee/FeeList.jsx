@@ -78,6 +78,7 @@ export default class FeeList extends React.Component {
             }
           }}
           canDelete={ this.canDelete }
+          deriveName={ fee => { return ('$' + fee.amount + ' - ' + fee.unit.name) } }
         />
       </div>
     );
