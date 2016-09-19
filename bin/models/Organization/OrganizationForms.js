@@ -54,6 +54,11 @@ var Edit = exports.Edit = function (_React$Component) {
           subStore: 'unit_edit'
         }, fetch),
         _react2.default.createElement(_components.FormStatic, { name: 'name', label: 'Name' }),
+        _react2.default.createElement(
+          _UserRoles.HasRole,
+          { role: _UserRoles.UserRoles.Administrator },
+          _react2.default.createElement(_components.FormInput, { name: 'name', label: 'Name' })
+        ),
         _react2.default.createElement(_components.FormInput, { name: 'street', label: 'Street' }),
         _react2.default.createElement(_components.FormInput, { name: 'street_2', label: 'Address 2' }),
         _react2.default.createElement(_components.FormInput, { name: 'city', label: 'City' }),

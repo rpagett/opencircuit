@@ -23,6 +23,9 @@ export class Edit extends React.Component {
         { ...fetch }
       >
         <FormStatic name="name" label="Name" />
+        <HasRole role={ UserRoles.Administrator }>
+          <FormInput name="name" label="Name" />
+        </HasRole>
         <FormInput name="street" label="Street" />
         <FormInput name="street_2" label="Address 2" />
         <FormInput name="city" label="City" />
