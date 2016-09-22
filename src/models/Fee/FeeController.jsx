@@ -197,7 +197,7 @@ router.get('/paypal-return', (req, res) => {
           .then(aggregate => {
             console.log('aggregate', aggregate);
             if (!aggregate.length) {
-              return Unit.update({_id: {$in: ids}}, {confirmed_paid_date: Date.now()}).exec();
+              return Unit.update({_id: {$in: ids}}, {confirmed_paid_date: Date.now()}, {multi: true}).exec();
             }
             else {
               return Promise.all(aggregate.map(unit => {

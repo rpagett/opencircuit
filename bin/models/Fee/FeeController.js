@@ -207,7 +207,7 @@ router.get('/paypal-return', function (req, res) {
         }).then(function (aggregate) {
           console.log('aggregate', aggregate);
           if (!aggregate.length) {
-            return _UnitModel2.default.update({ _id: { $in: ids } }, { confirmed_paid_date: Date.now() }).exec();
+            return _UnitModel2.default.update({ _id: { $in: ids } }, { confirmed_paid_date: Date.now() }, { multi: true }).exec();
           } else {
             return Promise.all(aggregate.map(function (unit) {
               if (!unit.count) {
