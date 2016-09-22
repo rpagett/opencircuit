@@ -13,6 +13,7 @@ import * as JudgeView from './models/Judge/JudgeViews';
 import * as EventView from './models/Event/EventViews';
 import * as OrganizationView from './models/Organization/OrganizationViews';
 import * as RegistrationView from './models/Registration/RegistrationViews';
+import * as ReportView from './models/Report/ReportViews';
 import * as SupportView from './models/Support/SupportViews';
 import * as UnitView from './models/Unit/UnitViews';
 import * as UnitTypeView from './models/UnitType/UnitTypeViews';
@@ -125,6 +126,11 @@ export function getAppRoutes(store) {
           <Route path="unit/:unit" component={ RegistrationView.Details } />
           <Route path="unit/:unit/events" component={ RegistrationView.EventRegistration } />
           <Route path="unit/:unit/confirm" component={ RegistrationView.Confirm } />
+        </Route>
+
+        <Route path="/reports" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
+          <IndexRoute component={ ReportView.Index } />
+          <Route path="quickbooks" component={ ReportView.Quickbooks } />
         </Route>
 
         <Route path="/support">

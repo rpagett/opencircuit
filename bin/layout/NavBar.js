@@ -172,6 +172,11 @@ var _NavBar = function (_React$Component2) {
                 ),
                 _react2.default.createElement(
                   _reactRouter.Link,
+                  { to: '/reports', className: 'dropdown-item' },
+                  'Reports'
+                ),
+                _react2.default.createElement(
+                  _reactRouter.Link,
                   { to: '/units', className: 'dropdown-item' },
                   'Units'
                 ),

@@ -1,4 +1,5 @@
 import Mongoose from 'mongoose';
+import Moment from 'moment';
 import mLifecycle from 'mongoose-lifecycle';
 
 import UnitType from '../UnitType/UnitTypeModel';
@@ -51,6 +52,10 @@ const UnitSchema = Mongoose.Schema({
 });
 
 UnitSchema.plugin(mLifecycle);
+
+UnitSchema.virtual('formattedCreationDate').get(function() {
+  return Moment(this.created_at).format('MMM. Do, YYYY h:mm a');
+});
 
 UnitSchema.virtual('detailsUrl').get(function() {
   return `/units/${this.slug}`;

@@ -59,6 +59,10 @@ var _RegistrationViews = require('./models/Registration/RegistrationViews');
 
 var RegistrationView = _interopRequireWildcard(_RegistrationViews);
 
+var _ReportViews = require('./models/Report/ReportViews');
+
+var ReportView = _interopRequireWildcard(_ReportViews);
+
 var _SupportViews = require('./models/Support/SupportViews');
 
 var SupportView = _interopRequireWildcard(_SupportViews);
@@ -212,6 +216,12 @@ function getAppRoutes(store) {
         _react2.default.createElement(_reactRouter.Route, { path: 'unit/:unit', component: RegistrationView.Details }),
         _react2.default.createElement(_reactRouter.Route, { path: 'unit/:unit/events', component: RegistrationView.EventRegistration }),
         _react2.default.createElement(_reactRouter.Route, { path: 'unit/:unit/confirm', component: RegistrationView.Confirm })
+      ),
+      _react2.default.createElement(
+        _reactRouter.Route,
+        { path: '/reports', onEnter: requiresRole.bind(this, _UserRoles.UserRoles.Administrator) },
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: ReportView.Index }),
+        _react2.default.createElement(_reactRouter.Route, { path: 'quickbooks', component: ReportView.Quickbooks })
       ),
       _react2.default.createElement(
         _reactRouter.Route,

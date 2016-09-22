@@ -8,6 +8,10 @@ var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 var _mongooseLifecycle = require('mongoose-lifecycle');
 
 var _mongooseLifecycle2 = _interopRequireDefault(_mongooseLifecycle);
@@ -75,6 +79,10 @@ var UnitSchema = _mongoose2.default.Schema({
 });
 
 UnitSchema.plugin(_mongooseLifecycle2.default);
+
+UnitSchema.virtual('formattedCreationDate').get(function () {
+  return (0, _moment2.default)(this.created_at).format('MMM. Do, YYYY h:mm a');
+});
 
 UnitSchema.virtual('detailsUrl').get(function () {
   return '/units/' + this.slug;
