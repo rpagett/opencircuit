@@ -30,10 +30,14 @@ export default class UnitList extends React.Component {
           columns={{
             'Name': unit => { return (<Link to={ unit.detailsUrl }>{ unit.name }</Link>) },
             'Director': unit => {
-              return (<Link to={ unit.director.profileUrl }>{ unit.director.formattedName }</Link>)
+              return (
+                <Link to={ (unit.director ? unit.director.profileUrl : '#' ) }>
+                  { (unit.director ? unit.director.formattedName : 'none') }
+                </Link>
+              )
             },
             'Type': unit => { return unit.unit_type.name },
-            'Class': unit => { return unit.competition_class.formattedName }
+            'Class': unit => { return (unit.competition_class ? unit.competition_class.formattedName : 'none') }
           }}
           canEdit={ this.canEdit }
           canDelete={ this.canDelete }

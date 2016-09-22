@@ -75,15 +75,15 @@ var UnitList = function (_React$Component) {
             'Director': function Director(unit) {
               return _react2.default.createElement(
                 _reactRouter.Link,
-                { to: unit.director.profileUrl },
-                unit.director.formattedName
+                { to: unit.director ? unit.director.profileUrl : '#' },
+                unit.director ? unit.director.formattedName : 'none'
               );
             },
             'Type': function Type(unit) {
               return unit.unit_type.name;
             },
             'Class': function Class(unit) {
-              return unit.competition_class.formattedName;
+              return unit.competition_class ? unit.competition_class.formattedName : 'none';
             }
           },
           canEdit: this.canEdit,

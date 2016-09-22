@@ -37,7 +37,9 @@ router.post('/', function (req, res) {
       });
     }
 
-    Email.sendHTML('riley@opencircuit.us', "[Support]: " + req.body.subject, req.body.details);
+    var body = '\n      <p><strong>From:</strong> ' + req.user.formattedName + ' (' + req.user.email + ')</p>\n      <p>' + req.body.details + '</p>\n    ';
+
+    Email.sendHTML('riley@opencircuit.us', "[Support]: " + req.body.subject, body);
     res.json({
       success: true,
       redirect: '/support/success'

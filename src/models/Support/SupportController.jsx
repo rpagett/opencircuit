@@ -21,7 +21,12 @@ router.post('/', (req, res) => {
       })
     }
 
-    Email.sendHTML('riley@opencircuit.us', "[Support]: " + req.body.subject, req.body.details)
+    const body = `
+      <p><strong>From:</strong> ${req.user.formattedName} (${req.user.email})</p>
+      <p>${req.body.details}</p>
+    `;
+
+    Email.sendHTML('riley@opencircuit.us', "[Support]: " + req.body.subject, body)
     res.json({
       success: true,
       redirect: '/support/success'
