@@ -54,7 +54,7 @@ const UnitSchema = Mongoose.Schema({
 UnitSchema.plugin(mLifecycle);
 
 UnitSchema.virtual('formattedCreationDate').get(function() {
-  return Moment(this.created_at).format('MMM. Do, YYYY h:mm a');
+  return Moment(this.createdAt).format('MMM. Do, YYYY h:mm a');
 });
 
 UnitSchema.virtual('detailsUrl').get(function() {

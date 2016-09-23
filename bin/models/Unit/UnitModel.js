@@ -81,7 +81,7 @@ var UnitSchema = _mongoose2.default.Schema({
 UnitSchema.plugin(_mongooseLifecycle2.default);
 
 UnitSchema.virtual('formattedCreationDate').get(function () {
-  return (0, _moment2.default)(this.created_at).format('MMM. Do, YYYY h:mm a');
+  return (0, _moment2.default)(this.createdAt).format('MMM. Do, YYYY h:mm a');
 });
 
 UnitSchema.virtual('detailsUrl').get(function () {
