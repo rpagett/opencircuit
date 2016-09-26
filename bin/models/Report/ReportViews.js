@@ -11,6 +11,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 var _reactRouter = require('react-router');
 
 var _ContentsView = require('../../helpers/ContentsView/ContentsView');
@@ -79,7 +83,19 @@ var _Quickbooks = function (_React$Component2) {
     key: 'render',
     value: function render() {
       var rows = [];
+      var lastWeek = 0;
       this.props.contents.map(function (unit) {
+        var date = (0, _moment2.default)(unit.createdAt);
+
+        if (date.week() != lastWeek) {
+          rows.push(_react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement('p', null)
+          ));
+          lastWeek = date.week();
+        }
+
         rows.push(_react2.default.createElement(
           'div',
           { className: 'row' },
@@ -91,7 +107,7 @@ var _Quickbooks = function (_React$Component2) {
           _react2.default.createElement(
             'div',
             { className: 'col-xs-5' },
-            unit.formattedCreationDate
+            date.format('MMM. Do, YYYY h:mm a')
           )
         ));
       });

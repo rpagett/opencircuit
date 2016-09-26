@@ -1,5 +1,7 @@
 import React from 'react';
+import Moment from 'moment';
 import { Link } from 'react-router';
+
 
 import ContentsView from '../../helpers/ContentsView/ContentsView';
 
@@ -20,11 +22,21 @@ export class Index extends React.Component {
 class _Quickbooks extends React.Component {
   render() {
     let rows = [ ];
+    let lastWeek = 0;
     this.props.contents.map(unit => {
+      let date = Moment(unit.createdAt);
+
+      if (date.week() != lastWeek) {
+        rows.push(
+          <div className="row"><p></p></div>
+        )
+        lastWeek = date.week();
+      }
+
       rows.push(
         <div className="row">
           <div className="offset-xs-1 col-xs-5">{ unit.name }</div>
-          <div className="col-xs-5">{ unit.formattedCreationDate }</div>
+          <div className="col-xs-5">{ date.format('MMM. Do, YYYY h:mm a') }</div>
         </div>
       )
     })

@@ -26,7 +26,7 @@ var router = _express2.default.Router();
 // All routes are '/api/reports/...'
 
 router.get('/quickbooks', function (req, res) {
-  _UnitModel2.default.find({ registered: true }, 'name slug created_at').sort('created_at').exec().then(function (units) {
+  _UnitModel2.default.find({ registered: true }, 'name slug createdAt').sort('createdAt').exec().then(function (units) {
     res.json({
       success: true,
       contents: units

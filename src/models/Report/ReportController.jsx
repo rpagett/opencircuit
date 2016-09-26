@@ -9,8 +9,8 @@ let router = Express.Router();
 // All routes are '/api/reports/...'
 
 router.get('/quickbooks', (req, res) => {
-  Unit.find({ registered: true }, 'name slug created_at')
-    .sort('created_at')
+  Unit.find({ registered: true }, 'name slug createdAt')
+    .sort('createdAt')
     .exec()
     .then(units => {
       res.json({
