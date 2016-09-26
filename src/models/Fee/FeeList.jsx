@@ -24,8 +24,8 @@ export default class FeeList extends React.Component {
           columns={{
             'Unit': fee => {
               return (
-                <Link to={ ( fee.unit ? fee.unit.detailsUrl : '#err' ) }>
-                  { ( fee.unit ? fee.unit.name : 'unit error' ) }
+                <Link to={ ( fee.unit !== null ? fee.unit.detailsUrl : '#err' ) }>
+                  { ( fee.unit !== null ? fee.unit.name : 'unit error' ) }
                 </Link>)
               },
             'Amount': fee => { return '$'+fee.amount },
