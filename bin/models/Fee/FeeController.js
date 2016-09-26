@@ -138,6 +138,10 @@ _EventRegistrationModel2.default.on('afterInsert', function (registration) {
 
 router.route('/').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
   _FeeModel2.default.find({}).populate('unit', 'name slug organization detailsUrl').populate('unit.organization', 'name slug detailsUrl').populate('category', 'name slug').populate('payments').sort('unit.name').sort('due_date').exec().then(function (fees) {
+    fees = _lodash2.default.filter(fees, function (fee) {
+      return fee.unit != null;
+    });
+
     res.json({
       success: true,
       contents: fees

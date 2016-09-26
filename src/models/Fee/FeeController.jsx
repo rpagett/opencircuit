@@ -115,6 +115,8 @@ router.route('/')
       .sort('due_date')
       .exec()
       .then(fees => {
+        fees = _.filter(fees, fee => fee.unit != null);
+        
         res.json({
           success: true,
           contents: fees
