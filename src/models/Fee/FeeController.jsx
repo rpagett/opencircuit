@@ -86,11 +86,6 @@ Unit.on('afterInsert', newUnit => {
   }
 });
 
-Unit.on('beforeRemove', unit => {
-  Fee.remove({ unit: unit._id })
-    .exec()
-})
-
 EventRegistration.on('afterInsert', registration => {
   Unit.findOne({ _id: registration.unit })
     .then(unit => {
@@ -116,7 +111,7 @@ router.route('/')
       .exec()
       .then(fees => {
         fees = _.filter(fees, fee => fee.unit != null);
-        
+
         res.json({
           success: true,
           contents: fees

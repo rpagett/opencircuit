@@ -158,8 +158,6 @@ app.use('/api', APIDispatch);
 app.use('/auth', AuthController);
 
 app.get('*', (req, res) => {
-  console.log(req.session);
-  console.log('REQ USER is', req.user);
   if (req.user) {
     appStore.dispatch(loginUser(req.user));
   }

@@ -177,8 +177,6 @@ app.use('/api', _APIDispatch2.default);
 app.use('/auth', _AuthController2.default);
 
 app.get('*', function (req, res) {
-  console.log(req.session);
-  console.log('REQ USER is', req.user);
   if (req.user) {
     appStore.dispatch((0, _AuthActions.loginUser)(req.user));
   } else {

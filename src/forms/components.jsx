@@ -481,7 +481,7 @@ class _Checkbox extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.inForm) {
+    if (this.props.inForm && this.props.preChecked != null) {
       this.props.updateField(this.props.preChecked);
     }
     else {

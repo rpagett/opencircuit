@@ -150,7 +150,11 @@ router.route('/:slug').get(function (req, res) {
     });
   });
 }).delete((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
-  _UnitModel2.default.findOneAndRemove({ slug: req.params.slug }).exec().then(function () {
+  _UnitModel2.default.findOneAndRemove({ slug: req.params.slug }).exec().then(function (unit) {
+    console.log('Removing fees for unit', unit);
+    _EventRegistrationModel2.default.remove({ unit: unit._id }).exec();
+    return _FeeModel2.default.remove({ unit: unit._id }).exec();
+  }).then(function () {
     res.json({
       success: true
     });

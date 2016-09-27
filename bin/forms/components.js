@@ -686,7 +686,7 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component16) {
   _createClass(_Checkbox, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      if (this.props.inForm) {
+      if (this.props.inForm && this.props.preChecked != null) {
         this.props.updateField(this.props.preChecked);
       } else {
         this.props.updateCheckbox(this.props.preChecked);

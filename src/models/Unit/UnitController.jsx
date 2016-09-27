@@ -152,12 +152,17 @@ router.route('/:slug')
   .delete(hasRole(UserRoles.Administrator), (req, res) => {
     Unit.findOneAndRemove({ slug: req.params.slug })
       .exec()
-      .then( () => {
+      .then(unit => {
+        console.log('Removing fees for unit', unit);
+        EventRegistration.remove({ unit: unit._id }).exec();
+        return Fee.remove({ unit: unit._id }).exec()
+      })
+      .then(() => {
         res.json({
           success: true
         })
       })
-      .catch( err => {
+      .catch(err => {
         res.json({
           success: false,
           error: err.message

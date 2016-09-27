@@ -49,6 +49,7 @@ export class Edit extends React.Component {
 
         <HasRole role={ UserRoles.Administrator }>
           <UserSelect name="director" label="Director" />
+          <Checkbox inForm={ true } name="registered" label="Registered" />
         </HasRole>
 
         <HasRole role={ UserRoles.EventDirector }>

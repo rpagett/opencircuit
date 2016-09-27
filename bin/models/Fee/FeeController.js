@@ -121,10 +121,6 @@ _UnitModel2.default.on('afterInsert', function (newUnit) {
   }
 });
 
-_UnitModel2.default.on('beforeRemove', function (unit) {
-  _FeeModel2.default.remove({ unit: unit._id }).exec();
-});
-
 _EventRegistrationModel2.default.on('afterInsert', function (registration) {
   _UnitModel2.default.findOne({ _id: registration.unit }).then(function (unit) {
     if (unit && !unit.circuit_member) {
