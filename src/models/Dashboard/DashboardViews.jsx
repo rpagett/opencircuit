@@ -6,6 +6,7 @@ import ContentsView from '../../helpers/ContentsView/ContentsView';
 import { LaunchModalButton } from '../../modals/SpawnableModal';
 import { UserRoles, HasRole } from '../User/UserRoles';
 import UserFeeList from '../Fee/UserFeeList';
+import UnitList from '../Unit/UnitList';
 
 class _FeeBox extends React.Component {
   render() {
@@ -56,6 +57,30 @@ class _FeeBox extends React.Component {
   }
 }
 
+class _UnitBox extends React.Component {
+  render() {
+    if (!this.props.contents.length) {
+      return (<div></div>)
+    }
+
+    return (
+      <div className="row">
+        <div className="card col-xs-12">
+          <div className="card-header card-success">
+            Your Registered Units
+          </div>
+          <div className="card-block">
+            <UnitList
+              endpoint={ `/api/units/forUser/${this.props.user._id}` }
+              fedContents={ this.props.contents }
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
 class _Home extends React.Component {
   render() {
     return (
@@ -65,6 +90,14 @@ class _Home extends React.Component {
           subStore="dashboard_fees"
           endpoint={ `/api/fees/orgsForUser/${this.props.user._id}` }
           component={ _FeeBox }
+          user={ this.props.user }
+          returnEmpty={ true }
+        />
+
+        <ContentsView
+          subStore="user_units"
+          endpoint={ `/api/units/forUser/${this.props.user._id}` }
+          component={ _UnitBox }
           user={ this.props.user }
           returnEmpty={ true }
         />

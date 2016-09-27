@@ -166,6 +166,20 @@ router.route('/:slug').get(function (req, res) {
   });
 });
 
+router.get('/forUser/:id', function (req, res) {
+  _UnitModel2.default.find({ director: req.params.id }, '_id name slug organization unit_type competition_class director').populate('organization', 'name detailsUrl').populate('unit_type', 'name').populate('competition_class', 'name abbreviation').populate('director', 'first_name last_name formattedName email profileUrl').sort('unit_type.name name').then(function (units) {
+    res.json({
+      success: true,
+      contents: units
+    });
+  }).catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
 // Mostly just for the registration flow / event modal
 router.route('/:id/events').get(function (req, res) {
   _EventRegistrationModel2.default.find({ unit: req.params.id }, 'event').then(function (registrations) {

@@ -27,6 +27,10 @@ var _UserFeeList = require('../Fee/UserFeeList');
 
 var _UserFeeList2 = _interopRequireDefault(_UserFeeList);
 
+var _UnitList = require('../Unit/UnitList');
+
+var _UnitList2 = _interopRequireDefault(_UnitList);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -111,8 +115,51 @@ var _FeeBox = function (_React$Component) {
   return _FeeBox;
 }(_react2.default.Component);
 
-var _Home = function (_React$Component2) {
-  _inherits(_Home, _React$Component2);
+var _UnitBox = function (_React$Component2) {
+  _inherits(_UnitBox, _React$Component2);
+
+  function _UnitBox() {
+    _classCallCheck(this, _UnitBox);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_UnitBox).apply(this, arguments));
+  }
+
+  _createClass(_UnitBox, [{
+    key: 'render',
+    value: function render() {
+      if (!this.props.contents.length) {
+        return _react2.default.createElement('div', null);
+      }
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'row' },
+        _react2.default.createElement(
+          'div',
+          { className: 'card col-xs-12' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card-header card-success' },
+            'Your Registered Units'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-block' },
+            _react2.default.createElement(_UnitList2.default, {
+              endpoint: '/api/units/forUser/' + this.props.user._id,
+              fedContents: this.props.contents
+            })
+          )
+        )
+      );
+    }
+  }]);
+
+  return _UnitBox;
+}(_react2.default.Component);
+
+var _Home = function (_React$Component3) {
+  _inherits(_Home, _React$Component3);
 
   function _Home() {
     _classCallCheck(this, _Home);
@@ -135,6 +182,13 @@ var _Home = function (_React$Component2) {
           subStore: 'dashboard_fees',
           endpoint: '/api/fees/orgsForUser/' + this.props.user._id,
           component: _FeeBox,
+          user: this.props.user,
+          returnEmpty: true
+        }),
+        _react2.default.createElement(_ContentsView2.default, {
+          subStore: 'user_units',
+          endpoint: '/api/units/forUser/' + this.props.user._id,
+          component: _UnitBox,
           user: this.props.user,
           returnEmpty: true
         }),
@@ -171,8 +225,8 @@ var mapDispatchToHomeProps = function mapDispatchToHomeProps(dispatch) {
 
 var Home = exports.Home = (0, _reactRedux.connect)(mapStateToHomeProps, mapDispatchToHomeProps)(_Home);
 
-var About = exports.About = function (_React$Component3) {
-  _inherits(About, _React$Component3);
+var About = exports.About = function (_React$Component4) {
+  _inherits(About, _React$Component4);
 
   function About() {
     _classCallCheck(this, About);
@@ -198,8 +252,8 @@ var About = exports.About = function (_React$Component3) {
   return About;
 }(_react2.default.Component);
 
-var PageNotFound = exports.PageNotFound = function (_React$Component4) {
-  _inherits(PageNotFound, _React$Component4);
+var PageNotFound = exports.PageNotFound = function (_React$Component5) {
+  _inherits(PageNotFound, _React$Component5);
 
   function PageNotFound() {
     _classCallCheck(this, PageNotFound);
@@ -243,8 +297,8 @@ var PageNotFound = exports.PageNotFound = function (_React$Component4) {
   return PageNotFound;
 }(_react2.default.Component);
 
-var ConfirmPayment = exports.ConfirmPayment = function (_React$Component5) {
-  _inherits(ConfirmPayment, _React$Component5);
+var ConfirmPayment = exports.ConfirmPayment = function (_React$Component6) {
+  _inherits(ConfirmPayment, _React$Component6);
 
   function ConfirmPayment() {
     _classCallCheck(this, ConfirmPayment);
@@ -288,8 +342,8 @@ var ConfirmPayment = exports.ConfirmPayment = function (_React$Component5) {
   return ConfirmPayment;
 }(_react2.default.Component);
 
-var ErrorPayment = exports.ErrorPayment = function (_React$Component6) {
-  _inherits(ErrorPayment, _React$Component6);
+var ErrorPayment = exports.ErrorPayment = function (_React$Component7) {
+  _inherits(ErrorPayment, _React$Component7);
 
   function ErrorPayment() {
     _classCallCheck(this, ErrorPayment);
