@@ -217,7 +217,7 @@ router.get('/:slug/eventChecks', function (req, res) {
   }).then(function (registrations) {
     storeRegistrations = registrations;
 
-    return _EventModel2.default.find({/*types_allowed: type*/}, '_id name slug date');
+    return _EventModel2.default.find({/*types_allowed: type*/}, '_id name slug date').sort('date').exec();
   }).then(function (events) {
     var outEvents = [];
 

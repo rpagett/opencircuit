@@ -238,6 +238,8 @@ router.get('/:slug/eventChecks', (req, res) => {
       storeRegistrations = registrations;
 
       return Event.find({ /*types_allowed: type*/ }, '_id name slug date')
+        .sort('date')
+        .exec()
     })
     .then(events => {
       let outEvents = [ ];
