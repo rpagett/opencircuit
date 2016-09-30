@@ -343,6 +343,7 @@ router.post('/:fee_id/applyPayment', function (req, res) {
   }).then(function (fee) {
     var alreadyPaid = _lodash2.default.sumBy(fee.payments, 'amount');
     console.log('Already paid', alreadyPaid);
+    console.log('Amount remaining', fee.amountRemaining);
     var amountToPay = Math.min(data.amount, fee.amountRemaining);
     console.log('Amount to pay', amountToPay);
 
@@ -354,9 +355,12 @@ router.post('/:fee_id/applyPayment', function (req, res) {
       });
     }
 
-    if (amountToPay <= 0 || fee.amountRemaining - amountToPay <= 0) {
+    console.log('Difference', fee.amountRemaining - amountToPay);
+    if (fee.amountRemaining - amountToPay <= 0) {
       fee.paid_date = Date.now();
       updateUnit = true;
+    } else {
+      fee.paid_date = null;
     }
 
     return fee.save();

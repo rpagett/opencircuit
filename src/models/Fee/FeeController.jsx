@@ -343,6 +343,7 @@ router.post('/:fee_id/applyPayment', (req, res) => {
     .then(fee => {
       const alreadyPaid = _.sumBy(fee.payments, 'amount');
       console.log('Already paid', alreadyPaid);
+      console.log('Amount remaining', fee.amountRemaining);
       const amountToPay = Math.min(data.amount, fee.amountRemaining);
       console.log('Amount to pay', amountToPay);
 
@@ -354,9 +355,13 @@ router.post('/:fee_id/applyPayment', (req, res) => {
         })
       }
 
-      if (amountToPay <= 0 || (fee.amountRemaining - amountToPay) <= 0) {
+      console.log('Difference', fee.amountRemaining - amountToPay)
+      if ((fee.amountRemaining - amountToPay) <= 0) {
         fee.paid_date = Date.now();
         updateUnit = true;
+      }
+      else {
+        fee.paid_date = null;
       }
 
       return fee.save()
