@@ -45,9 +45,9 @@ function updateEvents(id, events) {
       const registeredEvents = _.map(registrations, 'event');
       console.log('Registered Events', registeredEvents);
 
-      addEvents = _.difference(inEvents, registeredEvents);
+      addEvents = _.differenceBy(inEvents, registeredEvents, String);
 
-      const removeEvents = _.difference(registeredEvents, inEvents);
+      const removeEvents = _.differenceBy(registeredEvents, inEvents, String);
       console.log('Removing events', removeEvents);
 
       EventRegistration.remove({ unit: unit._id, event: {$in: removeEvents } }).exec()
@@ -63,6 +63,12 @@ function updateEvents(id, events) {
 
       console.log('Adding events', addEvents);
       return EventRegistration.create(creation)
+    })
+    .catch(err => {
+      res.json({
+        success: false,
+        error: err.message
+      })
     })
 }
 

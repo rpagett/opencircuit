@@ -70,9 +70,9 @@ function updateEvents(id, events) {
     var registeredEvents = _lodash2.default.map(registrations, 'event');
     console.log('Registered Events', registeredEvents);
 
-    addEvents = _lodash2.default.difference(inEvents, registeredEvents);
+    addEvents = _lodash2.default.differenceBy(inEvents, registeredEvents, String);
 
-    var removeEvents = _lodash2.default.difference(registeredEvents, inEvents);
+    var removeEvents = _lodash2.default.differenceBy(registeredEvents, inEvents, String);
     console.log('Removing events', removeEvents);
 
     _EventRegistrationModel2.default.remove({ unit: unit._id, event: { $in: removeEvents } }).exec();
@@ -88,6 +88,11 @@ function updateEvents(id, events) {
 
     console.log('Adding events', addEvents);
     return _EventRegistrationModel2.default.create(creation);
+  }).catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
+    });
   });
 }
 
