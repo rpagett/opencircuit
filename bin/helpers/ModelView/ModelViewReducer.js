@@ -24,7 +24,9 @@ var modelView = function modelView() {
       if (action.subStore) {
         var _extends2;
 
-        return _extends({}, state, (_extends2 = {}, _defineProperty(_extends2, action.subStore, null), _defineProperty(_extends2, 'isLoading', true), _extends2));
+        return _extends({}, state, (_extends2 = {
+          error: null
+        }, _defineProperty(_extends2, action.subStore, null), _defineProperty(_extends2, 'isLoading', true), _extends2));
       }
 
       return {

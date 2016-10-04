@@ -10,6 +10,7 @@ const modelView = (state = { }, action) => {
       if (action.subStore) {
         return {
           ...state,
+          error: null,
           [action.subStore]: null,
           isLoading: true
         }
