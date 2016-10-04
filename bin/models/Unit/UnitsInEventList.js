@@ -61,22 +61,22 @@ var UnitsInEventList = function (_React$Component) {
             'Name': function Name(reg) {
               return _react2.default.createElement(
                 _reactRouter.Link,
-                { to: reg.unit.detailsUrl },
-                reg.unit.name
+                { to: reg.unit ? reg.unit.detailsUrl : 'error' },
+                reg.unit ? reg.unit.name : 'error'
               );
             },
             'Director': function Director(reg) {
               return _react2.default.createElement(
                 _reactRouter.Link,
-                { to: reg.unit.director.profileUrl },
-                reg.unit.director.formattedName
+                { to: reg.unit && reg.unit.director ? reg.unit.director.profileUrl : '#' },
+                reg.unit && reg.unit.director ? reg.unit.director.formattedName : 'error'
               );
             },
             'Type': function Type(reg) {
-              return reg.unit.unit_type.name;
+              return reg.unit && reg.unit.unit_type ? reg.unit.unit_type.name : 'error';
             },
             'Class': function Class(reg) {
-              return reg.competition_class.formattedName;
+              return reg.competition_class ? reg.competition_class.formattedName : 'error';
             }
           },
           canEdit: this.canEdit,
