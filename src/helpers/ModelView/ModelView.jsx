@@ -34,7 +34,7 @@ class _ModelView extends React.Component {
     }
 
     if (this.props.error) {
-      return (<strong>{ this.props.error }</strong>);
+      return (<strong>{ this.props.error.message + " - " + this.props.error.filename }</strong>);
     }
 
     if (this.props.isLoading) {

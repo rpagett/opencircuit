@@ -70,7 +70,7 @@ var _ModelView = (_temp = _class = function (_React$Component) {
         return _react2.default.createElement(
           'strong',
           null,
-          this.props.error
+          this.props.error.message + " - " + this.props.error.filename
         );
       }
 

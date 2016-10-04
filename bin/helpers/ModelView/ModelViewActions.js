@@ -67,6 +67,6 @@ function receivedModel(model, subStore) {
 function gotError(error) {
   return {
     type: 'MODELVIEW_ERROR',
-    error: error.message
+    error: error
   };
 }
