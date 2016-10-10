@@ -25,6 +25,10 @@ class _ModelView extends React.Component {
   }
 
   render() {
+    if (this.props.isLoading) {
+      return <LoadingCube show={ true } />
+    }
+
     if (!this.props.model) {
       if (this.props.returnEmpty) {
         return <div></div>
@@ -36,11 +40,7 @@ class _ModelView extends React.Component {
     if (this.props.error) {
       return (<strong>{ this.props.error.message + " - " + this.props.error.filename }</strong>);
     }
-
-    if (this.props.isLoading) {
-      return <LoadingCube show={ true } />
-    }
-
+    
     return (<this.props.component model={ this.props.model } />)
   }
 }
