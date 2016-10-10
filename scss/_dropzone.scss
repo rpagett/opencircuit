@@ -1,0 +1,15 @@
+.dropzone {
+  width: 100%;
+  border: 5px solid $brand-info;
+  background-color: mix(white, $brand-info, 30%);
+  color: #222;
+  font-weight: bold;
+  padding: 3rem;
+  margin-top: 2rem;
+}
+
+.dropzone-active {
+  @extend .dropzone;
+  border: 5px solid $brand-warning;
+  background-color: mix(white, $brand-warning, 30%);
+}
