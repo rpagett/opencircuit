@@ -307,7 +307,7 @@ router.post('/userPay', (req, res) => {
           console.log('REDIRECT', redirect);
 
           if (redirect) {
-            Fee.update({ _id: {$in: _.map(fees, 'id')} }, { paypal_id: payment.id })
+            Fee.update({ _id: {$in: _.map(fees, 'id')} }, { paypal_id: payment.id }, { multi: true })
               .then( () => {
                 res.send({
                   success: true,

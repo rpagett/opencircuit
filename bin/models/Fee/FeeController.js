@@ -313,7 +313,7 @@ router.post('/userPay', function (req, res) {
           console.log('REDIRECT', redirect);
 
           if (redirect) {
-            _FeeModel2.default.update({ _id: { $in: _lodash2.default.map(fees, 'id') } }, { paypal_id: payment.id }).then(function () {
+            _FeeModel2.default.update({ _id: { $in: _lodash2.default.map(fees, 'id') } }, { paypal_id: payment.id }, { multi: true }).then(function () {
               res.send({
                 success: true,
                 external: true,
