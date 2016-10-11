@@ -318,7 +318,10 @@ router.post('/userPay', (req, res) => {
           }
         }
       });
-    });
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
 })
 
 router.post('/:fee_id/applyPayment', (req, res) => {

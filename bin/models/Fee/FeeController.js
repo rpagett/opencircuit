@@ -324,6 +324,8 @@ router.post('/userPay', function (req, res) {
         })();
       }
     });
+  }).catch(function (err) {
+    console.log(err.message);
   });
 });
 

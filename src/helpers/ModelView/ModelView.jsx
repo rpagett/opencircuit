@@ -40,7 +40,7 @@ class _ModelView extends React.Component {
     if (this.props.error) {
       return (<strong>{ this.props.error.message + " - " + this.props.error.filename }</strong>);
     }
-    
+
     return (<this.props.component model={ this.props.model } />)
   }
 }
