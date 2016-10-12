@@ -7,6 +7,7 @@ import { LaunchModalButton } from '../../modals/SpawnableModal';
 import { UserRoles, HasRole } from '../User/UserRoles';
 import UserFeeList from '../Fee/UserFeeList';
 import UnitList from '../Unit/UnitList';
+import FileList from '../File/FileList';
 
 class _FeeBox extends React.Component {
   render() {
@@ -107,6 +108,35 @@ class _Home extends React.Component {
             <Link to="/register" className="btn btn-block btn-outline-success">
               Register Your Unit(s)
             </Link>
+          </div>
+        </div>
+
+        <p></p>
+
+        <div className="row">
+          <div className="card col-xs-12">
+            <div className="card-header card-info">
+              Uploaded Files
+            </div>
+            <div className="card-block">
+              <FileList endpoint="/api/files" />
+            </div>
+            <HasRole role={ UserRoles.Administrator } className="card-footer">
+              <div className="row">
+                <LaunchModalButton
+                  className="btn btn-sm btn-block btn-outline-info"
+                  buttonText="Upload File"
+
+                  title="Upload File"
+                  componentName="FILE_UPLOAD"
+                  modalProps={{
+                    user: this.props.user,
+                    refreshTable: 'fileList',
+                    refreshEndpoint: '/api/files'
+                  }}
+                />
+              </div>
+            </HasRole>
           </div>
         </div>
       </div>

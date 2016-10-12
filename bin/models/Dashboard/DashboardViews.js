@@ -31,6 +31,10 @@ var _UnitList = require('../Unit/UnitList');
 
 var _UnitList2 = _interopRequireDefault(_UnitList);
 
+var _FileList = require('../File/FileList');
+
+var _FileList2 = _interopRequireDefault(_FileList);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -202,6 +206,45 @@ var _Home = function (_React$Component3) {
               _reactRouter.Link,
               { to: '/register', className: 'btn btn-block btn-outline-success' },
               'Register Your Unit(s)'
+            )
+          )
+        ),
+        _react2.default.createElement('p', null),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card col-xs-12' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-header card-info' },
+              'Uploaded Files'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-block' },
+              _react2.default.createElement(_FileList2.default, { endpoint: '/api/files' })
+            ),
+            _react2.default.createElement(
+              _UserRoles.HasRole,
+              { role: _UserRoles.UserRoles.Administrator, className: 'card-footer' },
+              _react2.default.createElement(
+                'div',
+                { className: 'row' },
+                _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
+                  className: 'btn btn-sm btn-block btn-outline-info',
+                  buttonText: 'Upload File',
+
+                  title: 'Upload File',
+                  componentName: 'FILE_UPLOAD',
+                  modalProps: {
+                    user: this.props.user,
+                    refreshTable: 'fileList',
+                    refreshEndpoint: '/api/files'
+                  }
+                })
+              )
             )
           )
         )

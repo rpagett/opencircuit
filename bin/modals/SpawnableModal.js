@@ -35,6 +35,10 @@ var _FeeModals = require('../models/Fee/FeeModals');
 
 var FeeModals = _interopRequireWildcard(_FeeModals);
 
+var _FileModals = require('../models/File/FileModals');
+
+var FileModals = _interopRequireWildcard(_FileModals);
+
 var _FlexTableModals = require('../helpers/FlexTable/FlexTableModals');
 
 var FlexTableModals = _interopRequireWildcard(_FlexTableModals);
@@ -115,6 +119,9 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
 
         case 'FLEXTABLE_CONFIRM_DELETION':
           return _react2.default.createElement(FlexTableModals.ConfirmDeletion, modalProps);
+
+        case 'FILE_UPLOAD':
+          return _react2.default.createElement(FileModals.Upload, modalProps);
 
         default:
           return _react2.default.createElement(_LoadingCube2.default, { show: true });

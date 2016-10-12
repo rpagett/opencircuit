@@ -103,7 +103,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function getAppRoutes(store) {
   var dumpAllContents = function dumpAllContents(store) {
-    store.dispatch((0, _FlexTableActions.dumpContents)());
+    //store.dispatch(dumpFlexTable());
     store.dispatch(ModelViewActions.dumpContents());
     store.dispatch(ContentsViewActions.dumpContents());
   };
