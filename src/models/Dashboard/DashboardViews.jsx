@@ -65,16 +65,47 @@ class _UnitBox extends React.Component {
     }
 
     return (
-      <div className="row">
-        <div className="card col-xs-12">
-          <div className="card-header card-success">
-            Your Registered Units
+      <div>
+        <div className="row">
+          <div className="card col-xs-12">
+            <div className="card-header card-success">
+              Your Registered Units
+            </div>
+            <div className="card-block">
+              <UnitList
+                endpoint={ `/api/units/forUser/${this.props.user._id}` }
+                fedContents={ this.props.contents }
+              />
+            </div>
           </div>
-          <div className="card-block">
-            <UnitList
-              endpoint={ `/api/units/forUser/${this.props.user._id}` }
-              fedContents={ this.props.contents }
-            />
+        </div>
+
+        <p></p>
+
+        <div className="row">
+          <div className="card col-xs-12">
+            <div className="card-header card-info">
+              Uploaded Files
+            </div>
+            <div className="card-block">
+              <FileList endpoint="/api/files" />
+            </div>
+            <HasRole role={ UserRoles.Administrator } className="card-footer">
+              <div className="row">
+                <LaunchModalButton
+                  className="btn btn-sm btn-block btn-outline-info"
+                  buttonText="Upload File"
+
+                  title="Upload File"
+                  componentName="FILE_UPLOAD"
+                  modalProps={{
+                    user: this.props.user,
+                    refreshTable: 'fileList',
+                    refreshEndpoint: '/api/files'
+                  }}
+                />
+              </div>
+            </HasRole>
           </div>
         </div>
       </div>
@@ -108,35 +139,6 @@ class _Home extends React.Component {
             <Link to="/register" className="btn btn-block btn-outline-success">
               Register Your Unit(s)
             </Link>
-          </div>
-        </div>
-
-        <p></p>
-
-        <div className="row">
-          <div className="card col-xs-12">
-            <div className="card-header card-info">
-              Uploaded Files
-            </div>
-            <div className="card-block">
-              <FileList endpoint="/api/files" />
-            </div>
-            <HasRole role={ UserRoles.Administrator } className="card-footer">
-              <div className="row">
-                <LaunchModalButton
-                  className="btn btn-sm btn-block btn-outline-info"
-                  buttonText="Upload File"
-
-                  title="Upload File"
-                  componentName="FILE_UPLOAD"
-                  modalProps={{
-                    user: this.props.user,
-                    refreshTable: 'fileList',
-                    refreshEndpoint: '/api/files'
-                  }}
-                />
-              </div>
-            </HasRole>
           </div>
         </div>
       </div>

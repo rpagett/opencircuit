@@ -55,6 +55,7 @@
     "mongodb": "^2.1.21",
     "mongoose": "^4.4.19",
     "mongoose-lifecycle": "^1.0.0",
+    "multer": "^1.2.0",
     "node-notifier": "^4.6.0",
     "node-uuid": "^1.4.7",
     "nodemon": "^1.10.2",

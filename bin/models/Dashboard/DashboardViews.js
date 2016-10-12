@@ -137,22 +137,65 @@ var _UnitBox = function (_React$Component2) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'row' },
+        null,
         _react2.default.createElement(
           'div',
-          { className: 'card col-xs-12' },
+          { className: 'row' },
           _react2.default.createElement(
             'div',
-            { className: 'card-header card-success' },
-            'Your Registered Units'
-          ),
+            { className: 'card col-xs-12' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-header card-success' },
+              'Your Registered Units'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-block' },
+              _react2.default.createElement(_UnitList2.default, {
+                endpoint: '/api/units/forUser/' + this.props.user._id,
+                fedContents: this.props.contents
+              })
+            )
+          )
+        ),
+        _react2.default.createElement('p', null),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
           _react2.default.createElement(
             'div',
-            { className: 'card-block' },
-            _react2.default.createElement(_UnitList2.default, {
-              endpoint: '/api/units/forUser/' + this.props.user._id,
-              fedContents: this.props.contents
-            })
+            { className: 'card col-xs-12' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-header card-info' },
+              'Uploaded Files'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-block' },
+              _react2.default.createElement(_FileList2.default, { endpoint: '/api/files' })
+            ),
+            _react2.default.createElement(
+              _UserRoles.HasRole,
+              { role: _UserRoles.UserRoles.Administrator, className: 'card-footer' },
+              _react2.default.createElement(
+                'div',
+                { className: 'row' },
+                _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
+                  className: 'btn btn-sm btn-block btn-outline-info',
+                  buttonText: 'Upload File',
+
+                  title: 'Upload File',
+                  componentName: 'FILE_UPLOAD',
+                  modalProps: {
+                    user: this.props.user,
+                    refreshTable: 'fileList',
+                    refreshEndpoint: '/api/files'
+                  }
+                })
+              )
+            )
           )
         )
       );
@@ -206,45 +249,6 @@ var _Home = function (_React$Component3) {
               _reactRouter.Link,
               { to: '/register', className: 'btn btn-block btn-outline-success' },
               'Register Your Unit(s)'
-            )
-          )
-        ),
-        _react2.default.createElement('p', null),
-        _react2.default.createElement(
-          'div',
-          { className: 'row' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card col-xs-12' },
-            _react2.default.createElement(
-              'div',
-              { className: 'card-header card-info' },
-              'Uploaded Files'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'card-block' },
-              _react2.default.createElement(_FileList2.default, { endpoint: '/api/files' })
-            ),
-            _react2.default.createElement(
-              _UserRoles.HasRole,
-              { role: _UserRoles.UserRoles.Administrator, className: 'card-footer' },
-              _react2.default.createElement(
-                'div',
-                { className: 'row' },
-                _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
-                  className: 'btn btn-sm btn-block btn-outline-info',
-                  buttonText: 'Upload File',
-
-                  title: 'Upload File',
-                  componentName: 'FILE_UPLOAD',
-                  modalProps: {
-                    user: this.props.user,
-                    refreshTable: 'fileList',
-                    refreshEndpoint: '/api/files'
-                  }
-                })
-              )
             )
           )
         )
