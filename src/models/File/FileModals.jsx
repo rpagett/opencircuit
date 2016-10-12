@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 
-import { fetchAPI } from '../../helpers/functions';
+import fetch from 'isomorphic-fetch';
 import LoadingCube from '../../helpers/LoadingCube';
 
 export class Upload extends React.Component {
@@ -18,22 +18,20 @@ export class Upload extends React.Component {
     })
   }
 
-  onDrop(files) {
+  //onDrop(files) {
+  onSubmit(e) {
+    e && e.preventDefault();
     this.setState({ isLoading: true });
 
     let data = new FormData();
-    files.map(file => {
-      data.append('upload', file);
-    })
+    data.append('file', this._file.files[0]);
     data.append('filename', this.state.filename);
 
     const boundaryKey = Math.floor(Math.random() * 1E16);
-    fetchAPI('/api/files', {
+    fetch('/api/files', {
       credentials: 'same-origin',
       method: 'POST',
       headers: {
-        //'Accept': 'application/json',
-        'Content-Type': 'multipart/form-data; boundary=---' + boundaryKey,
         'Authorization': this.props.user.apiToken
       },
       body: data
@@ -60,18 +58,36 @@ export class Upload extends React.Component {
     return (
       <div className="container-fluid">
         <div className="row"><strong>File Name for Users</strong></div>
-        <div className="row">
-          <input name="filename" className="form-control" type="text" onChange={ this.updateText.bind(this) } />
-        </div>
-        <div className="row">
-          <Dropzone
-            className="dropzone"
-            activeClassName="dropzone-active"
-            onDrop={ this.onDrop.bind(this) }
-          >
-            <strong>Drag a file or click to open file picker.</strong>
-          </Dropzone>
-        </div>
+        <form enctype="multipart/form-data" ref="uploadForm">
+          <div className="row">
+            <input
+              name="filename"
+              className="form-control"
+              type="text"
+              onChange={ this.updateText.bind(this) }
+            />
+            <p></p>
+          </div>
+          <div className="row">
+            <input
+              className="form-control"
+              type="file"
+              name="upload"
+              ref={ c => this._file = c } />
+            <p></p>
+          </div>
+          <div className="row">
+            <button
+              type="submit"
+              role="submit"
+              onClick={ this.onSubmit.bind(this) }
+              className="btn btn-success btn-block"
+            >
+              Upload
+            </button>
+            <p></p>
+          </div>
+        </form>
       </div>
     )
   }

@@ -4,7 +4,7 @@ export const fetchContents = (name, endpoint) => {
   return (dispatch, getState) => {
     const { flexTable, auth } = getState();
 
-    dispatch(dumpContents());
+    dispatch(dumpContents(name));
     dispatch(beginLoading());
 
     fetchAPI(endpoint, {
@@ -33,6 +33,14 @@ export const fetchContents = (name, endpoint) => {
 }
 
 export function dumpContents(name = null) {
+  if (name == null) {
+    var e = new Error('dummy');
+    var stack = e.stack.replace(/^[^\(]+?[\n$]/gm, '')
+      .replace(/^\s+at\s+/gm, '')
+      .replace(/^Object.<anonymous>\s*\(/gm, '{anonymous}()@')
+      .split('\n');
+    console.log(stack);
+  }
   return {
     type: 'FLEXTABLE_DUMP_CONTENTS',
     name

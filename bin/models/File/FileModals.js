@@ -15,7 +15,9 @@ var _reactDropzone = require('react-dropzone');
 
 var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
 
-var _functions = require('../../helpers/functions');
+var _isomorphicFetch = require('isomorphic-fetch');
+
+var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
 var _LoadingCube = require('../../helpers/LoadingCube');
 
@@ -50,26 +52,25 @@ var Upload = exports.Upload = function (_React$Component) {
         filename: e.target.value
       });
     }
+
+    //onDrop(files) {
   }, {
-    key: 'onDrop',
-    value: function onDrop(files) {
+    key: 'onSubmit',
+    value: function onSubmit(e) {
       var _this2 = this;
 
+      e && e.preventDefault();
       this.setState({ isLoading: true });
 
       var data = new FormData();
-      files.map(function (file) {
-        data.append('upload', file);
-      });
+      data.append('file', this._file.files[0]);
       data.append('filename', this.state.filename);
 
       var boundaryKey = Math.floor(Math.random() * 1E16);
-      (0, _functions.fetchAPI)('/api/files', {
+      (0, _isomorphicFetch2.default)('/api/files', {
         credentials: 'same-origin',
         method: 'POST',
         headers: {
-          //'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data; boundary=---' + boundaryKey,
           'Authorization': this.props.user.apiToken
         },
         body: data
@@ -87,6 +88,8 @@ var Upload = exports.Upload = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       if (this.state.isLoading) {
         return _react2.default.createElement(_LoadingCube2.default, { show: true });
       }
@@ -104,25 +107,45 @@ var Upload = exports.Upload = function (_React$Component) {
           )
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'row' },
-          _react2.default.createElement('input', { name: 'filename', className: 'form-control', type: 'text', onChange: this.updateText.bind(this) })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'row' },
+          'form',
+          { enctype: 'multipart/form-data', ref: 'uploadForm' },
           _react2.default.createElement(
-            _reactDropzone2.default,
-            {
-              className: 'dropzone',
-              activeClassName: 'dropzone-active',
-              onDrop: this.onDrop.bind(this)
-            },
+            'div',
+            { className: 'row' },
+            _react2.default.createElement('input', {
+              name: 'filename',
+              className: 'form-control',
+              type: 'text',
+              onChange: this.updateText.bind(this)
+            }),
+            _react2.default.createElement('p', null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement('input', {
+              className: 'form-control',
+              type: 'file',
+              name: 'upload',
+              ref: function ref(c) {
+                return _this3._file = c;
+              } }),
+            _react2.default.createElement('p', null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
             _react2.default.createElement(
-              'strong',
-              null,
-              'Drag a file or click to open file picker.'
-            )
+              'button',
+              {
+                type: 'submit',
+                role: 'submit',
+                onClick: this.onSubmit.bind(this),
+                className: 'btn btn-success btn-block'
+              },
+              'Upload'
+            ),
+            _react2.default.createElement('p', null)
           )
         )
       );

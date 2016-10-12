@@ -6,6 +6,7 @@ import Icon from '../helpers/Icon';
 import LoadingCube from '../helpers/LoadingCube';
 import * as ModalActions from './ModalActions';
 import * as FeeModals from '../models/Fee/FeeModals';
+import * as FileModals from '../models/File/FileModals';
 import * as FlexTableModals from '../helpers/FlexTable/FlexTableModals';
 import * as UserModals from '../models/User/UserModals';
 
@@ -56,6 +57,9 @@ class _SpawnableModal extends React.Component {
 
       case 'FLEXTABLE_CONFIRM_DELETION':
         return <FlexTableModals.ConfirmDeletion { ...modalProps } />
+
+      case 'FILE_UPLOAD':
+        return <FileModals.Upload { ...modalProps } />
 
       default:
         return (<LoadingCube show={ true } />)
