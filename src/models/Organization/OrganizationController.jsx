@@ -106,7 +106,7 @@ router.route('/:slug')
   })
   
   .delete(hasRole(UserRoles.Administrator), (req, res) => {
-    Event.findOneAndRemove({ slug: req.params.slug })
+    Organization.findOneAndRemove({ slug: req.params.slug })
       .exec()
       .then( () => {
         res.json({
