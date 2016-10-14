@@ -23,13 +23,13 @@ export class Index extends React.Component {
 
         <p></p>
 
-        <div className="row">
+        <HasRole role={ UserRoles.Administrator } className="row">
           <div className="col-xs-12 offset-sm-1 col-sm-10">
             <Link to="/events/new" className="btn btn-block btn-success-outline btn-sm">
               Create an Event
             </Link>
           </div>
-        </div>
+        </HasRole>
       </div>
     )
   }

@@ -70,8 +70,8 @@ var Index = exports.Index = function (_React$Component) {
         _react2.default.createElement('hr', null),
         _react2.default.createElement('p', null),
         _react2.default.createElement(
-          'div',
-          { className: 'row' },
+          _UserRoles.HasRole,
+          { role: _UserRoles.UserRoles.Administrator, className: 'row' },
           _react2.default.createElement(
             'div',
             { className: 'col-xs-12 offset-sm-1 col-sm-10' },
