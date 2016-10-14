@@ -117,6 +117,8 @@ function renderHTML(routerComponent, preloadedState) {
                 $(document).resize(function () {
                     reset_dimensions();
                 });
+
+                window.addEventListener('popstate', reset_dimensions);
             });
           </script>
         </body>
