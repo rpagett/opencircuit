@@ -11,6 +11,7 @@ import { fetchAPI } from '../helpers/functions';
 import * as FormActions from './FormActions';
 import * as ModalActions from '../modals/ModalActions';
 import LoadingCube from '../helpers/LoadingCube';
+import { DaypartLabels } from '../helpers/dayparts';
 
 class FormError extends React.Component {
   render() {
@@ -378,6 +379,33 @@ export class UserSelect extends React.Component {
           className="form-control"
           clearable={ false }
           loadOptions={ this.fetchList.bind(this) }
+          autosize={ false }
+        />
+      </InputWrapper>
+    );
+  }
+}
+
+export class DaypartSelect extends React.Component {
+  selectOptions() {
+    let options = [ ];
+    for (let key in DaypartLabels) {
+      options.push({
+        value: key,
+        label: DaypartLabels[key]
+      })
+    }
+
+    return options;
+  }
+
+  render() {
+    return (
+      <InputWrapper { ...this.props } inputClass="select-group">
+        <Select
+          className="form-control"
+          clearable={ false }
+          options={ this.selectOptions() }
           autosize={ false }
         />
       </InputWrapper>

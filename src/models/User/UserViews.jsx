@@ -37,32 +37,32 @@ export class _Show extends React.Component {
           <Val><a href={ `mailto:${user.email}` }>{ user.email }</a></Val>
         </div>
 
-        <div className="row">
-          <Prop>Phone</Prop>
-          <Val>{ user.phone }</Val>
-        </div>
-
-        <div className="row">
-          <Prop>Address</Prop>
-          <Val>
-            { user.street }<br />
-            { (user.address_2 ? user.address_2 : '') }
-            { user.city }, { user.state } { user.zip }
-          </Val>
-        </div>
-
         <UserOrAdmin profileEmail={ user.email }>
           <div className="row">
+            <Prop>Phone</Prop>
+            <Val>{ user.phone }</Val>
+          </div>
+
+          <div className="row">
+            <Prop>Address</Prop>
+            <Val>
+              { user.street }<br />
+              { (user.address_2 ? user.address_2 : '') }
+              { user.city }, { user.state } { user.zip }
+            </Val>
+          </div>
+
+          <div className="row">
             <div className="pull-xs-center col-xs-12 offset-sm-4 col-sm-4">
-              <small>
-                <Link to={ `${user.profileUrl}/edit` } className="btn btn-sm btn-outline-secondary btn-block">
-                  Edit Profile
-                </Link>
-              </small>
+              <Link
+                to={ `${user.profileUrl}/edit` }
+                className="btn btn-sm btn-outline-secondary btn-block"
+              >
+                Edit Profile
+              </Link>
             </div>
           </div>
         </UserOrAdmin>
-
       </div>
     );
   }

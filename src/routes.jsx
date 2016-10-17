@@ -78,6 +78,11 @@ export function getAppRoutes(store) {
     <Route path="/" component={ AppTemplate }>
       <Route path="/invoice/:org" component={ FeeView.Invoice } />
 
+      <Route path="/reports" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
+        <IndexRoute component={ ReportView.Index } />
+        <Route path="quickbooks" component={ ReportView.Quickbooks } />
+      </Route>
+
       <Route component={ App } onEnter={ authOnly }>
         <IndexRoute component={ RootView.Home } />
 
@@ -109,8 +114,11 @@ export function getAppRoutes(store) {
           <IndexRoute component={ FeeView.Index } />
         </Route>
 
-        <Route path="/judges" onEnter={ requiresRole.bind(this, UserRoles.EventDirector) }>
+        <Route path="/judges" onEnter={ requiresRole.bind(this, UserRoles.JudgeManager) }>
           <IndexRoute component={ JudgeView.Index } />
+          <Route path="new" component={ JudgeView.New }  />
+          <Route path=":email" component={ JudgeView.Show } />
+          <Route path=":email/edit" component={ JudgeView.Edit } />
         </Route>
 
         <Route path="/organizations">
@@ -126,11 +134,6 @@ export function getAppRoutes(store) {
           <Route path="unit/:unit" component={ RegistrationView.Details } />
           <Route path="unit/:unit/events" component={ RegistrationView.EventRegistration } />
           <Route path="unit/:unit/confirm" component={ RegistrationView.Confirm } />
-        </Route>
-
-        <Route path="/reports" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
-          <IndexRoute component={ ReportView.Index } />
-          <Route path="quickbooks" component={ ReportView.Quickbooks } />
         </Route>
 
         <Route path="/support">

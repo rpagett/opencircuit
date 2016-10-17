@@ -161,6 +161,12 @@ function getAppRoutes(store) {
     _react2.default.createElement(_reactRouter.Route, { path: '/invoice/:org', component: FeeView.Invoice }),
     _react2.default.createElement(
       _reactRouter.Route,
+      { path: '/reports', onEnter: requiresRole.bind(this, _UserRoles.UserRoles.Administrator) },
+      _react2.default.createElement(_reactRouter.IndexRoute, { component: ReportView.Index }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'quickbooks', component: ReportView.Quickbooks })
+    ),
+    _react2.default.createElement(
+      _reactRouter.Route,
       { component: _app2.default, onEnter: authOnly },
       _react2.default.createElement(_reactRouter.IndexRoute, { component: RootView.Home }),
       _react2.default.createElement(_reactRouter.Route, { path: '/404', component: RootView.PageNotFound }),
@@ -197,8 +203,11 @@ function getAppRoutes(store) {
       ),
       _react2.default.createElement(
         _reactRouter.Route,
-        { path: '/judges', onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector) },
-        _react2.default.createElement(_reactRouter.IndexRoute, { component: JudgeView.Index })
+        { path: '/judges', onEnter: requiresRole.bind(this, _UserRoles.UserRoles.JudgeManager) },
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: JudgeView.Index }),
+        _react2.default.createElement(_reactRouter.Route, { path: 'new', component: JudgeView.New }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':email', component: JudgeView.Show }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':email/edit', component: JudgeView.Edit })
       ),
       _react2.default.createElement(
         _reactRouter.Route,
@@ -216,12 +225,6 @@ function getAppRoutes(store) {
         _react2.default.createElement(_reactRouter.Route, { path: 'unit/:unit', component: RegistrationView.Details }),
         _react2.default.createElement(_reactRouter.Route, { path: 'unit/:unit/events', component: RegistrationView.EventRegistration }),
         _react2.default.createElement(_reactRouter.Route, { path: 'unit/:unit/confirm', component: RegistrationView.Confirm })
-      ),
-      _react2.default.createElement(
-        _reactRouter.Route,
-        { path: '/reports', onEnter: requiresRole.bind(this, _UserRoles.UserRoles.Administrator) },
-        _react2.default.createElement(_reactRouter.IndexRoute, { component: ReportView.Index }),
-        _react2.default.createElement(_reactRouter.Route, { path: 'quickbooks', component: ReportView.Quickbooks })
       ),
       _react2.default.createElement(
         _reactRouter.Route,

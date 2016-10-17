@@ -2,6 +2,8 @@ import Mongoose from 'mongoose';
 
 const ObjectId = Mongoose.Schema.Types.ObjectId;
 const JudgeSchema = new Mongoose.Schema({
+  email: String,
+
   first_name: String,
   middle_initial: String,
   last_name: String,
@@ -18,6 +20,7 @@ const JudgeSchema = new Mongoose.Schema({
   ff_airline: String,
   ff_number: String,
   airport: String,
+  TSA_precheck: String,
   friday_departure: String,
   sunday_departure: String,
   bio: String,
@@ -38,5 +41,9 @@ const JudgeSchema = new Mongoose.Schema({
 JudgeSchema.virtual('formattedName').get(function() {
   return this.first_name + ' ' + (this.middle_initial ? this.middle_initial + '. ' : '') + this.last_name;
 });
+
+JudgeSchema.virtual('profileUrl').get(function() {
+  return '/judges/' + this.email;
+})
 
 export default Mongoose.model('Judge', JudgeSchema);

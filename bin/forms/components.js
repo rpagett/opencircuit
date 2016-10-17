@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ReduxForm = exports.EventChecks = exports.Radio = exports.Checkbox = exports.DateTime = exports.StateSelect = exports.UserSelect = exports.UnitTypeSelect = exports.FeeCategorySelect = exports.UnitSelect = exports.PaymentTypeSelect = exports.ClassSelect = exports.TextArea = exports.FormStatic = exports.PhoneInput = exports.FormInput = undefined;
+exports.ReduxForm = exports.EventChecks = exports.Radio = exports.Checkbox = exports.DateTime = exports.StateSelect = exports.DaypartSelect = exports.UserSelect = exports.UnitTypeSelect = exports.FeeCategorySelect = exports.UnitSelect = exports.PaymentTypeSelect = exports.ClassSelect = exports.TextArea = exports.FormStatic = exports.PhoneInput = exports.FormInput = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -52,6 +52,8 @@ var ModalActions = _interopRequireWildcard(_ModalActions);
 var _LoadingCube = require('../helpers/LoadingCube');
 
 var _LoadingCube2 = _interopRequireDefault(_LoadingCube);
+
+var _dayparts = require('../helpers/dayparts');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -611,8 +613,49 @@ var UserSelect = exports.UserSelect = function (_React$Component13) {
   return UserSelect;
 }(_react2.default.Component);
 
-var StateSelect = exports.StateSelect = function (_React$Component14) {
-  _inherits(StateSelect, _React$Component14);
+var DaypartSelect = exports.DaypartSelect = function (_React$Component14) {
+  _inherits(DaypartSelect, _React$Component14);
+
+  function DaypartSelect() {
+    _classCallCheck(this, DaypartSelect);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(DaypartSelect).apply(this, arguments));
+  }
+
+  _createClass(DaypartSelect, [{
+    key: 'selectOptions',
+    value: function selectOptions() {
+      var options = [];
+      for (var key in _dayparts.DaypartLabels) {
+        options.push({
+          value: key,
+          label: _dayparts.DaypartLabels[key]
+        });
+      }
+
+      return options;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        InputWrapper,
+        _extends({}, this.props, { inputClass: 'select-group' }),
+        _react2.default.createElement(_reactSelect2.default, {
+          className: 'form-control',
+          clearable: false,
+          options: this.selectOptions(),
+          autosize: false
+        })
+      );
+    }
+  }]);
+
+  return DaypartSelect;
+}(_react2.default.Component);
+
+var StateSelect = exports.StateSelect = function (_React$Component15) {
+  _inherits(StateSelect, _React$Component15);
 
   function StateSelect() {
     _classCallCheck(this, StateSelect);
@@ -644,8 +687,8 @@ var StateSelect = exports.StateSelect = function (_React$Component14) {
   return StateSelect;
 }(_react2.default.Component);
 
-var DateTime = exports.DateTime = function (_React$Component15) {
-  _inherits(DateTime, _React$Component15);
+var DateTime = exports.DateTime = function (_React$Component16) {
+  _inherits(DateTime, _React$Component16);
 
   function DateTime() {
     _classCallCheck(this, DateTime);
@@ -674,8 +717,8 @@ var DateTime = exports.DateTime = function (_React$Component15) {
   return DateTime;
 }(_react2.default.Component);
 
-var _Checkbox = (_temp3 = _class3 = function (_React$Component16) {
-  _inherits(_Checkbox, _React$Component16);
+var _Checkbox = (_temp3 = _class3 = function (_React$Component17) {
+  _inherits(_Checkbox, _React$Component17);
 
   function _Checkbox() {
     _classCallCheck(this, _Checkbox);
@@ -777,8 +820,8 @@ var mapDispatchToCheckboxProps = function mapDispatchToCheckboxProps(dispatch, p
 
 var Checkbox = exports.Checkbox = (0, _reactRedux.connect)(mapStateToCheckboxProps, mapDispatchToCheckboxProps)(_Checkbox);
 
-var _Radio = (_temp4 = _class4 = function (_React$Component17) {
-  _inherits(_Radio, _React$Component17);
+var _Radio = (_temp4 = _class4 = function (_React$Component18) {
+  _inherits(_Radio, _React$Component18);
 
   function _Radio() {
     _classCallCheck(this, _Radio);
@@ -839,29 +882,29 @@ var mapDispatchToRadioProps = function mapDispatchToRadioProps(dispatch, props) 
 
 var Radio = exports.Radio = (0, _reactRedux.connect)(mapStateToCheckboxProps, mapDispatchToRadioProps)(_Radio);
 
-var _EventChecks = (_temp5 = _class5 = function (_React$Component18) {
-  _inherits(_EventChecks, _React$Component18);
+var _EventChecks = (_temp5 = _class5 = function (_React$Component19) {
+  _inherits(_EventChecks, _React$Component19);
 
   function _EventChecks() {
     _classCallCheck(this, _EventChecks);
 
-    var _this19 = _possibleConstructorReturn(this, Object.getPrototypeOf(_EventChecks).call(this));
+    var _this20 = _possibleConstructorReturn(this, Object.getPrototypeOf(_EventChecks).call(this));
 
-    _this19.state = {
+    _this20.state = {
       isLoading: true
     };
-    return _this19;
+    return _this20;
   }
 
   _createClass(_EventChecks, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this20 = this;
+      var _this21 = this;
 
       (0, _functions.fetchAPI)(this.props.endpoint).then(function (res) {
         return res.json();
       }).then(function (json) {
-        _this20.setState({
+        _this21.setState({
           isLoading: false,
           events: json.events
         });
@@ -870,7 +913,7 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component18) {
   }, {
     key: 'render',
     value: function render() {
-      var _this21 = this;
+      var _this22 = this;
 
       var boxes = [];
 
@@ -898,7 +941,7 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component18) {
           { className: 'col-xs-12', key: 'col-' + event.id },
           _react2.default.createElement(Checkbox, {
             name: 'events',
-            formStore: _this21.props.formStore,
+            formStore: _this22.props.formStore,
             key: event._id,
             label: event.name + ' (' + event.formattedDate + ')',
             value: event._id,
@@ -920,8 +963,8 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component18) {
   endpoint: _react2.default.PropTypes.string.isRequired
 }, _temp5);
 
-var EventChecks = exports.EventChecks = function (_React$Component19) {
-  _inherits(EventChecks, _React$Component19);
+var EventChecks = exports.EventChecks = function (_React$Component20) {
+  _inherits(EventChecks, _React$Component20);
 
   function EventChecks() {
     _classCallCheck(this, EventChecks);
@@ -945,8 +988,8 @@ var EventChecks = exports.EventChecks = function (_React$Component19) {
   return EventChecks;
 }(_react2.default.Component);
 
-var _ReduxForm = (_temp6 = _class6 = function (_React$Component20) {
-  _inherits(_ReduxForm, _React$Component20);
+var _ReduxForm = (_temp6 = _class6 = function (_React$Component21) {
+  _inherits(_ReduxForm, _React$Component21);
 
   function _ReduxForm() {
     _classCallCheck(this, _ReduxForm);
@@ -962,15 +1005,15 @@ var _ReduxForm = (_temp6 = _class6 = function (_React$Component20) {
   }, {
     key: 'recursivelyCloneChildren',
     value: function recursivelyCloneChildren(children) {
-      var _this24 = this;
+      var _this25 = this;
 
       return _react2.default.Children.map(children, function (child) {
         if (!_react2.default.isValidElement(child)) {
           return child;
         }
 
-        var childProps = { formStore: _this24.props.subStore, formModel: _this24.props.formModel };
-        childProps.children = _this24.recursivelyCloneChildren(child.props.children);
+        var childProps = { formStore: _this25.props.subStore, formModel: _this25.props.formModel };
+        childProps.children = _this25.recursivelyCloneChildren(child.props.children);
 
         return _react2.default.cloneElement(child, childProps);
       });
@@ -978,22 +1021,22 @@ var _ReduxForm = (_temp6 = _class6 = function (_React$Component20) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      var _this25 = this;
+      var _this26 = this;
 
       event && event.preventDefault();
 
       this.props.submitData().then(function (res) {
         if (res && res.success === true) {
 
-          if (_this25.props.inModal) {
-            _this25.props.closeModal();
+          if (_this26.props.inModal) {
+            _this26.props.closeModal();
           }
 
           if (res.redirect) {
             if (res.external && window) {
               window.location = res.redirect;
             } else {
-              _this25.props.router.push(res.redirect);
+              _this26.props.router.push(res.redirect);
             }
           }
         }

@@ -22,7 +22,7 @@ export default class JudgeList extends React.Component {
           endpoint={ this.props.endpoint }
           emptyMessage="There are no judges."
           columns={{
-            'Name': judge => judge.formattedName,
+            'Name': judge => { return <Link to={ judge.profileUrl }>{ judge.formattedName }</Link> },
             'Phone': judge => judge.phone,
             'Email': judge => { return (<a href={ `mailto:${judge.email}` }>{ judge.email }</a>) },
             'City': judge => judge.city,

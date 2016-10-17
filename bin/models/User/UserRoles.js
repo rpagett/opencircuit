@@ -28,7 +28,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var UserRoles = exports.UserRoles = Object.freeze({
   Administrator: 1,
   EventDirector: 2,
-  FormsManager: 3
+  FormsManager: 3,
+  JudgeManager: 4
 });
 
 var userRoleLabel = exports.userRoleLabel = function userRoleLabel(id) {
@@ -41,6 +42,9 @@ var userRoleLabel = exports.userRoleLabel = function userRoleLabel(id) {
 
     case UserRoles.FormsManager:
       return 'Forms Manager';
+
+    case UserRoles.JudgeManager:
+      return 'Judge Manager';
 
     default:
       return '';

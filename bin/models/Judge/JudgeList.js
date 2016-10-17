@@ -60,7 +60,11 @@ var JudgeList = function (_React$Component) {
           emptyMessage: 'There are no judges.',
           columns: {
             'Name': function Name(judge) {
-              return judge.formattedName;
+              return _react2.default.createElement(
+                _reactRouter.Link,
+                { to: judge.profileUrl },
+                judge.formattedName
+              );
             },
             'Phone': function Phone(judge) {
               return judge.phone;
