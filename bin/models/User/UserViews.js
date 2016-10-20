@@ -119,52 +119,56 @@ var _Show = exports._Show = function (_React$Component2) {
           { profileEmail: user.email },
           _react2.default.createElement(
             'div',
-            { className: 'row' },
-            _react2.default.createElement(
-              _ModelInfo.Prop,
-              null,
-              'Phone'
-            ),
-            _react2.default.createElement(
-              _ModelInfo.Val,
-              null,
-              user.phone
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'row' },
-            _react2.default.createElement(
-              _ModelInfo.Prop,
-              null,
-              'Address'
-            ),
-            _react2.default.createElement(
-              _ModelInfo.Val,
-              null,
-              user.street,
-              _react2.default.createElement('br', null),
-              user.address_2 ? user.address_2 : '',
-              user.city,
-              ', ',
-              user.state,
-              ' ',
-              user.zip
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'row' },
+            null,
             _react2.default.createElement(
               'div',
-              { className: 'pull-xs-center col-xs-12 offset-sm-4 col-sm-4' },
+              { className: 'row' },
               _react2.default.createElement(
-                _reactRouter.Link,
-                {
-                  to: user.profileUrl + '/edit',
-                  className: 'btn btn-sm btn-outline-secondary btn-block'
-                },
-                'Edit Profile'
+                _ModelInfo.Prop,
+                null,
+                'Phone'
+              ),
+              _react2.default.createElement(
+                _ModelInfo.Val,
+                null,
+                user.phone
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'row' },
+              _react2.default.createElement(
+                _ModelInfo.Prop,
+                null,
+                'Address'
+              ),
+              _react2.default.createElement(
+                _ModelInfo.Val,
+                null,
+                user.street,
+                _react2.default.createElement('br', null),
+                user.address_2 ? user.address_2 : '',
+                user.city,
+                ', ',
+                user.state,
+                ' ',
+                user.zip
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'pull-xs-center col-xs-12 offset-sm-4 col-sm-4' },
+                _react2.default.createElement(
+                  _reactRouter.Link,
+                  {
+                    to: user.profileUrl + '/edit',
+                    className: 'btn btn-sm btn-outline-secondary btn-block'
+                  },
+                  'Edit Profile'
+                )
               )
             )
           )

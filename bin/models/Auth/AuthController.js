@@ -50,7 +50,8 @@ var router = _express2.default.Router();
 // All routes are '/auth/...'
 
 router.post('/login', function (req, res) {
-  _UserModel2.default.authenticate()(req.body.email, req.body.password, function (err, user, options) {
+  var email = req.body.email.toLowerCase();
+  _UserModel2.default.authenticate()(email, req.body.password, function (err, user, options) {
     if (err || !user) {
       res.send({
         success: false,
@@ -126,7 +127,8 @@ router.get('/reauth', function (req, res) {
 });
 
 router.post('/recover', function (req, res) {
-  _UserModel2.default.findOneAndUpdate({ email: req.body.email }, { recovery_token: _nodeUuid2.default.v1() }, { new: true }).then(function (user) {
+  var email = req.body.email.toLowerCase();
+  _UserModel2.default.findOneAndUpdate({ email: email }, { recovery_token: _nodeUuid2.default.v1() }, { new: true }).then(function (user) {
     if (!user) {
       throw new Error('There is no user associated with that email address. Please register.');
     }
@@ -140,7 +142,7 @@ router.post('/recover', function (req, res) {
   }).catch(function (err) {
     res.send({
       success: false,
-      error: err.message
+      errors: [{ field: 'email', message: err.message }]
     });
   });
 });

@@ -15,7 +15,8 @@ let router = Express.Router();
 // All routes are '/auth/...'
 
 router.post('/login', (req, res) => {
-  User.authenticate()(req.body.email, req.body.password, function (err, user, options) {
+  const email = req.body.email.toLowerCase()
+  User.authenticate()(email, req.body.password, function (err, user, options) {
     if (err || !user) {
       res.send({
         success: false,
@@ -99,7 +100,8 @@ router.get('/reauth', (req, res) => {
 })
 
 router.post('/recover', (req, res) => {
-  User.findOneAndUpdate({ email: req.body.email }, { recovery_token: uuid.v1() }, { new: true })
+  const email = req.body.email.toLowerCase()
+  User.findOneAndUpdate({ email: email }, { recovery_token: uuid.v1() }, { new: true })
     .then(user => {
       if (!user) {
         throw new Error('There is no user associated with that email address. Please register.')
@@ -115,7 +117,7 @@ router.post('/recover', (req, res) => {
     .catch(err => {
       res.send({
         success: false,
-        error: err.message
+        errors: [{field: 'email', message: err.message}]
       })
     })
 })
