@@ -1,5 +1,4 @@
 import React from 'react';
-import Dropzone from 'react-dropzone';
 
 import fetch from 'isomorphic-fetch';
 import LoadingCube from '../../helpers/LoadingCube';
@@ -27,7 +26,6 @@ export class Upload extends React.Component {
     data.append('file', this._file.files[0]);
     data.append('filename', this.state.filename);
 
-    const boundaryKey = Math.floor(Math.random() * 1E16);
     fetch('/api/files', {
       credentials: 'same-origin',
       method: 'POST',
