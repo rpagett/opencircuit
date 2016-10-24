@@ -295,29 +295,34 @@ router.post('/userPay', (req, res) => {
 
       console.log('PAYPAL', payment_details);
 
-      Paypal.payment.create(payment_details, function (error, payment) {
-        if (error) {
-          throw error;
-        }
-        else {
-          //console.log("Create Payment Response");
-          //console.log(payment);
-
-          const redirect = _.find(payment.links, { method: 'REDIRECT' });
-          console.log('REDIRECT', redirect);
-
-          if (redirect) {
-            Fee.update({ _id: {$in: _.map(fees, 'id')} }, { paypal_id: payment.id }, { multi: true })
-              .then( () => {
-                res.send({
-                  success: true,
-                  external: true,
-                  redirect: redirect.href
-                })
-              })
+      try {
+        Paypal.payment.create(payment_details, function (error, payment) {
+          if (error) {
+            throw error;
           }
-        }
-      });
+          else {
+            //console.log("Create Payment Response");
+            //console.log(payment);
+
+            const redirect = _.find(payment.links, {method: 'REDIRECT'});
+            console.log('REDIRECT', redirect);
+
+            if (redirect) {
+              Fee.update({_id: {$in: _.map(fees, 'id')}}, {paypal_id: payment.id}, {multi: true})
+                .then(() => {
+                  res.send({
+                    success: true,
+                    external: true,
+                    redirect: redirect.href
+                  })
+                })
+            }
+          }
+        });
+      }
+      catch (err) {
+        console.log(err.message);
+      }
     })
     .catch(err => {
       console.log(err.message);

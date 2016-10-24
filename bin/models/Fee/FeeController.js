@@ -301,29 +301,33 @@ router.post('/userPay', function (req, res) {
 
     console.log('PAYPAL', payment_details);
 
-    _paypalRestSdk2.default.payment.create(payment_details, function (error, payment) {
-      if (error) {
-        throw error;
-      } else {
-        (function () {
-          //console.log("Create Payment Response");
-          //console.log(payment);
+    try {
+      _paypalRestSdk2.default.payment.create(payment_details, function (error, payment) {
+        if (error) {
+          throw error;
+        } else {
+          (function () {
+            //console.log("Create Payment Response");
+            //console.log(payment);
 
-          var redirect = _lodash2.default.find(payment.links, { method: 'REDIRECT' });
-          console.log('REDIRECT', redirect);
+            var redirect = _lodash2.default.find(payment.links, { method: 'REDIRECT' });
+            console.log('REDIRECT', redirect);
 
-          if (redirect) {
-            _FeeModel2.default.update({ _id: { $in: _lodash2.default.map(fees, 'id') } }, { paypal_id: payment.id }, { multi: true }).then(function () {
-              res.send({
-                success: true,
-                external: true,
-                redirect: redirect.href
+            if (redirect) {
+              _FeeModel2.default.update({ _id: { $in: _lodash2.default.map(fees, 'id') } }, { paypal_id: payment.id }, { multi: true }).then(function () {
+                res.send({
+                  success: true,
+                  external: true,
+                  redirect: redirect.href
+                });
               });
-            });
-          }
-        })();
-      }
-    });
+            }
+          })();
+        }
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
   }).catch(function (err) {
     console.log(err.message);
   });
