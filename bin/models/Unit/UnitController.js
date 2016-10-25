@@ -222,7 +222,7 @@ router.get('/:slug/eventChecks', function (req, res) {
   }).then(function (registrations) {
     storeRegistrations = registrations;
 
-    return _EventModel2.default.find({/*types_allowed: type*/}, '_id name slug date').sort('date').exec();
+    return _EventModel2.default.find({/*types_allowed: type*/}, '_id name slug date registration_closed').sort('date').exec();
   }).then(function (events) {
     var outEvents = [];
 
@@ -265,7 +265,7 @@ router.get('/:slug/attending', function (req, res) {
   }).then(function (registrations) {
     allRegistrations = _lodash2.default.groupBy(registrations, 'event');
 
-    return _EventModel2.default.find({ _id: { $in: Object.keys(allRegistrations) } });
+    return _EventModel2.default.find({ _id: { $in: Object.keys(allRegistrations) } }).sort('date');
   }).then(function (events) {
     for (var key in events) {
       var event = events[key];

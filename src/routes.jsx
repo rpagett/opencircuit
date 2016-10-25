@@ -81,6 +81,7 @@ export function getAppRoutes(store) {
       <Route path="/reports" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
         <IndexRoute component={ ReportView.Index } />
         <Route path="quickbooks" component={ ReportView.Quickbooks } />
+        <Route path="drawstatus" component={ ReportView.DrawStatus } />
       </Route>
 
       <Route component={ App } onEnter={ authOnly }>

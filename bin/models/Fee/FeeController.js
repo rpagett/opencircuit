@@ -179,50 +179,54 @@ router.get('/paypal-return', function (req, res) {
   };
   var paymentId = req.query.paymentId;
 
-  _paypalRestSdk2.default.payment.execute(paymentId, execute_payment_json, function (error, payment) {
-    if (error) {
-      console.log(error.response);
-      throw error;
-    } else {
-      if (payment.state === 'approved') {
-        return _FeeModel2.default.find({ paypal_id: payment.id }, 'unit amount payments').then(function (fees) {
-          return Promise.all(fees.map(function (fee) {
-            fee.payments.push({
-              amount: fee.amount,
-              method: _PaymentTypes2.default.Paypal
-            });
-
-            ids.push(fee.unit);
-
-            fee.paid_date = Date.now();
-            return fee.save();
-          }));
-        }).then(function () {
-          return _FeeModel2.default.aggregate([{ $match: { unit: { $in: ids }, paid_date: null } }, {
-            $group: {
-              _id: '$unit',
-              count: { $sum: 1 }
-            }
-          }]);
-        }).then(function (aggregate) {
-          console.log('aggregate', aggregate);
-          if (!aggregate.length) {
-            return _UnitModel2.default.update({ _id: { $in: ids } }, { confirmed_paid_date: Date.now() }, { multi: true }).exec();
-          } else {
-            return Promise.all(aggregate.map(function (unit) {
-              if (!unit.count) {
-                return _UnitModel2.default.findOneAndUpdate({ _id: unit._id }, { confirmed_paid_date: Date.now() }).exec();
-              }
-            }));
-          }
-        }).then(function () {
-          res.redirect(302, process.env.BASE_URL + '/confirm/payment');
-        });
+  try {
+    _paypalRestSdk2.default.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+      if (error) {
+        console.log(error.response);
+        throw error;
       } else {
-        res.redirect(302, process.env.BASE_URL + '/error/payment');
+        if (payment.state === 'approved') {
+          return _FeeModel2.default.find({ paypal_id: payment.id }, 'unit amount payments').then(function (fees) {
+            return Promise.all(fees.map(function (fee) {
+              fee.payments.push({
+                amount: fee.amount,
+                method: _PaymentTypes2.default.Paypal
+              });
+
+              ids.push(fee.unit);
+
+              fee.paid_date = Date.now();
+              return fee.save();
+            }));
+          }).then(function () {
+            return _FeeModel2.default.aggregate([{ $match: { unit: { $in: ids }, paid_date: null } }, {
+              $group: {
+                _id: '$unit',
+                count: { $sum: 1 }
+              }
+            }]);
+          }).then(function (aggregate) {
+            console.log('aggregate', aggregate);
+            if (!aggregate.length) {
+              return _UnitModel2.default.update({ _id: { $in: ids } }, { confirmed_paid_date: Date.now() }, { multi: true }).exec();
+            } else {
+              return Promise.all(aggregate.map(function (unit) {
+                if (!unit.count) {
+                  return _UnitModel2.default.findOneAndUpdate({ _id: unit._id }, { confirmed_paid_date: Date.now() }).exec();
+                }
+              }));
+            }
+          }).then(function () {
+            res.redirect(302, process.env.BASE_URL + '/confirm/payment');
+          });
+        } else {
+          res.redirect(302, process.env.BASE_URL + '/error/payment');
+        }
       }
-    }
-  });
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
 });
 
 router.get('/paymentTypes', function (req, res) {

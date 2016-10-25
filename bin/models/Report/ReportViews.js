@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Quickbooks = exports.Index = undefined;
+exports.DrawStatus = exports.Quickbooks = exports.Index = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -60,6 +60,15 @@ var Index = exports.Index = function (_React$Component) {
               _reactRouter.Link,
               { to: '/reports/quickbooks' },
               'Quickbooks'
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/reports/drawstatus' },
+              'Draw Status'
             )
           )
         )
@@ -171,4 +180,110 @@ var Quickbooks = exports.Quickbooks = function (_React$Component3) {
   }]);
 
   return Quickbooks;
+}(_react2.default.Component);
+
+var _DrawStatus = function (_React$Component4) {
+  _inherits(_DrawStatus, _React$Component4);
+
+  function _DrawStatus() {
+    _classCallCheck(this, _DrawStatus);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_DrawStatus).apply(this, arguments));
+  }
+
+  _createClass(_DrawStatus, [{
+    key: 'render',
+    value: function render() {
+      var rows = [];
+      var lastWeek = 0;
+      this.props.contents.map(function (unit) {
+        rows.push(_react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'offset-xs-1 col-xs-4' },
+            unit.name
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-3' },
+            unit.director.formattedName
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-4 ' + unit.paymentClass },
+            unit.paymentStatus
+          )
+        ));
+      });
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          'Draw Status Report'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'offset-xs-1 col-xs-4' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Unit'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-3' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Director'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-4' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Payment'
+            )
+          )
+        ),
+        rows
+      );
+    }
+  }]);
+
+  return _DrawStatus;
+}(_react2.default.Component);
+
+var DrawStatus = exports.DrawStatus = function (_React$Component5) {
+  _inherits(DrawStatus, _React$Component5);
+
+  function DrawStatus() {
+    _classCallCheck(this, DrawStatus);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(DrawStatus).apply(this, arguments));
+  }
+
+  _createClass(DrawStatus, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_ContentsView2.default, {
+        subStore: 'report_drawstatus',
+        endpoint: '/api/reports/drawstatus',
+        component: _DrawStatus
+      });
+    }
+  }]);
+
+  return DrawStatus;
 }(_react2.default.Component);

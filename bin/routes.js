@@ -163,7 +163,8 @@ function getAppRoutes(store) {
       _reactRouter.Route,
       { path: '/reports', onEnter: requiresRole.bind(this, _UserRoles.UserRoles.Administrator) },
       _react2.default.createElement(_reactRouter.IndexRoute, { component: ReportView.Index }),
-      _react2.default.createElement(_reactRouter.Route, { path: 'quickbooks', component: ReportView.Quickbooks })
+      _react2.default.createElement(_reactRouter.Route, { path: 'quickbooks', component: ReportView.Quickbooks }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'drawstatus', component: ReportView.DrawStatus })
     ),
     _react2.default.createElement(
       _reactRouter.Route,

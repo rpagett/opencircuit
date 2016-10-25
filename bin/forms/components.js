@@ -730,7 +730,7 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component17) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       if (this.props.inForm) {
-        this.props.updateField(this.props.preChecked);
+        this.props.updateField(this.props.formChecked || this.props.preChecked);
       } else {
         this.props.updateCheckbox(this.props.preChecked);
       }
@@ -781,7 +781,8 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component17) {
               name: this.props.name,
               value: this.props.value,
               checked: this.props.checked,
-              onChange: this.updateChecked.bind(this)
+              onChange: this.updateChecked.bind(this),
+              disabled: this.props.disabled
             }),
             _react2.default.createElement(
               'span',
@@ -945,7 +946,8 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component19) {
             key: event._id,
             label: event.name + ' (' + event.formattedDate + ')',
             value: event._id,
-            preChecked: event.attending
+            preChecked: event.attending,
+            disabled: event.registration_closed
           })
         ));
       });

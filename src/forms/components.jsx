@@ -510,7 +510,7 @@ class _Checkbox extends React.Component {
 
   componentDidMount() {
     if (this.props.inForm) {
-      this.props.updateField(this.props.preChecked);
+      this.props.updateField(this.props.formChecked || this.props.preChecked);
     }
     else {
       this.props.updateCheckbox(this.props.preChecked);
@@ -556,6 +556,7 @@ class _Checkbox extends React.Component {
               value={ this.props.value }
               checked={ this.props.checked }
               onChange={ this.updateChecked.bind(this) }
+              disabled={ this.props.disabled }
             />
             <span className="checkbox-label form-check-label">{ this.props.label }</span>
           </label>
@@ -687,6 +688,7 @@ class _EventChecks extends React.Component {
             label={ event.name + ' (' + event.formattedDate + ')' }
             value={ event._id }
             preChecked={ event.attending }
+            disabled={ event.registration_closed }
           />
         </div>
       )

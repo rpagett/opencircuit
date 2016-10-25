@@ -159,60 +159,65 @@ router.get('/paypal-return', (req, res) => {
   };
   const paymentId = req.query.paymentId;
 
-  Paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
-    if (error) {
-      console.log(error.response);
-      throw error;
-    }
-    else {
-      if (payment.state === 'approved') {
-        return Fee.find({ paypal_id: payment.id }, 'unit amount payments')
-          .then(fees => {
-            return Promise.all(fees.map(fee => {
-              fee.payments.push({
-                amount: fee.amount,
-                method: PaymentTypes.Paypal,
-              })
-
-              ids.push(fee.unit);
-
-              fee.paid_date = Date.now();
-              return fee.save()
-            }))
-          })
-          .then(() => {
-            return Fee.aggregate([
-              { $match: { unit: {$in: ids}, paid_date: null } },
-              {
-                $group: {
-                  _id: '$unit',
-                  count: { $sum: 1 }
-                }
-              }
-            ])
-          })
-          .then(aggregate => {
-            console.log('aggregate', aggregate);
-            if (!aggregate.length) {
-              return Unit.update({_id: {$in: ids}}, {confirmed_paid_date: Date.now()}, {multi: true}).exec();
-            }
-            else {
-              return Promise.all(aggregate.map(unit => {
-                if (!unit.count) {
-                  return Unit.findOneAndUpdate({_id: unit._id}, {confirmed_paid_date: Date.now()}).exec();
-                }
-              }))
-            }
-          })
-          .then(() => {
-            res.redirect(302, process.env.BASE_URL + '/confirm/payment');
-          })
+  try {
+    Paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+      if (error) {
+        console.log(error.response);
+        throw error;
       }
       else {
-        res.redirect(302, process.env.BASE_URL + '/error/payment')
+        if (payment.state === 'approved') {
+          return Fee.find({paypal_id: payment.id}, 'unit amount payments')
+            .then(fees => {
+              return Promise.all(fees.map(fee => {
+                fee.payments.push({
+                  amount: fee.amount,
+                  method: PaymentTypes.Paypal,
+                })
+
+                ids.push(fee.unit);
+
+                fee.paid_date = Date.now();
+                return fee.save()
+              }))
+            })
+            .then(() => {
+              return Fee.aggregate([
+                {$match: {unit: {$in: ids}, paid_date: null}},
+                {
+                  $group: {
+                    _id: '$unit',
+                    count: {$sum: 1}
+                  }
+                }
+              ])
+            })
+            .then(aggregate => {
+              console.log('aggregate', aggregate);
+              if (!aggregate.length) {
+                return Unit.update({_id: {$in: ids}}, {confirmed_paid_date: Date.now()}, {multi: true}).exec();
+              }
+              else {
+                return Promise.all(aggregate.map(unit => {
+                  if (!unit.count) {
+                    return Unit.findOneAndUpdate({_id: unit._id}, {confirmed_paid_date: Date.now()}).exec();
+                  }
+                }))
+              }
+            })
+            .then(() => {
+              res.redirect(302, process.env.BASE_URL + '/confirm/payment');
+            })
+        }
+        else {
+          res.redirect(302, process.env.BASE_URL + '/error/payment')
+        }
       }
-    }
-  });
+    });
+  }
+  catch (err) {
+    console.log(err.message);
+  }
 })
 
 router.get('/paymentTypes', (req, res) => {

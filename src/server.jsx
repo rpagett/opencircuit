@@ -102,24 +102,24 @@ function renderHTML(routerComponent, preloadedState) {
           <script type="text/javascript" src="/js/vendor.js"></script>
           <script type="text/javascript" src="/js/bundle.js"></script>
           <script>
-            $(document).ready(function()
-            {
-                function reset_dimensions()
-                {
-                    doc_height = $(document).height();
-                    $('.content-container').css('min-height', doc_height + 'px');
-                }
-
-                reset_dimensions();
-                $(window).resize(function() {
-                    reset_dimensions();
-                });
-                $(document).resize(function () {
-                    reset_dimensions();
-                });
-
-                window.addEventListener('popstate', reset_dimensions);
-            });
+            //$(document).ready(function()
+            //{
+            //    function reset_dimensions()
+            //    {
+            //        doc_height = $(document).height();
+            //        $('.content-container').css('height', doc_height + 'px');
+            //    }
+            //
+            //    reset_dimensions();
+            //    $(window).resize(function() {
+            //        reset_dimensions();
+            //    });
+            //    $(document).resize(function () {
+            //        reset_dimensions();
+            //    });
+            //
+            //    window.addEventListener('popstate', reset_dimensions);
+            //});
           </script>
         </body>
         </html>`;

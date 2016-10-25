@@ -17,6 +17,19 @@ html, body, .content-container, .app-container, .vcenter-parent, #react-containe
   padding: 1rem;
   padding-top: 5rem;
   background-color: #FBFBFB;
+
+  display: block; /* 1 */
+  height: 100vh;
+  flex-grow: 1;
+  flex-shrink: 1; /* 2 */
+  overflow: auto;
+}
+
+#react-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .body-container {
@@ -80,4 +93,14 @@ hr {
   .prop {
     font-weight: 700;
   }
+}
+
+.cell-red {
+  background-color: red;
+  color: white;
+}
+
+.cell-green {
+  background-color: green;
+  color: white;
 }

@@ -13,6 +13,7 @@ export class Index extends React.Component {
         <p></p>
         <ul>
           <li><Link to="/reports/quickbooks">Quickbooks</Link></li>
+          <li><Link to="/reports/drawstatus">Draw Status</Link></li>
         </ul>
       </div>
     )
@@ -63,6 +64,48 @@ export class Quickbooks extends React.Component {
         subStore="report_quickbooks"
         endpoint={ `/api/reports/quickbooks` }
         component={ _Quickbooks }
+      />
+    )
+  }
+}
+
+class _DrawStatus extends React.Component {
+  render() {
+    let rows = [ ];
+    let lastWeek = 0;
+    this.props.contents.map(unit => {
+      rows.push(
+        <div className="row">
+          <div className="offset-xs-1 col-xs-4">{ unit.name }</div>
+          <div className="col-xs-3">{ unit.director.formattedName }</div>
+          <div className={ `col-xs-4 ${unit.paymentClass}` }>{ unit.paymentStatus }</div>
+        </div>
+      )
+    })
+
+    return (
+      <div>
+        <h1 className="page-header">Draw Status Report</h1>
+
+        <div className="row">
+          <div className="offset-xs-1 col-xs-4"><strong>Unit</strong></div>
+          <div className="col-xs-3"><strong>Director</strong></div>
+          <div className="col-xs-4"><strong>Payment</strong></div>
+        </div>
+
+        { rows }
+      </div>
+    )
+  }
+}
+
+export class DrawStatus extends React.Component {
+  render() {
+    return (
+      <ContentsView
+        subStore="report_drawstatus"
+        endpoint={ `/api/reports/drawstatus` }
+        component={ _DrawStatus }
       />
     )
   }

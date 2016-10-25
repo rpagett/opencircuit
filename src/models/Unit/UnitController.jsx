@@ -243,7 +243,7 @@ router.get('/:slug/eventChecks', (req, res) => {
     .then(registrations => {
       storeRegistrations = registrations;
 
-      return Event.find({ /*types_allowed: type*/ }, '_id name slug date')
+      return Event.find({ /*types_allowed: type*/ }, '_id name slug date registration_closed')
         .sort('date')
         .exec()
     })
@@ -297,6 +297,7 @@ router.get('/:slug/attending', (req, res) => {
       allRegistrations = _.groupBy(registrations, 'event');
 
       return Event.find({ _id: {$in: Object.keys(allRegistrations)}})
+        .sort('date');
     })
     .then(events => {
       for (let key in events) {
