@@ -72,7 +72,7 @@ Unit.on('afterInsert', newUnit => {
   const unit = newUnit;
 
   if (unit.circuit_member) {
-    Unit.count({ organization: unit.organization })
+    Unit.count({ organization: unit.organization, circuit_member: true })
       .then(count => {
         const amount = determineFee(count);
         console.log(count, 'existing units. Fee should be $', amount);

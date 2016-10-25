@@ -108,7 +108,7 @@ _UnitModel2.default.on('afterInsert', function (newUnit) {
   var unit = newUnit;
 
   if (unit.circuit_member) {
-    _UnitModel2.default.count({ organization: unit.organization }).then(function (count) {
+    _UnitModel2.default.count({ organization: unit.organization, circuit_member: true }).then(function (count) {
       var amount = (0, _FeeStructure2.default)(count);
       console.log(count, 'existing units. Fee should be $', amount);
 
