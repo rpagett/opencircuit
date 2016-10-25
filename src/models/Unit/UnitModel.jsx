@@ -39,6 +39,10 @@ const UnitSchema = Mongoose.Schema({
     type: ObjectId,
     ref: 'Organization'
   },
+  form_obligations: {
+    type: [ObjectId],
+    ref: 'FormObligation'
+  },
 
   registered: Boolean,
 }, {

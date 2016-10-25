@@ -66,6 +66,10 @@ var UnitSchema = _mongoose2.default.Schema({
     type: ObjectId,
     ref: 'Organization'
   },
+  form_obligations: {
+    type: [ObjectId],
+    ref: 'FormObligation'
+  },
 
   registered: Boolean
 }, {

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FormObligationModel = undefined;
+exports.FormObligation = exports.Form = undefined;
 
 var _mongoose = require('mongoose');
 
@@ -16,6 +16,32 @@ var _moment2 = _interopRequireDefault(_moment);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ObjectId = _mongoose2.default.Schema.Types.ObjectId;
+
+var FormSchema = new _mongoose2.default.Schema({
+  name: String,
+  description: String,
+  due_date: Date,
+
+  form_filename: String,
+  form_extension: String,
+  uploader: {
+    type: ObjectId,
+    ref: 'User'
+  },
+
+  autoapply_classes: {
+    type: [ObjectId],
+    ref: 'CompetitionClass'
+  },
+  autoapply_scholastic: Boolean,
+  autoapply_independent: Boolean,
+  autoapply_all: Boolean
+});
+
+var Form = exports.Form = _mongoose2.default.model('Form', FormSchema);
+exports.default = Form;
+
+
 var FormObligationSchema = new _mongoose2.default.Schema({
   form: {
     type: ObjectId,
@@ -27,4 +53,4 @@ var FormObligationSchema = new _mongoose2.default.Schema({
   approved: Boolean
 });
 
-var FormObligationModel = exports.FormObligationModel = _mongoose2.default.model('FormObligation', FormObligationSchema);
+var FormObligation = exports.FormObligation = _mongoose2.default.model('FormObligation', FormObligationSchema);

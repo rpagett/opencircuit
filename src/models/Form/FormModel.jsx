@@ -10,6 +10,10 @@ const FormSchema = new Mongoose.Schema({
 
   form_filename: String,
   form_extension: String,
+  uploader: {
+    type: ObjectId,
+    ref: 'User'
+  },
 
   autoapply_classes: {
     type: [ObjectId],

@@ -11,10 +11,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDropzone = require('react-dropzone');
-
-var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
-
 var _isomorphicFetch = require('isomorphic-fetch');
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
@@ -66,7 +62,6 @@ var Upload = exports.Upload = function (_React$Component) {
       data.append('file', this._file.files[0]);
       data.append('filename', this.state.filename);
 
-      var boundaryKey = Math.floor(Math.random() * 1E16);
       (0, _isomorphicFetch2.default)('/api/files', {
         credentials: 'same-origin',
         method: 'POST',

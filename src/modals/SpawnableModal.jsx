@@ -8,6 +8,7 @@ import * as ModalActions from './ModalActions';
 import * as FeeModals from '../models/Fee/FeeModals';
 import * as FileModals from '../models/File/FileModals';
 import * as FlexTableModals from '../helpers/FlexTable/FlexTableModals';
+import * as FormModals from '../models/Form/FormModals';
 import * as UnitModals from '../models/Unit/UnitModals';
 import * as UserModals from '../models/User/UserModals';
 
@@ -64,6 +65,15 @@ class _SpawnableModal extends React.Component {
 
       case 'FILE_UPLOAD':
         return <FileModals.Upload { ...modalProps } />
+
+      case 'FORM_CREATE_FORM':
+        return <FormModals.CreateForm { ...modalProps } />
+
+      case 'FORM_SUBMIT_FORM':
+        return <FormModals.Submit { ...modalProps } />
+
+      case 'FORM_ASSIGN_OBLIGATION':
+        return <FormModals.AssignObligation { ...modalProps } />
 
       default:
         return (<LoadingCube show={ true } />)

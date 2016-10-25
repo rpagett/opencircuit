@@ -7,7 +7,7 @@ import { ReduxForm, Radio } from '../../forms/components';
 
 /* TODO:
     * FormList, FormObligationList
-    Add Obligations to Unit schema
+    * Add Obligations to Unit schema
     Trigger modals from lists
     Manual assignment
     Auto-assign on form creation
