@@ -9,10 +9,15 @@ export class Reclassify extends React.Component {
     return (
       <ReduxForm
         subStore="unit_reclassify"
-        submitEndpoint="/api/units/reclassify"
+        submitEndpoint={ `/api/units/${unit._id}/reclassify` }
         submitMethod="PATCH"
+        inModal={ true }
       >
-        <ClassSelect unitType={ unit.unit_type } scholastic={ unit.organization.is_school } />
+        <ClassSelect
+          name="compclass"
+          unitType={ unit.unit_type._id }
+          scholastic={ unit.organization.is_school }
+        />
 
         <button className="btn btn-success btn-block">
           Change Class

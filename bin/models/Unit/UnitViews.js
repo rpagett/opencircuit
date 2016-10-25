@@ -13,6 +13,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
+var _SpawnableModal = require('../../modals/SpawnableModal');
+
 var _ModelView = require('../../helpers/ModelView/ModelView');
 
 var _ModelView2 = _interopRequireDefault(_ModelView);
@@ -166,7 +168,23 @@ var _Show = function (_React$Component2) {
           _react2.default.createElement(
             _ModelInfo.Val,
             null,
-            unit.competition_class.formattedName
+            unit.competition_class.formattedName,
+            _react2.default.createElement(
+              _UserRoles.HasRole,
+              { role: _UserRoles.UserRoles.Administrator },
+              _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
+                className: 'btn btn-link',
+                buttonText: 'Reclassify',
+
+                title: 'Reclassify Unit',
+                componentName: 'UNIT_RECLASSIFY',
+                modalProps: {
+                  unit: unit,
+                  refreshTable: 'unitEventsList',
+                  refreshEndpoint: '/api/units/' + unit.slug + '/attending'
+                }
+              })
+            )
           )
         ),
         unit.members ? _react2.default.createElement(
@@ -180,7 +198,7 @@ var _Show = function (_React$Component2) {
           _react2.default.createElement(
             _ModelInfo.Val,
             null,
-            unit.members ? unit.members : 0
+            unit.members
           )
         ) : null,
         unit.notes ? _react2.default.createElement(

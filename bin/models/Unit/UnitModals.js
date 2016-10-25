@@ -39,10 +39,15 @@ var Reclassify = exports.Reclassify = function (_React$Component) {
         _components.ReduxForm,
         {
           subStore: 'unit_reclassify',
-          submitEndpoint: '/api/units/reclassify',
-          submitMethod: 'PATCH'
+          submitEndpoint: '/api/units/' + unit._id + '/reclassify',
+          submitMethod: 'PATCH',
+          inModal: true
         },
-        _react2.default.createElement(_components.ClassSelect, { unitType: unit.unit_type, scholastic: unit.organization.is_school }),
+        _react2.default.createElement(_components.ClassSelect, {
+          name: 'compclass',
+          unitType: unit.unit_type._id,
+          scholastic: unit.organization.is_school
+        }),
         _react2.default.createElement(
           'button',
           { className: 'btn btn-success btn-block' },

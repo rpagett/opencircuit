@@ -3,10 +3,12 @@ import _ from 'lodash';
 
 import { hasRole } from '../../middleware/authRoute';
 import { userHasRole, UserRoles } from '../User/UserRoles';
-import Unit from './UnitModel';
+
+import CompClass from '../CompClass/CompClassModel';
 import Event from '../Event/EventModel';
-import Fee from '../Fee/FeeModel';
 import EventRegistration from '../Pivots/EventRegistrationModel';
+import Fee from '../Fee/FeeModel';
+import Unit from './UnitModel';
 
 let router = Express.Router();
 // All routes are /api/units/
@@ -358,6 +360,37 @@ router.get('/:slug/attending', (req, res) => {
     //    contents: events
     //  })
     //})
+    .catch(err => {
+      res.json({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
+router.patch('/:id/reclassify', hasRole(UserRoles.Administrator), (req, res) => {
+  Unit.findOne({ _id: req.params.id }, 'competition_class')
+    .then(unit => {
+      if (!unit) {
+        throw new Error('Unit does not exist.');
+      }
+      unit.competition_class = req.body.compclass;
+      return unit.save();
+    })
+    .then(unit => {
+      return Event.find({ date: {$gt: Date.now()} }, '_id')
+    })
+    .then(events => {
+      return EventRegistration.update({
+        event: {$in:  _.map(events, '_id') },
+        unit: req.params.id
+      }, { competition_class: req.body.compclass }, { multi: true });
+    })
+    .then( () => {
+      res.json({
+        success: true
+      })
+    })
     .catch(err => {
       res.json({
         success: false,

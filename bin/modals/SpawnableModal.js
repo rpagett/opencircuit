@@ -43,6 +43,10 @@ var _FlexTableModals = require('../helpers/FlexTable/FlexTableModals');
 
 var FlexTableModals = _interopRequireWildcard(_FlexTableModals);
 
+var _UnitModals = require('../models/Unit/UnitModals');
+
+var UnitModals = _interopRequireWildcard(_UnitModals);
+
 var _UserModals = require('../models/User/UserModals');
 
 var UserModals = _interopRequireWildcard(_UserModals);
@@ -98,6 +102,9 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
         markClosed: this.props.markClosed
       });
       switch (this.props.componentName) {
+
+        case 'UNIT_RECLASSIFY':
+          return _react2.default.createElement(UnitModals.Reclassify, modalProps);
 
         case 'USER_ROLES':
           return _react2.default.createElement(UserModals.ManageRoles, modalProps);

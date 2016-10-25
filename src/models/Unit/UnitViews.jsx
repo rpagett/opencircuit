@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import { LaunchModalButton } from '../../modals/SpawnableModal';
 import ModelView from '../../helpers/ModelView/ModelView';
 import { Prop, Val } from '../../layout/ModelInfo';
 import { UserRoles, HasRole } from '../User/UserRoles';
@@ -56,13 +57,29 @@ class _Show extends React.Component {
 
         <div className="row">
           <Prop>Class</Prop>
-          <Val>{ unit.competition_class.formattedName }</Val>
+          <Val>
+            { unit.competition_class.formattedName }
+            <HasRole role={ UserRoles.Administrator }>
+              <LaunchModalButton
+                 className="btn btn-link"
+                 buttonText="Reclassify"
+
+                 title="Reclassify Unit"
+                 componentName="UNIT_RECLASSIFY"
+                 modalProps={{
+                    unit,
+                    refreshTable: 'unitEventsList',
+                    refreshEndpoint: `/api/units/${unit.slug}/attending`
+                 }}
+              />
+            </HasRole>
+          </Val>
         </div>
 
         { (unit.members ?
             <div className="row">
               <Prop>Member Count</Prop>
-              <Val>{ (unit.members ? unit.members : 0) }</Val>
+              <Val>{ unit.members }</Val>
             </div> : null) }
 
         { (unit.notes ?

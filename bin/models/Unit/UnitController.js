@@ -18,21 +18,25 @@ var _authRoute = require('../../middleware/authRoute');
 
 var _UserRoles = require('../User/UserRoles');
 
-var _UnitModel = require('./UnitModel');
+var _CompClassModel = require('../CompClass/CompClassModel');
 
-var _UnitModel2 = _interopRequireDefault(_UnitModel);
+var _CompClassModel2 = _interopRequireDefault(_CompClassModel);
 
 var _EventModel = require('../Event/EventModel');
 
 var _EventModel2 = _interopRequireDefault(_EventModel);
 
+var _EventRegistrationModel = require('../Pivots/EventRegistrationModel');
+
+var _EventRegistrationModel2 = _interopRequireDefault(_EventRegistrationModel);
+
 var _FeeModel = require('../Fee/FeeModel');
 
 var _FeeModel2 = _interopRequireDefault(_FeeModel);
 
-var _EventRegistrationModel = require('../Pivots/EventRegistrationModel');
+var _UnitModel = require('./UnitModel');
 
-var _EventRegistrationModel2 = _interopRequireDefault(_EventRegistrationModel);
+var _UnitModel2 = _interopRequireDefault(_UnitModel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -336,6 +340,32 @@ router.get('/:slug/attending', function (req, res) {
   //  })
   //})
   .catch(function (err) {
+    res.json({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
+router.patch('/:id/reclassify', (0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
+  _UnitModel2.default.findOne({ _id: req.params.id }, 'competition_class').then(function (unit) {
+    if (!unit) {
+      throw new Error('Unit does not exist.');
+    }
+    unit.competition_class = req.body.compclass;
+    return unit.save();
+  }).then(function (unit) {
+    return _EventModel2.default.find({ date: { $gt: Date.now() } }, '_id');
+  }).then(function (events) {
+    return _EventRegistrationModel2.default.update({
+      event: { $in: _lodash2.default.map(events, '_id') },
+      unit: req.params.id
+    }, { competition_class: req.body.compclass }, { multi: true });
+  }).then(function () {
+    res.json({
+      success: true
+    });
+  }).catch(function (err) {
     res.json({
       success: false,
       error: err.message

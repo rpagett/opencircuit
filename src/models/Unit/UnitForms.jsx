@@ -54,7 +54,6 @@ export class Edit extends React.Component {
 
         <HasRole role={ UserRoles.EventDirector }>
           <TextArea name="notes" label="Administrative Notes" />
-          <_ClassBox />
         </HasRole>
 
         <EventChecks endpoint={ `/api/units/${this.props.slug}/eventChecks` } />

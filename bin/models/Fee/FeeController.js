@@ -308,7 +308,7 @@ router.post('/userPay', function (req, res) {
     try {
       _paypalRestSdk2.default.payment.create(payment_details, function (error, payment) {
         if (error) {
-          throw error;
+          console.log('PAYPAL ERROR', error);
         } else {
           (function () {
             //console.log("Create Payment Response");

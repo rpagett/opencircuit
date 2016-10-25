@@ -303,7 +303,7 @@ router.post('/userPay', (req, res) => {
       try {
         Paypal.payment.create(payment_details, function (error, payment) {
           if (error) {
-            throw error;
+            console.log('PAYPAL ERROR', error);
           }
           else {
             //console.log("Create Payment Response");

@@ -8,6 +8,7 @@ import * as ModalActions from './ModalActions';
 import * as FeeModals from '../models/Fee/FeeModals';
 import * as FileModals from '../models/File/FileModals';
 import * as FlexTableModals from '../helpers/FlexTable/FlexTableModals';
+import * as UnitModals from '../models/Unit/UnitModals';
 import * as UserModals from '../models/User/UserModals';
 
 class SpawnableModalTransition extends React.Component {
@@ -36,6 +37,9 @@ class _SpawnableModal extends React.Component {
       markClosed: this.props.markClosed
     }
     switch (this.props.componentName) {
+
+      case 'UNIT_RECLASSIFY':
+        return <UnitModals.Reclassify { ...modalProps } />;
 
       case 'USER_ROLES':
         return <UserModals.ManageRoles { ...modalProps } />;
