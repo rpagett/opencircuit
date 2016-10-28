@@ -244,7 +244,7 @@ router.post('/userPay', (req, res) => {
 
   console.log('PAYING', toPay);
 
-  Fee.find({ _id: {$in: toPay} }, 'unit amount category')
+  Fee.find({ _id: {$in: toPay} }, 'unit amount category payments')
     .populate('unit', 'name')
     .populate('category', 'name')
     .exec()

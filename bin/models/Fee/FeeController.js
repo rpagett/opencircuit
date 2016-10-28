@@ -253,7 +253,7 @@ router.post('/userPay', function (req, res) {
 
   console.log('PAYING', toPay);
 
-  _FeeModel2.default.find({ _id: { $in: toPay } }, 'unit amount category').populate('unit', 'name').populate('category', 'name').exec().then(function (fees) {
+  _FeeModel2.default.find({ _id: { $in: toPay } }, 'unit amount category payments').populate('unit', 'name').populate('category', 'name').exec().then(function (fees) {
     var feeItems = [];
     var feeTotal = 0;
 
