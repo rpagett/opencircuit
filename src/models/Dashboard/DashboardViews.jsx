@@ -118,12 +118,20 @@ class _Home extends React.Component {
     return (
       <div className="container">
         <h1 className="page-header">CWEA Dashboard</h1>
+
+        <div className="row">
+          <div className="col-xs-12 offset-sm-1 col-sm-10">
+            <Link to="/register" className="btn btn-block btn-outline-success">
+              Register Your Unit(s)
+            </Link>
+          </div>
+        </div>
+        
         <ContentsView
           subStore="dashboard_fees"
           endpoint={ `/api/fees/orgsForUser/${this.props.user._id}` }
           component={ _FeeBox }
           user={ this.props.user }
-          returnEmpty={ true }
         />
 
         <ContentsView
@@ -134,13 +142,6 @@ class _Home extends React.Component {
           returnEmpty={ true }
         />
 
-        <div className="row">
-          <div className="col-xs-12 offset-sm-1 col-sm-10">
-            <Link to="/register" className="btn btn-block btn-outline-success">
-              Register Your Unit(s)
-            </Link>
-          </div>
-        </div>
       </div>
     );
   }

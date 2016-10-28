@@ -225,20 +225,6 @@ var _Home = function (_React$Component3) {
           { className: 'page-header' },
           'CWEA Dashboard'
         ),
-        _react2.default.createElement(_ContentsView2.default, {
-          subStore: 'dashboard_fees',
-          endpoint: '/api/fees/orgsForUser/' + this.props.user._id,
-          component: _FeeBox,
-          user: this.props.user,
-          returnEmpty: true
-        }),
-        _react2.default.createElement(_ContentsView2.default, {
-          subStore: 'user_units',
-          endpoint: '/api/units/forUser/' + this.props.user._id,
-          component: _UnitBox,
-          user: this.props.user,
-          returnEmpty: true
-        }),
         _react2.default.createElement(
           'div',
           { className: 'row' },
@@ -251,7 +237,20 @@ var _Home = function (_React$Component3) {
               'Register Your Unit(s)'
             )
           )
-        )
+        ),
+        _react2.default.createElement(_ContentsView2.default, {
+          subStore: 'dashboard_fees',
+          endpoint: '/api/fees/orgsForUser/' + this.props.user._id,
+          component: _FeeBox,
+          user: this.props.user
+        }),
+        _react2.default.createElement(_ContentsView2.default, {
+          subStore: 'user_units',
+          endpoint: '/api/units/forUser/' + this.props.user._id,
+          component: _UnitBox,
+          user: this.props.user,
+          returnEmpty: true
+        })
       );
     }
   }]);
