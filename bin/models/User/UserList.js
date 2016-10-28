@@ -96,7 +96,11 @@ var UserList = function (_React$Component) {
             'Roles': function Roles(user, dispatch) {
               return _react2.default.createElement(
                 'button',
-                { onClick: _this2.launchRolesOverlay.bind(user, dispatch), className: 'btn btn-sm btn-info' },
+                {
+                  onClick: _this2.launchRolesOverlay.bind(user, dispatch),
+                  className: 'btn btn-sm btn-info',
+                  key: user._id
+                },
                 'Manage...'
               );
             }

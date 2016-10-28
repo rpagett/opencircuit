@@ -24,10 +24,14 @@ const FormSchema = new Mongoose.Schema({
   autoapply_all: Boolean
 })
 
+FormSchema.virtual('detailsUrl').get(function() {
+  return `/forms/${this._id}`;
+});
+
 export const Form = Mongoose.model('Form', FormSchema);
 export default Form;
 
-const FormObligationSchema = new Mongoose.Schema({
+export const FormObligationSchema = new Mongoose.Schema({
   form: {
     type: ObjectId,
     ref: 'Form'
@@ -37,5 +41,3 @@ const FormObligationSchema = new Mongoose.Schema({
   due_date: Date,
   approved: Boolean
 });
-
-export const FormObligation = Mongoose.model('FormObligation', FormObligationSchema);

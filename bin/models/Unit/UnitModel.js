@@ -32,6 +32,8 @@ var _OrganizationModel = require('../Organization/OrganizationModel');
 
 var _OrganizationModel2 = _interopRequireDefault(_OrganizationModel);
 
+var _FormModel = require('../Form/FormModel');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ObjectId = _mongoose2.default.Schema.Types.ObjectId;
@@ -66,10 +68,7 @@ var UnitSchema = _mongoose2.default.Schema({
     type: ObjectId,
     ref: 'Organization'
   },
-  form_obligations: {
-    type: [ObjectId],
-    ref: 'FormObligation'
-  },
+  form_obligations: [_FormModel.FormObligationSchema],
 
   registered: Boolean
 }, {

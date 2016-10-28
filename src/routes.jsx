@@ -118,6 +118,7 @@ export function getAppRoutes(store) {
 
         <Route path="/forms" onEnter={ requiresRole.bind(this, UserRoles.FormsManager) }>
           <IndexRoute component={ FormView.Index } />
+          <Route path=":form_id" component={ FormView.View } />
         </Route>
 
         <Route path="/judges" onEnter={ requiresRole.bind(this, UserRoles.JudgeManager) }>

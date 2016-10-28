@@ -19,8 +19,7 @@ function validateForm() {
   var data = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
   var rules = {
-    'file': 'required',
-    'name': ['required', 'regex:^[a-zA-Z.\s]+$'],
+    'name': 'required',
     'description': 'required'
   };
 
@@ -29,8 +28,7 @@ function validateForm() {
   };
 
   var messages = {
-    'required': 'This field is required.',
-    'name.regex': 'The name may only contain letters and spaces.'
+    'required': 'This field is required.'
   };
 
   return _indicative2.default.validateAll(data, rules, messages).then(function (data) {

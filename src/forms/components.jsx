@@ -513,7 +513,9 @@ class _Checkbox extends React.Component {
       this.props.updateField(this.props.formChecked || this.props.preChecked);
     }
     else {
-      this.props.updateCheckbox(this.props.preChecked);
+      if (this.props.preChecked) {
+        this.props.updateCheckbox(this.props.preChecked);
+      }
     }
   }
 
@@ -593,6 +595,12 @@ class _Radio extends React.Component {
     name: React.PropTypes.string.isRequired,
   }
 
+  componentDidMount() {
+    if (this.props.checked) {
+      this.props.updateField(this.props.checked)
+    }
+  }
+
   updateChecked(e) {
     this.props.updateField(e.target.checked);
   }
@@ -605,7 +613,7 @@ class _Radio extends React.Component {
             type="radio"
             name={ this.props.name }
             value={ this.props.value }
-            checked={ this.props.checked }
+            checked={ this.props.formChecked }
             onChange={ this.updateChecked.bind(this) }
           />
           <span className="checkbox-label">{ this.props.label }</span>
@@ -629,7 +637,7 @@ const mapDispatchToRadioProps = (dispatch, props) => {
   }
 }
 
-export const Radio = connect(mapStateToCheckboxProps, mapDispatchToRadioProps)(_Radio);
+export const Radio = connect(mapStateToRadioProps, mapDispatchToRadioProps)(_Radio);
 
 class _EventChecks extends React.Component {
   static propTypes = {

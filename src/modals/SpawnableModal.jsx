@@ -70,7 +70,7 @@ class _SpawnableModal extends React.Component {
         return <FormModals.CreateForm { ...modalProps } />
 
       case 'FORM_SUBMIT_FORM':
-        return <FormModals.Submit { ...modalProps } />
+        return <FormModals.SubmitForm { ...modalProps } />
 
       case 'FORM_ASSIGN_OBLIGATION':
         return <FormModals.AssignObligation { ...modalProps } />

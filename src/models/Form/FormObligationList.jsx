@@ -3,7 +3,8 @@ import { Link } from 'react-router';
 
 import { userHasRole, UserRoles } from '../User/UserRoles';
 import FlexTable from '../../helpers/FlexTable/FlexTable';
-import {launch as launchModal} from '../../modals/ModalActions';
+import { launch as launchModal } from '../../modals/ModalActions';
+import { LaunchModalButton } from '../../modals/SpawnableModal';
 
 export default class FormObligationList extends React.Component {
   canEdit(obl, user) {

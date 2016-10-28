@@ -43,6 +43,10 @@ var _FlexTableModals = require('../helpers/FlexTable/FlexTableModals');
 
 var FlexTableModals = _interopRequireWildcard(_FlexTableModals);
 
+var _FormModals = require('../models/Form/FormModals');
+
+var FormModals = _interopRequireWildcard(_FormModals);
+
 var _UnitModals = require('../models/Unit/UnitModals');
 
 var UnitModals = _interopRequireWildcard(_UnitModals);
@@ -129,6 +133,15 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
 
         case 'FILE_UPLOAD':
           return _react2.default.createElement(FileModals.Upload, modalProps);
+
+        case 'FORM_CREATE_FORM':
+          return _react2.default.createElement(FormModals.CreateForm, modalProps);
+
+        case 'FORM_SUBMIT_FORM':
+          return _react2.default.createElement(FormModals.SubmitForm, modalProps);
+
+        case 'FORM_ASSIGN_OBLIGATION':
+          return _react2.default.createElement(FormModals.AssignObligation, modalProps);
 
         default:
           return _react2.default.createElement(_LoadingCube2.default, { show: true });

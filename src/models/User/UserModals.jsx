@@ -7,12 +7,14 @@ export class ManageRoles extends React.Component {
   render() {
     let boxes = [ ];
     for (let key in UserRoles) {
-      boxes.push(<Checkbox
-        name="roles[]"
-        key={ key }
-        label={ userRoleLabel(UserRoles[key]) }
-        value={ UserRoles[key] }
-      />);
+      boxes.push(
+        <Checkbox
+          name="roles[]"
+          key={ key }
+          label={ userRoleLabel(UserRoles[key]) }
+          value={ UserRoles[key] }
+        />
+      );
     }
 
     return (

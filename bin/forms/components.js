@@ -732,7 +732,9 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component17) {
       if (this.props.inForm) {
         this.props.updateField(this.props.formChecked || this.props.preChecked);
       } else {
-        this.props.updateCheckbox(this.props.preChecked);
+        if (this.props.preChecked) {
+          this.props.updateCheckbox(this.props.preChecked);
+        }
       }
     }
   }, {
@@ -831,6 +833,13 @@ var _Radio = (_temp4 = _class4 = function (_React$Component18) {
   }
 
   _createClass(_Radio, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.checked) {
+        this.props.updateField(this.props.checked);
+      }
+    }
+  }, {
     key: 'updateChecked',
     value: function updateChecked(e) {
       this.props.updateField(e.target.checked);
@@ -848,7 +857,7 @@ var _Radio = (_temp4 = _class4 = function (_React$Component18) {
             type: 'radio',
             name: this.props.name,
             value: this.props.value,
-            checked: this.props.checked,
+            checked: this.props.formChecked,
             onChange: this.updateChecked.bind(this)
           }),
           _react2.default.createElement(
@@ -881,7 +890,7 @@ var mapDispatchToRadioProps = function mapDispatchToRadioProps(dispatch, props) 
   };
 };
 
-var Radio = exports.Radio = (0, _reactRedux.connect)(mapStateToCheckboxProps, mapDispatchToRadioProps)(_Radio);
+var Radio = exports.Radio = (0, _reactRedux.connect)(mapStateToRadioProps, mapDispatchToRadioProps)(_Radio);
 
 var _EventChecks = (_temp5 = _class5 = function (_React$Component19) {
   _inherits(_EventChecks, _React$Component19);

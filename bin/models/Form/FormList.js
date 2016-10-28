@@ -21,6 +21,8 @@ var _FlexTable2 = _interopRequireDefault(_FlexTable);
 
 var _ModalActions = require('../../modals/ModalActions');
 
+var _SpawnableModal = require('../../modals/SpawnableModal');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -62,7 +64,11 @@ var FormList = function (_React$Component) {
           emptyMessage: 'There are no forms.',
           columns: {
             'Name': function Name(form) {
-              return form.name;
+              return _react2.default.createElement(
+                _reactRouter.Link,
+                { to: '/forms/' + form._id },
+                form.name
+              );
             },
             'Assigned To': function AssignedTo(form) {
               return form.assignedUnitCount;
@@ -70,8 +76,15 @@ var FormList = function (_React$Component) {
             'Auto-Apply': function AutoApply(form) {
               return form.autoApplyList;
             },
+            'Download': function Download(form) {
+              return _react2.default.createElement(
+                _reactRouter.Link,
+                { to: '/api/forms/' + form._id + '/download', target: '_blank' },
+                'View'
+              );
+            },
             'Assign...': function Assign(form) {
-              return _react2.default.createElement(LaunchModalButton, {
+              return _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
                 className: 'btn btn-sm btn-outline-danger',
                 buttonText: 'Assign to Unit',
 

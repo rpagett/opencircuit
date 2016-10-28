@@ -21,6 +21,8 @@ var _FlexTable2 = _interopRequireDefault(_FlexTable);
 
 var _ModalActions = require('../../modals/ModalActions');
 
+var _SpawnableModal = require('../../modals/SpawnableModal');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -71,7 +73,7 @@ var FormObligationList = function (_React$Component) {
               return obl.formattedDueDate;
             },
             'Submit...': function Submit(obl) {
-              return _react2.default.createElement(LaunchModalButton, {
+              return _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
                 className: 'btn btn-sm btn-outline-info',
                 buttonText: 'Submit Form',
 

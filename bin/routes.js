@@ -209,7 +209,8 @@ function getAppRoutes(store) {
       _react2.default.createElement(
         _reactRouter.Route,
         { path: '/forms', onEnter: requiresRole.bind(this, _UserRoles.UserRoles.FormsManager) },
-        _react2.default.createElement(_reactRouter.IndexRoute, { component: FormView.Index })
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: FormView.Index }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':form_id', component: FormView.View })
       ),
       _react2.default.createElement(
         _reactRouter.Route,

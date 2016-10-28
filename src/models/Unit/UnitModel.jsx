@@ -6,6 +6,7 @@ import UnitType from '../UnitType/UnitTypeModel';
 import CompClass from '../CompClass/CompClassModel';
 import User from '../User/UserModel';
 import Organization from '../Organization/OrganizationModel';
+import { FormObligationSchema } from '../Form/FormModel';
 
 const ObjectId = Mongoose.Schema.Types.ObjectId;
 const UnitSchema = Mongoose.Schema({
@@ -39,10 +40,7 @@ const UnitSchema = Mongoose.Schema({
     type: ObjectId,
     ref: 'Organization'
   },
-  form_obligations: {
-    type: [ObjectId],
-    ref: 'FormObligation'
-  },
+  form_obligations: [FormObligationSchema],
 
   registered: Boolean,
 }, {

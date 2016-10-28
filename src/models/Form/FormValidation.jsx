@@ -3,8 +3,7 @@ import Moment from 'moment';
 
 export default function validateForm(data = { }) {
   const rules = {
-    'file': 'required',
-    'name': ['required', 'regex:^[a-zA-Z.\s]+$'],
+    'name': 'required',
     'description': 'required'
   };
 
@@ -14,7 +13,6 @@ export default function validateForm(data = { }) {
 
   const messages = {
     'required': 'This field is required.',
-    'name.regex': 'The name may only contain letters and spaces.'
   };
 
   return Indicative.validateAll(data, rules, messages)

@@ -43,7 +43,11 @@ export default class UserList extends React.Component {
             'Phone': user => { return user.phone },
             'Roles': (user, dispatch) => {
               return (
-                <button onClick={ this.launchRolesOverlay.bind(user, dispatch) } className="btn btn-sm btn-info">
+                <button
+                  onClick={ this.launchRolesOverlay.bind(user, dispatch) }
+                  className="btn btn-sm btn-info"
+                  key={ user._id }
+                >
                   Manage...
                 </button>
               );

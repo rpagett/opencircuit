@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FormObligation = exports.Form = undefined;
+exports.FormObligationSchema = exports.Form = undefined;
 
 var _mongoose = require('mongoose');
 
@@ -38,11 +38,13 @@ var FormSchema = new _mongoose2.default.Schema({
   autoapply_all: Boolean
 });
 
+FormSchema.virtual('detailsUrl').get(function () {
+  return '/forms/' + this._id;
+});
+
 var Form = exports.Form = _mongoose2.default.model('Form', FormSchema);
 exports.default = Form;
-
-
-var FormObligationSchema = new _mongoose2.default.Schema({
+var FormObligationSchema = exports.FormObligationSchema = new _mongoose2.default.Schema({
   form: {
     type: ObjectId,
     ref: 'Form'
@@ -52,5 +54,3 @@ var FormObligationSchema = new _mongoose2.default.Schema({
   due_date: Date,
   approved: Boolean
 });
-
-var FormObligation = exports.FormObligation = _mongoose2.default.model('FormObligation', FormObligationSchema);

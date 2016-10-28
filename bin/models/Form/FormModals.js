@@ -3,13 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SubmitForm = exports.CreateForm = undefined;
+exports.AssignObligation = exports.SubmitForm = exports.CreateForm = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
 
 var _isomorphicFetch = require('isomorphic-fetch');
 
@@ -40,13 +42,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     Auto-assign on unit creation
 */
 
-var CreateForm = exports.CreateForm = function (_React$Component) {
-  _inherits(CreateForm, _React$Component);
+var _CreateForm = function (_React$Component) {
+  _inherits(_CreateForm, _React$Component);
 
-  function CreateForm() {
-    _classCallCheck(this, CreateForm);
+  function _CreateForm() {
+    _classCallCheck(this, _CreateForm);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CreateForm).call(this));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_CreateForm).call(this));
 
     _this.state = {
       isLoading: false
@@ -54,7 +56,7 @@ var CreateForm = exports.CreateForm = function (_React$Component) {
     return _this;
   }
 
-  _createClass(CreateForm, [{
+  _createClass(_CreateForm, [{
     key: 'updateText',
     value: function updateText(e) {
       this.setState(_defineProperty({}, e.target.name, e.target.value));
@@ -71,7 +73,7 @@ var CreateForm = exports.CreateForm = function (_React$Component) {
 
       var data = new FormData();
       data.append('file', this._file.files[0]);
-      data.append('name', this.state.filename);
+      data.append('name', this.state.name);
       data.append('description', this.state.description);
 
       (0, _isomorphicFetch2.default)('/api/forms', {
@@ -178,8 +180,16 @@ var CreateForm = exports.CreateForm = function (_React$Component) {
     }
   }]);
 
-  return CreateForm;
+  return _CreateForm;
 }(_react2.default.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.auth.user
+  };
+};
+
+var CreateForm = exports.CreateForm = (0, _reactRedux.connect)(mapStateToProps, function () {})(_CreateForm);
 
 var SubmitForm = exports.SubmitForm = function (_React$Component2) {
   _inherits(SubmitForm, _React$Component2);
@@ -205,6 +215,7 @@ var SubmitForm = exports.SubmitForm = function (_React$Component2) {
 
       var data = new FormData();
       data.append('file', this._file.files[0]);
+      data.append('unit', this.props.unit._id);
 
       (0, _isomorphicFetch2.default)('/api/forms/' + this.props.formId, {
         credentials: 'same-origin',
@@ -242,23 +253,31 @@ var SubmitForm = exports.SubmitForm = function (_React$Component2) {
           _react2.default.createElement(
             'div',
             { className: 'row' },
-            _react2.default.createElement(
-              'strong',
-              null,
-              'Submit Form'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'row' },
             _react2.default.createElement('input', {
               className: 'form-control',
               type: 'file',
               name: 'upload',
+              accept: 'application/pdf, .pdf',
               ref: function ref(c) {
                 return _this6._file = c;
               } }),
             _react2.default.createElement('p', null)
+          ),
+          _react2.default.createElement('p', null),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'alert alert-warning col-xs-12' },
+              'Please supply ',
+              _react2.default.createElement(
+                'strong',
+                null,
+                'PDF'
+              ),
+              's only.'
+            )
           ),
           _react2.default.createElement(
             'div',
@@ -281,4 +300,148 @@ var SubmitForm = exports.SubmitForm = function (_React$Component2) {
   }]);
 
   return SubmitForm;
+}(_react2.default.Component);
+
+var AssignObligation = exports.AssignObligation = function (_React$Component3) {
+  _inherits(AssignObligation, _React$Component3);
+
+  function AssignObligation() {
+    _classCallCheck(this, AssignObligation);
+
+    var _this7 = _possibleConstructorReturn(this, Object.getPrototypeOf(AssignObligation).call(this));
+
+    _this7.state = {
+      showIndividual: false
+    };
+    return _this7;
+  }
+
+  _createClass(AssignObligation, [{
+    key: 'setViewType',
+    value: function setViewType(individual) {
+      this.setState({
+        showIndividual: individual
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var header = _react2.default.createElement(
+        'div',
+        { className: 'text-xs-center text-center' },
+        _react2.default.createElement(
+          'div',
+          { className: 'btn-group btn-group-sm', role: 'group' },
+          _react2.default.createElement(
+            'button',
+            {
+              type: 'button',
+              className: this.state.showIndividual ? 'btn btn-info' : 'btn btn-outline-info',
+              onClick: this.setViewType.bind(this, true)
+            },
+            'Individual Units'
+          ),
+          _react2.default.createElement(
+            'button',
+            {
+              type: 'button',
+              className: !this.state.showIndividual ? 'btn btn-info' : 'btn btn-outline-info',
+              onClick: this.setViewType.bind(this, false)
+            },
+            'Automatically'
+          )
+        )
+      );
+
+      if (this.state.showIndividual) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            header
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement('p', null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row col-xs-12' },
+            _react2.default.createElement(
+              _components.ReduxForm,
+              {
+                subStore: 'form_assign_indiv',
+                submitEndpoint: '/api/forms/' + this.props.form._id + '/assign',
+                submitMethod: 'POST',
+                inModal: true
+              },
+              _react2.default.createElement(_components.UnitSelect, { name: 'unit' }),
+              _react2.default.createElement(
+                'button',
+                { type: 'submit', role: 'submit', className: 'btn btn-warning btn-block' },
+                'Assign Obligation'
+              )
+            )
+          )
+        );
+      } else {
+        return _react2.default.createElement(
+          'div',
+          { className: 'container-fluid' },
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            header
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement('p', null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-xs-12' },
+              _react2.default.createElement(
+                _components.ReduxForm,
+                {
+                  subStore: 'form_assign_auto',
+                  fetchEndpoint: '/api/forms/' + this.props.form._id + '/autoassign',
+                  submitEndpoint: '/api/forms/' + this.props.form._id + '/autoassign',
+                  submitMethod: 'PATCH',
+                  inModal: true
+                },
+                _react2.default.createElement(_components.Radio, { name: 'category', value: 'all', label: 'All Units' }),
+                _react2.default.createElement(_components.Radio, { name: 'category', value: 'independent', label: 'Independent Units' }),
+                _react2.default.createElement(_components.Radio, { name: 'category', value: 'scholastic', label: 'Scholastic Units' }),
+                _react2.default.createElement(_components.Radio, { name: 'category', value: 'none', label: 'None' }),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Remember,'
+                  ),
+                  ' this assigns retroactively as well as to all new units.'
+                ),
+                _react2.default.createElement(
+                  'button',
+                  { type: 'submit', role: 'submit', 'class': 'btn btn-success btn-block' },
+                  'Auto-Assign'
+                )
+              )
+            )
+          )
+        );
+      }
+    }
+  }]);
+
+  return AssignObligation;
 }(_react2.default.Component);
