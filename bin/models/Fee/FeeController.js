@@ -183,7 +183,10 @@ router.get('/paypal-return', function (req, res) {
     _paypalRestSdk2.default.payment.execute(paymentId, execute_payment_json, function (error, payment) {
       if (error) {
         console.log(error.response);
-        throw error;
+        fs.appendFile('files/logs/paypal/errors.log', JSON.stringify(err), function (err) {
+          console.log('Even the log file failed.');
+        });
+        res.redirect(302, process.env.BASE_URL + '/error/payment');
       } else {
         if (payment.state === 'approved') {
           return _FeeModel2.default.find({ paypal_id: payment.id }, 'unit amount payments').then(function (fees) {
@@ -226,6 +229,10 @@ router.get('/paypal-return', function (req, res) {
     });
   } catch (err) {
     console.log(err.message);
+    fs.appendFile('files/logs/paypal/errors.log', JSON.stringify(err), function (err) {
+      console.log('Even the log file failed.');
+    });
+    res.redirect(302, process.env.BASE_URL + '/error/payment');
   }
 });
 
