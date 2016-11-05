@@ -166,8 +166,6 @@ class _Home extends React.Component {
           returnEmpty={ true }
         />
 
-<<<<<<< b5cb7ac3c57ed5689ad3855dc9f3bf90c0842768
-=======
         <div className="row">
           <div className="card col-xs-12">
             <div className="card-header card-warning">
@@ -178,16 +176,6 @@ class _Home extends React.Component {
             </div>
           </div>
         </div>
-
-
-        <div className="row">
-          <div className="col-xs-12 offset-sm-1 col-sm-10">
-            <Link to="/register" className="btn btn-block btn-outline-success">
-              Register Your Unit(s)
-            </Link>
-          </div>
-        </div>
->>>>>>> forms management whee
       </div>
     );
   }

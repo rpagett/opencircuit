@@ -35,6 +35,10 @@ var _FileList = require('../File/FileList');
 
 var _FileList2 = _interopRequireDefault(_FileList);
 
+var _FormObligationList = require('../Form/FormObligationList');
+
+var _FormObligationList2 = _interopRequireDefault(_FormObligationList);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -205,8 +209,45 @@ var _UnitBox = function (_React$Component2) {
   return _UnitBox;
 }(_react2.default.Component);
 
-var _Home = function (_React$Component3) {
-  _inherits(_Home, _React$Component3);
+var _FormSummary = function (_React$Component3) {
+  _inherits(_FormSummary, _React$Component3);
+
+  function _FormSummary() {
+    _classCallCheck(this, _FormSummary);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_FormSummary).apply(this, arguments));
+  }
+
+  _createClass(_FormSummary, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _reactRouter.Link,
+        { to: '/forms/review' },
+        _react2.default.createElement(
+          'div',
+          { className: 'alert alert-warning' },
+          'There ',
+          this.props.contents.length == 1 ? 'is' : 'are',
+          _react2.default.createElement(
+            'strong',
+            null,
+            ' ',
+            this.props.contents.length
+          ),
+          ' form',
+          this.props.contents.length == 1 ? '' : 's',
+          ' needing review.'
+        )
+      );
+    }
+  }]);
+
+  return _FormSummary;
+}(_react2.default.Component);
+
+var _Home = function (_React$Component4) {
+  _inherits(_Home, _React$Component4);
 
   function _Home() {
     _classCallCheck(this, _Home);
@@ -224,6 +265,17 @@ var _Home = function (_React$Component3) {
           'h1',
           { className: 'page-header' },
           'CWEA Dashboard'
+        ),
+        _react2.default.createElement(
+          _UserRoles.HasRole,
+          { role: _UserRoles.UserRoles.FormsManager },
+          _react2.default.createElement(_ContentsView2.default, {
+            subStore: 'formsmanager_summary',
+            endpoint: '/api/forms/review',
+            component: _FormSummary,
+            user: this.props.user,
+            returnEmpty: true
+          })
         ),
         _react2.default.createElement(
           'div',
@@ -250,7 +302,25 @@ var _Home = function (_React$Component3) {
           component: _UnitBox,
           user: this.props.user,
           returnEmpty: true
-        })
+        }),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card col-xs-12' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-header card-warning' },
+              'Required Forms for Your Units'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-block' },
+              _react2.default.createElement(_FormObligationList2.default, { endpoint: '/api/forms/forUser/' + this.props.user._id })
+            )
+          )
+        )
       );
     }
   }]);
@@ -271,8 +341,8 @@ var mapDispatchToHomeProps = function mapDispatchToHomeProps(dispatch) {
 
 var Home = exports.Home = (0, _reactRedux.connect)(mapStateToHomeProps, mapDispatchToHomeProps)(_Home);
 
-var About = exports.About = function (_React$Component4) {
-  _inherits(About, _React$Component4);
+var About = exports.About = function (_React$Component5) {
+  _inherits(About, _React$Component5);
 
   function About() {
     _classCallCheck(this, About);
@@ -298,8 +368,8 @@ var About = exports.About = function (_React$Component4) {
   return About;
 }(_react2.default.Component);
 
-var PageNotFound = exports.PageNotFound = function (_React$Component5) {
-  _inherits(PageNotFound, _React$Component5);
+var PageNotFound = exports.PageNotFound = function (_React$Component6) {
+  _inherits(PageNotFound, _React$Component6);
 
   function PageNotFound() {
     _classCallCheck(this, PageNotFound);
@@ -343,8 +413,8 @@ var PageNotFound = exports.PageNotFound = function (_React$Component5) {
   return PageNotFound;
 }(_react2.default.Component);
 
-var ConfirmPayment = exports.ConfirmPayment = function (_React$Component6) {
-  _inherits(ConfirmPayment, _React$Component6);
+var ConfirmPayment = exports.ConfirmPayment = function (_React$Component7) {
+  _inherits(ConfirmPayment, _React$Component7);
 
   function ConfirmPayment() {
     _classCallCheck(this, ConfirmPayment);
@@ -388,8 +458,8 @@ var ConfirmPayment = exports.ConfirmPayment = function (_React$Component6) {
   return ConfirmPayment;
 }(_react2.default.Component);
 
-var ErrorPayment = exports.ErrorPayment = function (_React$Component7) {
-  _inherits(ErrorPayment, _React$Component7);
+var ErrorPayment = exports.ErrorPayment = function (_React$Component8) {
+  _inherits(ErrorPayment, _React$Component8);
 
   function ErrorPayment() {
     _classCallCheck(this, ErrorPayment);
