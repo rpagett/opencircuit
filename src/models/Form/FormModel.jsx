@@ -40,6 +40,10 @@ FormSchema.virtual('detailsUrl').get(function() {
   return `/forms/${this._id}`;
 });
 
+FeeSchema.virtual('formattedDueDate').get(function() {
+  return Moment(this.due_date).format('MMM. Do, YYYY');
+});
+
 export const Form = Mongoose.model('Form', FormSchema);
 export default Form;
 

@@ -54,6 +54,10 @@ FormSchema.virtual('detailsUrl').get(function () {
   return '/forms/' + this._id;
 });
 
+FeeSchema.virtual('formattedDueDate').get(function () {
+  return (0, _moment2.default)(this.due_date).format('MMM. Do, YYYY');
+});
+
 var Form = exports.Form = _mongoose2.default.model('Form', FormSchema);
 exports.default = Form;
 var FormObligationSchema = exports.FormObligationSchema = new _mongoose2.default.Schema({

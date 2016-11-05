@@ -27,7 +27,7 @@ export default class ObligatedUnitsList extends React.Component {
             'Form': obl => {
               return <Link to={ obl.form.detailsUrl }>{ obl.form.name }</Link>
             },
-            'Due Date': obl => obl.form.due_date,
+            'Due Date': obl => obl.form.formattedDueDate,
             'Status': obl => {
               if (obl.system_filename) {
                 if (obl.approved) {

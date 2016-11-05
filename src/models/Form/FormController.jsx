@@ -518,12 +518,12 @@ router.get('/forUnit/:id', (req, res) => {
       const obligations = [ ];
 
       for (let key in unit.form_obligations) {
-        let obl = unit.form_obligations[key].toObject();
+        //let obl = unit.form_obligations[key].toObject();
 
-        if (!obl) { continue; }
+        //if (!obl) { continue; }
 
-        obl = {
-          ...obl,
+        let obl = {
+          ...unit.form_obligations[key],
           unit
         }
 
@@ -552,10 +552,12 @@ router.get('/forUser/:id', (req, res) => {
     .then(units => {
       units.map(unit => {
         for (let key in unit.form_obligations) {
-          let obl = unit.form_obligations[key].toObject();
+          //let obl = unit.form_obligations[key].toObject();
 
-          obl = {
-            ...obl,
+          //if (!obl) { continue; }
+
+          let obl = {
+            ...unit.form_obligations[key],
             unit
           }
 

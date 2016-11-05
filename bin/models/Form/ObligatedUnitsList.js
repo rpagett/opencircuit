@@ -78,7 +78,7 @@ var ObligatedUnitsList = function (_React$Component) {
               );
             },
             'Due Date': function DueDate(obl) {
-              return obl.form.due_date;
+              return obl.form.formattedDueDate;
             },
             'Status': function Status(obl) {
               if (obl.system_filename) {

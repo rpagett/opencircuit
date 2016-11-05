@@ -466,13 +466,11 @@ router.get('/forUnit/:id', function (req, res) {
     var obligations = [];
 
     for (var key in unit.form_obligations) {
-      var obl = unit.form_obligations[key].toObject();
+      //let obl = unit.form_obligations[key].toObject();
 
-      if (!obl) {
-        continue;
-      }
+      //if (!obl) { continue; }
 
-      obl = _extends({}, obl, {
+      var obl = _extends({}, unit.form_obligations[key], {
         unit: unit
       });
 
@@ -496,9 +494,11 @@ router.get('/forUser/:id', function (req, res) {
   _UnitModel2.default.find({ director: req.params.id }, 'name slug form_obligations').sort('form_obligations.form').populate('form_obligations.form').exec().then(function (units) {
     units.map(function (unit) {
       for (var key in unit.form_obligations) {
-        var obl = unit.form_obligations[key].toObject();
+        //let obl = unit.form_obligations[key].toObject();
 
-        obl = _extends({}, obl, {
+        //if (!obl) { continue; }
+
+        var obl = _extends({}, unit.form_obligations[key], {
           unit: unit
         });
 
