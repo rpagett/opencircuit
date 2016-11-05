@@ -468,6 +468,10 @@ router.get('/forUnit/:id', function (req, res) {
     for (var key in unit.form_obligations) {
       var obl = unit.form_obligations[key].toObject();
 
+      if (!obl) {
+        continue;
+      }
+
       obl = _extends({}, obl, {
         unit: unit
       });

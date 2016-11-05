@@ -520,6 +520,8 @@ router.get('/forUnit/:id', (req, res) => {
       for (let key in unit.form_obligations) {
         let obl = unit.form_obligations[key].toObject();
 
+        if (!obl) { continue; }
+
         obl = {
           ...obl,
           unit
