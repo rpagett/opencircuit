@@ -157,6 +157,8 @@ class _Home extends React.Component {
           </div>
         </div>
 
+        <p></p>
+
         <ContentsView
           subStore="dashboard_fees"
           endpoint={ `/api/fees/orgsForUser/${this.props.user._id}` }

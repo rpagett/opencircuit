@@ -27,7 +27,7 @@ export default class FormObligationList extends React.Component {
             'Form': obl => { return (
               <a href={ `/api/forms/${obl.form._id}/download` } target="_blank">{ obl.form.name }</a>
             )},
-            'Due Date': obl => obl.formattedDueDate,
+            'Due Date': obl => obl.form.formattedDueDate,
             'Status': obl => {
               if (obl.system_filename) {
                 if (obl.approved) {

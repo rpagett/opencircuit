@@ -295,6 +295,7 @@ var _Home = function (_React$Component4) {
             )
           )
         ),
+        _react2.default.createElement('p', null),
         _react2.default.createElement(_ContentsView2.default, {
           subStore: 'dashboard_fees',
           endpoint: '/api/fees/orgsForUser/' + this.props.user._id,

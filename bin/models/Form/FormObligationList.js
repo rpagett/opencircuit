@@ -74,7 +74,7 @@ var FormObligationList = function (_React$Component) {
               );
             },
             'Due Date': function DueDate(obl) {
-              return obl.formattedDueDate;
+              return obl.form.formattedDueDate;
             },
             'Status': function Status(obl) {
               if (obl.system_filename) {

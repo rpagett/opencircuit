@@ -506,7 +506,7 @@ router.get('/submission/:obl', (req, res) => {
 })
 
 router.get('/forUnit/:id', (req, res) => {
-  Unit.findOne({ _id: req.params.id, form_obligations: { $ne: null } }, 'name slug form_obligations')
+  Unit.findOne({ _id: req.params.id }, 'name slug form_obligations')
     .sort('form_obligations.form')
     .populate('form_obligations.form')
     .exec()
@@ -515,20 +515,13 @@ router.get('/forUnit/:id', (req, res) => {
         throw new Error('Unit not found.')
       }
 
-      const obligations = [ ];
-
-      if (unit.form_obligations) {
-        for (let key in unit.form_obligations) {
-          let obl = unit.form_obligations[key].toObject();
-
-          obl = {
-            ...obl,
-            unit
-          }
-
-          obligations[key] = obl;
-        }
-      }
+      let obligations = [ ];
+      unit.form_obligations.map(obl => {
+        obligations.push({
+          ...obl.toObject(),
+          unit
+        });
+      })
 
       res.send({
         success: true,
