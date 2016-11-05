@@ -551,18 +551,12 @@ router.get('/forUser/:id', (req, res) => {
     .exec()
     .then(units => {
       units.map(unit => {
-        if (unit.form_obligations) {
-          for (let key in unit.form_obligations) {
-            let obl = unit.form_obligations[key].toObject();
-
-            obl = {
-              ...obl,
-              unit
-            }
-
-            obligations.push(obl);
-          }
-        }
+        unit.form_obligations.map(obl => {
+          obligations.push({
+            ...obl,
+            unit
+          });
+        })
       })
 
       res.send({
