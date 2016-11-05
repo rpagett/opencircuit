@@ -84,7 +84,7 @@ class _Verify extends React.Component {
 
   render() {
     const url = process.env.BASE_URL + `/api/forms/submission/${this.props.params.id}`;
-    const fullUrl = 'http://docs.google.com/viewer?url=' + url + '&embedded=true';
+    const fullUrl = 'https://docs.google.com/viewer?url=' + url + '&embedded=true';
 
     return (
       <div className="container-fluid">
@@ -179,7 +179,7 @@ class _Review extends React.Component {
 
   render() {
     const url = process.env.BASE_URL + `/api/forms/submission/${this.props.params.id}`;
-    const fullUrl = 'http://docs.google.com/viewer?url=' + url + '&embedded=true';
+    const fullUrl = 'https://docs.google.com/viewer?url=' + url + '&embedded=true';
 
     return (
       <div className="container-fluid">
