@@ -496,7 +496,7 @@ router.get('/submission/:obl', (req, res) => {
 
       const obl = unit.form_obligations.id(req.params.obl);
 
-      res.set('Content-disposition', 'attachment; filename=' + obl.system_filename + '.' + obl.extension);
+      //res.set('Content-disposition', 'attachment; filename=' + obl.system_filename + '.' + obl.extension);
       res.sendFile(path.resolve(process.cwd(), 'files', 'form_uploads', obl.system_filename))
     })
     .catch(err => {
