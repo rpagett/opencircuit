@@ -80,3 +80,21 @@
 //    padding-bottom: .6rem;
 //  }
 //}
+
+.pdf-header {
+  background-color: #EEE;
+  color: #333;
+
+  button {
+    padding-top: .2rem;
+    margin-top: .2rem;
+  }
+}
+
+.pdf-text {
+  margin: auto auto;
+  padding: .3rem;
+  padding-left: .6rem;
+  padding-right: .6rem;
+  font-weight: 600;
+}

@@ -162,6 +162,11 @@ var _NavBar = function (_React$Component2) {
                 ),
                 _react2.default.createElement(
                   _reactRouter.Link,
+                  { to: '/forms', className: 'dropdown-item' },
+                  'Forms'
+                ),
+                _react2.default.createElement(
+                  _reactRouter.Link,
                   { to: '/judges', className: 'dropdown-item' },
                   'Judges'
                 ),

@@ -22,7 +22,19 @@ const FormSchema = new Mongoose.Schema({
   autoapply_scholastic: Boolean,
   autoapply_independent: Boolean,
   autoapply_all: Boolean
+}, {
+  timestamps: true,
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
 })
+
+FormSchema.statics.DUE_DATE = () => {
+  return Date.parse('Dec 31, 2016');
+}
 
 FormSchema.virtual('detailsUrl').get(function() {
   return `/forms/${this._id}`;
@@ -39,5 +51,9 @@ export const FormObligationSchema = new Mongoose.Schema({
   system_filename: String,
   extension: String,
   due_date: Date,
+
+  submitted: Boolean,
   approved: Boolean
+}, {
+  timestamps: true
 });

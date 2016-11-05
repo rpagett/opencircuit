@@ -21,6 +21,8 @@ var _LoadingCube = require('../../helpers/LoadingCube');
 
 var _LoadingCube2 = _interopRequireDefault(_LoadingCube);
 
+var _functions = require('../../helpers/functions');
+
 var _components = require('../../forms/components');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -80,7 +82,7 @@ var _CreateForm = function (_React$Component) {
         credentials: 'same-origin',
         method: 'POST',
         headers: {
-          'Authorization': this.props.user.apiToken
+          'Authorization': this.props.authUser.apiToken
         },
         body: data
       }).then(function (res) {
@@ -183,21 +185,15 @@ var _CreateForm = function (_React$Component) {
   return _CreateForm;
 }(_react2.default.Component);
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    user: state.auth.user
-  };
-};
+var CreateForm = exports.CreateForm = (0, _functions.authConnect)(_CreateForm);
 
-var CreateForm = exports.CreateForm = (0, _reactRedux.connect)(mapStateToProps, function () {})(_CreateForm);
+var _SubmitForm = function (_React$Component2) {
+  _inherits(_SubmitForm, _React$Component2);
 
-var SubmitForm = exports.SubmitForm = function (_React$Component2) {
-  _inherits(SubmitForm, _React$Component2);
+  function _SubmitForm() {
+    _classCallCheck(this, _SubmitForm);
 
-  function SubmitForm() {
-    _classCallCheck(this, SubmitForm);
-
-    var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(SubmitForm).call(this));
+    var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(_SubmitForm).call(this));
 
     _this4.state = {
       isLoading: false
@@ -205,7 +201,7 @@ var SubmitForm = exports.SubmitForm = function (_React$Component2) {
     return _this4;
   }
 
-  _createClass(SubmitForm, [{
+  _createClass(_SubmitForm, [{
     key: 'onSubmit',
     value: function onSubmit(e) {
       var _this5 = this;
@@ -217,11 +213,11 @@ var SubmitForm = exports.SubmitForm = function (_React$Component2) {
       data.append('file', this._file.files[0]);
       data.append('unit', this.props.unit._id);
 
-      (0, _isomorphicFetch2.default)('/api/forms/' + this.props.formId, {
+      (0, _isomorphicFetch2.default)('/api/forms/' + this.props.form._id, {
         credentials: 'same-origin',
         method: 'POST',
         headers: {
-          'Authorization': this.props.user.apiToken
+          'Authorization': this.props.authUser.apiToken
         },
         body: data
       }).then(function (res) {
@@ -257,7 +253,7 @@ var SubmitForm = exports.SubmitForm = function (_React$Component2) {
               className: 'form-control',
               type: 'file',
               name: 'upload',
-              accept: 'application/pdf, .pdf',
+              accept: 'application/pdf, pdf',
               ref: function ref(c) {
                 return _this6._file = c;
               } }),
@@ -299,8 +295,10 @@ var SubmitForm = exports.SubmitForm = function (_React$Component2) {
     }
   }]);
 
-  return SubmitForm;
+  return _SubmitForm;
 }(_react2.default.Component);
+
+var SubmitForm = exports.SubmitForm = (0, _functions.authConnect)(_SubmitForm);
 
 var AssignObligation = exports.AssignObligation = function (_React$Component3) {
   _inherits(AssignObligation, _React$Component3);
@@ -356,7 +354,7 @@ var AssignObligation = exports.AssignObligation = function (_React$Component3) {
       if (this.state.showIndividual) {
         return _react2.default.createElement(
           'div',
-          null,
+          { className: 'container-fluid' },
           _react2.default.createElement(
             'div',
             { className: 'row' },
@@ -369,20 +367,24 @@ var AssignObligation = exports.AssignObligation = function (_React$Component3) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'row col-xs-12' },
+            { className: 'row' },
             _react2.default.createElement(
-              _components.ReduxForm,
-              {
-                subStore: 'form_assign_indiv',
-                submitEndpoint: '/api/forms/' + this.props.form._id + '/assign',
-                submitMethod: 'POST',
-                inModal: true
-              },
-              _react2.default.createElement(_components.UnitSelect, { name: 'unit' }),
+              'div',
+              { className: 'col-xs-12' },
               _react2.default.createElement(
-                'button',
-                { type: 'submit', role: 'submit', className: 'btn btn-warning btn-block' },
-                'Assign Obligation'
+                _components.ReduxForm,
+                {
+                  subStore: 'form_assign_indiv',
+                  submitEndpoint: '/api/forms/' + this.props.form._id + '/assign',
+                  submitMethod: 'POST',
+                  inModal: true
+                },
+                _react2.default.createElement(_components.UnitSelect, { name: 'unit' }),
+                _react2.default.createElement(
+                  'button',
+                  { type: 'submit', className: 'btn btn-warning btn-block' },
+                  'Assign Obligation'
+                )
               )
             )
           )
@@ -432,7 +434,7 @@ var AssignObligation = exports.AssignObligation = function (_React$Component3) {
                 ),
                 _react2.default.createElement(
                   'button',
-                  { type: 'submit', role: 'submit', 'class': 'btn btn-success btn-block' },
+                  { type: 'submit', className: 'btn btn-success btn-block' },
                   'Auto-Assign'
                 )
               )

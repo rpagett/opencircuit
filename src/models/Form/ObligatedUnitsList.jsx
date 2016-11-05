@@ -23,16 +23,21 @@ export default class ObligatedUnitsList extends React.Component {
           endpoint={ this.props.endpoint }
           emptyMessage="There are no form obligations."
           columns={{
-            'Unit': unit => { return <Link to={ unit.detailsUrl }>{ unit.name }</Link> },
-            'Form': unit => unit.selectedForm.name,
-            'Due Date': unit => unit.selectedForm.due_date,
-            'Status': unit => {
-              if (unit.selectedForm.system_filename) {
-                if (unit.selectedForm.approved) {
-                  return 'Approved';
+            'Unit': obl => { return <Link to={ obl.unit.detailsUrl }>{ obl.unit.name }</Link> },
+            'Form': obl => {
+              return <Link to={ obl.form.detailsUrl }>{ obl.form.name }</Link>
+            },
+            'Due Date': obl => obl.form.due_date,
+            'Status': obl => {
+              if (obl.system_filename) {
+                if (obl.approved) {
+                  return <a href={ `/api/forms/submission/${obl._id}` } target="_blank">Approved</a>;
+                }
+                else if (obl.submitted) {
+                  return (<p>Submitted (<Link to={ '/forms/review/' + obl._id }>Review</Link>)</p>);
                 }
                 else {
-                  return 'Pending';
+                  return (<p>Pending (<Link to={ '/forms/verify/' + obl._id }>Submit</Link>)</p>);
                 }
               }
 
@@ -44,8 +49,8 @@ export default class ObligatedUnitsList extends React.Component {
                   title="Submit Form"
                   componentName="FORM_SUBMIT_FORM"
                   modalProps={{
-                    form: unit.selectedForm,
-                    unit,
+                    form: obl.form,
+                    unit: obl.unit,
                     refreshTable: 'obligatedUnitsList',
                     refreshEndpoint: this.props.endpoint
                   }}

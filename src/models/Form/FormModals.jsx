@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import fetch from 'isomorphic-fetch';
 import LoadingCube from '../../helpers/LoadingCube';
 
+import { authConnect } from '../../helpers/functions';
 import { ReduxForm, Radio, UnitSelect } from '../../forms/components';
 
 /* TODO:
@@ -43,7 +44,7 @@ class _CreateForm extends React.Component {
       credentials: 'same-origin',
       method: 'POST',
       headers: {
-        'Authorization': this.props.user.apiToken
+        'Authorization': this.props.authUser.apiToken
       },
       body: data
     })
@@ -116,13 +117,7 @@ class _CreateForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.auth.user
-  }
-}
-
-export const CreateForm = connect(mapStateToProps, () => { })(_CreateForm);
+export const CreateForm = authConnect(_CreateForm);
 
 class _SubmitForm extends React.Component {
   constructor() {
@@ -141,11 +136,11 @@ class _SubmitForm extends React.Component {
     data.append('file', this._file.files[0]);
     data.append('unit', this.props.unit._id);
 
-    fetch('/api/forms/' + this.props.formId, {
+    fetch('/api/forms/' + this.props.form._id, {
       credentials: 'same-origin',
       method: 'POST',
       headers: {
-        'Authorization': this.props.user.apiToken
+        'Authorization': this.props.authUser.apiToken
       },
       body: data
     })
@@ -176,7 +171,7 @@ class _SubmitForm extends React.Component {
               className="form-control"
               type="file"
               name="upload"
-              accept="application/pdf, .pdf"
+              accept="application/pdf, pdf"
               ref={ c => this._file = c } />
             <p></p>
           </div>
@@ -206,13 +201,7 @@ class _SubmitForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.auth.user
-  }
-}
-
-export const SubmitForm = connect(mapStateToProps, () => { })(_SubmitForm);
+export const SubmitForm = authConnect(_SubmitForm);
 
 export class AssignObligation extends React.Component {
   constructor() {
@@ -253,7 +242,7 @@ export class AssignObligation extends React.Component {
 
     if (this.state.showIndividual) {
       return (
-        <div>
+        <div className="container-fluid">
           <div className="row">
             { header }
           </div>
@@ -262,19 +251,21 @@ export class AssignObligation extends React.Component {
             <p></p>
           </div>
 
-          <div className="row col-xs-12">
-            <ReduxForm
-              subStore="form_assign_indiv"
-              submitEndpoint={ `/api/forms/${this.props.form._id}/assign` }
-              submitMethod="POST"
-              inModal={ true }
-            >
-              <UnitSelect name="unit" />
+          <div className="row">
+            <div className="col-xs-12">
+              <ReduxForm
+                subStore="form_assign_indiv"
+                submitEndpoint={ `/api/forms/${this.props.form._id}/assign` }
+                submitMethod="POST"
+                inModal={ true }
+              >
+                <UnitSelect name="unit" />
 
-              <button type="submit" role="submit" className="btn btn-warning btn-block">
-                Assign Obligation
-              </button>
-            </ReduxForm>
+                <button type="submit" className="btn btn-warning btn-block">
+                  Assign Obligation
+                </button>
+              </ReduxForm>
+            </div>
           </div>
         </div>
       )
@@ -306,7 +297,7 @@ export class AssignObligation extends React.Component {
 
                 <p><strong>Remember,</strong> this assigns retroactively as well as to all new units.</p>
 
-                <button type="submit" role="submit" class="btn btn-success btn-block">
+                <button type="submit" className="btn btn-success btn-block">
                   Auto-Assign
                 </button>
               </ReduxForm>

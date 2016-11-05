@@ -8,6 +8,7 @@ import { UserRoles, HasRole } from '../User/UserRoles';
 import UserFeeList from '../Fee/UserFeeList';
 import UnitList from '../Unit/UnitList';
 import FileList from '../File/FileList';
+import FormObligationList from '../Form/FormObligationList';
 
 class _FeeBox extends React.Component {
   render() {
@@ -113,11 +114,34 @@ class _UnitBox extends React.Component {
   }
 }
 
+class _FormSummary extends React.Component {
+  render() {
+    return (
+      <Link to="/forms/review">
+        <div className="alert alert-warning">
+          There { (this.props.contents.length == 1 ? 'is' : 'are') }
+          <strong> { this.props.contents.length }</strong> form{ (this.props.contents.length == 1 ? '' : 's') } needing review.
+        </div>
+      </Link>
+    )
+  }
+}
+
 class _Home extends React.Component {
   render() {
     return (
       <div className="container">
         <h1 className="page-header">CWEA Dashboard</h1>
+
+        <HasRole role={ UserRoles.FormsManager }>
+          <ContentsView
+            subStore="formsmanager_summary"
+            endpoint="/api/forms/review"
+            component={ _FormSummary }
+            user={ this.props.user }
+            returnEmpty={ true }
+          />
+        </HasRole>
 
         <div className="row">
           <div className="col-xs-12 offset-sm-1 col-sm-10">
@@ -126,7 +150,7 @@ class _Home extends React.Component {
             </Link>
           </div>
         </div>
-        
+
         <ContentsView
           subStore="dashboard_fees"
           endpoint={ `/api/fees/orgsForUser/${this.props.user._id}` }
@@ -142,6 +166,28 @@ class _Home extends React.Component {
           returnEmpty={ true }
         />
 
+<<<<<<< b5cb7ac3c57ed5689ad3855dc9f3bf90c0842768
+=======
+        <div className="row">
+          <div className="card col-xs-12">
+            <div className="card-header card-warning">
+              Required Forms for Your Units
+            </div>
+            <div className="card-block">
+              <FormObligationList endpoint={ `/api/forms/forUser/${this.props.user._id}` } />
+            </div>
+          </div>
+        </div>
+
+
+        <div className="row">
+          <div className="col-xs-12 offset-sm-1 col-sm-10">
+            <Link to="/register" className="btn btn-block btn-outline-success">
+              Register Your Unit(s)
+            </Link>
+          </div>
+        </div>
+>>>>>>> forms management whee
       </div>
     );
   }

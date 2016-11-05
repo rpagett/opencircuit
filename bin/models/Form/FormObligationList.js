@@ -64,15 +64,43 @@ var FormObligationList = function (_React$Component) {
           emptyMessage: 'There are no form obligations.',
           columns: {
             'Unit': function Unit(obl) {
-              return obl.unit.formattedName;
+              return obl.unit.name;
             },
             'Form': function Form(obl) {
-              return obl.form.name;
+              return _react2.default.createElement(
+                'a',
+                { href: '/api/forms/' + obl.form._id + '/download', target: '_blank' },
+                obl.form.name
+              );
             },
             'Due Date': function DueDate(obl) {
               return obl.formattedDueDate;
             },
-            'Submit...': function Submit(obl) {
+            'Status': function Status(obl) {
+              if (obl.system_filename) {
+                if (obl.approved) {
+                  return _react2.default.createElement(
+                    'a',
+                    { href: '/api/forms/submission/' + obl._id, target: '_blank' },
+                    'Approved'
+                  );
+                } else if (obl.submitted) {
+                  return 'Submitted';
+                } else {
+                  return _react2.default.createElement(
+                    'p',
+                    null,
+                    'Pending (',
+                    _react2.default.createElement(
+                      _reactRouter.Link,
+                      { to: '/forms/verify/' + obl._id },
+                      'Submit'
+                    ),
+                    ')'
+                  );
+                }
+              }
+
               return _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
                 className: 'btn btn-sm btn-outline-info',
                 buttonText: 'Submit Form',
@@ -80,8 +108,8 @@ var FormObligationList = function (_React$Component) {
                 title: 'Submit Form',
                 componentName: 'FORM_SUBMIT_FORM',
                 modalProps: {
-                  form: form,
-                  obl: obl,
+                  form: obl.form,
+                  unit: obl.unit,
                   refreshTable: 'formObligationList',
                   refreshEndpoint: _this2.props.endpoint
                 }

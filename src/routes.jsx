@@ -85,6 +85,13 @@ export function getAppRoutes(store) {
         <Route path="drawstatus" component={ ReportView.DrawStatus } />
       </Route>
 
+      <Route path="forms/verify/:id" component={ FormView.Verify } onEnter={ authOnly } />
+      <Route
+        path="forms/review/:id"
+        component={ FormView.Review }
+        onEnter={ requiresRole.bind(this, UserRoles.Administrator) }
+      />
+
       <Route component={ App } onEnter={ authOnly }>
         <IndexRoute component={ RootView.Home } />
 
@@ -118,6 +125,7 @@ export function getAppRoutes(store) {
 
         <Route path="/forms" onEnter={ requiresRole.bind(this, UserRoles.FormsManager) }>
           <IndexRoute component={ FormView.Index } />
+          <Route path="review" component={ FormView.ReviewList } />
           <Route path=":form_id" component={ FormView.View } />
         </Route>
 

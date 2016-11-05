@@ -1,4 +1,15 @@
 import libFetch from 'isomorphic-fetch';
+import { connect } from 'react-redux';
+
+export function authConnect(WrappedComponent) {
+  const mapStateToProps = state => {
+    return {
+      authUser: state.auth.user
+    }
+  }
+
+  return connect(mapStateToProps, { })(WrappedComponent);
+}
 
 export function fetchAPI(url, options = { }) {
   const finalUrl = ( typeof window === 'undefined' ? process.env.BASE_URL + ':8080' + url : url );

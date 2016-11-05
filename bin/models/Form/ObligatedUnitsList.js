@@ -63,25 +63,55 @@ var ObligatedUnitsList = function (_React$Component) {
           endpoint: this.props.endpoint,
           emptyMessage: 'There are no form obligations.',
           columns: {
-            'Unit': function Unit(unit) {
+            'Unit': function Unit(obl) {
               return _react2.default.createElement(
                 _reactRouter.Link,
-                { to: unit.detailsUrl },
-                unit.name
+                { to: obl.unit.detailsUrl },
+                obl.unit.name
               );
             },
-            'Form': function Form(unit) {
-              return unit.selectedForm.name;
+            'Form': function Form(obl) {
+              return _react2.default.createElement(
+                _reactRouter.Link,
+                { to: obl.form.detailsUrl },
+                obl.form.name
+              );
             },
-            'Due Date': function DueDate(unit) {
-              return unit.selectedForm.due_date;
+            'Due Date': function DueDate(obl) {
+              return obl.form.due_date;
             },
-            'Status': function Status(unit) {
-              if (unit.selectedForm.system_filename) {
-                if (unit.selectedForm.approved) {
-                  return 'Approved';
+            'Status': function Status(obl) {
+              if (obl.system_filename) {
+                if (obl.approved) {
+                  return _react2.default.createElement(
+                    'a',
+                    { href: '/api/forms/submission/' + obl._id, target: '_blank' },
+                    'Approved'
+                  );
+                } else if (obl.submitted) {
+                  return _react2.default.createElement(
+                    'p',
+                    null,
+                    'Submitted (',
+                    _react2.default.createElement(
+                      _reactRouter.Link,
+                      { to: '/forms/review/' + obl._id },
+                      'Review'
+                    ),
+                    ')'
+                  );
                 } else {
-                  return 'Pending';
+                  return _react2.default.createElement(
+                    'p',
+                    null,
+                    'Pending (',
+                    _react2.default.createElement(
+                      _reactRouter.Link,
+                      { to: '/forms/verify/' + obl._id },
+                      'Submit'
+                    ),
+                    ')'
+                  );
                 }
               }
 
@@ -92,8 +122,8 @@ var ObligatedUnitsList = function (_React$Component) {
                 title: 'Submit Form',
                 componentName: 'FORM_SUBMIT_FORM',
                 modalProps: {
-                  form: unit.selectedForm,
-                  unit: unit,
+                  form: obl.form,
+                  unit: obl.unit,
                   refreshTable: 'obligatedUnitsList',
                   refreshEndpoint: _this2.props.endpoint
                 }

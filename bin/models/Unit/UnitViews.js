@@ -39,6 +39,10 @@ var _UnitEventsList = require('../Event/UnitEventsList');
 
 var _UnitEventsList2 = _interopRequireDefault(_UnitEventsList);
 
+var _FormObligationList = require('../Form/FormObligationList');
+
+var _FormObligationList2 = _interopRequireDefault(_FormObligationList);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -249,6 +253,24 @@ var _Show = function (_React$Component2) {
               'div',
               { className: 'card-block' },
               _react2.default.createElement(_UserFeeList2.default, { endpoint: '/api/fees/forUnit/' + unit.slug })
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card col-xs-12' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-header card-info' },
+              'Forms'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-block' },
+              _react2.default.createElement(_FormObligationList2.default, { endpoint: '/api/forms/forUnit/' + unit._id })
             )
           )
         ),

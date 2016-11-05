@@ -23,24 +23,40 @@ export default class FormObligationList extends React.Component {
           endpoint={ this.props.endpoint }
           emptyMessage="There are no form obligations."
           columns={{
-            'Unit': obl => obl.unit.formattedName,
-            'Form': obl => obl.form.name,
+            'Unit': obl => obl.unit.name,
+            'Form': obl => { return (
+              <a href={ `/api/forms/${obl.form._id}/download` } target="_blank">{ obl.form.name }</a>
+            )},
             'Due Date': obl => obl.formattedDueDate,
-            'Submit...': obl => { return (
-              <LaunchModalButton
-                className="btn btn-sm btn-outline-info"
-                buttonText="Submit Form"
+            'Status': obl => {
+              if (obl.system_filename) {
+                if (obl.approved) {
+                  return <a href={ `/api/forms/submission/${obl._id}` } target="_blank">Approved</a>;
+                }
+                else if (obl.submitted) {
+                  return 'Submitted';
+                }
+                else {
+                  return (<p>Pending (<Link to={ '/forms/verify/' + obl._id }>Submit</Link>)</p>);
+                }
+              }
 
-                title="Submit Form"
-                componentName="FORM_SUBMIT_FORM"
-                modalProps={{
-                  form: form,
-                  obl: obl,
-                  refreshTable: 'formObligationList',
-                  refreshEndpoint: this.props.endpoint
-                }}
-               />
-            )}
+              return (
+                <LaunchModalButton
+                  className="btn btn-sm btn-outline-info"
+                  buttonText="Submit Form"
+
+                  title="Submit Form"
+                  componentName="FORM_SUBMIT_FORM"
+                  modalProps={{
+                    form: obl.form,
+                    unit: obl.unit,
+                    refreshTable: 'formObligationList',
+                    refreshEndpoint: this.props.endpoint
+                  }}
+                 />
+              )
+            }
           }}
           canEdit={ this.canEdit }
           canDelete={ this.canDelete }
