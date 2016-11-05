@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 import fetch from 'isomorphic-fetch';
@@ -152,6 +151,7 @@ class _SubmitForm extends React.Component {
       .then(res => {
         if (res.success == true) {
           this.props.router.push(res.redirect);
+          this.props.markClosed();
         }
         else {
           console.log(res.error);
