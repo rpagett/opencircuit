@@ -449,7 +449,7 @@ router.get('/submission/:obl', function (req, res) {
 
     var obl = unit.form_obligations.id(req.params.obl);
 
-    res.set('Content-disposition', 'attachment; filename=' + obl.form.name + '.' + obl.extension);
+    res.set('Content-disposition', 'attachment; filename=' + obl.system_filename + '.' + obl.extension);
     res.sendFile(_path2.default.resolve(process.cwd(), 'files', 'form_uploads', obl.system_filename));
   }).catch(function (err) {
     console.log(err.message);
