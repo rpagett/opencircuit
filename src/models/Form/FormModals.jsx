@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 import fetch from 'isomorphic-fetch';
@@ -150,7 +151,7 @@ class _SubmitForm extends React.Component {
       })
       .then(res => {
         if (res.success == true) {
-          this.props.markClosed();
+          this.props.router.push(res.redirect);
         }
         else {
           console.log(res.error);
@@ -201,7 +202,7 @@ class _SubmitForm extends React.Component {
   }
 }
 
-export const SubmitForm = authConnect(_SubmitForm);
+export const SubmitForm = withRouter(authConnect(_SubmitForm));
 
 export class AssignObligation extends React.Component {
   constructor() {
