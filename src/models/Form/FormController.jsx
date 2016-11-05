@@ -506,7 +506,7 @@ router.get('/submission/:obl', (req, res) => {
 })
 
 router.get('/forUnit/:id', (req, res) => {
-  Unit.findOne({ _id: req.params.id }, 'name slug form_obligations')
+  Unit.findOne({ _id: req.params.id, form_obligations: { $ne: null } }, 'name slug form_obligations')
     .sort('form_obligations.form')
     .populate('form_obligations.form')
     .exec()
@@ -518,12 +518,10 @@ router.get('/forUnit/:id', (req, res) => {
       const obligations = [ ];
 
       for (let key in unit.form_obligations) {
-        //let obl = unit.form_obligations[key].toObject();
+        let obl = unit.form_obligations[key].toObject();
 
-        //if (!obl) { continue; }
-
-        let obl = {
-          ...unit.form_obligations[key],
+        obl = {
+          ...obl,
           unit
         }
 
@@ -545,19 +543,17 @@ router.get('/forUnit/:id', (req, res) => {
 
 router.get('/forUser/:id', (req, res) => {
   let obligations = [ ]
-  Unit.find({ director: req.params.id }, 'name slug form_obligations')
+  Unit.find({ director: req.params.id, form_obligations: { $ne: null } }, 'name slug form_obligations')
     .sort('form_obligations.form')
     .populate('form_obligations.form')
     .exec()
     .then(units => {
       units.map(unit => {
         for (let key in unit.form_obligations) {
-          //let obl = unit.form_obligations[key].toObject();
+          let obl = unit.form_obligations[key].toObject();
 
-          //if (!obl) { continue; }
-
-          let obl = {
-            ...unit.form_obligations[key],
+          obl = {
+            ...obl,
             unit
           }
 

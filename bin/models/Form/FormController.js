@@ -458,7 +458,7 @@ router.get('/submission/:obl', function (req, res) {
 });
 
 router.get('/forUnit/:id', function (req, res) {
-  _UnitModel2.default.findOne({ _id: req.params.id }, 'name slug form_obligations').sort('form_obligations.form').populate('form_obligations.form').exec().then(function (unit) {
+  _UnitModel2.default.findOne({ _id: req.params.id, form_obligations: { $ne: null } }, 'name slug form_obligations').sort('form_obligations.form').populate('form_obligations.form').exec().then(function (unit) {
     if (!unit) {
       throw new Error('Unit not found.');
     }
@@ -466,11 +466,9 @@ router.get('/forUnit/:id', function (req, res) {
     var obligations = [];
 
     for (var key in unit.form_obligations) {
-      //let obl = unit.form_obligations[key].toObject();
+      var obl = unit.form_obligations[key].toObject();
 
-      //if (!obl) { continue; }
-
-      var obl = _extends({}, unit.form_obligations[key], {
+      obl = _extends({}, obl, {
         unit: unit
       });
 
@@ -491,14 +489,12 @@ router.get('/forUnit/:id', function (req, res) {
 
 router.get('/forUser/:id', function (req, res) {
   var obligations = [];
-  _UnitModel2.default.find({ director: req.params.id }, 'name slug form_obligations').sort('form_obligations.form').populate('form_obligations.form').exec().then(function (units) {
+  _UnitModel2.default.find({ director: req.params.id, form_obligations: { $ne: null } }, 'name slug form_obligations').sort('form_obligations.form').populate('form_obligations.form').exec().then(function (units) {
     units.map(function (unit) {
       for (var key in unit.form_obligations) {
-        //let obl = unit.form_obligations[key].toObject();
+        var obl = unit.form_obligations[key].toObject();
 
-        //if (!obl) { continue; }
-
-        var obl = _extends({}, unit.form_obligations[key], {
+        obl = _extends({}, obl, {
           unit: unit
         });
 
