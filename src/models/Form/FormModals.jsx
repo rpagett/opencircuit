@@ -251,21 +251,19 @@ export class AssignObligation extends React.Component {
             <p></p>
           </div>
 
-          <div className="row">
-            <div className="col-xs-12">
-              <ReduxForm
-                subStore="form_assign_indiv"
-                submitEndpoint={ `/api/forms/${this.props.form._id}/assign` }
-                submitMethod="POST"
-                inModal={ true }
-              >
-                <UnitSelect name="unit" />
+          <div className="row col-xs-12">
+            <ReduxForm
+              subStore="form_assign_indiv"
+              submitEndpoint={ `/api/forms/${this.props.form._id}/assign` }
+              submitMethod="POST"
+              inModal={ true }
+            >
+              <UnitSelect name="unit" />
 
-                <button type="submit" className="btn btn-warning btn-block">
-                  Assign Obligation
-                </button>
-              </ReduxForm>
-            </div>
+              <button type="submit" className="btn btn-warning btn-block">
+                Assign Obligation
+              </button>
+            </ReduxForm>
           </div>
         </div>
       )

@@ -221,6 +221,10 @@ var _FormSummary = function (_React$Component3) {
   _createClass(_FormSummary, [{
     key: 'render',
     value: function render() {
+      if (this.props.contents.length == 0) {
+        return null;
+      }
+
       return _react2.default.createElement(
         _reactRouter.Link,
         { to: '/forms/review' },
@@ -277,6 +281,7 @@ var _Home = function (_React$Component4) {
             returnEmpty: true
           })
         ),
+        _react2.default.createElement('p', null),
         _react2.default.createElement(
           'div',
           { className: 'row' },

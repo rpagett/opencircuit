@@ -116,6 +116,10 @@ class _UnitBox extends React.Component {
 
 class _FormSummary extends React.Component {
   render() {
+    if (this.props.contents.length == 0) {
+      return null;
+    }
+
     return (
       <Link to="/forms/review">
         <div className="alert alert-warning">
@@ -142,6 +146,8 @@ class _Home extends React.Component {
             returnEmpty={ true }
           />
         </HasRole>
+
+        <p></p>
 
         <div className="row">
           <div className="col-xs-12 offset-sm-1 col-sm-10">

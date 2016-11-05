@@ -367,24 +367,20 @@ var AssignObligation = exports.AssignObligation = function (_React$Component3) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'row' },
+            { className: 'row col-xs-12' },
             _react2.default.createElement(
-              'div',
-              { className: 'col-xs-12' },
+              _components.ReduxForm,
+              {
+                subStore: 'form_assign_indiv',
+                submitEndpoint: '/api/forms/' + this.props.form._id + '/assign',
+                submitMethod: 'POST',
+                inModal: true
+              },
+              _react2.default.createElement(_components.UnitSelect, { name: 'unit' }),
               _react2.default.createElement(
-                _components.ReduxForm,
-                {
-                  subStore: 'form_assign_indiv',
-                  submitEndpoint: '/api/forms/' + this.props.form._id + '/assign',
-                  submitMethod: 'POST',
-                  inModal: true
-                },
-                _react2.default.createElement(_components.UnitSelect, { name: 'unit' }),
-                _react2.default.createElement(
-                  'button',
-                  { type: 'submit', className: 'btn btn-warning btn-block' },
-                  'Assign Obligation'
-                )
+                'button',
+                { type: 'submit', className: 'btn btn-warning btn-block' },
+                'Assign Obligation'
               )
             )
           )
