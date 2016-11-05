@@ -308,6 +308,7 @@ var _Home = function (_React$Component4) {
           user: this.props.user,
           returnEmpty: true
         }),
+        _react2.default.createElement('p', null),
         _react2.default.createElement(
           'div',
           { className: 'row' },

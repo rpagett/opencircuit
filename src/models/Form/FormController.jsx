@@ -538,7 +538,7 @@ router.get('/forUnit/:id', (req, res) => {
     .catch(err => {
       res.send({
         success: false,
-        error: err.message
+        contents: [ ]
       })
     })
 })

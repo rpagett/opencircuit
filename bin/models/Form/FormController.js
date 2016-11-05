@@ -484,7 +484,7 @@ router.get('/forUnit/:id', function (req, res) {
   }).catch(function (err) {
     res.send({
       success: false,
-      error: err.message
+      contents: []
     });
   });
 });

@@ -172,6 +172,8 @@ class _Home extends React.Component {
           returnEmpty={ true }
         />
 
+        <p></p>
+
         <div className="row">
           <div className="card col-xs-12">
             <div className="card-header card-warning">
