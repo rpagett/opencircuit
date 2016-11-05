@@ -218,7 +218,7 @@ var _Verify = function (_React$Component3) {
           'div',
           { className: 'row' },
           _react2.default.createElement('iframe', {
-            src: 'http://docs.google.com/viewer?url=' + url + '&amp;embedded=true',
+            src: 'http://docs.google.com/viewer?url=' + url + '&embedded=true',
             style: { 'width': '100%', 'height': '100vh', 'border': 'none' }
           })
         )
