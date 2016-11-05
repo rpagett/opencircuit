@@ -84,6 +84,7 @@ class _Verify extends React.Component {
 
   render() {
     const url = process.env.BASE_URL + `/api/forms/submission/${this.props.params.id}`;
+    const fullUrl = 'http://docs.google.com/viewer?url=' + url + '&embedded=true';
 
     return (
       <div className="container-fluid">
@@ -116,7 +117,7 @@ class _Verify extends React.Component {
         </div>
         <div className="row">
           <iframe
-            src={ `http://docs.google.com/viewer?url=${url}&embedded=true` }
+            src={ fullUrl }
             style={{ 'width': '100%', 'height': '100vh', 'border': 'none' }}
           />
         </div>
@@ -178,6 +179,7 @@ class _Review extends React.Component {
 
   render() {
     const url = process.env.BASE_URL + `/api/forms/submission/${this.props.params.id}`;
+    const fullUrl = 'http://docs.google.com/viewer?url=' + url + '&embedded=true';
 
     return (
       <div className="container-fluid">
@@ -210,7 +212,7 @@ class _Review extends React.Component {
         </div>
         <div className="row">
           <iframe
-            src={ `http://docs.google.com/viewer?url=${url}&embedded=true` }
+            src={ fullUrl }
             style={{ 'width': '100%', 'height': '100vh', 'border': 'none' }}
           />
         </div>
