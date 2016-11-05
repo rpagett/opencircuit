@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 import fetch from 'isomorphic-fetch';
 import LoadingCube from '../../helpers/LoadingCube';

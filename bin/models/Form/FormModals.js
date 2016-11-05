@@ -13,6 +13,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
+var _reactRouter = require('react-router');
+
 var _isomorphicFetch = require('isomorphic-fetch');
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
@@ -299,7 +301,7 @@ var _SubmitForm = function (_React$Component2) {
   return _SubmitForm;
 }(_react2.default.Component);
 
-var SubmitForm = exports.SubmitForm = withRouter((0, _functions.authConnect)(_SubmitForm));
+var SubmitForm = exports.SubmitForm = (0, _reactRouter.withRouter)((0, _functions.authConnect)(_SubmitForm));
 
 var AssignObligation = exports.AssignObligation = function (_React$Component3) {
   _inherits(AssignObligation, _React$Component3);
