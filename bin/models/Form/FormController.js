@@ -494,7 +494,7 @@ router.get('/forUser/:id', function (req, res) {
   _UnitModel2.default.find({ director: req.params.id, form_obligations: { $ne: null } }, 'name slug form_obligations').sort('form_obligations.form').populate('form_obligations.form').exec().then(function (units) {
     units.map(function (unit) {
       unit.form_obligations.map(function (obl) {
-        obligations.push(_extends({}, obl, {
+        obligations.push(_extends({}, obl.toObject(), {
           unit: unit
         }));
       });

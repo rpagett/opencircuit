@@ -553,7 +553,7 @@ router.get('/forUser/:id', (req, res) => {
       units.map(unit => {
         unit.form_obligations.map(obl => {
           obligations.push({
-            ...obl,
+            ...obl.toObject(),
             unit
           });
         })
