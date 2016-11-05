@@ -83,7 +83,7 @@ class _Verify extends React.Component {
   }
 
   render() {
-    const url = process.env.BASE_URL + `/api/forms/submission/${this.props.params.id}`;
+    const url = `http://opencircuit.us/api/forms/submission/${this.props.params.id}`;
     const fullUrl = 'https://docs.google.com/viewer?url=' + url + '&embedded=true';
 
     return (
@@ -178,7 +178,7 @@ class _Review extends React.Component {
   }
 
   render() {
-    const url = process.env.BASE_URL + `/api/forms/submission/${this.props.params.id}`;
+    const url = `http://opencircuit.us/api/forms/submission/${this.props.params.id}`;
     const fullUrl = 'https://docs.google.com/viewer?url=' + url + '&embedded=true';
 
     return (

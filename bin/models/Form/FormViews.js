@@ -162,7 +162,7 @@ var _Verify = function (_React$Component3) {
   }, {
     key: 'render',
     value: function render() {
-      var url = process.env.BASE_URL + ('/api/forms/submission/' + this.props.params.id);
+      var url = 'http://opencircuit.us/api/forms/submission/' + this.props.params.id;
       var fullUrl = 'https://docs.google.com/viewer?url=' + url + '&embedded=true';
 
       return _react2.default.createElement(
@@ -293,7 +293,7 @@ var _Review = function (_React$Component4) {
   }, {
     key: 'render',
     value: function render() {
-      var url = process.env.BASE_URL + ('/api/forms/submission/' + this.props.params.id);
+      var url = 'http://opencircuit.us/api/forms/submission/' + this.props.params.id;
       var fullUrl = 'https://docs.google.com/viewer?url=' + url + '&embedded=true';
 
       return _react2.default.createElement(
