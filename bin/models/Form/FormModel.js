@@ -54,7 +54,7 @@ FormSchema.virtual('detailsUrl').get(function () {
   return '/forms/' + this._id;
 });
 
-FeeSchema.virtual('formattedDueDate').get(function () {
+FormSchema.virtual('formattedDueDate').get(function () {
   return (0, _moment2.default)(this.due_date).format('MMM. Do, YYYY');
 });
 
