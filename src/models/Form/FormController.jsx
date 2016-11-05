@@ -21,7 +21,7 @@ function multerMiddleware(folder) {
   })
 }
 
-function assignObligation(unit_id, form_id, due_date = Form.DUE_DATE) {
+function assignObligation(unit_id, form_id, due_date = Form.DUE_DATE()) {
   return Unit.findOneAndUpdate({ _id: unit_id, 'form_obligations.form': { $ne: form_id } }, {
     $addToSet: { form_obligations: {
       form: form_id,
