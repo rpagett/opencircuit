@@ -59,7 +59,7 @@ class _Show extends React.Component {
         <div className="row">
           <Prop>Class</Prop>
           <Val>
-            { unit.competition_class.formattedName }
+            { (unit.competition_class ? unit.competition_class.formattedName : 'none') }
             <HasRole role={ UserRoles.Administrator }>
               <LaunchModalButton
                  className="btn btn-link"

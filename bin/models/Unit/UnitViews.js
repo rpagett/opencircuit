@@ -172,7 +172,7 @@ var _Show = function (_React$Component2) {
           _react2.default.createElement(
             _ModelInfo.Val,
             null,
-            unit.competition_class.formattedName,
+            unit.competition_class ? unit.competition_class.formattedName : 'none',
             _react2.default.createElement(
               _UserRoles.HasRole,
               { role: _UserRoles.UserRoles.Administrator },
