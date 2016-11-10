@@ -66,8 +66,6 @@ function assignObligation(unit_id, form_id) {
 }
 
 _UnitModel2.default.on('afterInsert', function (newUnit) {
-  var scholastic = newUnit.organization.is_school;
-
   function pushForm(form) {
     newUnit.form_obligations.push({
       form: form._id,
@@ -75,13 +73,19 @@ _UnitModel2.default.on('afterInsert', function (newUnit) {
     });
   }
 
-  _FormModel2.default.find({}).exec().then(function (forms) {
+  var scholastic = false;
+
+  _UnitModel2.default.populate(newUnit, { path: 'organization' }).then(function (unit) {
+    scholastic = unit.organization.is_school;
+
+    return _FormModel2.default.find({}).exec();
+  }).then(function (forms) {
     forms.map(function (form) {
       if (form.autoapply_all) {
         pushForm(form);
       } else if (scholastic && form.autoapply_scholastic) {
         pushForm(form);
-      } else if (!scholastic && form.autoapply_independent) {
+      } else if (scholastic == false && form.autoapply_independent) {
         pushForm(form);
       }
     });
@@ -94,12 +98,12 @@ var router = _express2.default.Router();
 
 router.route('/').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.FormsManager), function (req, res) {
   var forms = [];
-  _FormModel2.default.find({}, 'name').populate('autoapply_classes').exec().then(function (formRes) {
+  _FormModel2.default.find({}).populate('autoapply_classes').exec().then(function (formRes) {
     forms = formRes;
     return _UnitModel2.default.aggregate([{ $match: { registered: true } }, { $unwind: '$form_obligations' }, /* this converts arrays into unique documents for counting */
     {
       $group: {
-        _id: '$form',
+        _id: '$form_obligations.form',
         count: { $sum: 1 }
       }
     }]);
@@ -116,12 +120,13 @@ router.route('/').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.FormsManager)
         autoapply = 'Scholastic Teams';
       } else if (form.autoapply_independent) {
         autoapply = 'Independent Teams';
-      } else if (form.autoapply_classes) {
-        autoapply = _lodash2.default.map(autoapply_classes, 'formattedName');
       }
+      //else if (form.autoapply_classes) {
+      //  autoapply = _.map(autoapply_classes, 'formattedName');
+      //}
 
       forms[key] = _extends({}, form, {
-        assignedUnitCount: agg[form._id] ? agg[form._id].count : 0,
+        assignedUnitCount: _lodash2.default.find(agg, { _id: form._id }) ? _lodash2.default.find(agg, { _id: form._id }).count : 0,
         autoApplyList: autoapply
       });
     }
@@ -166,7 +171,7 @@ router.route('/').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.FormsManager)
 });
 
 // For user submitting a completed form
-router.post('/:id', multerMiddleware('form_uploads').single('file'), function (req, res) {
+router.route('/:id').post(multerMiddleware('form_uploads').single('file'), function (req, res) {
   var redirect = null;
   _UnitModel2.default.findOne({ _id: req.body.unit }, 'form_obligations').populate('form_obligations.form').exec().then(function (unit) {
     if (!unit) {
@@ -191,7 +196,7 @@ router.post('/:id', multerMiddleware('form_uploads').single('file'), function (r
 
       unit.form_obligations[key].system_filename = req.file.filename;
       unit.form_obligations[key].extension = deriveFileExtension(req.file.originalname);
-      redirect = obl._id;
+      redirect = unit._id + '/' + obl.form._id;
       return unit.save();
     }
 
@@ -203,6 +208,19 @@ router.post('/:id', multerMiddleware('form_uploads').single('file'), function (r
     });
   }).catch(function (err) {
     console.log('TEMP1 e');
+    res.send({
+      success: false,
+      error: err.message
+    });
+  });
+}).delete((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
+  _FormModel2.default.findOneAndRemove({ _id: req.params.id }).exec().then(function (form) {
+    return _UnitModel2.default.update({ 'form_obligations.form': req.params.id }, { $pull: { form_obligations: { form: req.params.id } } }, { multi: true });
+  }).then(function () {
+    res.send({
+      success: true
+    });
+  }).catch(function (err) {
     res.send({
       success: false,
       error: err.message
@@ -227,14 +245,14 @@ router.get('/:id/download', function (req, res) {
 router.route('/:id/assign').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.FormsManager), function (req, res) {
   var obligations = [];
   _UnitModel2.default.find({ 'form_obligations.form': req.params.id }, 'name slug form_obligations').populate('form_obligations.form').sort('name').exec().then(function (units) {
-    var obligations = [];
-
     units.map(function (unit) {
-      unit.form_obligations.map(function (obl) {
-        obligations.push(_extends({}, obl.toObject(), {
-          unit: unit
-        }));
-      });
+      var obl = _lodash2.default.find(unit.form_obligations, function (obl) {
+        return obl.form._id.toString() == req.params.id;
+      }).toObject();
+      console.log('Unit is', unit.name, 'form is', obl.form.name, 'obl is', obl._id);
+      obligations.push(_extends({}, obl, {
+        unit: unit
+      }));
     });
 
     res.send({
@@ -345,13 +363,15 @@ router.route('/:id/autoassign').get((0, _authRoute.hasRole)(_UserRoles.UserRoles
   });
 });
 
-router.route('/verify/:obl').get(function (req, res) {
-  _UnitModel2.default.findOne({ 'form_obligations._id': req.params.obl }, 'name form_obligations').populate('form_obligations.form').exec().then(function (unit) {
+router.route('/verify/:unit/:form').get(function (req, res) {
+  _UnitModel2.default.findOne({ _id: req.params.unit }, 'name form_obligations').populate('form_obligations.form').exec().then(function (unit) {
     if (!unit) {
       throw new Error('Obligation not found.');
     }
 
-    var obl = unit.form_obligations.find(req.params.obl);
+    var obl = _lodash2.default.find(unit.form_obligations, function (obl) {
+      return obl.form._id.toString() == req.params.form;
+    });
 
     if (!obl.system_filename) {
       throw new Error('No form response.');
@@ -373,7 +393,7 @@ router.route('/verify/:obl').get(function (req, res) {
     res.redirect(302, process.env.BASE_URL + '/');
   });
 }).post(function (req, res) {
-  _UnitModel2.default.findOneAndUpdate({ 'form_obligations._id': req.params.obl }, { 'form_obligations.$.submitted': true }).then(function (unit) {
+  _UnitModel2.default.findOneAndUpdate({ _id: req.params.unit, 'form_obligations.form': req.params.form }, { 'form_obligations.$.submitted': true }).then(function (unit) {
     res.send({
       success: true,
       redirect: unit.detailsUrl
@@ -383,6 +403,22 @@ router.route('/verify/:obl').get(function (req, res) {
     res.send({
       success: false,
       redirect: '/'
+    });
+  });
+});
+
+router.delete('/obligation/:unit/:form', (0, _authRoute.hasRole)(_UserRoles.UserRoles.FormsManager), function (req, res) {
+  _UnitModel2.default.findOneAndUpdate({ _id: req.params.unit }, { $pull: { form_obligations: { form: req.params.form } } }).then(function (unit) {
+    if (!unit) {
+      throw new Error('Unit not found.');
+    }
+    res.send({
+      success: true
+    });
+  }).catch(function (err) {
+    res.send({
+      success: false,
+      error: err.message
     });
   });
 });
@@ -409,8 +445,8 @@ router.get('/review', (0, _authRoute.hasRole)(_UserRoles.UserRoles.FormsManager)
   });
 });
 
-router.route('/review/:obl').post(function (req, res) {
-  _UnitModel2.default.findOneAndUpdate({ 'form_obligations._id': req.params.obl }, { 'form_obligations.$.approved': true }).then(function (unit) {
+router.route('/review/:unit/:form').post(function (req, res) {
+  _UnitModel2.default.findOneAndUpdate({ _id: req.params.unit, 'form_obligations.form': req.params.form }, { 'form_obligations.$.approved': true }).then(function (unit) {
     res.send({
       success: true,
       redirect: unit.detailsUrl
@@ -423,7 +459,7 @@ router.route('/review/:obl').post(function (req, res) {
     });
   });
 }).delete(function (req, res) {
-  _UnitModel2.default.findOneAndUpdate({ 'form_obligations._id': req.params.obl }, {
+  _UnitModel2.default.findOneAndUpdate({ _id: req.params.unit, 'form_obligations.form': req.params.form }, {
     'form_obligations.$.system_filename': null,
     'form_obligations.$.extension': null,
     'form_obligations.$.submitted': false
@@ -441,13 +477,15 @@ router.route('/review/:obl').post(function (req, res) {
   });
 });
 
-router.get('/submission/:obl', function (req, res) {
-  _UnitModel2.default.findOne({ 'form_obligations._id': req.params.obl }, 'name form_obligations').populate('form_obligations.form').exec().then(function (unit) {
+router.get('/submission/:unit/:form', function (req, res) {
+  _UnitModel2.default.findOne({ _id: req.params.unit }, 'name form_obligations').populate('form_obligations.form').exec().then(function (unit) {
     if (!unit) {
-      throw new Error('Submission not found.');
+      throw new Error('Unit not found.');
     }
 
-    var obl = unit.form_obligations.id(req.params.obl);
+    var obl = _lodash2.default.find(unit.form_obligations, function (obl) {
+      return obl.form._id.toString() == req.params.form;
+    });
 
     res.set('Content-disposition', 'attachment; filename=' + obl.system_filename + '.' + obl.extension);
     res.sendFile(_path2.default.resolve(process.cwd(), 'files', 'form_uploads', obl.system_filename));

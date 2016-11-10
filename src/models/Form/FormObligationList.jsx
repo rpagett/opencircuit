@@ -12,6 +12,10 @@ export default class FormObligationList extends React.Component {
   }
 
   canDelete(obl, user) {
+    if (userHasRole(user, UserRoles.FormsManager)) {
+      return `/api/forms/obligation/${obl.unit._id}/${obl.form._id}`
+    }
+
     return null
   }
 
@@ -31,13 +35,13 @@ export default class FormObligationList extends React.Component {
             'Status': obl => {
               if (obl.system_filename) {
                 if (obl.approved) {
-                  return <a href={ `/api/forms/submission/${obl._id}` } target="_blank">Approved</a>;
+                  return <a href={ `/api/forms/submission/${obl.unit._id}/${obl.form._id}` } target="_blank">Approved</a>;
                 }
                 else if (obl.submitted) {
                   return 'Submitted';
                 }
                 else {
-                  return (<p>Pending (<Link to={ '/forms/verify/' + obl._id }>Submit</Link>)</p>);
+                  return (<p>Pending (<Link to={ `/forms/verify/${obl.unit._id}/${obl.form._id}` }>Submit</Link>)</p>);
                 }
               }
 
@@ -60,7 +64,7 @@ export default class FormObligationList extends React.Component {
           }}
           canEdit={ this.canEdit }
           canDelete={ this.canDelete }
-          deriveName={ null }
+          deriveName={ obl => { return (obl.form.name + ' for ' + obl.unit.name) } }
         />
       </div>
     );

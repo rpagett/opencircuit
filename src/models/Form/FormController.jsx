@@ -31,8 +31,6 @@ function assignObligation(unit_id, form_id, due_date = Form.DUE_DATE()) {
 }
 
 Unit.on('afterInsert', newUnit => {
-  const scholastic = newUnit.organization.is_school;
-
   function pushForm(form) {
     newUnit.form_obligations.push({
       form: form._id,
@@ -40,8 +38,15 @@ Unit.on('afterInsert', newUnit => {
     })
   }
 
-  Form.find({ })
-    .exec()
+  let scholastic = false;
+
+  Unit.populate(newUnit, { path: 'organization' })
+    .then(unit => {
+      scholastic = unit.organization.is_school;
+
+      return Form.find({ })
+        .exec()
+    })
     .then(forms => {
       forms.map(form => {
         if (form.autoapply_all) {
@@ -50,7 +55,7 @@ Unit.on('afterInsert', newUnit => {
         else if (scholastic && form.autoapply_scholastic) {
           pushForm(form);
         }
-        else if (!scholastic && form.autoapply_independent) {
+        else if (scholastic == false && form.autoapply_independent) {
           pushForm(form);
         }
       })
@@ -64,7 +69,7 @@ let router = Express.Router();
 router.route('/')
   .get(hasRole(UserRoles.FormsManager), (req, res) => {
     let forms = [ ];
-    Form.find({ }, 'name')
+    Form.find({ })
       .populate('autoapply_classes')
       .exec()
       .then(formRes => {
@@ -74,7 +79,7 @@ router.route('/')
           {$unwind: '$form_obligations'}, /* this converts arrays into unique documents for counting */
           {
             $group: {
-              _id: '$form',
+              _id: '$form_obligations.form',
               count: {$sum: 1}
             }
           }
@@ -96,13 +101,13 @@ router.route('/')
           else if (form.autoapply_independent) {
             autoapply = 'Independent Teams'
           }
-          else if (form.autoapply_classes) {
-            autoapply = _.map(autoapply_classes, 'formattedName');
-          }
+          //else if (form.autoapply_classes) {
+          //  autoapply = _.map(autoapply_classes, 'formattedName');
+          //}
 
           forms[key] = {
             ...form,
-            assignedUnitCount: (agg[form._id] ? agg[form._id].count : 0),
+            assignedUnitCount: (_.find(agg, { _id: form._id}) ? _.find(agg, { _id: form._id}).count : 0),
             autoApplyList: autoapply
           }
         }
@@ -153,54 +158,74 @@ router.route('/')
   })
 
 // For user submitting a completed form
-router.post('/:id', multerMiddleware('form_uploads').single('file'), (req, res) => {
-  let redirect = null;
-  Unit.findOne({ _id: req.body.unit }, 'form_obligations')
-    .populate('form_obligations.form')
-    .exec()
-    .then(unit => {
-      if (!unit) {
-        throw new Error('Unit not found.');
-      }
-
-      if (deriveFileExtension(req.file.originalname) != 'pdf') {
-        throw new Error('Invalid file extension. Please supply a PDF.');
-      }
-
-      for (let key in unit.form_obligations) {
-        const obl = unit.form_obligations[key];
-        console.log('OBL OBL', obl);
-
-        if (obl.form._id.toString() != req.params.id) {
-          continue;
+router.route('/:id')
+  .post(multerMiddleware('form_uploads').single('file'), (req, res) => {
+    let redirect = null;
+    Unit.findOne({ _id: req.body.unit }, 'form_obligations')
+      .populate('form_obligations.form')
+      .exec()
+      .then(unit => {
+        if (!unit) {
+          throw new Error('Unit not found.');
         }
 
-        if (obl.approved) {
-          throw new Error('Obligation has already been fulfilled and approved.')
+        if (deriveFileExtension(req.file.originalname) != 'pdf') {
+          throw new Error('Invalid file extension. Please supply a PDF.');
         }
 
-        unit.form_obligations[key].system_filename = req.file.filename;
-        unit.form_obligations[key].extension = deriveFileExtension(req.file.originalname);
-        redirect = obl._id;
-        return unit.save();
-      }
+        for (let key in unit.form_obligations) {
+          const obl = unit.form_obligations[key];
+          console.log('OBL OBL', obl);
 
-      throw new Error('Did not find matching form obligation.');
-    })
-    .then(() => {
-      res.send({
-        success: true,
-        redirect: `/forms/verify/${redirect}`
+          if (obl.form._id.toString() != req.params.id) {
+            continue;
+          }
+
+          if (obl.approved) {
+            throw new Error('Obligation has already been fulfilled and approved.')
+          }
+
+          unit.form_obligations[key].system_filename = req.file.filename;
+          unit.form_obligations[key].extension = deriveFileExtension(req.file.originalname);
+          redirect = `${unit._id}/${obl.form._id}`;
+          return unit.save();
+        }
+
+        throw new Error('Did not find matching form obligation.');
       })
-    })
-    .catch(err => {
-      console.log('TEMP1 e')
-      res.send({
-        success: false,
-        error: err.message
+      .then(() => {
+        res.send({
+          success: true,
+          redirect: `/forms/verify/${redirect}`
+        })
       })
-    })
-})
+      .catch(err => {
+        console.log('TEMP1 e')
+        res.send({
+          success: false,
+          error: err.message
+        })
+      })
+  })
+
+  .delete(hasRole(UserRoles.Administrator), (req, res) => {
+    Form.findOneAndRemove({ _id: req.params.id })
+      .exec()
+      .then(form => {
+        return Unit.update({'form_obligations.form': req.params.id}, { $pull: { form_obligations: { form: req.params.id } } }, { multi: true })
+      })
+      .then(() => {
+        res.send({
+          success: true
+        })
+      })
+      .catch(err => {
+        res.send({
+          success: false,
+          error: err.message
+        })
+      })
+  })
 
 router.get('/:id/download', (req, res) => {
   Form.findOne({ _id: req.params.id })
@@ -219,7 +244,6 @@ router.get('/:id/download', (req, res) => {
 })
 
 router.route('/:id/assign')
-
   .get(hasRole(UserRoles.FormsManager), (req, res) => {
     let obligations = [ ];
     Unit.find({ 'form_obligations.form': req.params.id }, 'name slug form_obligations')
@@ -227,14 +251,12 @@ router.route('/:id/assign')
       .sort('name')
       .exec()
       .then(units => {
-        let obligations = [ ];
-
         units.map(unit => {
-          unit.form_obligations.map(obl => {
-            obligations.push({
-              ...obl.toObject(),
-              unit
-            })
+          const obl = _.find(unit.form_obligations, obl => {return obl.form._id.toString() == req.params.id}).toObject();
+          console.log('Unit is', unit.name, 'form is', obl.form.name, 'obl is', obl._id);
+          obligations.push({
+            ...obl,
+            unit
           })
         })
 
@@ -367,9 +389,9 @@ router.route('/:id/autoassign')
     })
 })
 
-router.route('/verify/:obl')
+router.route('/verify/:unit/:form')
 .get((req, res) => {
-  Unit.findOne({'form_obligations._id': req.params.obl}, 'name form_obligations')
+  Unit.findOne({ _id: req.params.unit }, 'name form_obligations')
     .populate('form_obligations.form')
     .exec()
     .then(unit => {
@@ -377,7 +399,7 @@ router.route('/verify/:obl')
         throw new Error('Obligation not found.');
       }
 
-      const obl = unit.form_obligations.find(req.params.obl);
+      const obl = _.find(unit.form_obligations, obl => {return obl.form._id.toString() == req.params.form });
 
       if (!obl.system_filename) {
         throw new Error('No form response.');
@@ -402,7 +424,7 @@ router.route('/verify/:obl')
 })
 
 .post((req, res) => {
-  Unit.findOneAndUpdate({'form_obligations._id': req.params.obl}, {'form_obligations.$.submitted': true })
+  Unit.findOneAndUpdate({_id: req.params.unit, 'form_obligations.form': req.params.form}, {'form_obligations.$.submitted': true })
     .then(unit => {
       res.send({
         success: true,
@@ -414,6 +436,24 @@ router.route('/verify/:obl')
       res.send({
         success: false,
         redirect: '/'
+      })
+    })
+})
+
+router.delete('/obligation/:unit/:form', hasRole(UserRoles.FormsManager), (req, res) => {
+  Unit.findOneAndUpdate({_id: req.params.unit}, { $pull: { form_obligations: { form: req.params.form } } })
+    .then(unit => {
+      if (!unit) {
+        throw new Error('Unit not found.');
+      }
+      res.send({
+        success: true
+      })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err.message
       })
     })
 })
@@ -446,9 +486,9 @@ router.get('/review', hasRole(UserRoles.FormsManager), (req, res) => {
     })
 })
 
-router.route('/review/:obl')
+router.route('/review/:unit/:form')
 .post((req, res) => {
-  Unit.findOneAndUpdate({'form_obligations._id': req.params.obl}, {'form_obligations.$.approved': true })
+  Unit.findOneAndUpdate({_id: req.params.unit, 'form_obligations.form': req.params.form}, {'form_obligations.$.approved': true })
     .then(unit => {
       res.send({
         success: true,
@@ -465,7 +505,7 @@ router.route('/review/:obl')
 })
 
 .delete((req, res) => {
-  Unit.findOneAndUpdate({'form_obligations._id': req.params.obl}, {
+  Unit.findOneAndUpdate({_id: req.params.unit, 'form_obligations.form': req.params.form}, {
     'form_obligations.$.system_filename': null,
     'form_obligations.$.extension': null,
     'form_obligations.$.submitted': false
@@ -485,16 +525,16 @@ router.route('/review/:obl')
     })
 })
 
-router.get('/submission/:obl', (req, res) => {
-  Unit.findOne({ 'form_obligations._id': req.params.obl }, 'name form_obligations')
+router.get('/submission/:unit/:form', (req, res) => {
+  Unit.findOne({ _id: req.params.unit }, 'name form_obligations')
     .populate('form_obligations.form')
     .exec()
     .then(unit => {
       if (!unit) {
-        throw new Error('Submission not found.');
+        throw new Error('Unit not found.');
       }
 
-      const obl = unit.form_obligations.id(req.params.obl);
+      const obl = _.find(unit.form_obligations, obl => {return obl.form._id.toString() == req.params.form });
 
       res.set('Content-disposition', 'attachment; filename=' + obl.system_filename + '.' + obl.extension);
       res.sendFile(path.resolve(process.cwd(), 'files', 'form_uploads', obl.system_filename))

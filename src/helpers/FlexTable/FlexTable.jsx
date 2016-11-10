@@ -136,7 +136,7 @@ class _FlexTable extends React.Component {
         showOptionsColumn = true;
       }
 
-      contents.push(<tr key={ line._id }>{ cells }</tr>);
+      contents.push(<tr key={ line._id + Math.random() }>{ cells }</tr>);
     })
 
     if (showOptionsColumn) {

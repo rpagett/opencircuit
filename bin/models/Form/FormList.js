@@ -48,6 +48,10 @@ var FormList = function (_React$Component) {
   }, {
     key: 'canDelete',
     value: function canDelete(form, user) {
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator)) {
+        return '/api/forms/' + form._id;
+      }
+
       return null;
     }
   }, {

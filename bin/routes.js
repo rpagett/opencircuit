@@ -170,9 +170,9 @@ function getAppRoutes(store) {
       _react2.default.createElement(_reactRouter.Route, { path: 'quickbooks', component: ReportView.Quickbooks }),
       _react2.default.createElement(_reactRouter.Route, { path: 'drawstatus', component: ReportView.DrawStatus })
     ),
-    _react2.default.createElement(_reactRouter.Route, { path: 'forms/verify/:id', component: FormView.Verify, onEnter: authOnly }),
+    _react2.default.createElement(_reactRouter.Route, { path: 'forms/verify/:unit/:form', component: FormView.Verify, onEnter: authOnly }),
     _react2.default.createElement(_reactRouter.Route, {
-      path: 'forms/review/:id',
+      path: 'forms/review/:unit/:form',
       component: FormView.Review,
       onEnter: requiresRole.bind(this, _UserRoles.UserRoles.Administrator)
     }),

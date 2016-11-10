@@ -57,7 +57,7 @@ export class View extends React.Component {
 
 class _Verify extends React.Component {
   submit() {
-    fetchAPI(`/api/forms/verify/${this.props.params.id}`, {
+    fetchAPI(`/api/forms/verify/${this.props.params.unit}/${this.props.params.form}`, {
       credentials: 'same-origin',
       method: 'POST',
       headers: {
@@ -83,7 +83,7 @@ class _Verify extends React.Component {
   }
 
   render() {
-    const url = `http://opencircuit.us/api/forms/submission/${this.props.params.id}`;
+    const url = `http://opencircuit.us/api/forms/submission/${this.props.params.unit}/${this.props.params.form}`;
     const fullUrl = 'https://docs.google.com/viewer?url=' + url + '&embedded=true';
 
     return (
@@ -130,7 +130,7 @@ export const Verify = withRouter(authConnect(_Verify));
 
 class _Review extends React.Component {
   submit() {
-    fetchAPI(`/api/forms/review/${this.props.params.id}`, {
+    fetchAPI(`/api/forms/review/${this.props.params.unit}/${this.props.params.form}`, {
       credentials: 'same-origin',
       method: 'POST',
       headers: {
@@ -152,7 +152,7 @@ class _Review extends React.Component {
   }
 
   reject() {
-    fetchAPI(`/api/forms/review/${this.props.params.id}`, {
+    fetchAPI(`/api/forms/review/${this.props.params.unit}/${this.props.params.form}`, {
       credentials: 'same-origin',
       method: 'DELETE',
       headers: {
@@ -178,7 +178,7 @@ class _Review extends React.Component {
   }
 
   render() {
-    const url = `http://opencircuit.us/api/forms/submission/${this.props.params.id}`;
+    const url = `http://opencircuit.us/api/forms/submission/${this.props.params.unit}/${this.props.params.form}`;
     const fullUrl = 'https://docs.google.com/viewer?url=' + url + '&embedded=true';
 
     return (

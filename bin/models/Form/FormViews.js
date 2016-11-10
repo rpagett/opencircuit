@@ -137,7 +137,7 @@ var _Verify = function (_React$Component3) {
     value: function submit() {
       var _this4 = this;
 
-      (0, _functions.fetchAPI)('/api/forms/verify/' + this.props.params.id, {
+      (0, _functions.fetchAPI)('/api/forms/verify/' + this.props.params.unit + '/' + this.props.params.form, {
         credentials: 'same-origin',
         method: 'POST',
         headers: {
@@ -162,7 +162,7 @@ var _Verify = function (_React$Component3) {
   }, {
     key: 'render',
     value: function render() {
-      var url = 'http://opencircuit.us/api/forms/submission/' + this.props.params.id;
+      var url = 'http://opencircuit.us/api/forms/submission/' + this.props.params.unit + '/' + this.props.params.form;
       var fullUrl = 'https://docs.google.com/viewer?url=' + url + '&embedded=true';
 
       return _react2.default.createElement(
@@ -246,7 +246,7 @@ var _Review = function (_React$Component4) {
     value: function submit() {
       var _this6 = this;
 
-      (0, _functions.fetchAPI)('/api/forms/review/' + this.props.params.id, {
+      (0, _functions.fetchAPI)('/api/forms/review/' + this.props.params.unit + '/' + this.props.params.form, {
         credentials: 'same-origin',
         method: 'POST',
         headers: {
@@ -268,7 +268,7 @@ var _Review = function (_React$Component4) {
     value: function reject() {
       var _this7 = this;
 
-      (0, _functions.fetchAPI)('/api/forms/review/' + this.props.params.id, {
+      (0, _functions.fetchAPI)('/api/forms/review/' + this.props.params.unit + '/' + this.props.params.form, {
         credentials: 'same-origin',
         method: 'DELETE',
         headers: {
@@ -293,7 +293,7 @@ var _Review = function (_React$Component4) {
   }, {
     key: 'render',
     value: function render() {
-      var url = 'http://opencircuit.us/api/forms/submission/' + this.props.params.id;
+      var url = 'http://opencircuit.us/api/forms/submission/' + this.props.params.unit + '/' + this.props.params.form;
       var fullUrl = 'https://docs.google.com/viewer?url=' + url + '&embedded=true';
 
       return _react2.default.createElement(

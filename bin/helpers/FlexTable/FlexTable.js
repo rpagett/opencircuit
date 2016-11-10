@@ -175,7 +175,7 @@ var _FlexTable = (_temp = _class = function (_React$Component) {
 
         contents.push(_react2.default.createElement(
           'tr',
-          { key: line._id },
+          { key: line._id + Math.random() },
           cells
         ));
       });

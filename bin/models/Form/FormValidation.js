@@ -23,16 +23,10 @@ function validateForm() {
     'description': 'required'
   };
 
-  var sanitation = {
-    'name': 'capitalize'
-  };
-
   var messages = {
     'required': 'This field is required.'
   };
 
-  return _indicative2.default.validateAll(data, rules, messages).then(function (data) {
-    return _indicative2.default.sanitize(data, sanitation);
-  });
+  return _indicative2.default.validateAll(data, rules, messages);
 }
 module.exports = exports['default'];

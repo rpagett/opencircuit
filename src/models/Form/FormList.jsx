@@ -12,6 +12,10 @@ export default class FormList extends React.Component {
   }
 
   canDelete(form, user) {
+    if (userHasRole(user, UserRoles.Administrator)) {
+      return `/api/forms/${form._id}`
+    }
+
     return null
   }
 

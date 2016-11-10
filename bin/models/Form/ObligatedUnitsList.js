@@ -42,12 +42,16 @@ var ObligatedUnitsList = function (_React$Component) {
 
   _createClass(ObligatedUnitsList, [{
     key: 'canEdit',
-    value: function canEdit(unit, user) {
+    value: function canEdit(obl, user) {
       return null;
     }
   }, {
     key: 'canDelete',
-    value: function canDelete(unit, user) {
+    value: function canDelete(obl, user) {
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.FormsManager)) {
+        return '/api/forms/obligation/' + obl.unit._id + '/' + obl.form._id;
+      }
+
       return null;
     }
   }, {
@@ -59,7 +63,7 @@ var ObligatedUnitsList = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(_FlexTable2.default, {
-          name: 'obligatedUnitList',
+          name: 'obligatedUnitsList',
           endpoint: this.props.endpoint,
           emptyMessage: 'There are no form obligations.',
           columns: {
@@ -85,7 +89,7 @@ var ObligatedUnitsList = function (_React$Component) {
                 if (obl.approved) {
                   return _react2.default.createElement(
                     'a',
-                    { href: '/api/forms/submission/' + obl._id, target: '_blank' },
+                    { href: '/api/forms/submission/' + obl.unit._id + '/' + obl.form._id, target: '_blank' },
                     'Approved'
                   );
                 } else if (obl.submitted) {
@@ -95,7 +99,7 @@ var ObligatedUnitsList = function (_React$Component) {
                     'Submitted (',
                     _react2.default.createElement(
                       _reactRouter.Link,
-                      { to: '/forms/review/' + obl._id },
+                      { to: '/forms/review/' + obl.unit._id + '/' + obl.form._id },
                       'Review'
                     ),
                     ')'
@@ -107,7 +111,7 @@ var ObligatedUnitsList = function (_React$Component) {
                     'Pending (',
                     _react2.default.createElement(
                       _reactRouter.Link,
-                      { to: '/forms/verify/' + obl._id },
+                      { to: '/forms/verify/' + obl.unit._id + '/' + obl.form._id },
                       'Submit'
                     ),
                     ')'
@@ -132,7 +136,9 @@ var ObligatedUnitsList = function (_React$Component) {
           },
           canEdit: this.canEdit,
           canDelete: this.canDelete,
-          deriveName: null
+          deriveName: function deriveName(obl) {
+            return obl.form.name + ' for ' + obl.unit.name;
+          }
         })
       );
     }
