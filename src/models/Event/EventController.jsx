@@ -220,7 +220,7 @@ router.route('/:slug')
 
 // :type is a UnitType _id
 router.get('/by_type/:type', (req, res) => {
-  Event.find({ }, '_id name date')
+  Event.find({ }, '_id name date registration_closed date')
   //Event.find({ types_allowed: req.params.type }, '_id name')
     .sort('date')
     .exec()
