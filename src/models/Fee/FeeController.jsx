@@ -1,6 +1,7 @@
 import Express from 'express';
 import _ from 'lodash';
 import Paypal from 'paypal-rest-sdk';
+import fs from 'fs';
 
 import { fetchAPI } from '../../helpers/functions';
 import { UserRoles } from '../User/UserRoles';
