@@ -42,7 +42,7 @@ var Edit = exports.Edit = function (_React$Component) {
         fetch.submitMethod = 'POST';
       } else {
         fetch.submitEndpoint = '/api/events/' + this.props.slug;
-        fetch.fetchEndpoint = '/api/events/' + this.props.slug;
+        fetch.fetchEndpoint = '/api/events/edit/' + this.props.slug;
         fetch.submitMethod = 'PATCH';
       }
 

@@ -115,6 +115,20 @@ router.route('/').get(function (req, res) {
   });
 });
 
+router.get('/edit/:slug', function (req, res) {
+  _EventModel2.default.findOne({ slug: req.params.slug }).then(function (event) {
+    res.send({
+      success: true,
+      model: event
+    });
+  }).catch(function (err) {
+    res.send({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
 router.route('/:slug').get(function (req, res) {
   var event = {};
   _EventModel2.default.findOne({ slug: req.params.slug }).then(function (inEvent) {

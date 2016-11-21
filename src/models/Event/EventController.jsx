@@ -102,6 +102,22 @@ router.route('/')
       })
   });
 
+router.get('/edit/:slug', (req, res) => {
+  Event.findOne({ slug: req.params.slug })
+    .then(event => {
+      res.send({
+        success: true,
+        model: event
+      })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
 router.route('/:slug')
   .get((req, res) => {
     let event = { };
