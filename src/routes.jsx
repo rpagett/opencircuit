@@ -81,8 +81,9 @@ export function getAppRoutes(store) {
 
       <Route path="/reports" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
         <IndexRoute component={ ReportView.Index } />
-        <Route path="quickbooks" component={ ReportView.Quickbooks } />
         <Route path="drawstatus" component={ ReportView.DrawStatus } />
+        <Route path="mailchimp" component={ ReportView.MailChimp } />
+        <Route path="quickbooks" component={ ReportView.Quickbooks } />
       </Route>
 
       <Route path="forms/verify/:unit/:form" component={ FormView.Verify } onEnter={ authOnly } />

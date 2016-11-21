@@ -12,8 +12,9 @@ export class Index extends React.Component {
         <h1 className="page-header">Reports</h1>
         <p></p>
         <ul>
-          <li><Link to="/reports/quickbooks">Quickbooks</Link></li>
           <li><Link to="/reports/drawstatus">Draw Status</Link></li>
+          <li><Link to="/reports/mailchimp">Mailchimp</Link></li>
+          <li><Link to="/reports/quickbooks">Quickbooks</Link></li>
         </ul>
       </div>
     )
@@ -72,7 +73,6 @@ export class Quickbooks extends React.Component {
 class _DrawStatus extends React.Component {
   render() {
     let rows = [ ];
-    let lastWeek = 0;
     this.props.contents.map(unit => {
       rows.push(
         <div className="row">
@@ -106,6 +106,75 @@ export class DrawStatus extends React.Component {
         subStore="report_drawstatus"
         endpoint={ `/api/reports/drawstatus` }
         component={ _DrawStatus }
+      />
+    )
+  }
+}
+
+class _MailChimp extends React.Component {
+  render() {
+    let rows = [ ];
+    this.props.contents.map(unit => {
+      rows.push(
+        <tr key={ unit._id }>
+          <td key={ unit._id + 'a' }>{ unit.name }</td>
+          <td key={ unit._id + 'b' }>{ unit.director.first_name }</td>
+          <td key={ unit._id + 'c' }>{ unit.director.last_name }</td>
+          <td key={ unit._id + 'd' }>{ unit.director.email }</td>
+          <td key={ unit._id + 'e' }>{ unit.director.phone }</td>
+          <td key={ unit._id + 'f' }>{ unit.organization.street }</td>
+          <td key={ unit._id + 'g' }>{ unit.organization.street_2 }</td>
+          <td key={ unit._id + 'h' }>{ unit.organization.city }</td>
+          <td key={ unit._id + 'i' }>{ unit.organization.state }</td>
+          <td key={ unit._id + 'j' }>{ unit.organization.zip }</td>
+          <td key={ unit._id + 'k' }>{ unit.organization.name }</td>
+          <td key={ unit._id + 'l' }>{ unit.unit_type.name }</td>
+          <td key={ unit._id + 'm' }>{ unit.competition_class.name }</td>
+          <td key={ unit._id + 'n' }>{ unit.eventList }</td>
+        </tr>
+      )
+    })
+
+    return (
+      <div>
+        <h1 className="page-header">MailChimp CSV</h1>
+
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Unit</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Street</th>
+              <th>Street 2</th>
+              <th>City</th>
+              <th>State</th>
+              <th>ZIP</th>
+              <th>Organization</th>
+              <th>Unit Type</th>
+              <th>Class</th>
+              <th>Events</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            { rows }
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+}
+
+export class MailChimp extends React.Component {
+  render() {
+    return (
+      <ContentsView
+        subStore="report_mailchimp"
+        endpoint={ `/api/reports/mailchimp` }
+        component={ _MailChimp }
       />
     )
   }

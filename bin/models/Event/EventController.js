@@ -154,6 +154,10 @@ router.route('/:slug').get(function (req, res) {
 
       if (registrations.length >= event.attendance_cap) {
         var unitList = _lodash2.default.sortBy(confirmedUnits, function (reg) {
+          if (reg.createdAt > reg.unit.confirmed_paid_date) {
+            return reg.createdAt;
+          }
+
           return reg.unit.confirmed_paid_date;
         });
 

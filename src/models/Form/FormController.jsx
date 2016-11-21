@@ -499,7 +499,7 @@ router.route('/review/:unit/:form')
       console.log(err.message);
       res.send({
         success: false,
-        redirect: '/'
+        redirect: '/forms/review'
       })
     })
 })

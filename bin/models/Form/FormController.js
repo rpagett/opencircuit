@@ -455,7 +455,7 @@ router.route('/review/:unit/:form').post(function (req, res) {
     console.log(err.message);
     res.send({
       success: false,
-      redirect: '/'
+      redirect: '/forms/review'
     });
   });
 }).delete(function (req, res) {

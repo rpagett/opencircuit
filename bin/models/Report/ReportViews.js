@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DrawStatus = exports.Quickbooks = exports.Index = undefined;
+exports.MailChimp = exports.DrawStatus = exports.Quickbooks = exports.Index = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -58,8 +58,8 @@ var Index = exports.Index = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactRouter.Link,
-              { to: '/reports/quickbooks' },
-              'Quickbooks'
+              { to: '/reports/drawstatus' },
+              'Draw Status'
             )
           ),
           _react2.default.createElement(
@@ -67,8 +67,17 @@ var Index = exports.Index = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactRouter.Link,
-              { to: '/reports/drawstatus' },
-              'Draw Status'
+              { to: '/reports/mailchimp' },
+              'Mailchimp'
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/reports/quickbooks' },
+              'Quickbooks'
             )
           )
         )
@@ -195,7 +204,6 @@ var _DrawStatus = function (_React$Component4) {
     key: 'render',
     value: function render() {
       var rows = [];
-      var lastWeek = 0;
       this.props.contents.map(function (unit) {
         rows.push(_react2.default.createElement(
           'div',
@@ -286,4 +294,219 @@ var DrawStatus = exports.DrawStatus = function (_React$Component5) {
   }]);
 
   return DrawStatus;
+}(_react2.default.Component);
+
+var _MailChimp = function (_React$Component6) {
+  _inherits(_MailChimp, _React$Component6);
+
+  function _MailChimp() {
+    _classCallCheck(this, _MailChimp);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_MailChimp).apply(this, arguments));
+  }
+
+  _createClass(_MailChimp, [{
+    key: 'render',
+    value: function render() {
+      var rows = [];
+      this.props.contents.map(function (unit) {
+        rows.push(_react2.default.createElement(
+          'tr',
+          { key: unit._id },
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'a' },
+            unit.name
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'b' },
+            unit.director.first_name
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'c' },
+            unit.director.last_name
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'd' },
+            unit.director.email
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'e' },
+            unit.director.phone
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'f' },
+            unit.organization.street
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'g' },
+            unit.organization.street_2
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'h' },
+            unit.organization.city
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'i' },
+            unit.organization.state
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'j' },
+            unit.organization.zip
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'k' },
+            unit.organization.name
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'l' },
+            unit.unit_type.name
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'm' },
+            unit.competition_class.name
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: unit._id + 'n' },
+            unit.eventList
+          )
+        ));
+      });
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          'MailChimp CSV'
+        ),
+        _react2.default.createElement(
+          'table',
+          { className: 'table' },
+          _react2.default.createElement(
+            'thead',
+            null,
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'th',
+                null,
+                'Unit'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'First Name'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Last Name'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Email'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Phone'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Street'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Street 2'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'City'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'State'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'ZIP'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Organization'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Unit Type'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Class'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Events'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'tbody',
+            null,
+            rows
+          )
+        )
+      );
+    }
+  }]);
+
+  return _MailChimp;
+}(_react2.default.Component);
+
+var MailChimp = exports.MailChimp = function (_React$Component7) {
+  _inherits(MailChimp, _React$Component7);
+
+  function MailChimp() {
+    _classCallCheck(this, MailChimp);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(MailChimp).apply(this, arguments));
+  }
+
+  _createClass(MailChimp, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_ContentsView2.default, {
+        subStore: 'report_mailchimp',
+        endpoint: '/api/reports/mailchimp',
+        component: _MailChimp
+      });
+    }
+  }]);
+
+  return MailChimp;
 }(_react2.default.Component);

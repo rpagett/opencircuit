@@ -16,6 +16,10 @@ var _paypalRestSdk = require('paypal-rest-sdk');
 
 var _paypalRestSdk2 = _interopRequireDefault(_paypalRestSdk);
 
+var _fs = require('fs');
+
+var _fs2 = _interopRequireDefault(_fs);
+
 var _functions = require('../../helpers/functions');
 
 var _UserRoles = require('../User/UserRoles');
@@ -183,7 +187,7 @@ router.get('/paypal-return', function (req, res) {
     _paypalRestSdk2.default.payment.execute(paymentId, execute_payment_json, function (error, payment) {
       if (error) {
         console.log(error.response);
-        fs.appendFile('files/logs/paypal/errors.log', JSON.stringify(err), function (err) {
+        _fs2.default.appendFile('files/logs/paypal/errors.log', JSON.stringify(err), function (err) {
           console.log('Even the log file failed.');
         });
         res.redirect(302, process.env.BASE_URL + '/error/payment');
@@ -229,7 +233,7 @@ router.get('/paypal-return', function (req, res) {
     });
   } catch (err) {
     console.log(err.message);
-    fs.appendFile('files/logs/paypal/errors.log', JSON.stringify(err), function (err) {
+    _fs2.default.appendFile('files/logs/paypal/errors.log', JSON.stringify(err), function (err) {
       console.log('Even the log file failed.');
     });
     res.redirect(302, process.env.BASE_URL + '/error/payment');

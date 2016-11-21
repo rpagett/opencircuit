@@ -148,6 +148,10 @@ router.route('/:slug')
 
           if (registrations.length >= event.attendance_cap) {
             const unitList = _.sortBy(confirmedUnits, reg => {
+              if (reg.createdAt > reg.unit.confirmed_paid_date) {
+                return reg.createdAt;
+              }
+
               return reg.unit.confirmed_paid_date;
             })
 
