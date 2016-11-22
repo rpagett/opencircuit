@@ -48,34 +48,46 @@ var router = _express2.default.Router();
 // All routes are '/api/events/...'
 
 router.route('/').get(function (req, res) {
-  var contents = [];
-  _EventModel2.default.find({}, 'name slug detailsUrl date formattedDate attendance_cap').sort('date').exec().then(function (events) {
-    contents = events;
+  var events = [];
+  _EventModel2.default.find({}, 'name slug detailsUrl date formattedDate attendance_cap').sort('date').exec().then(function (resEvents) {
+    events = resEvents;
 
-    var ids = [];
-    events.map(function (event) {
-      ids.push(event._id);
-    });
+    return _EventRegistrationModel2.default.find({}).populate('unit', 'confirmed_paid_date').exec();
+  }).then(function (registrations) {
+    for (var key in events) {
+      var event = events[key].toObject();
+      var attending = _lodash2.default.filter(registrations, { event: event._id });
+      var count = attending.length;
 
-    return _EventRegistrationModel2.default.aggregate([{ $match: { event: { $in: ids } } }, { $project: { event: 1 } }, {
-      $group: {
-        _id: '$event',
-        count: { $sum: 1 }
+      if (attending.length > event.attendance_cap) {
+        var allUnits = _lodash2.default.sortBy(attending, function (reg) {
+          if (reg.createdAt > reg.unit.confirmed_paid_date) {
+            return reg.createdAt;
+          }
+
+          return reg.unit.confirmed_paid_date;
+        });
+
+        var paidUnits = _lodash2.default.filter(allUnits, function (reg) {
+          return reg.unit.confirmed_paid_date != null;
+        });
+        var unpaidUnits = _lodash2.default.reject(allUnits, function (reg) {
+          return reg.unit.confirmed_paid_date != null;
+        });
+        var confirmedUnits = _lodash2.default.slice(paidUnits, 0, event.attendance_cap);
+        var waitlistUnits = _lodash2.default.slice(paidUnits, event.attendance_cap);
+
+        count = confirmedUnits.length + ' / ' + waitlistUnits.length + ' / ' + unpaidUnits.length;
       }
-    }]);
-  }).then(function (counts) {
-    for (var key in contents) {
-      contents[key] = contents[key].toObject();
-      var count = _lodash2.default.find(counts, { _id: contents[key]._id });
 
-      contents[key] = _extends({}, contents[key], {
-        unitCount: count ? count.count : 0
+      events[key] = _extends({}, event, {
+        unitCount: count ? count : 0
       });
     }
 
     res.json({
       success: true,
-      contents: contents
+      contents: events
     });
   }).catch(function (err) {
     res.json({

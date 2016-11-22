@@ -15,43 +15,53 @@ let router = Express.Router();
 
 router.route('/')
   .get((req, res) => {
-    let contents = [ ];
+    let events = [ ];
     Event.find({ }, 'name slug detailsUrl date formattedDate attendance_cap')
       .sort('date')
       .exec()
-      .then(events => {
-        contents = events;
+      .then(resEvents => {
+        events = resEvents;
 
-        let ids = [ ];
-        events.map(event => {
-          ids.push(event._id);
-        })
-
-        return EventRegistration.aggregate([
-          { $match: { event: {$in: ids} } },
-          { $project: { event: 1} },
-          {
-            $group: {
-              _id: '$event',
-              count: { $sum: 1 }
-            }
-          }
-        ])
+        return EventRegistration.find({ })
+          .populate('unit', 'confirmed_paid_date')
+          .exec()
       })
-      .then(counts => {
-        for (let key in contents) {
-          contents[key] = contents[key].toObject();
-          let count = _.find(counts, { _id: contents[key]._id });
+      .then(registrations => {
+        for (let key in events) {
+          const event = events[key].toObject();
+          const attending = _.filter(registrations, { event: event._id })
+          let count = attending.length;
 
-          contents[key] = {
-            ...contents[key],
-            unitCount: (count ? count.count : 0)
+          if (attending.length > event.attendance_cap) {
+            const allUnits = _.sortBy(attending, reg => {
+              if (reg.createdAt > reg.unit.confirmed_paid_date) {
+                return reg.createdAt;
+              }
+
+              return reg.unit.confirmed_paid_date;
+            });
+
+            const paidUnits = _.filter(allUnits, reg => {
+              return reg.unit.confirmed_paid_date != null;
+            });
+            const unpaidUnits = _.reject(allUnits, reg => {
+              return reg.unit.confirmed_paid_date != null;
+            });
+            const confirmedUnits = _.slice(paidUnits, 0, event.attendance_cap);
+            const waitlistUnits = _.slice(paidUnits, event.attendance_cap);
+
+            count = confirmedUnits.length + ' / ' + waitlistUnits.length + ' / ' + unpaidUnits.length;
+          }
+
+          events[key] = {
+            ...event,
+            unitCount: (count ? count : 0)
           }
         }
 
         res.json({
           success: true,
-          contents
+          contents: events
         })
       })
       .catch(err => {
