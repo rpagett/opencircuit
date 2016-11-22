@@ -322,7 +322,7 @@ router.get('/:slug/attending', (req, res) => {
             unitKey = _.findKey(unitList, reg => reg.unit.id == unit.id)
             console.log('Key for event', event.name, 'is', unitKey, '. Cap is', event.attendance_cap);
 
-            if ((unitKey+1) > event.attendance_cap) {
+            if (parseInt(unitKey) + 1 > event.attendance_cap) {
               status = 'On Waitlist';
             }
           }
