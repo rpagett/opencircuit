@@ -63,7 +63,6 @@ router.route('/')
   })
 
   .post(hasRole(UserRoles.EventDirector), (req, res) => {
-    console.log('Body is', req.body);
     validateEvent(req.body)
       .then(data => {
         let event = new Event(data);
@@ -78,7 +77,6 @@ router.route('/')
         })
       })
       .catch(errors => {
-        console.log('We\'re in catch.', errors);
         res.json({
           success: false,
           errors
@@ -156,7 +154,6 @@ router.route('/:slug')
           unpaidUnits = _.filter(registrations, reg => {
             return reg.unit.confirmed_paid_date == null;
           });
-          console.log('Unpaid units', unpaidUnits);
 
           confirmedUnits = _.filter(registrations, reg => {
             return reg.unit.confirmed_paid_date != null;

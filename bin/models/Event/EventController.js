@@ -84,7 +84,6 @@ router.route('/').get(function (req, res) {
     });
   });
 }).post((0, _authRoute.hasRole)(_UserRoles.UserRoles.EventDirector), function (req, res) {
-  console.log('Body is', req.body);
   (0, _EventValidation2.default)(req.body).then(function (data) {
     var event = new _EventModel2.default(data);
     event.slug = data.slug;
@@ -96,7 +95,6 @@ router.route('/').get(function (req, res) {
       redirect: event.detailsUrl
     });
   }).catch(function (errors) {
-    console.log('We\'re in catch.', errors);
     res.json({
       success: false,
       errors: errors
@@ -160,7 +158,6 @@ router.route('/:slug').get(function (req, res) {
       unpaidUnits = _lodash2.default.filter(registrations, function (reg) {
         return reg.unit.confirmed_paid_date == null;
       });
-      console.log('Unpaid units', unpaidUnits);
 
       confirmedUnits = _lodash2.default.filter(registrations, function (reg) {
         return reg.unit.confirmed_paid_date != null;

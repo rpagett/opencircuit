@@ -28,7 +28,6 @@ function updateEvents(id, events) {
   }
 
   //const inEvents = Object.keys(events);
-  console.log('IN EVENTS', inEvents);
 
   let unit = { };
   let addEvents = [ ];
@@ -45,12 +44,10 @@ function updateEvents(id, events) {
     })
     .then(registrations => {
       const registeredEvents = _.map(registrations, 'event');
-      console.log('Registered Events', registeredEvents);
 
       addEvents = _.differenceBy(inEvents, registeredEvents, String);
 
       const removeEvents = _.differenceBy(registeredEvents, inEvents, String);
-      console.log('Removing events', removeEvents);
 
       EventRegistration.remove({ unit: unit._id, event: {$in: removeEvents } }).exec()
 
@@ -63,7 +60,6 @@ function updateEvents(id, events) {
         })
       })
 
-      console.log('Adding events', addEvents);
       return EventRegistration.create(creation)
     })
     .catch(err => {
@@ -140,7 +136,6 @@ router.route('/:slug')
       fields: '_id slug detailsUrl'
     })
     .then(unit => {
-      console.log('ID is', unit._id, 'EVENTS are', req.body.events);
       return updateEvents(unit._id, req.body.events);
     })
     .then( () => {
@@ -161,7 +156,6 @@ router.route('/:slug')
     Unit.findOneAndRemove({ slug: req.params.slug })
       .exec()
       .then(unit => {
-        console.log('Removing fees for unit', unit);
         EventRegistration.remove({ unit: unit._id }).exec();
         return Fee.remove({ unit: unit._id }).exec()
       })
@@ -252,7 +246,6 @@ router.get('/:slug/eventChecks', (req, res) => {
     .then(events => {
       let outEvents = [ ];
 
-      console.log('registrations', storeRegistrations);
       for (let key in events) {
 
         const event = events[key].toObject();
@@ -264,7 +257,6 @@ router.get('/:slug/eventChecks', (req, res) => {
         }
       }
 
-      console.log('EVENTS', outEvents);
 
       res.json({
         success: true,
@@ -308,9 +300,10 @@ router.get('/:slug/attending', (req, res) => {
         let status = 'Confirmed';
         //console.log('all registrations', allRegistrations);
         //console.log('this event', allRegistrations[event._id])
-        let unitList = _.map(allRegistrations[event._id], reg => reg.unit);
+        let unitList = allRegistrations[event._id];
+        //let unitList = _.map(allRegistrations[event._id], reg => reg.unit);
         //console.log('unitList', unitList);
-        let unitKey = _.findKey(unitList, u => u.id == unit.id)
+        let unitKey = _.findKey(unitList, reg => reg.unit.id == unit.id)
         //console.log('key', unitKey);
 
         if (!unitKey && unitKey !== 0) { console.log('cnting'); continue; }
@@ -319,10 +312,17 @@ router.get('/:slug/attending', (req, res) => {
 
         if (unit.confirmed_paid_date) {
           if (unitList.length >= event.attendance_cap) {
-            unitList = _.sortBy(unitList, u => u.confirmed_paid_date);
-            unitKey = _.findKey(unitList, u => u.id == unit.id)
+            unitList = _.sortBy(unitList, reg => {
+              if (reg.createdAt > reg.unit.confirmed_paid_date) {
+                return reg.createdAt;
+              }
 
-            if (unitKey >= event.attendance_cap) {
+              return reg.unit.confirmed_paid_date;
+            });
+            unitKey = _.findKey(unitList, reg => reg.unit.id == unit.id)
+            console.log('Key for event', event.name, 'is', unitKey, '. Cap is', event.attendance_cap);
+
+            if ((unitKey+1) > event.attendance_cap) {
               status = 'On Waitlist';
             }
           }
@@ -331,7 +331,8 @@ router.get('/:slug/attending', (req, res) => {
           status = 'Owes Fees'
         }
 
-        const found = _.find(allRegistrations[event._id], reg => { return reg.unit.id == unit.id });
+        //const found = _.find(allRegistrations[event._id], reg => { return reg.unit.id == unit.id });
+        const found = unitList[unitKey];
         //console.log('found', found);
 
         contents.push({
@@ -341,7 +342,6 @@ router.get('/:slug/attending', (req, res) => {
         })
       }
 
-      console.log('CONTENTS', contents);
       res.json({
         success: true,
         contents

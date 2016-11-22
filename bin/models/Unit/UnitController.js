@@ -57,7 +57,6 @@ function updateEvents(id, events) {
   }
 
   //const inEvents = Object.keys(events);
-  console.log('IN EVENTS', inEvents);
 
   var unit = {};
   var addEvents = [];
@@ -72,12 +71,10 @@ function updateEvents(id, events) {
     return _EventRegistrationModel2.default.find({ unit: unit._id }, 'event');
   }).then(function (registrations) {
     var registeredEvents = _lodash2.default.map(registrations, 'event');
-    console.log('Registered Events', registeredEvents);
 
     addEvents = _lodash2.default.differenceBy(inEvents, registeredEvents, String);
 
     var removeEvents = _lodash2.default.differenceBy(registeredEvents, inEvents, String);
-    console.log('Removing events', removeEvents);
 
     _EventRegistrationModel2.default.remove({ unit: unit._id, event: { $in: removeEvents } }).exec();
 
@@ -90,7 +87,6 @@ function updateEvents(id, events) {
       });
     });
 
-    console.log('Adding events', addEvents);
     return _EventRegistrationModel2.default.create(creation);
   }).catch(function (err) {
     res.json({
@@ -145,7 +141,6 @@ router.route('/:slug').get(function (req, res) {
     upsert: true,
     fields: '_id slug detailsUrl'
   }).then(function (unit) {
-    console.log('ID is', unit._id, 'EVENTS are', req.body.events);
     return updateEvents(unit._id, req.body.events);
   }).then(function () {
     res.send({
@@ -160,7 +155,6 @@ router.route('/:slug').get(function (req, res) {
   });
 }).delete((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
   _UnitModel2.default.findOneAndRemove({ slug: req.params.slug }).exec().then(function (unit) {
-    console.log('Removing fees for unit', unit);
     _EventRegistrationModel2.default.remove({ unit: unit._id }).exec();
     return _FeeModel2.default.remove({ unit: unit._id }).exec();
   }).then(function () {
@@ -230,7 +224,6 @@ router.get('/:slug/eventChecks', function (req, res) {
   }).then(function (events) {
     var outEvents = [];
 
-    console.log('registrations', storeRegistrations);
     for (var key in events) {
 
       var event = events[key].toObject();
@@ -240,8 +233,6 @@ router.get('/:slug/eventChecks', function (req, res) {
         attending: isAttending
       });
     }
-
-    console.log('EVENTS', outEvents);
 
     res.json({
       success: true,
@@ -277,12 +268,11 @@ router.get('/:slug/attending', function (req, res) {
       var status = 'Confirmed';
       //console.log('all registrations', allRegistrations);
       //console.log('this event', allRegistrations[event._id])
-      var unitList = _lodash2.default.map(allRegistrations[event._id], function (reg) {
-        return reg.unit;
-      });
+      var unitList = allRegistrations[event._id];
+      //let unitList = _.map(allRegistrations[event._id], reg => reg.unit);
       //console.log('unitList', unitList);
-      var unitKey = _lodash2.default.findKey(unitList, function (u) {
-        return u.id == unit.id;
+      var unitKey = _lodash2.default.findKey(unitList, function (reg) {
+        return reg.unit.id == unit.id;
       });
       //console.log('key', unitKey);
 
@@ -294,14 +284,19 @@ router.get('/:slug/attending', function (req, res) {
 
       if (unit.confirmed_paid_date) {
         if (unitList.length >= event.attendance_cap) {
-          unitList = _lodash2.default.sortBy(unitList, function (u) {
-            return u.confirmed_paid_date;
-          });
-          unitKey = _lodash2.default.findKey(unitList, function (u) {
-            return u.id == unit.id;
-          });
+          unitList = _lodash2.default.sortBy(unitList, function (reg) {
+            if (reg.createdAt > reg.unit.confirmed_paid_date) {
+              return reg.createdAt;
+            }
 
-          if (unitKey >= event.attendance_cap) {
+            return reg.unit.confirmed_paid_date;
+          });
+          unitKey = _lodash2.default.findKey(unitList, function (reg) {
+            return reg.unit.id == unit.id;
+          });
+          console.log('Key for event', event.name, 'is', unitKey, '. Cap is', event.attendance_cap);
+
+          if (unitKey + 1 > event.attendance_cap) {
             status = 'On Waitlist';
           }
         }
@@ -309,9 +304,8 @@ router.get('/:slug/attending', function (req, res) {
         status = 'Owes Fees';
       }
 
-      var found = _lodash2.default.find(allRegistrations[event._id], function (reg) {
-        return reg.unit.id == unit.id;
-      });
+      //const found = _.find(allRegistrations[event._id], reg => { return reg.unit.id == unit.id });
+      var found = unitList[unitKey];
       //console.log('found', found);
 
       contents.push(_extends({}, event.toObject(), {
@@ -320,7 +314,6 @@ router.get('/:slug/attending', function (req, res) {
       }));
     }
 
-    console.log('CONTENTS', contents);
     res.json({
       success: true,
       contents: contents
