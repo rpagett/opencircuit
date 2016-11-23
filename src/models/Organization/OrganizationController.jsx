@@ -22,6 +22,7 @@ router.route('/')
 
     Organization.find({ })
       .populate('director', 'first_name last_name middle_initial email')
+      .sort('name')
       .exec()
       .then(orgs => {
         contents = orgs;

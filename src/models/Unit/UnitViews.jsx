@@ -94,7 +94,7 @@ class _Show extends React.Component {
         <div className="row">
           <div className="card col-xs-12">
             <div className="card-header card-info">
-              Attending Events
+              Event Registrations
             </div>
             <div className="card-block">
               <UnitEventsList endpoint={ `/api/units/${unit.slug}/attending` } />

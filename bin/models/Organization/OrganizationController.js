@@ -43,7 +43,7 @@ router.route('/').get((0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator
   var contents = [];
   var ids = [];
 
-  _OrganizationModel2.default.find({}).populate('director', 'first_name last_name middle_initial email').exec().then(function (orgs) {
+  _OrganizationModel2.default.find({}).populate('director', 'first_name last_name middle_initial email').sort('name').exec().then(function (orgs) {
     contents = orgs;
 
     orgs.map(function (org) {

@@ -946,6 +946,11 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component19) {
       }
 
       this.state.events.map(function (event) {
+        var label = event.name + ' (' + event.formattedDate + ')';
+        if (event.registration_closed) {
+          label += ' [Closed]';
+        }
+
         boxes.push(_react2.default.createElement(
           'div',
           { className: 'col-xs-12', key: 'col-' + event.id },
@@ -953,7 +958,7 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component19) {
             name: 'events',
             formStore: _this22.props.formStore,
             key: event._id,
-            label: event.name + ' (' + event.formattedDate + ')',
+            label: label,
             value: event._id,
             preChecked: event.attending,
             disabled: event.registration_closed

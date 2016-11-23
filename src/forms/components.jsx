@@ -687,13 +687,18 @@ class _EventChecks extends React.Component {
     }
 
     this.state.events.map(event => {
+      let label = event.name + ' (' + event.formattedDate + ')';
+      if (event.registration_closed) {
+        label += ' [Closed]';
+      }
+
       boxes.push(
         <div className="col-xs-12" key={ `col-${event.id}` }>
           <Checkbox
             name="events"
             formStore={ this.props.formStore }
             key={ event._id }
-            label={ event.name + ' (' + event.formattedDate + ')' }
+            label={ label }
             value={ event._id }
             preChecked={ event.attending }
             disabled={ event.registration_closed }

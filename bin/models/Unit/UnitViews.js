@@ -229,7 +229,7 @@ var _Show = function (_React$Component2) {
             _react2.default.createElement(
               'div',
               { className: 'card-header card-info' },
-              'Attending Events'
+              'Event Registrations'
             ),
             _react2.default.createElement(
               'div',
