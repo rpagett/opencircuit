@@ -11,7 +11,7 @@ let router = Express.Router();
 // All routes are '/api/reports/...'
 
 router.get('/quickbooks', hasRole(UserRoles.Administrator), (req, res) => {
-  Unit.find({ registered: true }, 'name slug createdAt')
+  Unit.find({ registered: true }, 'name slug createdAt confirmed_paid_date')
     .sort('createdAt')
     .exec()
     .then(units => {

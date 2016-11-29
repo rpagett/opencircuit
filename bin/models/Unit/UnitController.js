@@ -279,21 +279,30 @@ router.get('/:slug/attending', function (req, res) {
       if (!unitKey && unitKey !== 0) {
         console.log('cnting');continue;
       }
+      var found = unitList[unitKey];
 
       //console.log('obj at unitkey', unitKey, unitList[unitKey]);
 
       if (unit.confirmed_paid_date) {
         if (unitList.length >= event.attendance_cap) {
-          unitList = _lodash2.default.sortBy(unitList, function (reg) {
+          var paidUnits = _lodash2.default.filter(unitList, function (reg) {
+            return reg.unit.confirmed_paid_date != null;
+          });
+
+          paidUnits = _lodash2.default.sortBy(paidUnits, function (reg) {
             if (reg.createdAt > reg.unit.confirmed_paid_date) {
               return reg.createdAt;
             }
 
             return reg.unit.confirmed_paid_date;
           });
-          unitKey = _lodash2.default.findKey(unitList, function (reg) {
+
+          //console.log('Paid Units', _.map(paidUnits, reg => reg.unit.name));
+
+          unitKey = _lodash2.default.findKey(paidUnits, function (reg) {
             return reg.unit.id == unit.id;
           });
+          found = paidUnits[unitKey];
           console.log('Key for event', event.name, 'is', unitKey, '. Cap is', event.attendance_cap);
 
           if (parseInt(unitKey) + 1 > event.attendance_cap) {
@@ -305,7 +314,6 @@ router.get('/:slug/attending', function (req, res) {
       }
 
       //const found = _.find(allRegistrations[event._id], reg => { return reg.unit.id == unit.id });
-      var found = unitList[unitKey];
       //console.log('found', found);
 
       contents.push(_extends({}, event.toObject(), {

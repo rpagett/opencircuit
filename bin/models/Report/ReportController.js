@@ -36,7 +36,7 @@ var router = _express2.default.Router();
 // All routes are '/api/reports/...'
 
 router.get('/quickbooks', (0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
-  _UnitModel2.default.find({ registered: true }, 'name slug createdAt').sort('createdAt').exec().then(function (units) {
+  _UnitModel2.default.find({ registered: true }, 'name slug createdAt confirmed_paid_date').sort('createdAt').exec().then(function (units) {
     res.json({
       success: true,
       contents: units

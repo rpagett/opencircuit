@@ -178,7 +178,7 @@ router.route('/:slug')
               return reg.unit.confirmed_paid_date;
             })
 
-            console.log('SORTED', _.map(unitList, reg => reg.unit.name));
+            //console.log('SORTED', _.map(unitList, reg => reg.unit.name));
 
             confirmedUnits = _.slice(unitList, 0, event.attendance_cap);
             waitlistUnits = _.slice(unitList, event.attendance_cap);

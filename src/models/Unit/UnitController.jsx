@@ -307,19 +307,28 @@ router.get('/:slug/attending', (req, res) => {
         //console.log('key', unitKey);
 
         if (!unitKey && unitKey !== 0) { console.log('cnting'); continue; }
+        let found = unitList[unitKey];
 
         //console.log('obj at unitkey', unitKey, unitList[unitKey]);
 
         if (unit.confirmed_paid_date) {
           if (unitList.length >= event.attendance_cap) {
-            unitList = _.sortBy(unitList, reg => {
+            let paidUnits = _.filter(unitList, reg => {
+              return reg.unit.confirmed_paid_date != null;
+            });
+
+            paidUnits = _.sortBy(paidUnits, reg => {
               if (reg.createdAt > reg.unit.confirmed_paid_date) {
                 return reg.createdAt;
               }
 
               return reg.unit.confirmed_paid_date;
             });
-            unitKey = _.findKey(unitList, reg => reg.unit.id == unit.id)
+
+            //console.log('Paid Units', _.map(paidUnits, reg => reg.unit.name));
+
+            unitKey = _.findKey(paidUnits, reg => reg.unit.id == unit.id)
+            found = paidUnits[unitKey];
             console.log('Key for event', event.name, 'is', unitKey, '. Cap is', event.attendance_cap);
 
             if (parseInt(unitKey) + 1 > event.attendance_cap) {
@@ -332,7 +341,6 @@ router.get('/:slug/attending', (req, res) => {
         }
 
         //const found = _.find(allRegistrations[event._id], reg => { return reg.unit.id == unit.id });
-        const found = unitList[unitKey];
         //console.log('found', found);
 
         contents.push({

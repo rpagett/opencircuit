@@ -124,8 +124,13 @@ var _Quickbooks = function (_React$Component2) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-5' },
+            { className: 'col-xs-3' },
             date.format('MMM. Do, YYYY h:mm a')
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-3' },
+            (0, _moment2.default)(unit.confirmed_paid_date).format('MMM. Do, YYYY h:mm a')
           )
         ));
       });
@@ -152,11 +157,20 @@ var _Quickbooks = function (_React$Component2) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-5' },
+            { className: 'col-xs-3' },
             _react2.default.createElement(
               'strong',
               null,
               'Registration Date'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-3' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Paid Date'
             )
           )
         ),

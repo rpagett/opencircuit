@@ -38,7 +38,8 @@ class _Quickbooks extends React.Component {
       rows.push(
         <div className="row">
           <div className="offset-xs-1 col-xs-5">{ unit.name }</div>
-          <div className="col-xs-5">{ date.format('MMM. Do, YYYY h:mm a') }</div>
+          <div className="col-xs-3">{ date.format('MMM. Do, YYYY h:mm a') }</div>
+          <div className="col-xs-3">{ Moment(unit.confirmed_paid_date).format('MMM. Do, YYYY h:mm a') }</div>
         </div>
       )
     })
@@ -49,7 +50,8 @@ class _Quickbooks extends React.Component {
 
         <div className="row">
           <div className="offset-xs-1 col-xs-5"><strong>Unit</strong></div>
-          <div className="col-xs-5"><strong>Registration Date</strong></div>
+          <div className="col-xs-3"><strong>Registration Date</strong></div>
+          <div className="col-xs-3"><strong>Paid Date</strong></div>
         </div>
 
         { rows }

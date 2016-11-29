@@ -184,9 +184,7 @@ router.route('/:slug').get(function (req, res) {
           return reg.unit.confirmed_paid_date;
         });
 
-        console.log('SORTED', _lodash2.default.map(unitList, function (reg) {
-          return reg.unit.name;
-        }));
+        //console.log('SORTED', _.map(unitList, reg => reg.unit.name));
 
         confirmedUnits = _lodash2.default.slice(unitList, 0, event.attendance_cap);
         waitlistUnits = _lodash2.default.slice(unitList, event.attendance_cap);
