@@ -48,9 +48,9 @@ var EventList = function (_React$Component) {
   }, {
     key: 'canDelete',
     value: function canDelete(event, user) {
-      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator)) {
-        return '/api' + event.detailsUrl;
-      }
+      //if (userHasRole(user, UserRoles.Administrator)) {
+      //  return '/api' + event.detailsUrl;
+      //}
 
       return null;
     }

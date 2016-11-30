@@ -14,9 +14,9 @@ export default class EventList extends React.Component {
   }
 
   canDelete(event, user) {
-    if (userHasRole(user, UserRoles.Administrator)) {
-      return '/api' + event.detailsUrl;
-    }
+    //if (userHasRole(user, UserRoles.Administrator)) {
+    //  return '/api' + event.detailsUrl;
+    //}
 
     return null;
   }
