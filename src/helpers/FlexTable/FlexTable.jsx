@@ -33,7 +33,7 @@ class _FlexTable extends React.Component {
     if (this.props.fedContents) {
       this.props.preloadContents();
     }
-    else {
+    else if (this.props.endpoint) {
       this.props.fetchContents();
     }
   }

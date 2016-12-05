@@ -59,7 +59,7 @@ var _FlexTable = (_temp = _class = function (_React$Component) {
     value: function componentDidMount() {
       if (this.props.fedContents) {
         this.props.preloadContents();
-      } else {
+      } else if (this.props.endpoint) {
         this.props.fetchContents();
       }
     }

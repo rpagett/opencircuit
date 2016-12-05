@@ -51,6 +51,7 @@ var UnitSchema = _mongoose2.default.Schema({
   circuit_member: Boolean,
   plus_pass: Boolean,
   confirmed_paid_date: Date,
+  last_music_submission: Date,
 
   competition_class: {
     type: ObjectId,

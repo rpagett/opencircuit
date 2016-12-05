@@ -42,6 +42,9 @@ class _SpawnableModal extends React.Component {
       case 'UNIT_RECLASSIFY':
         return <UnitModals.Reclassify { ...modalProps } />;
 
+      case 'UNIT_SUBMIT_MUSIC':
+        return <UnitModals.UploadMusic { ...modalProps } />;
+
       case 'USER_ROLES':
         return <UserModals.ManageRoles { ...modalProps } />;
 

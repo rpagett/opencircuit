@@ -170,7 +170,7 @@ router.route('/:slug').get(function (req, res) {
 });
 
 router.get('/forUser/:id', function (req, res) {
-  _UnitModel2.default.find({ director: req.params.id }, '_id name slug organization unit_type competition_class director').populate('organization', 'name detailsUrl').populate('unit_type', 'name').populate('competition_class', 'name abbreviation').populate('director', 'first_name last_name formattedName email profileUrl').sort('unit_type.name name').then(function (units) {
+  _UnitModel2.default.find({ director: req.params.id }, '_id name slug organization unit_type competition_class director last_music_submission').populate('organization', 'name detailsUrl').populate('unit_type', 'name').populate('competition_class', 'name abbreviation').populate('director', 'first_name last_name formattedName email profileUrl').sort('unit_type.name name').then(function (units) {
     res.json({
       success: true,
       contents: units
@@ -342,6 +342,19 @@ router.get('/:slug/attending', function (req, res) {
   //})
   .catch(function (err) {
     res.json({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
+router.route('/:slug/music').patch(function (req, res) {
+  _UnitModel2.default.findOneAndUpdate({ slug: req.params.slug }, { last_music_submission: Date.now() }).then(function (unit) {
+    res.send({
+      success: true
+    });
+  }).catch(function (err) {
+    res.send({
       success: false,
       error: err.message
     });

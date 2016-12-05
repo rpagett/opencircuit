@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Reclassify = undefined;
+exports.UploadMusic = exports.Reclassify = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -11,7 +11,23 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _dropbox = require('dropbox');
+
+var _dropbox2 = _interopRequireDefault(_dropbox);
+
+var _isomorphicFetch = require('isomorphic-fetch');
+
+var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 var _components = require('../../forms/components');
+
+var _LoadingCube = require('../../helpers/LoadingCube');
+
+var _LoadingCube2 = _interopRequireDefault(_LoadingCube);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58,4 +74,132 @@ var Reclassify = exports.Reclassify = function (_React$Component) {
   }]);
 
   return Reclassify;
+}(_react2.default.Component);
+
+var UploadMusic = exports.UploadMusic = function (_React$Component2) {
+  _inherits(UploadMusic, _React$Component2);
+
+  function UploadMusic() {
+    _classCallCheck(this, UploadMusic);
+
+    var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(UploadMusic).call(this));
+
+    _this2.state = {
+      isLoading: false
+    };
+    return _this2;
+  }
+
+  _createClass(UploadMusic, [{
+    key: 'uploadFile',
+    value: function uploadFile(e) {
+      var _this3 = this;
+
+      function deriveFileExtension(fname) {
+        return fname.substr((~-fname.lastIndexOf(".") >>> 0) + 2);
+      }
+
+      e && e.preventDefault();
+      this.setState({
+        isLoading: true,
+        uploadMessage: true
+      });
+
+      var ACCESS_TOKEN = 'U2Me9Hub8LAAAAAAAAAACNoxSNS_iNDYKb0AVbenYGaKDdOwRL5tKGfXL-mACAEm';
+      var dbx = new _dropbox2.default({ accessToken: ACCESS_TOKEN });
+      var file = this._file.files[0];
+
+      if (!file) {
+        this.setState({
+          isLoading: false,
+          uploadMessage: false
+        });
+        return false;
+      }
+
+      dbx.filesUpload({ path: '/' + this.props.unit.name + '--' + (0, _moment2.default)(Date.now()).format('MMM-Do-YYYY--h-mm-a') + '.' + deriveFileExtension(file.name), contents: file }).then(function (res) {
+        var data = new FormData();
+        data.append('modified', res.client_modified);
+
+        return (0, _isomorphicFetch2.default)('/api/units/' + _this3.props.unit.slug + '/music', {
+          credentials: 'same-origin',
+          method: 'PATCH',
+          headers: {
+            'Authorization': _this3.props.user.apiToken
+          },
+          body: data
+        });
+      }).then(function (res) {
+        _this3.setState({
+          isLoading: false,
+          uploadMessage: false
+        });
+        return res.json();
+      }).then(function (res) {
+        if (res.success == true) {
+          _this3.props.markClosed();
+        } else {
+          console.log(res.error);
+        }
+      }).catch(function (err) {
+        console.error(error);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this4 = this;
+
+      if (this.state.isLoading) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_LoadingCube2.default, { show: true }),
+          this.state.uploadMessage ? _react2.default.createElement(
+            'strong',
+            null,
+            'Uploading...'
+          ) : null
+        );
+      }
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'container-fluid' },
+        _react2.default.createElement(
+          'form',
+          { enctype: 'multipart/form-data', ref: 'uploadForm' },
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement('input', {
+              className: 'form-control',
+              type: 'file',
+              name: 'upload',
+              ref: function ref(c) {
+                return _this4._file = c;
+              } }),
+            _react2.default.createElement('p', null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'button',
+              {
+                type: 'submit',
+                role: 'submit',
+                onClick: this.uploadFile.bind(this),
+                className: 'btn btn-success btn-block'
+              },
+              'Submit'
+            ),
+            _react2.default.createElement('p', null)
+          )
+        )
+      );
+    }
+  }]);
+
+  return UploadMusic;
 }(_react2.default.Component);

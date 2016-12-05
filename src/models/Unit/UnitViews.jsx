@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import { authConnect } from '../../helpers/functions';
 import { LaunchModalButton } from '../../modals/SpawnableModal';
 import ModelView from '../../helpers/ModelView/ModelView';
 import { Prop, Val } from '../../layout/ModelInfo';
-import { UserRoles, HasRole } from '../User/UserRoles';
+import { UserRoles, HasRole, userHasRole } from '../User/UserRoles';
 
 import * as UnitForms from './UnitForms';
 import UnitList from './UnitList';
@@ -143,7 +144,7 @@ export class Show extends React.Component {
       <ModelView
         subStore="unit_show"
         endpoint={ `/api/units/${this.props.params.slug}` }
-        component={ _Show }
+        component={ authConnect(_Show) }
       />
     )
   }

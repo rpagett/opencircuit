@@ -13,6 +13,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
+var _functions = require('../../helpers/functions');
+
 var _SpawnableModal = require('../../modals/SpawnableModal');
 
 var _ModelView = require('../../helpers/ModelView/ModelView');
@@ -310,7 +312,7 @@ var Show = exports.Show = function (_React$Component3) {
       return _react2.default.createElement(_ModelView2.default, {
         subStore: 'unit_show',
         endpoint: '/api/units/' + this.props.params.slug,
-        component: _Show
+        component: (0, _functions.authConnect)(_Show)
       });
     }
   }]);

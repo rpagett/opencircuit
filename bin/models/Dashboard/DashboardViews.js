@@ -15,6 +15,10 @@ var _reactRedux = require('react-redux');
 
 var _reactRouter = require('react-router');
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 var _ContentsView = require('../../helpers/ContentsView/ContentsView');
 
 var _ContentsView2 = _interopRequireDefault(_ContentsView);
@@ -30,6 +34,10 @@ var _UserFeeList2 = _interopRequireDefault(_UserFeeList);
 var _UnitList = require('../Unit/UnitList');
 
 var _UnitList2 = _interopRequireDefault(_UnitList);
+
+var _UnitMusicList = require('../Unit/UnitMusicList');
+
+var _UnitMusicList2 = _interopRequireDefault(_UnitMusicList);
 
 var _FileList = require('../File/FileList');
 
@@ -133,6 +141,63 @@ var _UnitBox = function (_React$Component2) {
   }
 
   _createClass(_UnitBox, [{
+    key: 'musicBox',
+    value: function musicBox(units) {
+      //  let musicStatus = [ ]
+      //  units.map(unit => {
+      //    musicStatus.push(
+      //      <div className="row" key={ 'music-' + unit.slug }>
+      //        <div className="col-xs-6">{ unit.name }</div>
+      //        <div className="col-xs-4">
+      //          { (unit.last_music_submission ?
+      //          'Submitted ' + Moment(unit.last_music_submission).format('MMM. Do, YYYY [at] h:mm a') :
+      //            'None submitted')
+      //          }
+      //        </div>
+      //        <div className="col-xs-2">
+      //          <LaunchModalButton
+      //            className="btn btn-link"
+      //            buttonText="Submit Music"
+      //
+      //            title="Submit Music"
+      //            componentName="UNIT_SUBMIT_MUSIC"
+      //            modalProps={{
+      //              unit
+      //            }}
+      //          />
+      //        </div>
+      //      </div>
+      //    )
+      //  })
+
+      if (units.length) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card offset col-xs-12' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-header card-info' },
+              'Music Status'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-block' },
+              _react2.default.createElement(_UnitMusicList2.default, {
+                units: units,
+                user: this.props.user
+              })
+            )
+          ),
+          _react2.default.createElement('p', null)
+        );
+      }
+
+      return null;
+    }
+  }, {
     key: 'render',
     value: function render() {
       if (!this.props.contents.length) {
@@ -163,6 +228,7 @@ var _UnitBox = function (_React$Component2) {
             )
           )
         ),
+        this.musicBox(this.props.contents),
         _react2.default.createElement('p', null),
         _react2.default.createElement(
           'div',

@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import Moment from 'moment';
 
 import ContentsView from '../../helpers/ContentsView/ContentsView';
 import { LaunchModalButton } from '../../modals/SpawnableModal';
 import { UserRoles, HasRole } from '../User/UserRoles';
 import UserFeeList from '../Fee/UserFeeList';
 import UnitList from '../Unit/UnitList';
+import UnitMusicList from '../Unit/UnitMusicList';
 import FileList from '../File/FileList';
 import FormObligationList from '../Form/FormObligationList';
 
@@ -23,7 +25,7 @@ class _FeeBox extends React.Component {
             Outstanding Fees
           </div>
           <div className="card-block">
-            <UserFeeList endpoint={ `/api/fees/forUser/${this.props.user._id}` } />
+            <UserFeeList endpoint={ `/api/fees/forUser/${this.props.user._id}` }/>
           </div>
           <div className="card-footer">
             <div className="row">
@@ -60,6 +62,57 @@ class _FeeBox extends React.Component {
 }
 
 class _UnitBox extends React.Component {
+  musicBox(units) {
+  //  let musicStatus = [ ]
+  //  units.map(unit => {
+  //    musicStatus.push(
+  //      <div className="row" key={ 'music-' + unit.slug }>
+  //        <div className="col-xs-6">{ unit.name }</div>
+  //        <div className="col-xs-4">
+  //          { (unit.last_music_submission ?
+  //          'Submitted ' + Moment(unit.last_music_submission).format('MMM. Do, YYYY [at] h:mm a') :
+  //            'None submitted')
+  //          }
+  //        </div>
+  //        <div className="col-xs-2">
+  //          <LaunchModalButton
+  //            className="btn btn-link"
+  //            buttonText="Submit Music"
+  //
+  //            title="Submit Music"
+  //            componentName="UNIT_SUBMIT_MUSIC"
+  //            modalProps={{
+  //              unit
+  //            }}
+  //          />
+  //        </div>
+  //      </div>
+  //    )
+  //  })
+
+    if (units.length) {
+      return (
+        <div className="row">
+          <div className="card offset col-xs-12">
+            <div className="card-header card-info">
+              Music Status
+            </div>
+            <div className="card-block">
+              <UnitMusicList
+                units={ units }
+                user={ this.props.user }
+              />
+            </div>
+          </div>
+
+          <p></p>
+        </div>
+      )
+    }
+
+    return null
+  }
+
   render() {
     if (!this.props.contents.length) {
       return (<div></div>)
@@ -80,6 +133,8 @@ class _UnitBox extends React.Component {
             </div>
           </div>
         </div>
+
+        { this.musicBox(this.props.contents) }
 
         <p></p>
 

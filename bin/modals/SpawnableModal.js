@@ -110,6 +110,9 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
         case 'UNIT_RECLASSIFY':
           return _react2.default.createElement(UnitModals.Reclassify, modalProps);
 
+        case 'UNIT_SUBMIT_MUSIC':
+          return _react2.default.createElement(UnitModals.UploadMusic, modalProps);
+
         case 'USER_ROLES':
           return _react2.default.createElement(UserModals.ManageRoles, modalProps);
 

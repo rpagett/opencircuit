@@ -173,7 +173,7 @@ router.route('/:slug')
   });
 
 router.get('/forUser/:id', (req, res) => {
-  Unit.find({ director: req.params.id }, '_id name slug organization unit_type competition_class director')
+  Unit.find({ director: req.params.id }, '_id name slug organization unit_type competition_class director last_music_submission')
     .populate('organization', 'name detailsUrl')
     .populate('unit_type', 'name')
     .populate('competition_class', 'name abbreviation')
@@ -375,6 +375,22 @@ router.get('/:slug/attending', (req, res) => {
       })
     })
 })
+
+router.route('/:slug/music')
+  .patch((req, res) => {
+    Unit.findOneAndUpdate({ slug: req.params.slug }, { last_music_submission: Date.now() })
+      .then(unit => {
+        res.send({
+          success: true
+        })
+      })
+      .catch(err => {
+        res.send({
+          success: false,
+          error: err.message
+        })
+      })
+  })
 
 router.patch('/:id/reclassify', hasRole(UserRoles.Administrator), (req, res) => {
   Unit.findOne({ _id: req.params.id }, 'competition_class')
