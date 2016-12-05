@@ -228,46 +228,7 @@ var _UnitBox = function (_React$Component2) {
             )
           )
         ),
-        this.musicBox(this.props.contents),
-        _react2.default.createElement('p', null),
-        _react2.default.createElement(
-          'div',
-          { className: 'row' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card col-xs-12' },
-            _react2.default.createElement(
-              'div',
-              { className: 'card-header card-info' },
-              'Uploaded Files'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'card-block' },
-              _react2.default.createElement(_FileList2.default, { endpoint: '/api/files' })
-            ),
-            _react2.default.createElement(
-              _UserRoles.HasRole,
-              { role: _UserRoles.UserRoles.Administrator, className: 'card-footer' },
-              _react2.default.createElement(
-                'div',
-                { className: 'row' },
-                _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
-                  className: 'btn btn-sm btn-block btn-outline-info',
-                  buttonText: 'Upload File',
-
-                  title: 'Upload File',
-                  componentName: 'FILE_UPLOAD',
-                  modalProps: {
-                    user: this.props.user,
-                    refreshTable: 'fileList',
-                    refreshEndpoint: '/api/files'
-                  }
-                })
-              )
-            )
-          )
-        )
+        this.musicBox(this.props.contents)
       );
     }
   }]);
@@ -391,6 +352,45 @@ var _Home = function (_React$Component4) {
               'div',
               { className: 'card-block' },
               _react2.default.createElement(_FormObligationList2.default, { endpoint: '/api/forms/forUser/' + this.props.user._id })
+            )
+          )
+        ),
+        _react2.default.createElement('p', null),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card col-xs-12' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-header card-info' },
+              'Uploaded Files'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-block' },
+              _react2.default.createElement(_FileList2.default, { endpoint: '/api/files' })
+            ),
+            _react2.default.createElement(
+              _UserRoles.HasRole,
+              { role: _UserRoles.UserRoles.Administrator, className: 'card-footer' },
+              _react2.default.createElement(
+                'div',
+                { className: 'row' },
+                _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
+                  className: 'btn btn-sm btn-block btn-outline-info',
+                  buttonText: 'Upload File',
+
+                  title: 'Upload File',
+                  componentName: 'FILE_UPLOAD',
+                  modalProps: {
+                    user: this.props.user,
+                    refreshTable: 'fileList',
+                    refreshEndpoint: '/api/files'
+                  }
+                })
+              )
             )
           )
         )
