@@ -156,9 +156,13 @@ var UploadMusic = exports.UploadMusic = function (_React$Component2) {
           null,
           _react2.default.createElement(_LoadingCube2.default, { show: true }),
           this.state.uploadMessage ? _react2.default.createElement(
-            'strong',
+            'center',
             null,
-            'Uploading...'
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Uploading...'
+            )
           ) : null
         );
       }
