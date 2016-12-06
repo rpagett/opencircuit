@@ -105,6 +105,34 @@ var _Show = function (_React$Component2) {
   }
 
   _createClass(_Show, [{
+    key: 'musicBox',
+    value: function musicBox(unit, user) {
+      if (unit.unit_type.slug != 'guard') {
+        return null;
+      }
+
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator) || unit.director._id.equals(user._id)) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card col-xs-12' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-header card-info' },
+              'Music'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-block' },
+              _react2.default.createElement(_UnitMusicList2.default, { units: [unit], user: this.props.authUser })
+            )
+          )
+        );
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var unit = this.props.model;
@@ -280,24 +308,7 @@ var _Show = function (_React$Component2) {
             )
           )
         ),
-        _react2.default.createElement(
-          'div',
-          { className: 'row' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card col-xs-12' },
-            _react2.default.createElement(
-              'div',
-              { className: 'card-header card-info' },
-              'Music'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'card-block' },
-              _react2.default.createElement(_UnitMusicList2.default, { units: [unit], user: this.props.authUser })
-            )
-          )
-        ),
+        this.musicBox(unit, this.props.authUser),
         _react2.default.createElement(
           _UserRoles.HasRole,
           { role: _UserRoles.UserRoles.Administrator, className: 'row' },

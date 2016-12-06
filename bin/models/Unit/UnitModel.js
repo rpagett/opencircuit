@@ -34,6 +34,10 @@ var _OrganizationModel2 = _interopRequireDefault(_OrganizationModel);
 
 var _FormModel = require('../Form/FormModel');
 
+var _SpielSchema = require('../Spiel/SpielSchema');
+
+var _SpielSchema2 = _interopRequireDefault(_SpielSchema);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ObjectId = _mongoose2.default.Schema.Types.ObjectId;
@@ -70,6 +74,7 @@ var UnitSchema = _mongoose2.default.Schema({
     ref: 'Organization'
   },
   form_obligations: [_FormModel.FormObligationSchema],
+  spiel: _SpielSchema2.default,
 
   registered: Boolean
 }, {

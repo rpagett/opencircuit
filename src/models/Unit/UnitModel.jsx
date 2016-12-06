@@ -7,6 +7,7 @@ import CompClass from '../CompClass/CompClassModel';
 import User from '../User/UserModel';
 import Organization from '../Organization/OrganizationModel';
 import { FormObligationSchema } from '../Form/FormModel';
+import SpielSchema from '../Spiel/SpielSchema'
 
 const ObjectId = Mongoose.Schema.Types.ObjectId;
 const UnitSchema = Mongoose.Schema({
@@ -42,6 +43,7 @@ const UnitSchema = Mongoose.Schema({
     ref: 'Organization'
   },
   form_obligations: [FormObligationSchema],
+  spiel: SpielSchema,
 
   registered: Boolean,
 }, {

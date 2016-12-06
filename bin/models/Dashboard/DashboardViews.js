@@ -143,32 +143,9 @@ var _UnitBox = function (_React$Component2) {
   _createClass(_UnitBox, [{
     key: 'musicBox',
     value: function musicBox(units) {
-      //  let musicStatus = [ ]
-      //  units.map(unit => {
-      //    musicStatus.push(
-      //      <div className="row" key={ 'music-' + unit.slug }>
-      //        <div className="col-xs-6">{ unit.name }</div>
-      //        <div className="col-xs-4">
-      //          { (unit.last_music_submission ?
-      //          'Submitted ' + Moment(unit.last_music_submission).format('MMM. Do, YYYY [at] h:mm a') :
-      //            'None submitted')
-      //          }
-      //        </div>
-      //        <div className="col-xs-2">
-      //          <LaunchModalButton
-      //            className="btn btn-link"
-      //            buttonText="Submit Music"
-      //
-      //            title="Submit Music"
-      //            componentName="UNIT_SUBMIT_MUSIC"
-      //            modalProps={{
-      //              unit
-      //            }}
-      //          />
-      //        </div>
-      //      </div>
-      //    )
-      //  })
+      units = units.filter(function (unit) {
+        return unit.unit_type.slug == 'guard';
+      });
 
       if (units.length) {
         return _react2.default.createElement(

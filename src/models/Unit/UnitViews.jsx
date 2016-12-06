@@ -36,6 +36,27 @@ export class Index extends React.Component {
 //}
 
 class _Show extends React.Component {
+  musicBox(unit, user) {
+    if (unit.unit_type.slug != 'guard') {
+      return null
+    }
+
+    if (userHasRole(user, UserRoles.Administrator) || unit.director._id.equals(user._id)) {
+      return (
+        <div className="row">
+          <div className="card col-xs-12">
+            <div className="card-header card-info">
+              Music
+            </div>
+            <div className="card-block">
+              <UnitMusicList units={ [unit] } user={ this.props.authUser }/>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
+
   render() {
     const unit = this.props.model;
 
@@ -126,16 +147,7 @@ class _Show extends React.Component {
           </div>
         </div>
 
-        <div className="row">
-          <div className="card col-xs-12">
-            <div className="card-header card-info">
-              Music
-            </div>
-            <div className="card-block">
-              <UnitMusicList units={ [unit] } user={ this.props.authUser } />
-            </div>
-          </div>
-        </div>
+        { this.musicBox(unit, this.props.authUser) }
 
         <HasRole role={ UserRoles.Administrator } className="row">
           <div className="pull-xs-center col-xs-12 offset-sm-4 col-sm-4">
