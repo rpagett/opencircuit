@@ -9,6 +9,7 @@ import { UserRoles, HasRole, userHasRole } from '../User/UserRoles';
 
 import * as UnitForms from './UnitForms';
 import UnitList from './UnitList';
+import UnitMusicList from './UnitMusicList';
 import UserFeeList from '../Fee/UserFeeList'
 
 import UnitEventsList from '../Event/UnitEventsList';
@@ -121,6 +122,17 @@ class _Show extends React.Component {
             </div>
             <div className="card-block">
               <FormObligationList endpoint={ `/api/forms/forUnit/${unit._id}` } />
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="card col-xs-12">
+            <div className="card-header card-info">
+              Music
+            </div>
+            <div className="card-block">
+              <UnitMusicList units={ [unit] } user={ this.props.authUser } />
             </div>
           </div>
         </div>

@@ -33,6 +33,10 @@ var _UnitList = require('./UnitList');
 
 var _UnitList2 = _interopRequireDefault(_UnitList);
 
+var _UnitMusicList = require('./UnitMusicList');
+
+var _UnitMusicList2 = _interopRequireDefault(_UnitMusicList);
+
 var _UserFeeList = require('../Fee/UserFeeList');
 
 var _UserFeeList2 = _interopRequireDefault(_UserFeeList);
@@ -273,6 +277,24 @@ var _Show = function (_React$Component2) {
               'div',
               { className: 'card-block' },
               _react2.default.createElement(_FormObligationList2.default, { endpoint: '/api/forms/forUnit/' + unit._id })
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card col-xs-12' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-header card-info' },
+              'Music'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-block' },
+              _react2.default.createElement(_UnitMusicList2.default, { units: [unit], user: this.props.authUser })
             )
           )
         ),
