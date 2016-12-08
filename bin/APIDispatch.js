@@ -48,6 +48,10 @@ var _ReportController = require('./models/Report/ReportController');
 
 var _ReportController2 = _interopRequireDefault(_ReportController);
 
+var _SpielController = require('./models/Spiel/SpielController');
+
+var _SpielController2 = _interopRequireDefault(_SpielController);
+
 var _SupportController = require('./models/Support/SupportController');
 
 var _SupportController2 = _interopRequireDefault(_SupportController);
@@ -78,6 +82,7 @@ router.use('/judges/', _JudgeController2.default);
 router.use('/organizations/', _OrganizationController2.default);
 router.use('/register/', _RegistrationController2.default);
 router.use('/reports/', _ReportController2.default);
+router.use('/spiels/', _SpielController2.default);
 router.use('/support/', _SupportController2.default);
 router.use('/units/', _UnitController2.default);
 router.use('/unittypes/', _UnitTypeController2.default);

@@ -23,7 +23,7 @@ var ObjectId = _mongoose2.default.Schema.Types.ObjectId;
 var SpielSchema = new _mongoose2.default.Schema({
   unit_name: String,
   show_title: String,
-  staff: String,
+  directors: String,
   age_outs: String
 }, {
   timestamps: true,

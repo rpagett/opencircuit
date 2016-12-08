@@ -170,7 +170,7 @@ router.route('/:slug').get(function (req, res) {
 });
 
 router.get('/forUser/:id', function (req, res) {
-  _UnitModel2.default.find({ director: req.params.id }, '_id name slug organization unit_type competition_class director last_music_submission').populate('organization', 'name detailsUrl').populate('unit_type', 'name slug').populate('competition_class', 'name abbreviation').populate('director', 'first_name last_name formattedName email profileUrl').sort('unit_type.name name').then(function (units) {
+  _UnitModel2.default.find({ director: req.params.id }, '_id name slug organization unit_type competition_class director last_music_submission spiel').populate('organization', 'name detailsUrl').populate('unit_type', 'name slug').populate('competition_class', 'name abbreviation').populate('director', 'first_name last_name formattedName email profileUrl').sort('unit_type.name name').then(function (units) {
     res.json({
       success: true,
       contents: units

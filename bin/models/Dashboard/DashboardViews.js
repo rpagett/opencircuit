@@ -19,6 +19,10 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _ContentsView = require('../../helpers/ContentsView/ContentsView');
 
 var _ContentsView2 = _interopRequireDefault(_ContentsView);
@@ -42,6 +46,10 @@ var _UnitMusicList2 = _interopRequireDefault(_UnitMusicList);
 var _FileList = require('../File/FileList');
 
 var _FileList2 = _interopRequireDefault(_FileList);
+
+var _SpielList = require('../Spiel/SpielList');
+
+var _SpielList2 = _interopRequireDefault(_SpielList);
 
 var _FormObligationList = require('../Form/FormObligationList');
 
@@ -175,6 +183,36 @@ var _UnitBox = function (_React$Component2) {
       return null;
     }
   }, {
+    key: 'spielBox',
+    value: function spielBox(units) {
+      units = _lodash2.default.filter(units, function (unit) {
+        return unit.spiel == null;
+      });
+
+      if (units.length) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card col-xs-12' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-header card-danger' },
+              'Missing Spiels'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-block' },
+              _react2.default.createElement(_SpielList2.default, { units: units })
+            )
+          )
+        );
+      }
+
+      return null;
+    }
+  }, {
     key: 'render',
     value: function render() {
       if (!this.props.contents.length) {
@@ -205,6 +243,7 @@ var _UnitBox = function (_React$Component2) {
             )
           )
         ),
+        this.spielBox(this.props.contents),
         this.musicBox(this.props.contents)
       );
     }

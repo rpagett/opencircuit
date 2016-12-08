@@ -15,6 +15,7 @@ import * as EventView from './models/Event/EventViews';
 import * as OrganizationView from './models/Organization/OrganizationViews';
 import * as RegistrationView from './models/Registration/RegistrationViews';
 import * as ReportView from './models/Report/ReportViews';
+import * as SpielView from './models/Spiel/SpielViews';
 import * as SupportView from './models/Support/SupportViews';
 import * as UnitView from './models/Unit/UnitViews';
 import * as UnitTypeView from './models/UnitType/UnitTypeViews';
@@ -150,6 +151,11 @@ export function getAppRoutes(store) {
           <Route path="unit/:unit" component={ RegistrationView.Details } />
           <Route path="unit/:unit/events" component={ RegistrationView.EventRegistration } />
           <Route path="unit/:unit/confirm" component={ RegistrationView.Confirm } />
+        </Route>
+
+        <Route path="/spiels">
+          <IndexRoute component={ SpielView.Index } />
+          <Route path=":slug" component={ SpielView.Edit } />
         </Route>
 
         <Route path="/support">

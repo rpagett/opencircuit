@@ -57,6 +57,20 @@ class _Show extends React.Component {
     }
   }
 
+  spielBox(unit, user) {
+    if (userHasRole(user, UserRoles.Administrator) || unit.director._id.equals(user._id)) {
+      return (
+        <div className="row">
+          <div className="pull-xs-center col-xs-12 offset-sm-4 col-sm-4">
+            <Link to={ `/spiels/${unit.slug}` } className={ 'btn btn-sm btn-block ' + (unit.spiel ? 'btn-outline-secondary' : 'btn-outline-danger') }>
+              Edit Spiel
+            </Link>
+          </div>
+        </div>
+      )
+    }
+  }
+
   render() {
     const unit = this.props.model;
 
@@ -111,6 +125,10 @@ class _Show extends React.Component {
               <Prop>Notes</Prop>
               <Val>{ unit.notes }</Val>
             </HasRole> : null) }
+
+        <p></p>
+
+        { this.spielBox(unit, this.props.authUser) }
 
         <p></p>
 

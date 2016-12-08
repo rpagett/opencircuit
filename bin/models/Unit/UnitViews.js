@@ -133,6 +133,25 @@ var _Show = function (_React$Component2) {
       }
     }
   }, {
+    key: 'spielBox',
+    value: function spielBox(unit, user) {
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator) || unit.director._id.equals(user._id)) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'pull-xs-center col-xs-12 offset-sm-4 col-sm-4' },
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/spiels/' + unit.slug, className: 'btn btn-sm btn-block ' + (unit.spiel ? 'btn-outline-secondary' : 'btn-outline-danger') },
+              'Edit Spiel'
+            )
+          )
+        );
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var unit = this.props.model;
@@ -253,6 +272,8 @@ var _Show = function (_React$Component2) {
             unit.notes
           )
         ) : null,
+        _react2.default.createElement('p', null),
+        this.spielBox(unit, this.props.authUser),
         _react2.default.createElement('p', null),
         _react2.default.createElement(
           'div',

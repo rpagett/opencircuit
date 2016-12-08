@@ -173,7 +173,7 @@ router.route('/:slug')
   });
 
 router.get('/forUser/:id', (req, res) => {
-  Unit.find({ director: req.params.id }, '_id name slug organization unit_type competition_class director last_music_submission')
+  Unit.find({ director: req.params.id }, '_id name slug organization unit_type competition_class director last_music_submission spiel')
     .populate('organization', 'name detailsUrl')
     .populate('unit_type', 'name slug')
     .populate('competition_class', 'name abbreviation')

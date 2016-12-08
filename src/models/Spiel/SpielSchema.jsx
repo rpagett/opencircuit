@@ -7,7 +7,7 @@ const ObjectId = Mongoose.Schema.Types.ObjectId;
 const SpielSchema = new Mongoose.Schema({
   unit_name: String,
   show_title: String,
-  staff: String,
+  directors: String,
   age_outs: String
 }, {
   timestamps: true,

@@ -67,6 +67,10 @@ var _ReportViews = require('./models/Report/ReportViews');
 
 var ReportView = _interopRequireWildcard(_ReportViews);
 
+var _SpielViews = require('./models/Spiel/SpielViews');
+
+var SpielView = _interopRequireWildcard(_SpielViews);
+
 var _SupportViews = require('./models/Support/SupportViews');
 
 var SupportView = _interopRequireWildcard(_SupportViews);
@@ -244,6 +248,12 @@ function getAppRoutes(store) {
         _react2.default.createElement(_reactRouter.Route, { path: 'unit/:unit', component: RegistrationView.Details }),
         _react2.default.createElement(_reactRouter.Route, { path: 'unit/:unit/events', component: RegistrationView.EventRegistration }),
         _react2.default.createElement(_reactRouter.Route, { path: 'unit/:unit/confirm', component: RegistrationView.Confirm })
+      ),
+      _react2.default.createElement(
+        _reactRouter.Route,
+        { path: '/spiels' },
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: SpielView.Index }),
+        _react2.default.createElement(_reactRouter.Route, { path: ':slug', component: SpielView.Edit })
       ),
       _react2.default.createElement(
         _reactRouter.Route,

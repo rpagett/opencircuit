@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Moment from 'moment';
+import _ from 'lodash';
 
 import ContentsView from '../../helpers/ContentsView/ContentsView';
 import { LaunchModalButton } from '../../modals/SpawnableModal';
@@ -10,6 +11,7 @@ import UserFeeList from '../Fee/UserFeeList';
 import UnitList from '../Unit/UnitList';
 import UnitMusicList from '../Unit/UnitMusicList';
 import FileList from '../File/FileList';
+import SpielList from '../Spiel/SpielList';
 import FormObligationList from '../Form/FormObligationList';
 
 class _FeeBox extends React.Component {
@@ -90,6 +92,29 @@ class _UnitBox extends React.Component {
     return null
   }
 
+  spielBox(units) {
+    units = _.filter(units, unit => {
+      return unit.spiel == null;
+    })
+
+    if (units.length) {
+      return (
+        <div className="row">
+          <div className="card col-xs-12">
+            <div className="card-header card-danger">
+              Missing Spiels
+            </div>
+            <div className="card-block">
+              <SpielList units={ units } />
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    return null;
+  }
+
   render() {
     if (!this.props.contents.length) {
       return (<div></div>)
@@ -111,6 +136,7 @@ class _UnitBox extends React.Component {
           </div>
         </div>
 
+        { this.spielBox(this.props.contents) }
         { this.musicBox(this.props.contents) }
       </div>
     )
