@@ -170,5 +170,33 @@ router.get('/mailchimp', function (req, res) {
   });
 });
 
+router.get('/music', (0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
+  _UnitModel2.default.find({ registered: true }, 'name director competition_class last_music_submission').populate('competition_class', 'abbreviation').populate('director', 'email first_name mi last_name').sort('name').exec().then(function (units) {
+    res.send({
+      success: true,
+      contents: units
+    });
+  }).catch(function (err) {
+    res.send({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
+router.get('/spiels', (0, _authRoute.hasRole)(_UserRoles.UserRoles.Administrator), function (req, res) {
+  _UnitModel2.default.find({ registered: true }, 'name director competition_class spiel').populate('competition_class', 'abbreviation').populate('director', 'email first_name mi last_name').sort('name').exec().then(function (units) {
+    res.send({
+      success: true,
+      contents: units
+    });
+  }).catch(function (err) {
+    res.send({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
 exports.default = router;
 module.exports = exports['default'];

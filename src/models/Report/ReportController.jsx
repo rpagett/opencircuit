@@ -161,4 +161,44 @@ router.get('/mailchimp', (req, res) => {
     })
 })
 
+router.get('/music', hasRole(UserRoles.Administrator), (req, res) => {
+  Unit.find({ registered: true }, 'name director competition_class last_music_submission')
+    .populate('competition_class', 'abbreviation')
+    .populate('director', 'email first_name mi last_name')
+    .sort('name')
+    .exec()
+    .then(units => {
+      res.send({
+        success: true,
+        contents: units
+      })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
+router.get('/spiels', hasRole(UserRoles.Administrator), (req, res) => {
+  Unit.find({ registered: true }, 'name director competition_class spiel')
+    .populate('competition_class', 'abbreviation')
+    .populate('director', 'email first_name mi last_name')
+    .sort('name')
+    .exec()
+    .then(units => {
+      res.send({
+        success: true,
+        contents: units
+      })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
 export default router;

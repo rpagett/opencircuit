@@ -80,12 +80,11 @@ export function getAppRoutes(store) {
     <Route path="/" component={ AppTemplate }>
       <Route path="/invoice/:org" component={ FeeView.Invoice } />
 
-      <Route path="/reports" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
-        <IndexRoute component={ ReportView.Index } />
-        <Route path="drawstatus" component={ ReportView.DrawStatus } />
-        <Route path="mailchimp" component={ ReportView.MailChimp } />
-        <Route path="quickbooks" component={ ReportView.Quickbooks } />
-      </Route>
+      <Route path="reports/drawstatus" component={ ReportView.DrawStatus } />
+      <Route path="reports/mailchimp" component={ ReportView.MailChimp } />
+      <Route path="reports/music" component={ ReportView.Music } />
+      <Route path="reports/quickbooks" component={ ReportView.Quickbooks } />
+      <Route path="reports/spiels" component={ ReportView.Spiels } />
 
       <Route path="forms/verify/:unit/:form" component={ FormView.Verify } onEnter={ authOnly } />
       <Route
@@ -151,6 +150,10 @@ export function getAppRoutes(store) {
           <Route path="unit/:unit" component={ RegistrationView.Details } />
           <Route path="unit/:unit/events" component={ RegistrationView.EventRegistration } />
           <Route path="unit/:unit/confirm" component={ RegistrationView.Confirm } />
+        </Route>
+
+        <Route path="/reports" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>
+          <IndexRoute component={ ReportView.Index } />
         </Route>
 
         <Route path="/spiels">

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MailChimp = exports.DrawStatus = exports.Quickbooks = exports.Index = undefined;
+exports.Spiels = exports.Music = exports.MailChimp = exports.DrawStatus = exports.Quickbooks = exports.Index = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -76,8 +76,26 @@ var Index = exports.Index = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactRouter.Link,
+              { to: '/reports/music' },
+              'Music'
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              _reactRouter.Link,
               { to: '/reports/quickbooks' },
               'Quickbooks'
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/reports/spiels' },
+              'Spiels'
             )
           )
         )
@@ -523,4 +541,270 @@ var MailChimp = exports.MailChimp = function (_React$Component7) {
   }]);
 
   return MailChimp;
+}(_react2.default.Component);
+
+var _Music = function (_React$Component8) {
+  _inherits(_Music, _React$Component8);
+
+  function _Music() {
+    _classCallCheck(this, _Music);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Music).apply(this, arguments));
+  }
+
+  _createClass(_Music, [{
+    key: 'render',
+    value: function render() {
+      var rows = [];
+      this.props.contents.map(function (unit) {
+        rows.push(_react2.default.createElement(
+          'div',
+          { className: 'row', key: unit._id + '_row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-3', key: unit._id + '_name' },
+            unit.name
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-1', key: unit._id + '_class' },
+            unit.competition_class.abbreviation.toUpperCase()
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-2', key: unit._id + '_director' },
+            unit.director.formattedName
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-3', key: unit._id + '_email' },
+            unit.director.email
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-3', key: unit._id + '_status' },
+            unit.last_music_submission ? (0, _moment2.default)(unit.last_music_submission).format('MMM. Do, YYYY [at] h:mm a') : 'None'
+          )
+        ));
+      });
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          'Music Status Report'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'offset-xs-1 col-xs-2' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Unit'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-2' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Class'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-2' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Director'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-2' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Email'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-2' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Music Status'
+            )
+          )
+        ),
+        rows
+      );
+    }
+  }]);
+
+  return _Music;
+}(_react2.default.Component);
+
+var Music = exports.Music = function (_React$Component9) {
+  _inherits(Music, _React$Component9);
+
+  function Music() {
+    _classCallCheck(this, Music);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Music).apply(this, arguments));
+  }
+
+  _createClass(Music, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_ContentsView2.default, {
+        subStore: 'report_music',
+        endpoint: '/api/reports/music',
+        component: _Music
+      });
+    }
+  }]);
+
+  return Music;
+}(_react2.default.Component);
+
+var _Spiels = function (_React$Component10) {
+  _inherits(_Spiels, _React$Component10);
+
+  function _Spiels() {
+    _classCallCheck(this, _Spiels);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Spiels).apply(this, arguments));
+  }
+
+  _createClass(_Spiels, [{
+    key: 'render',
+    value: function render() {
+      var rows = [];
+      this.props.contents.map(function (unit) {
+        rows.push(_react2.default.createElement(
+          'div',
+          { className: 'row', key: unit._id + '_row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-3', key: unit._id + '_name' },
+            unit.name
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-1', key: unit._id + '_class' },
+            unit.competition_class.abbreviation.toUpperCase()
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-2', key: unit._id + '_director' },
+            unit.director.formattedName
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-3', key: unit._id + '_email' },
+            unit.director.email
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-3', key: unit._id + '_status' },
+            unit.spiel ? (0, _moment2.default)(unit.spiel.updatedAt).format('MMM. Do, YYYY [at] h:mm a') : 'Never'
+          )
+        ));
+      });
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          'Spiel Status Report'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'offset-xs-1 col-xs-2' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Unit'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-2' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Class'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-2' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Director'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-2' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Email'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-2' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              'Last Spiel Update'
+            )
+          )
+        ),
+        rows
+      );
+    }
+  }]);
+
+  return _Spiels;
+}(_react2.default.Component);
+
+var Spiels = exports.Spiels = function (_React$Component11) {
+  _inherits(Spiels, _React$Component11);
+
+  function Spiels() {
+    _classCallCheck(this, Spiels);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Spiels).apply(this, arguments));
+  }
+
+  _createClass(Spiels, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_ContentsView2.default, {
+        subStore: 'report_spiels',
+        endpoint: '/api/reports/spiels',
+        component: _Spiels
+      });
+    }
+  }]);
+
+  return Spiels;
 }(_react2.default.Component);
