@@ -45,7 +45,7 @@ var _authRoute = require('../../middleware/authRoute');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function deriveFileExtension(fname) {
-  return fname.substr((~-fname.lastIndexOf(".") >>> 0) + 2);
+  return fname.substr((~-fname.lastIndexOf(".") >>> 0) + 2).toLowerCase();
 }
 
 function multerMiddleware(folder) {
