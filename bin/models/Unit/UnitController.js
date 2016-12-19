@@ -125,12 +125,13 @@ router.get('/select', function (req, res) {
 });
 
 router.route('/:slug').get(function (req, res) {
-  _UnitModel2.default.findOne({ slug: req.params.slug }).populate('organization', 'name slug detailsUrl is_school').populate('unit_type', 'name slug').populate('competition_class', 'name abbreviation formattedName').populate('director', 'first_name last_name formattedName email profileUrl').exec().then(function (unit) {
+  _UnitModel2.default.findOne({ slug: req.params.slug }).populate('organization', 'name slug detailsUrl is_school').populate('unit_type', 'name slug').populate('competition_class', 'name abbreviation formattedName').populate('director', 'first_name last_name mi formattedName email profileUrl').exec().then(function (unit) {
     res.json({
       success: true,
       model: unit
     });
   }).catch(function (err) {
+    console.error(err);
     res.json({
       success: false,
       error: err.message

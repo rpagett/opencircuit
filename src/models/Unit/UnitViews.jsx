@@ -38,10 +38,10 @@ export class Index extends React.Component {
 class _Show extends React.Component {
   musicBox(unit, user) {
     if (unit.unit_type.slug != 'guard') {
-      return null
+      return (<div></div>)
     }
 
-    if (userHasRole(user, UserRoles.Administrator) || unit.director._id.equals(user._id)) {
+    if (userHasRole(user, UserRoles.Administrator) || unit.director._id.toString() == user._id.toString()) {
       return (
         <div className="row">
           <div className="card col-xs-12">
@@ -49,16 +49,18 @@ class _Show extends React.Component {
               Music
             </div>
             <div className="card-block">
-              <UnitMusicList units={ [unit] } user={ this.props.authUser }/>
+              { <UnitMusicList units={ [unit] } user={ user }/> }
             </div>
           </div>
         </div>
       )
     }
+
+    return (<div></div>)
   }
 
   spielBox(unit, user) {
-    if (userHasRole(user, UserRoles.Administrator) || unit.director._id.equals(user._id)) {
+    if (userHasRole(user, UserRoles.Administrator) || unit.director._id.toString() == user._id.toString()) {
       return (
         <div className="row">
           <div className="pull-xs-center col-xs-12 offset-sm-4 col-sm-4">
@@ -69,6 +71,51 @@ class _Show extends React.Component {
         </div>
       )
     }
+
+    return (<div></div>)
+  }
+
+  privateInfo(unit, user) {
+    if (userHasRole(user, UserRoles.Administrator) || unit.director._id.toString() == user._id.toString()) {
+      return (
+        <div>
+          <div className="row">
+            <div className="card col-xs-12">
+              <div className="card-header card-info">
+                Event Registrations
+              </div>
+              <div className="card-block">
+                <UnitEventsList endpoint={ `/api/units/${unit.slug}/attending` } />
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="card col-xs-12">
+              <div className="card-header card-info">
+                Fees and Payments
+              </div>
+              <div className="card-block">
+                <UserFeeList endpoint={ `/api/fees/forUnit/${unit.slug}` } />
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="card col-xs-12">
+              <div className="card-header card-info">
+                Forms
+              </div>
+              <div className="card-block">
+                <FormObligationList endpoint={ `/api/forms/forUnit/${unit._id}` } />
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    return (<div></div>)
   }
 
   render() {
@@ -118,13 +165,13 @@ class _Show extends React.Component {
             <div className="row">
               <Prop>Member Count</Prop>
               <Val>{ unit.members }</Val>
-            </div> : null) }
+            </div> : <div></div>) }
 
         { (unit.notes ?
             <HasRole role={ UserRoles.EventDirector } className="row">
               <Prop>Notes</Prop>
               <Val>{ unit.notes }</Val>
-            </HasRole> : null) }
+            </HasRole> : <div></div>) }
 
         <p></p>
 
@@ -132,38 +179,7 @@ class _Show extends React.Component {
 
         <p></p>
 
-        <div className="row">
-          <div className="card col-xs-12">
-            <div className="card-header card-info">
-              Event Registrations
-            </div>
-            <div className="card-block">
-              <UnitEventsList endpoint={ `/api/units/${unit.slug}/attending` } />
-            </div>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="card col-xs-12">
-            <div className="card-header card-info">
-              Fees and Payments
-            </div>
-            <div className="card-block">
-              <UserFeeList endpoint={ `/api/fees/forUnit/${unit.slug}` } />
-            </div>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="card col-xs-12">
-            <div className="card-header card-info">
-              Forms
-            </div>
-            <div className="card-block">
-              <FormObligationList endpoint={ `/api/forms/forUnit/${unit._id}` } />
-            </div>
-          </div>
-        </div>
+        { this.privateInfo(unit, this.props.authUser) }
 
         { this.musicBox(unit, this.props.authUser) }
 

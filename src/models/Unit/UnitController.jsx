@@ -114,7 +114,7 @@ router.route('/:slug')
       .populate('organization', 'name slug detailsUrl is_school')
       .populate('unit_type', 'name slug')
       .populate('competition_class', 'name abbreviation formattedName')
-      .populate('director', 'first_name last_name formattedName email profileUrl')
+      .populate('director', 'first_name last_name mi formattedName email profileUrl')
       .exec()
       .then(unit => {
         res.json({
@@ -123,6 +123,7 @@ router.route('/:slug')
         })
       })
       .catch(err => {
+        console.error(err);
         res.json({
           success: false,
           error: err.message

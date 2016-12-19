@@ -108,10 +108,10 @@ var _Show = function (_React$Component2) {
     key: 'musicBox',
     value: function musicBox(unit, user) {
       if (unit.unit_type.slug != 'guard') {
-        return null;
+        return _react2.default.createElement('div', null);
       }
 
-      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator) || unit.director._id.equals(user._id)) {
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator) || unit.director._id.toString() == user._id.toString()) {
         return _react2.default.createElement(
           'div',
           { className: 'row' },
@@ -126,16 +126,18 @@ var _Show = function (_React$Component2) {
             _react2.default.createElement(
               'div',
               { className: 'card-block' },
-              _react2.default.createElement(_UnitMusicList2.default, { units: [unit], user: this.props.authUser })
+              _react2.default.createElement(_UnitMusicList2.default, { units: [unit], user: user })
             )
           )
         );
       }
+
+      return _react2.default.createElement('div', null);
     }
   }, {
     key: 'spielBox',
     value: function spielBox(unit, user) {
-      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator) || unit.director._id.equals(user._id)) {
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator) || unit.director._id.toString() == user._id.toString()) {
         return _react2.default.createElement(
           'div',
           { className: 'row' },
@@ -150,6 +152,74 @@ var _Show = function (_React$Component2) {
           )
         );
       }
+
+      return _react2.default.createElement('div', null);
+    }
+  }, {
+    key: 'privateInfo',
+    value: function privateInfo(unit, user) {
+      if ((0, _UserRoles.userHasRole)(user, _UserRoles.UserRoles.Administrator) || unit.director._id.toString() == user._id.toString()) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card col-xs-12' },
+              _react2.default.createElement(
+                'div',
+                { className: 'card-header card-info' },
+                'Event Registrations'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'card-block' },
+                _react2.default.createElement(_UnitEventsList2.default, { endpoint: '/api/units/' + unit.slug + '/attending' })
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card col-xs-12' },
+              _react2.default.createElement(
+                'div',
+                { className: 'card-header card-info' },
+                'Fees and Payments'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'card-block' },
+                _react2.default.createElement(_UserFeeList2.default, { endpoint: '/api/fees/forUnit/' + unit.slug })
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card col-xs-12' },
+              _react2.default.createElement(
+                'div',
+                { className: 'card-header card-info' },
+                'Forms'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'card-block' },
+                _react2.default.createElement(_FormObligationList2.default, { endpoint: '/api/forms/forUnit/' + unit._id })
+              )
+            )
+          )
+        );
+      }
+
+      return _react2.default.createElement('div', null);
     }
   }, {
     key: 'render',
@@ -257,7 +327,7 @@ var _Show = function (_React$Component2) {
             null,
             unit.members
           )
-        ) : null,
+        ) : _react2.default.createElement('div', null),
         unit.notes ? _react2.default.createElement(
           _UserRoles.HasRole,
           { role: _UserRoles.UserRoles.EventDirector, className: 'row' },
@@ -271,64 +341,11 @@ var _Show = function (_React$Component2) {
             null,
             unit.notes
           )
-        ) : null,
+        ) : _react2.default.createElement('div', null),
         _react2.default.createElement('p', null),
         this.spielBox(unit, this.props.authUser),
         _react2.default.createElement('p', null),
-        _react2.default.createElement(
-          'div',
-          { className: 'row' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card col-xs-12' },
-            _react2.default.createElement(
-              'div',
-              { className: 'card-header card-info' },
-              'Event Registrations'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'card-block' },
-              _react2.default.createElement(_UnitEventsList2.default, { endpoint: '/api/units/' + unit.slug + '/attending' })
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'row' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card col-xs-12' },
-            _react2.default.createElement(
-              'div',
-              { className: 'card-header card-info' },
-              'Fees and Payments'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'card-block' },
-              _react2.default.createElement(_UserFeeList2.default, { endpoint: '/api/fees/forUnit/' + unit.slug })
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'row' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card col-xs-12' },
-            _react2.default.createElement(
-              'div',
-              { className: 'card-header card-info' },
-              'Forms'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'card-block' },
-              _react2.default.createElement(_FormObligationList2.default, { endpoint: '/api/forms/forUnit/' + unit._id })
-            )
-          )
-        ),
+        this.privateInfo(unit, this.props.authUser),
         this.musicBox(unit, this.props.authUser),
         _react2.default.createElement(
           _UserRoles.HasRole,
