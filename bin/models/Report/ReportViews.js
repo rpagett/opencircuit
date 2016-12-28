@@ -558,31 +558,31 @@ var _Music = function (_React$Component8) {
       var rows = [];
       this.props.contents.map(function (unit) {
         rows.push(_react2.default.createElement(
-          'div',
-          { className: 'row', key: unit._id + '_row' },
+          'tr',
+          { key: unit._id + '_row' },
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-3', key: unit._id + '_name' },
+            'td',
+            { key: unit._id + '_name' },
             unit.name
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-1', key: unit._id + '_class' },
+            'td',
+            { key: unit._id + '_class' },
             unit.competition_class.abbreviation.toUpperCase()
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-2', key: unit._id + '_director' },
+            'td',
+            { key: unit._id + '_director' },
             unit.director.formattedName
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-3', key: unit._id + '_email' },
+            'td',
+            { key: unit._id + '_email' },
             unit.director.email
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-3', key: unit._id + '_status' },
+            'td',
+            { key: unit._id + '_status' },
             unit.last_music_submission ? (0, _moment2.default)(unit.last_music_submission).format('MMM. Do, YYYY [at] h:mm a') : 'None'
           )
         ));
@@ -597,55 +597,67 @@ var _Music = function (_React$Component8) {
           'Music Status Report'
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'row' },
+          'table',
+          null,
           _react2.default.createElement(
-            'div',
-            { className: 'offset-xs-1 col-xs-2' },
+            'thead',
+            null,
             _react2.default.createElement(
-              'strong',
+              'tr',
               null,
-              'Unit'
+              _react2.default.createElement(
+                'th',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Unit'
+                )
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Class'
+                )
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Director'
+                )
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Email'
+                )
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Music Status'
+                )
+              )
             )
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-2' },
-            _react2.default.createElement(
-              'strong',
-              null,
-              'Class'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'col-xs-2' },
-            _react2.default.createElement(
-              'strong',
-              null,
-              'Director'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'col-xs-2' },
-            _react2.default.createElement(
-              'strong',
-              null,
-              'Email'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'col-xs-2' },
-            _react2.default.createElement(
-              'strong',
-              null,
-              'Music Status'
-            )
+            'tbody',
+            null,
+            rows
           )
-        ),
-        rows
+        )
       );
     }
   }]);
@@ -691,31 +703,31 @@ var _Spiels = function (_React$Component10) {
       var rows = [];
       this.props.contents.map(function (unit) {
         rows.push(_react2.default.createElement(
-          'div',
-          { className: 'row', key: unit._id + '_row' },
+          'tr',
+          { key: unit._id + '_row' },
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-3', key: unit._id + '_name' },
+            'td',
+            { key: unit._id + '_name' },
             unit.name
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-1', key: unit._id + '_class' },
+            'td',
+            { key: unit._id + '_class' },
             unit.competition_class.abbreviation.toUpperCase()
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-2', key: unit._id + '_director' },
+            'td',
+            { key: unit._id + '_director' },
             unit.director.formattedName
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-3', key: unit._id + '_email' },
+            'td',
+            { key: unit._id + '_email' },
             unit.director.email
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-3', key: unit._id + '_status' },
+            'td',
+            { key: unit._id + '_status' },
             unit.spiel ? (0, _moment2.default)(unit.spiel.updatedAt).format('MMM. Do, YYYY [at] h:mm a') : 'Never'
           )
         ));
@@ -730,55 +742,67 @@ var _Spiels = function (_React$Component10) {
           'Spiel Status Report'
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'row' },
+          'table',
+          null,
           _react2.default.createElement(
-            'div',
-            { className: 'offset-xs-1 col-xs-2' },
+            'thead',
+            null,
             _react2.default.createElement(
-              'strong',
+              'tr',
               null,
-              'Unit'
+              _react2.default.createElement(
+                'th',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Unit'
+                )
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Class'
+                )
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Director'
+                )
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Email'
+                )
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Last Spiel Update'
+                )
+              )
             )
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-2' },
-            _react2.default.createElement(
-              'strong',
-              null,
-              'Class'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'col-xs-2' },
-            _react2.default.createElement(
-              'strong',
-              null,
-              'Director'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'col-xs-2' },
-            _react2.default.createElement(
-              'strong',
-              null,
-              'Email'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'col-xs-2' },
-            _react2.default.createElement(
-              'strong',
-              null,
-              'Last Spiel Update'
-            )
+            'tbody',
+            null,
+            rows
           )
-        ),
-        rows
+        )
       );
     }
   }]);

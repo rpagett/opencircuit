@@ -188,15 +188,15 @@ class _Music extends React.Component {
     let rows = [ ];
     this.props.contents.map(unit => {
       rows.push(
-        <div className="row" key={ unit._id + '_row' }>
-          <div className="col-xs-3" key={ unit._id + '_name' }>{ unit.name }</div>
-          <div className="col-xs-1" key={ unit._id + '_class' }>{ unit.competition_class.abbreviation.toUpperCase() }</div>
-          <div className="col-xs-2" key={ unit._id + '_director' }>{ unit.director.formattedName }</div>
-          <div className="col-xs-3" key={ unit._id + '_email' }>{ unit.director.email }</div>
-          <div className="col-xs-3" key={ unit._id + '_status' }>
+        <tr key={ unit._id + '_row' }>
+          <td key={ unit._id + '_name' }>{ unit.name }</td>
+          <td key={ unit._id + '_class' }>{ unit.competition_class.abbreviation.toUpperCase() }</td>
+          <td key={ unit._id + '_director' }>{ unit.director.formattedName }</td>
+          <td key={ unit._id + '_email' }>{ unit.director.email }</td>
+          <td key={ unit._id + '_status' }>
             { ( unit.last_music_submission ? Moment(unit.last_music_submission).format('MMM. Do, YYYY [at] h:mm a') : 'None' ) }
-          </div>
-        </div>
+          </td>
+        </tr>
       )
     })
 
@@ -204,15 +204,20 @@ class _Music extends React.Component {
       <div>
         <h1 className="page-header">Music Status Report</h1>
 
-        <div className="row">
-          <div className="offset-xs-1 col-xs-2"><strong>Unit</strong></div>
-          <div className="col-xs-2"><strong>Class</strong></div>
-          <div className="col-xs-2"><strong>Director</strong></div>
-          <div className="col-xs-2"><strong>Email</strong></div>
-          <div className="col-xs-2"><strong>Music Status</strong></div>
-        </div>
-
-        { rows }
+        <table>
+          <thead>
+          <tr>
+            <th><strong>Unit</strong></th>
+            <th><strong>Class</strong></th>
+            <th><strong>Director</strong></th>
+            <th><strong>Email</strong></th>
+            <th><strong>Music Status</strong></th>
+          </tr>
+          </thead>
+          <tbody>
+            { rows }
+          </tbody>
+        </table>
       </div>
     )
   }
@@ -235,15 +240,15 @@ class _Spiels extends React.Component {
     let rows = [ ];
     this.props.contents.map(unit => {
       rows.push(
-        <div className="row" key={ unit._id + '_row' }>
-          <div className="col-xs-3" key={ unit._id + '_name' }>{ unit.name }</div>
-          <div className="col-xs-1" key={ unit._id + '_class' }>{ unit.competition_class.abbreviation.toUpperCase() }</div>
-          <div className="col-xs-2" key={ unit._id + '_director' }>{ unit.director.formattedName }</div>
-          <div className="col-xs-3" key={ unit._id + '_email' }>{ unit.director.email }</div>
-          <div className="col-xs-3" key={ unit._id + '_status' }>
+        <tr key={ unit._id + '_row' }>
+          <td key={ unit._id + '_name' }>{ unit.name }</td>
+          <td key={ unit._id + '_class' }>{ unit.competition_class.abbreviation.toUpperCase() }</td>
+          <td key={ unit._id + '_director' }>{ unit.director.formattedName }</td>
+          <td key={ unit._id + '_email' }>{ unit.director.email }</td>
+          <td key={ unit._id + '_status' }>
             { ( unit.spiel ? Moment(unit.spiel.updatedAt).format('MMM. Do, YYYY [at] h:mm a') : 'Never' ) }
-          </div>
-        </div>
+          </td>
+        </tr>
       )
     })
 
@@ -251,15 +256,20 @@ class _Spiels extends React.Component {
       <div>
         <h1 className="page-header">Spiel Status Report</h1>
 
-        <div className="row">
-          <div className="offset-xs-1 col-xs-2"><strong>Unit</strong></div>
-          <div className="col-xs-2"><strong>Class</strong></div>
-          <div className="col-xs-2"><strong>Director</strong></div>
-          <div className="col-xs-2"><strong>Email</strong></div>
-          <div className="col-xs-2"><strong>Last Spiel Update</strong></div>
-        </div>
-
-        { rows }
+        <table>
+          <thead>
+            <tr>
+              <th><strong>Unit</strong></th>
+              <th><strong>Class</strong></th>
+              <th><strong>Director</strong></th>
+              <th><strong>Email</strong></th>
+              <th><strong>Last Spiel Update</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            { rows }
+          </tbody>
+        </table>
       </div>
     )
   }
