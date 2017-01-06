@@ -172,6 +172,7 @@ function getAppRoutes(store) {
     _react2.default.createElement(_reactRouter.Route, { path: 'reports/music', component: ReportView.Music }),
     _react2.default.createElement(_reactRouter.Route, { path: 'reports/quickbooks', component: ReportView.Quickbooks }),
     _react2.default.createElement(_reactRouter.Route, { path: 'reports/spiels', component: ReportView.Spiels }),
+    _react2.default.createElement(_reactRouter.Route, { path: 'spiels/event/:slug', component: SpielView.EventSpiels }),
     _react2.default.createElement(_reactRouter.Route, { path: 'forms/verify/:unit/:form', component: FormView.Verify, onEnter: authOnly }),
     _react2.default.createElement(_reactRouter.Route, {
       path: 'forms/review/:unit/:form',
@@ -207,7 +208,14 @@ function getAppRoutes(store) {
         _react2.default.createElement(_reactRouter.IndexRoute, { component: EventView.Index }),
         _react2.default.createElement(_reactRouter.Route, { path: 'new', component: EventView.New, onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector) }),
         _react2.default.createElement(_reactRouter.Route, { path: ':slug', component: EventView.Show }),
-        _react2.default.createElement(_reactRouter.Route, { path: ':slug/edit', component: EventView.Edit, onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector) })
+        _react2.default.createElement(_reactRouter.Route, { path: ':slug/edit', component: EventView.Edit, onEnter: requiresRole.bind(this, _UserRoles.UserRoles.EventDirector) }),
+        _react2.default.createElement(
+          _reactRouter.Route,
+          { onEnter: requiresRole.bind(this, _UserRoles.UserRoles.CircuitStaff) },
+          _react2.default.createElement(_reactRouter.Route, { path: ':slug/times', component: EventView.Times }),
+          _react2.default.createElement(_reactRouter.Route, { path: ':slug/lineup', component: EventView.Lineup }),
+          _react2.default.createElement(_reactRouter.Route, { path: ':slug/critique', component: EventView.Critique })
+        )
       ),
       _react2.default.createElement(
         _reactRouter.Route,

@@ -111,3 +111,10 @@ hr {
   background-color: green;
   color: white;
 }
+
+@media print {
+  .spiel-box {
+    line-height: 1.8rem;
+    page-break-after: always;
+  }
+}

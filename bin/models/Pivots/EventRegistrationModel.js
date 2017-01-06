@@ -29,7 +29,7 @@ var EventRegistrationSchema = new _mongoose2.default.Schema({
     ref: 'CompClass'
   },
 
-  performance_time: Date,
+  performance_time: String,
   exhibition: Boolean,
   attending_critique: Boolean,
 

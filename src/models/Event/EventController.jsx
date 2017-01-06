@@ -1,5 +1,6 @@
 import Express from 'express';
 import _ from 'lodash';
+import Moment from 'moment';
 
 import Event from './EventModel';
 import EventRegistration from '../Pivots/EventRegistrationModel';
@@ -261,6 +262,158 @@ router.get('/by_type/:type', (req, res) => {
     })
     .catch(err => {
       res.json({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
+router.route('/:slug/times')
+.get((req, res) => {
+  let event = { }
+
+  Event.findOne({ slug: req.params.slug }, 'name')
+    .then(resEvent => {
+      event = resEvent;
+
+      return EventRegistration.find({ event: event._id })
+        .populate('unit', 'name unit_type')
+        .populate('competition_class', 'name abbreviation')
+    })
+    .then(regs => {
+      let contents = { }
+      for (let key in regs) {
+        const reg = regs[key]
+        contents[`performance_time.${reg.unit._id}`] = reg.performance_time;
+      }
+
+      console.log(contents);
+      res.send({
+        success: true,
+        model: contents
+      })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
+.patch((req, res) => {
+  let event = { }
+  Event.findOne({ slug: req.params.slug }, '_id date')
+    .then(resEvent => {
+      event = resEvent;
+
+      return EventRegistration.find({ event: event._id })
+    })
+    .then(regs => {
+      console.log(req.body);
+      let calls = [ ];
+      regs.map(reg => {
+        let time = req.body[`performance_time.${reg.unit}`];
+        if (time) {
+          calls.push(new Promise((res, rej) => {
+            console.log('Saving performance time for ', reg.unit, ': ', time)
+            reg.performance_time = time;
+            reg.save();
+            res();
+          }))
+        }
+      })
+
+      return Promise.all(calls);
+    })
+    .then(() => {
+      res.json({
+        success: true,
+        redirect: '/events/' + req.params.slug
+      })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
+router.get('/:slug/lineup', (req, res) => {
+  Event.findOne({ slug: req.params.slug }, '_id')
+    .then(event => {
+      return EventRegistration.find({ event: event._id })
+        .populate({
+          path: 'unit',
+          // Get friends of friends - populate the 'friends' array for every friend
+          populate: { path: 'director competition_class unit_type' }
+        })
+        // .populate('unit', 'name director spiel competition_class unit_type')
+        // .populate('unit.director', 'first_name mi last_name')
+        // .populate('unit.competition_class', 'name abbreviation')
+        // .populate('unit.unit_type', 'name')
+        .sort('performance_time')
+        .exec()
+    })
+    .then(regs => {
+      res.send({
+        success: true,
+        contents: regs
+      })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
+router.get('/:slug/spiels', (req, res) => {
+  Event.findOne({ slug: req.params.slug })
+    .then(event => {
+      return EventRegistration.find({ event: event._id })
+        .sort('performance_time')
+    })
+    .then(regs => {
+      const ids = _.map(regs, 'unit');
+      return Unit.find({_id: {$in: ids}, spiel: {$exists: true, $ne: null}}, 'name spiel organization')
+        .populate('organization', 'city state')
+    })
+    .then(units => {
+      res.send({
+        success: true,
+        contents: units
+      })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err.message
+      })
+    })
+})
+
+router.get('/:slug/critique', (req, res) => {
+  Event.findOne({ slug: req.params.slug }, '_id')
+    .then(event => {
+      return EventRegistration.find({ event: event._id, attending_critique: true })
+        .populate({
+          path: 'unit',
+          populate: { path: 'director competition_class unit_type' }
+        })
+        .sort('performance_time')
+        .exec()
+    })
+    .then(regs => {
+      res.send({
+        success: true,
+        contents: regs
+      })
+    })
+    .catch(err => {
+      res.send({
         success: false,
         error: err.message
       })

@@ -186,6 +186,16 @@ export class PhoneInput extends React.Component {
   }
 }
 
+export class PerformanceTime extends React.Component {
+  render() {
+    return (
+      <InputWrapper { ...this.props }>
+        <MaskedInput type="tel" className="form-control" mask="99:99" />
+      </InputWrapper>
+    )
+  }
+}
+
 class _FormStatic extends React.Component {
   render() {
     return (

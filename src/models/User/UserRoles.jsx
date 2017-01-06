@@ -5,7 +5,8 @@ export const UserRoles = Object.freeze({
   Administrator: 1,
   EventDirector: 2,
   FormsManager: 3,
-  JudgeManager: 4
+  JudgeManager: 4,
+  CircuitStaff: 5
 });
 
 export const userRoleLabel = id => {
@@ -21,6 +22,9 @@ export const userRoleLabel = id => {
 
     case UserRoles.JudgeManager:
       return 'Judge Manager';
+
+    case UserRoles.CircuitStaff:
+      return 'Circuit Staff';
 
     default:
       return '';

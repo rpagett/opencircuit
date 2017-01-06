@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Show = exports.Edit = exports.New = exports.Index = undefined;
+exports.Critique = exports.Lineup = exports.Times = exports.Show = exports.Edit = exports.New = exports.Index = undefined;
 
 var _class, _temp;
 
@@ -15,13 +15,31 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
+var _reactInputMask = require('react-input-mask');
+
+var _reactInputMask2 = _interopRequireDefault(_reactInputMask);
+
+var _isomorphicFetch = require('isomorphic-fetch');
+
+var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+var _LoadingCube = require('../../helpers/LoadingCube');
+
+var _LoadingCube2 = _interopRequireDefault(_LoadingCube);
+
 var _ModelView = require('../../helpers/ModelView/ModelView');
 
 var _ModelView2 = _interopRequireDefault(_ModelView);
 
+var _ContentsView = require('../../helpers/ContentsView/ContentsView');
+
+var _ContentsView2 = _interopRequireDefault(_ContentsView);
+
 var _ModelInfo = require('../../layout/ModelInfo');
 
 var _UserRoles = require('../User/UserRoles');
+
+var _components = require('../../forms/components');
 
 var _EventList = require('./EventList');
 
@@ -338,6 +356,71 @@ var _Show = (_temp = _class = function (_React$Component4) {
             )
           )
         ),
+        _react2.default.createElement(
+          _UserRoles.HasRole,
+          { role: _UserRoles.UserRoles.CircuitStaff },
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card offset-xs-1 col-xs-10' },
+              _react2.default.createElement(
+                'div',
+                { className: 'card-header card-success' },
+                'Staff Toolbox'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'card-block' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-sm-6' },
+                    _react2.default.createElement(
+                      _reactRouter.Link,
+                      { to: '/events/' + event.slug + '/times', className: 'btn btn-block btn-primary' },
+                      'Set Performance Times'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-sm-6' },
+                    _react2.default.createElement(
+                      _reactRouter.Link,
+                      { to: '/events/' + event.slug + '/lineup', className: 'btn btn-block btn-primary' },
+                      'Show Lineup'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-sm-6' },
+                    _react2.default.createElement(
+                      _reactRouter.Link,
+                      { to: '/spiels/event/' + event.slug, className: 'btn btn-block btn-primary' },
+                      'Spiels'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-sm-6' },
+                    _react2.default.createElement(
+                      _reactRouter.Link,
+                      { to: '/events/' + event.slug + '/critique', className: 'btn btn-block btn-primary' },
+                      'Critique Schedule'
+                    )
+                  )
+                )
+              )
+            )
+          )
+        ),
         event.confirmedUnits ? _react2.default.createElement(
           'div',
           null,
@@ -461,4 +544,376 @@ var Show = exports.Show = function (_React$Component5) {
   }]);
 
   return Show;
+}(_react2.default.Component);
+
+var _Times = function (_React$Component6) {
+  _inherits(_Times, _React$Component6);
+
+  function _Times() {
+    _classCallCheck(this, _Times);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Times).apply(this, arguments));
+  }
+
+  _createClass(_Times, [{
+    key: 'render',
+    value: function render() {
+      var regs = this.props.contents;
+      var rows = [];
+
+      regs.map(function (reg) {
+        rows.push(_react2.default.createElement(_components.PerformanceTime, { key: reg.unit._id, label: reg.unit.name, name: 'performance_time.' + reg.unit._id, value: reg.performance_time }));
+      });
+      return _react2.default.createElement(
+        'div',
+        { className: 'container-fluid' },
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          'Performance Times'
+        ),
+        _react2.default.createElement(
+          _components.ReduxForm,
+          {
+            subStore: 'event_perftimes',
+            fetchEndpoint: '/api/events/' + this.props.slug + '/times',
+            submitEndpoint: '/api/events/' + this.props.slug + '/times',
+            submitMethod: 'PATCH'
+          },
+          rows,
+          _react2.default.createElement(
+            'button',
+            { type: 'submit', role: 'submit', className: 'btn btn-success btn-block' },
+            'Submit'
+          )
+        )
+      );
+    }
+  }]);
+
+  return _Times;
+}(_react2.default.Component);
+
+var Times = exports.Times = function (_React$Component7) {
+  _inherits(Times, _React$Component7);
+
+  function Times() {
+    _classCallCheck(this, Times);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Times).apply(this, arguments));
+  }
+
+  _createClass(Times, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_ContentsView2.default, {
+        subStore: 'event_times',
+        endpoint: '/api/events/' + this.props.params.slug + '/lineup',
+        component: _Times,
+        slug: this.props.params.slug
+      });
+    }
+  }]);
+
+  return Times;
+}(_react2.default.Component);
+
+var _Lineup = function (_React$Component8) {
+  _inherits(_Lineup, _React$Component8);
+
+  function _Lineup() {
+    _classCallCheck(this, _Lineup);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Lineup).apply(this, arguments));
+  }
+
+  _createClass(_Lineup, [{
+    key: 'render',
+    value: function render() {
+      var rows = [];
+      this.props.contents.map(function (reg) {
+        rows.push(_react2.default.createElement(
+          'tr',
+          { key: reg._id },
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-name' },
+            reg.unit.name
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-fname' },
+            reg.unit.director.formattedName
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-spiel' },
+            reg.unit.spiel ? reg.unit.spiel.show_title : 'No Spiel'
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-class' },
+            reg.unit.competition_class.abbreviation.toUpperCase()
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-time' },
+            reg.performance_time
+          )
+        ));
+      });
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          'Lineup'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'container-fluid' },
+          _react2.default.createElement(
+            'table',
+            { className: 'table table-responsive' },
+            _react2.default.createElement(
+              'thead',
+              null,
+              _react2.default.createElement(
+                'tr',
+                null,
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Unit'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Director'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Title'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Class'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Time'
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'tbody',
+              null,
+              rows
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return _Lineup;
+}(_react2.default.Component);
+
+var Lineup = exports.Lineup = function (_React$Component9) {
+  _inherits(Lineup, _React$Component9);
+
+  function Lineup() {
+    _classCallCheck(this, Lineup);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Lineup).apply(this, arguments));
+  }
+
+  _createClass(Lineup, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_ContentsView2.default, {
+        subStore: 'event_lineup',
+        endpoint: '/api/events/' + this.props.params.slug + '/lineup',
+        component: _Lineup,
+        slug: this.props.params.slug
+      });
+    }
+  }]);
+
+  return Lineup;
+}(_react2.default.Component);
+
+var _Critique = function (_React$Component10) {
+  _inherits(_Critique, _React$Component10);
+
+  function _Critique() {
+    _classCallCheck(this, _Critique);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Critique).apply(this, arguments));
+  }
+
+  _createClass(_Critique, [{
+    key: 'render',
+    value: function render() {
+      var rows = [];
+      this.props.contents.map(function (reg) {
+        rows.push(_react2.default.createElement(
+          'tr',
+          { key: reg._id },
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-name' },
+            reg.unit.name
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-fname' },
+            reg.unit.director.formattedName
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-title' },
+            reg.unit.spiel.show_title
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-class' },
+            reg.unit.competition_class.abbreviation.toUpperCase()
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-time' },
+            reg.performance_time
+          )
+        ));
+      });
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          'Attending Critique'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'container-fluid' },
+          _react2.default.createElement(
+            'table',
+            { className: 'table table-responsive' },
+            _react2.default.createElement(
+              'thead',
+              null,
+              _react2.default.createElement(
+                'tr',
+                null,
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Unit'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Director'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Title'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Class'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Perf. Time'
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'tbody',
+              null,
+              rows
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return _Critique;
+}(_react2.default.Component);
+
+var Critique = exports.Critique = function (_React$Component11) {
+  _inherits(Critique, _React$Component11);
+
+  function Critique() {
+    _classCallCheck(this, Critique);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Critique).apply(this, arguments));
+  }
+
+  _createClass(Critique, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_ContentsView2.default, {
+        subStore: 'event_critique',
+        endpoint: '/api/events/' + this.props.params.slug + '/critique',
+        component: _Critique,
+        slug: this.props.params.slug
+      });
+    }
+  }]);
+
+  return Critique;
 }(_react2.default.Component);

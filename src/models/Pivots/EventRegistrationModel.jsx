@@ -16,7 +16,7 @@ const EventRegistrationSchema = new Mongoose.Schema({
     ref: 'CompClass'
   },
 
-  performance_time: Date,
+  performance_time: String,
   exhibition: Boolean,
   attending_critique: Boolean,
 

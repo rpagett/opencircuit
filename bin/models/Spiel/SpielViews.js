@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Edit = exports.Index = undefined;
+exports.EventSpiels = exports.Edit = exports.Index = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -26,6 +26,12 @@ var _UserRoles = require('../User/UserRoles');
 var _ModelView = require('../../helpers/ModelView/ModelView');
 
 var _ModelView2 = _interopRequireDefault(_ModelView);
+
+var _ContentsView = require('../../helpers/ContentsView/ContentsView');
+
+var _ContentsView2 = _interopRequireDefault(_ContentsView);
+
+var _logos = require('../../helpers/logos');
 
 var _SpielList = require('./SpielList');
 
@@ -333,4 +339,258 @@ var Edit = exports.Edit = function (_React$Component3) {
   }]);
 
   return Edit;
+}(_react2.default.Component);
+
+var Print = function (_React$Component4) {
+  _inherits(Print, _React$Component4);
+
+  function Print() {
+    _classCallCheck(this, Print);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Print).apply(this, arguments));
+  }
+
+  _createClass(Print, [{
+    key: 'render',
+    value: function render() {
+      var unit_name = this.props.unit_name ? this.props.unit_name : this.props.name;
+      var show_title = this.props.show_title ? this.props.show_title : '(show title)';
+      var staff = this.props.directors ? this.props.directors : '(director)';
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'offset-xs-1 col-xs-10' },
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(_logos.CircuitLogo, { className: 'nav-logo', padding: 0 })
+        ),
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(
+            'h6',
+            null,
+            '(When unit crosses timeline)'
+          )
+        ),
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(
+            'h5',
+            null,
+            'Ladies and Gentlemen, please welcome from',
+            _react2.default.createElement(
+              'strong',
+              null,
+              ' ',
+              this.props.city,
+              ', ',
+              this.props.state
+            ),
+            ','
+          )
+        ),
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(
+            'h3',
+            null,
+            unit_name
+          )
+        ),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(
+            'h6',
+            null,
+            '(at 1:30 of the interval time, or at the direction of the timing official)'
+          )
+        ),
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(
+            'h4',
+            null,
+            'Performing their program, "',
+            show_title,
+            '",'
+          )
+        ),
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(
+            'strong',
+            null,
+            _react2.default.createElement(
+              'h3',
+              null,
+              unit_name
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(
+            'h4',
+            null,
+            'You may take the floor in competition!'
+          )
+        ),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(
+            'strong',
+            null,
+            _react2.default.createElement(
+              'h6',
+              null,
+              '( At the obvious conclusion of the program: )'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(
+            'h4',
+            null,
+            'Ladies and gentlemen, ',
+            _react2.default.createElement(
+              'strong',
+              null,
+              unit_name
+            ),
+            ', under the direction of ',
+            _react2.default.createElement(
+              'strong',
+              null,
+              staff
+            ),
+            '!'
+          )
+        ),
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(
+            'h4',
+            null,
+            _react2.default.createElement(
+              'strong',
+              null,
+              unit_name
+            ),
+            ' hopes you enjoyed their program, entitled "',
+            show_title,
+            '".'
+          )
+        ),
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(
+            'h4',
+            null,
+            'Hailing from ',
+            _react2.default.createElement(
+              'strong',
+              null,
+              this.props.city,
+              ', ',
+              this.props.state
+            ),
+            ','
+          )
+        ),
+        _react2.default.createElement(
+          'center',
+          null,
+          _react2.default.createElement(
+            'h2',
+            null,
+            _react2.default.createElement(
+              'strong',
+              null,
+              unit_name
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Print;
+}(_react2.default.Component);
+
+var _EventSpiels = function (_React$Component5) {
+  _inherits(_EventSpiels, _React$Component5);
+
+  function _EventSpiels() {
+    _classCallCheck(this, _EventSpiels);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_EventSpiels).apply(this, arguments));
+  }
+
+  _createClass(_EventSpiels, [{
+    key: 'render',
+    value: function render() {
+      var rows = [];
+      this.props.contents.map(function (unit) {
+        rows.push(_react2.default.createElement(
+          'div',
+          { className: 'container-fluid spiel-box' },
+          _react2.default.createElement(Print, {
+            directors: unit.spiel.directors,
+            show_title: unit.spiel.show_title,
+            unit_name: unit.spiel.unit_name,
+            city: unit.organization.city,
+            state: unit.organization.state,
+            key: unit._id
+          })
+        ));
+      });
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        rows
+      );
+    }
+  }]);
+
+  return _EventSpiels;
+}(_react2.default.Component);
+
+var EventSpiels = exports.EventSpiels = function (_React$Component6) {
+  _inherits(EventSpiels, _React$Component6);
+
+  function EventSpiels() {
+    _classCallCheck(this, EventSpiels);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(EventSpiels).apply(this, arguments));
+  }
+
+  _createClass(EventSpiels, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_ContentsView2.default, {
+        subStore: 'event_spiels',
+        endpoint: '/api/events/' + this.props.params.slug + '/spiels',
+        component: _EventSpiels,
+        slug: this.props.params.slug
+      });
+    }
+  }]);
+
+  return EventSpiels;
 }(_react2.default.Component);

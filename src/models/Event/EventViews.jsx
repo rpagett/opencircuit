@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
+import MaskedInput from 'react-input-mask';
+import fetch from 'isomorphic-fetch';
 
+import LoadingCube from '../../helpers/LoadingCube';
 import ModelView from '../../helpers/ModelView/ModelView';
+import ContentsView from '../../helpers/ContentsView/ContentsView';
 import { Prop, Val } from '../../layout/ModelInfo';
 import { UserRoles, HasRole } from '../User/UserRoles';
+import { ReduxForm, PerformanceTime } from '../../forms/components';
 
 import EventList from './EventList';
 import UnitsInEventList from '../Unit/UnitsInEventList';
@@ -135,6 +140,42 @@ class _Show extends React.Component {
           </div>
         </HasRole>
 
+        <HasRole role={ UserRoles.CircuitStaff }>
+          <div className="row">
+            <div className="card offset-xs-1 col-xs-10">
+              <div className="card-header card-success">
+                Staff Toolbox
+              </div>
+              <div className="card-block">
+                <div className="row">
+                  <div className="col-xs-12 col-sm-6">
+                    <Link to={ `/events/${event.slug}/times` } className="btn btn-block btn-primary">
+                      Set Performance Times
+                    </Link>
+                  </div>
+                  <div className="col-xs-12 col-sm-6">
+                    <Link to={ `/events/${event.slug}/lineup` } className="btn btn-block btn-primary">
+                     Show Lineup
+                    </Link>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-xs-12 col-sm-6">
+                    <Link to={ `/spiels/event/${event.slug}` } className="btn btn-block btn-primary">
+                      Spiels
+                    </Link>
+                  </div>
+                  <div className="col-xs-12 col-sm-6">
+                    <Link to={ `/events/${event.slug}/critique` } className="btn btn-block btn-primary">
+                      Critique Schedule
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </HasRole>
+
         { (event.confirmedUnits ?
           <div>
             <div className="row">
@@ -207,6 +248,152 @@ export class Show extends React.Component {
         subStore="event_show"
         endpoint={ `/api/events/${ this.props.params.slug }` }
         component={ _Show }
+      />
+    )
+  }
+}
+
+class _Times extends React.Component {
+  render() {
+    const regs = this.props.contents;
+    let rows = [ ];
+
+    regs.map(reg => {
+      rows.push(
+        <PerformanceTime key={ reg.unit._id } label={ reg.unit.name } name={ `performance_time.${reg.unit._id}` } value={ reg.performance_time } />
+      )
+    })
+    return (
+      <div className="container-fluid">
+        <h1 className="page-header">Performance Times</h1>
+
+        <ReduxForm
+          subStore="event_perftimes"
+          fetchEndpoint={ `/api/events/${this.props.slug}/times`}
+          submitEndpoint={ `/api/events/${this.props.slug}/times` }
+          submitMethod="PATCH"
+        >
+          { rows }
+
+          <button type="submit" role="submit" className="btn btn-success btn-block">Submit</button>
+        </ReduxForm>
+      </div>
+    )
+  }
+}
+
+export class Times extends React.Component {
+  render() {
+    return (
+      <ContentsView
+        subStore="event_times"
+        endpoint={ `/api/events/${this.props.params.slug}/lineup` }
+        component={ _Times }
+        slug={ this.props.params.slug }
+      />
+    )
+  }
+}
+
+class _Lineup extends React.Component {
+  render() {
+    let rows = [ ];
+    this.props.contents.map(reg => {
+      rows.push(
+        <tr key={ reg._id }>
+          <td key={ reg._id + '-name'}>{ reg.unit.name }</td>
+          <td key={ reg._id + '-fname' }>{ reg.unit.director.formattedName }</td>
+          <td key={ reg._id + '-spiel'}>{ (reg.unit.spiel ? reg.unit.spiel.show_title : 'No Spiel') }</td>
+          <td key={ reg._id + '-class'}>{ reg.unit.competition_class.abbreviation.toUpperCase() }</td>
+          <td key={ reg._id + '-time'}>{ reg.performance_time }</td>
+        </tr>
+      )
+    })
+
+    return (
+      <div>
+        <h1 className="page-header">Lineup</h1>
+        <div className="container-fluid">
+          <table className="table table-responsive">
+            <thead>
+              <tr>
+                <th><strong>Unit</strong></th>
+                <th><strong>Director</strong></th>
+                <th><strong>Title</strong></th>
+                <th><strong>Class</strong></th>
+                <th><strong>Time</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              { rows }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
+  }
+}
+
+export class Lineup extends React.Component {
+  render() {
+    return (
+      <ContentsView
+        subStore="event_lineup"
+        endpoint={ `/api/events/${this.props.params.slug}/lineup` }
+        component={ _Lineup }
+        slug={ this.props.params.slug }
+      />
+    )
+  }
+}
+
+class _Critique extends React.Component {
+  render() {
+    let rows = [ ];
+    this.props.contents.map(reg => {
+      rows.push(
+        <tr key={ reg._id }>
+          <td key={ reg._id + '-name'}>{ reg.unit.name }</td>
+          <td key={ reg._id + '-fname'}>{ reg.unit.director.formattedName }</td>
+          <td key={ reg._id + '-title'}>{ reg.unit.spiel.show_title }</td>
+          <td key={ reg._id + '-class'}>{ reg.unit.competition_class.abbreviation.toUpperCase() }</td>
+          <td key={ reg._id + '-time'}>{ reg.performance_time }</td>
+        </tr>
+      )
+    })
+
+    return (
+      <div>
+        <h1 className="page-header">Attending Critique</h1>
+        <div className="container-fluid">
+          <table className="table table-responsive">
+            <thead>
+            <tr>
+              <th><strong>Unit</strong></th>
+              <th><strong>Director</strong></th>
+              <th><strong>Title</strong></th>
+              <th><strong>Class</strong></th>
+              <th><strong>Perf. Time</strong></th>
+            </tr>
+            </thead>
+            <tbody>
+              { rows }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
+  }
+}
+
+export class Critique extends React.Component {
+  render() {
+    return (
+      <ContentsView
+        subStore="event_critique"
+        endpoint={ `/api/events/${this.props.params.slug}/critique` }
+        component={ _Critique }
+        slug={ this.props.params.slug }
       />
     )
   }

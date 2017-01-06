@@ -86,6 +86,8 @@ export function getAppRoutes(store) {
       <Route path="reports/quickbooks" component={ ReportView.Quickbooks } />
       <Route path="reports/spiels" component={ ReportView.Spiels } />
 
+      <Route path="spiels/event/:slug" component={ SpielView.EventSpiels } />
+
       <Route path="forms/verify/:unit/:form" component={ FormView.Verify } onEnter={ authOnly } />
       <Route
         path="forms/review/:unit/:form"
@@ -118,6 +120,12 @@ export function getAppRoutes(store) {
           <Route path="new" component={ EventView.New } onEnter={ requiresRole.bind(this, UserRoles.EventDirector) } />
           <Route path=":slug" component={ EventView.Show } />
           <Route path=":slug/edit" component={ EventView.Edit } onEnter={ requiresRole.bind(this, UserRoles.EventDirector) } />
+
+          <Route onEnter={ requiresRole.bind(this, UserRoles.CircuitStaff) }>
+            <Route path=":slug/times" component={ EventView.Times } />
+            <Route path=":slug/lineup" component={ EventView.Lineup } />
+            <Route path=":slug/critique" component={ EventView.Critique } />
+          </Route>
         </Route>
 
         <Route path="/fees" onEnter={ requiresRole.bind(this, UserRoles.Administrator) }>

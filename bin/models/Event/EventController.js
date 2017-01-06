@@ -14,6 +14,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 var _EventModel = require('./EventModel');
 
 var _EventModel2 = _interopRequireDefault(_EventModel);
@@ -251,6 +255,129 @@ router.get('/by_type/:type', function (req, res) {
     });
   }).catch(function (err) {
     res.json({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
+router.route('/:slug/times').get(function (req, res) {
+  var event = {};
+
+  _EventModel2.default.findOne({ slug: req.params.slug }, 'name').then(function (resEvent) {
+    event = resEvent;
+
+    return _EventRegistrationModel2.default.find({ event: event._id }).populate('unit', 'name unit_type').populate('competition_class', 'name abbreviation');
+  }).then(function (regs) {
+    var contents = {};
+    for (var key in regs) {
+      var reg = regs[key];
+      contents['performance_time.' + reg.unit._id] = reg.performance_time;
+    }
+
+    console.log(contents);
+    res.send({
+      success: true,
+      model: contents
+    });
+  }).catch(function (err) {
+    res.send({
+      success: false,
+      error: err.message
+    });
+  });
+}).patch(function (req, res) {
+  var event = {};
+  _EventModel2.default.findOne({ slug: req.params.slug }, '_id date').then(function (resEvent) {
+    event = resEvent;
+
+    return _EventRegistrationModel2.default.find({ event: event._id });
+  }).then(function (regs) {
+    console.log(req.body);
+    var calls = [];
+    regs.map(function (reg) {
+      var time = req.body['performance_time.' + reg.unit];
+      if (time) {
+        calls.push(new Promise(function (res, rej) {
+          console.log('Saving performance time for ', reg.unit, ': ', time);
+          reg.performance_time = time;
+          reg.save();
+          res();
+        }));
+      }
+    });
+
+    return Promise.all(calls);
+  }).then(function () {
+    res.json({
+      success: true,
+      redirect: '/events/' + req.params.slug
+    });
+  }).catch(function (err) {
+    res.send({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
+router.get('/:slug/lineup', function (req, res) {
+  _EventModel2.default.findOne({ slug: req.params.slug }, '_id').then(function (event) {
+    return _EventRegistrationModel2.default.find({ event: event._id }).populate({
+      path: 'unit',
+      // Get friends of friends - populate the 'friends' array for every friend
+      populate: { path: 'director competition_class unit_type' }
+    })
+    // .populate('unit', 'name director spiel competition_class unit_type')
+    // .populate('unit.director', 'first_name mi last_name')
+    // .populate('unit.competition_class', 'name abbreviation')
+    // .populate('unit.unit_type', 'name')
+    .sort('performance_time').exec();
+  }).then(function (regs) {
+    res.send({
+      success: true,
+      contents: regs
+    });
+  }).catch(function (err) {
+    res.send({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
+router.get('/:slug/spiels', function (req, res) {
+  _EventModel2.default.findOne({ slug: req.params.slug }).then(function (event) {
+    return _EventRegistrationModel2.default.find({ event: event._id }).sort('performance_time');
+  }).then(function (regs) {
+    var ids = _lodash2.default.map(regs, 'unit');
+    return _UnitModel2.default.find({ _id: { $in: ids }, spiel: { $exists: true, $ne: null } }, 'name spiel organization').populate('organization', 'city state');
+  }).then(function (units) {
+    res.send({
+      success: true,
+      contents: units
+    });
+  }).catch(function (err) {
+    res.send({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
+router.get('/:slug/critique', function (req, res) {
+  _EventModel2.default.findOne({ slug: req.params.slug }, '_id').then(function (event) {
+    return _EventRegistrationModel2.default.find({ event: event._id, attending_critique: true }).populate({
+      path: 'unit',
+      populate: { path: 'director competition_class unit_type' }
+    }).sort('performance_time').exec();
+  }).then(function (regs) {
+    res.send({
+      success: true,
+      contents: regs
+    });
+  }).catch(function (err) {
+    res.send({
       success: false,
       error: err.message
     });
