@@ -166,6 +166,7 @@ class _EventSpiels extends React.Component {
             unit_name={ unit.spiel.unit_name }
             city={ unit.organization.city }
             state={ unit.organization.state }
+            updated={ unit.spiel.updatedAt }
             key={ unit._id }
           />
         </div>
@@ -175,6 +176,99 @@ class _EventSpiels extends React.Component {
     return (
       <div>
         { rows }
+      </div>
+    )
+  }
+}
+
+class NewPrint extends React.Component {
+  render() {
+    const unit_name = (this.props.unit_name ? this.props.unit_name : this.props.name);
+    const show_title = (this.props.show_title ? this.props.show_title : '(show title)');
+    const directors = (this.props.directors ? this.props.directors : '(director)');
+
+    return (
+      <div className="container content-container">
+        <div className="row header-row">
+          <div className="col-xs-offset-1 col-xs-5 vcenter">
+            <h1 className="text-center">
+              <strong>Spiel</strong>
+            </h1>
+            <h4 className="text-center">
+              <small>Updated { this.props.updated }</small>
+            </h4>
+          </div>
+          <div className="col-xs-5">
+            <CircuitLogo className="img img-responsive center-block" />
+          </div>
+        </div>
+
+        <div className="row">
+          <hr />
+        </div>
+
+        <div className="card">
+          <div className="card-header">
+            When the Unit Crosses the Timeline
+          </div>
+          <div className="card-block">
+            <div className="row unit-row" width="100%">
+              <h4 className="text-center">
+                Ladies and gentlemen, please welcome, from { this.props.city },
+                { this.props.state },
+              </h4>
+              <h2 className="unit-name text-center">
+                { unit_name }!
+              </h2>
+            </div>
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="card-header">
+            <i>At 1:30 or by Direction of the Timing Official</i>
+          </div>
+          <div className="card-block">
+            <div className="row unit-row" width="100%">
+              <h4 className="text-center">
+                Performing their program <strong>"{ show_title }"</strong>,
+              </h4>
+              <h2 className="unit-name text-center">
+                { unit_name },
+              </h2>
+              <h4 className="text-center">
+                You may take the floor in competition!
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="card-header">
+            At the Obvious Conclusion of the Program
+          </div>
+          <div className="card-block">
+            <div className="row unit-row" width="100%">
+              <h4 className="text-center">
+                Ladies and gentlemen, <strong>{ unit_name }</strong>,
+                under the direction of <strong>{ directors }</strong>.
+              </h4>
+
+              <h4 className="text-center">
+                <strong>{ unit_name }</strong> hopes you enjoyed their program,
+                entitled <strong>"{ show_title }"</strong>.
+              </h4>
+
+              <h4 className="text-center">
+                Hailing from <strong>{ this.props.city }, { this.props.state }</strong>,
+              </h4>
+
+              <h2 className="unit-name text-center">
+                { unit_name }
+              </h2>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

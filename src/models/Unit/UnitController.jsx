@@ -284,14 +284,14 @@ router.get('/:slug/attending', (req, res) => {
       //console.log('unit is', unit);
 
       return EventRegistration.find({ unit: {$ne: null} })
-        .populate('unit', '_id confirmed_paid_date director')
+        .populate('unit', '_id slug name confirmed_paid_date director')
         .populate('competition_class', 'name abbreviation')
         .exec()
     })
     .then(registrations => {
       allRegistrations = _.groupBy(registrations, 'event');
 
-      return Event.find({ _id: {$in: Object.keys(allRegistrations)}})
+      return Event.find({ _id: {$in: Object.keys(allRegistrations)}}, 'name slug date attendance_cap critique_closed')
         .sort('date');
     })
     .then(events => {
@@ -347,7 +347,8 @@ router.get('/:slug/attending', (req, res) => {
         contents.push({
           ...event.toObject(),
           status,
-          competition_class: found.competition_class.formattedName
+          competition_class: found.competition_class.formattedName,
+          found
         })
       }
 
@@ -423,5 +424,58 @@ router.patch('/:id/reclassify', hasRole(UserRoles.Administrator), (req, res) => 
       })
     })
 })
+
+router.route('/:slug/critique/:event')
+  .post((req, res) => {
+    Unit.findOne({ slug: req.params.slug }, '_id')
+      .then(unit => {
+        return EventRegistration.findOne({ unit: unit._id, event: req.params.event })
+      })
+      .then(reg => {
+        if (!reg) {
+          throw new Error('No event registration found.');
+        }
+
+        reg.attending_critique = true;
+        return reg.save();
+      })
+      .then(() => {
+        res.send({
+          success: true
+        })
+      })
+      .catch(err => {
+        res.send({
+          success: false,
+          error: err.message
+        })
+      })
+  })
+
+  .delete((req, res) => {
+    Unit.findOne({ slug: req.params.slug }, '_id')
+      .then(unit => {
+        return EventRegistration.findOne({ unit: unit._id, event: req.params.event })
+      })
+      .then(reg => {
+        if (!reg) {
+          throw new Error('No event registration found.');
+        }
+
+        reg.attending_critique = false;
+        return reg.save();
+      })
+      .then(() => {
+        res.send({
+          success: true
+        })
+      })
+      .catch(err => {
+        res.send({
+          success: false,
+          error: err.message
+        })
+      })
+  })
 
 export default router;

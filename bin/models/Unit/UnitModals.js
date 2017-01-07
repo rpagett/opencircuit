@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UploadMusic = exports.Reclassify = undefined;
+exports.RegisterCritique = exports.RemoveCritique = exports.UploadMusic = exports.Reclassify = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -206,4 +206,117 @@ var UploadMusic = exports.UploadMusic = function (_React$Component2) {
   }]);
 
   return UploadMusic;
+}(_react2.default.Component);
+
+var RemoveCritique = exports.RemoveCritique = function (_React$Component3) {
+  _inherits(RemoveCritique, _React$Component3);
+
+  function RemoveCritique() {
+    _classCallCheck(this, RemoveCritique);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(RemoveCritique).apply(this, arguments));
+  }
+
+  _createClass(RemoveCritique, [{
+    key: 'render',
+    value: function render() {
+      var reg = this.props.reg;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _components.ReduxForm,
+          {
+            subStore: 'unit_remove_critique',
+            submitEndpoint: '/api/units/' + reg.unit.slug + '/critique/' + this.props.event._id,
+            submitMethod: 'DELETE',
+            inModal: true
+          },
+          'Are you sure you\'d like to remove ',
+          _react2.default.createElement(
+            'strong',
+            null,
+            reg.unit.name
+          ),
+          ' from critique at',
+          _react2.default.createElement(
+            'strong',
+            null,
+            ' ',
+            this.props.event.name
+          ),
+          '?',
+          _react2.default.createElement(
+            'button',
+            { type: 'submit', role: 'submit', className: 'btn btn-danger btn-block' },
+            'Confirm'
+          )
+        )
+      );
+    }
+  }]);
+
+  return RemoveCritique;
+}(_react2.default.Component);
+
+var RegisterCritique = exports.RegisterCritique = function (_React$Component4) {
+  _inherits(RegisterCritique, _React$Component4);
+
+  function RegisterCritique() {
+    _classCallCheck(this, RegisterCritique);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(RegisterCritique).apply(this, arguments));
+  }
+
+  _createClass(RegisterCritique, [{
+    key: 'render',
+    value: function render() {
+      var reg = this.props.reg;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _components.ReduxForm,
+          {
+            subStore: 'unit_register_critique',
+            submitEndpoint: '/api/units/' + reg.unit.slug + '/critique/' + this.props.event._id,
+            submitMethod: 'POST',
+            inModal: true
+          },
+          _react2.default.createElement(
+            'p',
+            null,
+            'Are you sure you\'d like to register ',
+            _react2.default.createElement(
+              'strong',
+              null,
+              reg.unit.name
+            ),
+            ' for critique at',
+            _react2.default.createElement(
+              'strong',
+              null,
+              ' ',
+              this.props.event.name
+            ),
+            '?'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'Units which register for critique and do not attend the session will be disqualified from critique for the remainder of the competitive season.'
+          ),
+          _react2.default.createElement(
+            'button',
+            { type: 'submit', role: 'submit', className: 'btn btn-success btn-block' },
+            'Confirm'
+          )
+        )
+      );
+    }
+  }]);
+
+  return RegisterCritique;
 }(_react2.default.Component);

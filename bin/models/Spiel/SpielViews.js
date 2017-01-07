@@ -555,6 +555,7 @@ var _EventSpiels = function (_React$Component5) {
             unit_name: unit.spiel.unit_name,
             city: unit.organization.city,
             state: unit.organization.state,
+            updated: unit.spiel.updatedAt,
             key: unit._id
           })
         ));
@@ -571,8 +572,218 @@ var _EventSpiels = function (_React$Component5) {
   return _EventSpiels;
 }(_react2.default.Component);
 
-var EventSpiels = exports.EventSpiels = function (_React$Component6) {
-  _inherits(EventSpiels, _React$Component6);
+var NewPrint = function (_React$Component6) {
+  _inherits(NewPrint, _React$Component6);
+
+  function NewPrint() {
+    _classCallCheck(this, NewPrint);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewPrint).apply(this, arguments));
+  }
+
+  _createClass(NewPrint, [{
+    key: 'render',
+    value: function render() {
+      var unit_name = this.props.unit_name ? this.props.unit_name : this.props.name;
+      var show_title = this.props.show_title ? this.props.show_title : '(show title)';
+      var directors = this.props.directors ? this.props.directors : '(director)';
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'container content-container' },
+        _react2.default.createElement(
+          'div',
+          { className: 'row header-row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-offset-1 col-xs-5 vcenter' },
+            _react2.default.createElement(
+              'h1',
+              { className: 'text-center' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                'Spiel'
+              )
+            ),
+            _react2.default.createElement(
+              'h4',
+              { className: 'text-center' },
+              _react2.default.createElement(
+                'small',
+                null,
+                'Updated ',
+                this.props.updated
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-5' },
+            _react2.default.createElement(_logos.CircuitLogo, { className: 'img img-responsive center-block' })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement('hr', null)
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'card' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card-header' },
+            'When the Unit Crosses the Timeline'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-block' },
+            _react2.default.createElement(
+              'div',
+              { className: 'row unit-row', width: '100%' },
+              _react2.default.createElement(
+                'h4',
+                { className: 'text-center' },
+                'Ladies and gentlemen, please welcome, from ',
+                this.props.city,
+                ',',
+                this.props.state,
+                ','
+              ),
+              _react2.default.createElement(
+                'h2',
+                { className: 'unit-name text-center' },
+                unit_name,
+                '!'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'card' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card-header' },
+            _react2.default.createElement(
+              'i',
+              null,
+              'At 1:30 or by Direction of the Timing Official'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-block' },
+            _react2.default.createElement(
+              'div',
+              { className: 'row unit-row', width: '100%' },
+              _react2.default.createElement(
+                'h4',
+                { className: 'text-center' },
+                'Performing their program ',
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  '"',
+                  show_title,
+                  '"'
+                ),
+                ','
+              ),
+              _react2.default.createElement(
+                'h2',
+                { className: 'unit-name text-center' },
+                unit_name,
+                ','
+              ),
+              _react2.default.createElement(
+                'h4',
+                { className: 'text-center' },
+                'You may take the floor in competition!'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'card' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card-header' },
+            'At the Obvious Conclusion of the Program'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-block' },
+            _react2.default.createElement(
+              'div',
+              { className: 'row unit-row', width: '100%' },
+              _react2.default.createElement(
+                'h4',
+                { className: 'text-center' },
+                'Ladies and gentlemen, ',
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  unit_name
+                ),
+                ', under the direction of ',
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  directors
+                ),
+                '.'
+              ),
+              _react2.default.createElement(
+                'h4',
+                { className: 'text-center' },
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  unit_name
+                ),
+                ' hopes you enjoyed their program, entitled ',
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  '"',
+                  show_title,
+                  '"'
+                ),
+                '.'
+              ),
+              _react2.default.createElement(
+                'h4',
+                { className: 'text-center' },
+                'Hailing from ',
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  this.props.city,
+                  ', ',
+                  this.props.state
+                ),
+                ','
+              ),
+              _react2.default.createElement(
+                'h2',
+                { className: 'unit-name text-center' },
+                unit_name
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return NewPrint;
+}(_react2.default.Component);
+
+var EventSpiels = exports.EventSpiels = function (_React$Component7) {
+  _inherits(EventSpiels, _React$Component7);
 
   function EventSpiels() {
     _classCallCheck(this, EventSpiels);

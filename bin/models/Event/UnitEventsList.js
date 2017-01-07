@@ -13,6 +13,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
+var _SpawnableModal = require('../../modals/SpawnableModal');
+
 var _UserRoles = require('../User/UserRoles');
 
 var _FlexTable = require('../../helpers/FlexTable/FlexTable');
@@ -39,6 +41,8 @@ var UnitEventsList = function (_React$Component) {
   _createClass(UnitEventsList, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
         null,
@@ -50,7 +54,7 @@ var UnitEventsList = function (_React$Component) {
             'Name': function Name(reg) {
               return _react2.default.createElement(
                 _reactRouter.Link,
-                { to: reg.detailsUrl },
+                { key: reg.found._id + '-name', to: reg.detailsUrl },
                 reg.name
               );
             },
@@ -62,6 +66,56 @@ var UnitEventsList = function (_React$Component) {
             },
             'Status': function Status(reg) {
               return reg.status;
+            },
+            'Critique': function Critique(reg) {
+              if (reg.critique_closed) {
+                if (reg.found.attending_critique) {
+                  return _react2.default.createElement(
+                    'i',
+                    { key: reg.found._id + '-critique' },
+                    'Attending Critique'
+                  );
+                }
+
+                return _react2.default.createElement(
+                  'i',
+                  { key: reg.found._id + '-critique' },
+                  'Registration Closed'
+                );
+              }
+
+              if (reg.found.attending_critique) {
+                return _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
+                  className: 'btn btn-block btn-sm btn-success',
+                  buttonText: 'Registered',
+                  key: reg.found._id + '-critique',
+
+                  title: 'Remove Critique Registration?',
+                  componentName: 'UNIT_CRITIQUE_REMOVE',
+                  modalProps: {
+                    event: reg,
+                    reg: reg.found,
+                    refreshTable: 'unitEventsList',
+                    refreshEndpoint: _this2.props.endpoint
+                  }
+                });
+              }
+
+              return _react2.default.createElement(_SpawnableModal.LaunchModalButton, {
+                className: 'btn btn-block btn-sm btn-warning',
+                buttonText: 'Register?',
+                key: reg.found._id + '-critique',
+
+                title: 'Register for Critique?',
+                componentName: 'UNIT_CRITIQUE_REGISTER',
+                modalProps: {
+                  event: reg,
+                  reg: reg.found,
+                  refreshTable: 'unitEventsList',
+                  refreshEndpoint: _this2.props.endpoint
+
+                }
+              });
             }
           }
         })

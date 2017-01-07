@@ -257,11 +257,11 @@ router.get('/:slug/attending', function (req, res) {
     unit = inUnit;
     //console.log('unit is', unit);
 
-    return _EventRegistrationModel2.default.find({ unit: { $ne: null } }).populate('unit', '_id confirmed_paid_date director').populate('competition_class', 'name abbreviation').exec();
+    return _EventRegistrationModel2.default.find({ unit: { $ne: null } }).populate('unit', '_id slug name confirmed_paid_date director').populate('competition_class', 'name abbreviation').exec();
   }).then(function (registrations) {
     allRegistrations = _lodash2.default.groupBy(registrations, 'event');
 
-    return _EventModel2.default.find({ _id: { $in: Object.keys(allRegistrations) } }).sort('date');
+    return _EventModel2.default.find({ _id: { $in: Object.keys(allRegistrations) } }, 'name slug date attendance_cap critique_closed').sort('date');
   }).then(function (events) {
     for (var key in events) {
       var event = events[key];
@@ -319,7 +319,8 @@ router.get('/:slug/attending', function (req, res) {
 
       contents.push(_extends({}, event.toObject(), {
         status: status,
-        competition_class: found.competition_class.formattedName
+        competition_class: found.competition_class.formattedName,
+        found: found
       }));
     }
 
@@ -382,6 +383,48 @@ router.patch('/:id/reclassify', (0, _authRoute.hasRole)(_UserRoles.UserRoles.Adm
     });
   }).catch(function (err) {
     res.json({
+      success: false,
+      error: err.message
+    });
+  });
+});
+
+router.route('/:slug/critique/:event').post(function (req, res) {
+  _UnitModel2.default.findOne({ slug: req.params.slug }, '_id').then(function (unit) {
+    return _EventRegistrationModel2.default.findOne({ unit: unit._id, event: req.params.event });
+  }).then(function (reg) {
+    if (!reg) {
+      throw new Error('No event registration found.');
+    }
+
+    reg.attending_critique = true;
+    return reg.save();
+  }).then(function () {
+    res.send({
+      success: true
+    });
+  }).catch(function (err) {
+    res.send({
+      success: false,
+      error: err.message
+    });
+  });
+}).delete(function (req, res) {
+  _UnitModel2.default.findOne({ slug: req.params.slug }, '_id').then(function (unit) {
+    return _EventRegistrationModel2.default.findOne({ unit: unit._id, event: req.params.event });
+  }).then(function (reg) {
+    if (!reg) {
+      throw new Error('No event registration found.');
+    }
+
+    reg.attending_critique = false;
+    return reg.save();
+  }).then(function () {
+    res.send({
+      success: true
+    });
+  }).catch(function (err) {
+    res.send({
       success: false,
       error: err.message
     });

@@ -698,7 +698,9 @@ class _EventChecks extends React.Component {
 
     this.state.events.map(event => {
       let label = event.name + ' (' + event.formattedDate + ')';
-      if (event.registration_closed) {
+      const closeDate = new Date(event.registration_autoclose);
+      const now = new Date();
+      if (event.registration_closed || closeDate.getTime() < now.getTime()) {
         label += ' [Closed]';
       }
 
@@ -711,7 +713,7 @@ class _EventChecks extends React.Component {
             label={ label }
             value={ event._id }
             preChecked={ event.attending }
-            disabled={ event.registration_closed }
+            disabled={ (event.registration_closed || closeDate.getTime() < now.getTime()) }
           />
         </div>
       )

@@ -39,6 +39,12 @@ class _SpawnableModal extends React.Component {
     }
     switch (this.props.componentName) {
 
+      case 'UNIT_CRITIQUE_REMOVE':
+        return <UnitModals.RemoveCritique { ...modalProps } />;
+
+      case 'UNIT_CRITIQUE_REGISTER':
+        return <UnitModals.RegisterCritique { ...modalProps } />;
+
       case 'UNIT_RECLASSIFY':
         return <UnitModals.Reclassify { ...modalProps } />;
 

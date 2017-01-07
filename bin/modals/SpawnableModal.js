@@ -107,6 +107,12 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
       });
       switch (this.props.componentName) {
 
+        case 'UNIT_CRITIQUE_REMOVE':
+          return _react2.default.createElement(UnitModals.RemoveCritique, modalProps);
+
+        case 'UNIT_CRITIQUE_REGISTER':
+          return _react2.default.createElement(UnitModals.RegisterCritique, modalProps);
+
         case 'UNIT_RECLASSIFY':
           return _react2.default.createElement(UnitModals.Reclassify, modalProps);
 

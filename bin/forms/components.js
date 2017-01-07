@@ -970,7 +970,9 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component20) {
 
       this.state.events.map(function (event) {
         var label = event.name + ' (' + event.formattedDate + ')';
-        if (event.registration_closed) {
+        var closeDate = new Date(event.registration_autoclose);
+        var now = new Date();
+        if (event.registration_closed || closeDate.getTime() < now.getTime()) {
           label += ' [Closed]';
         }
 
@@ -984,7 +986,7 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component20) {
             label: label,
             value: event._id,
             preChecked: event.attending,
-            disabled: event.registration_closed
+            disabled: event.registration_closed || closeDate.getTime() < now.getTime()
           })
         ));
       });

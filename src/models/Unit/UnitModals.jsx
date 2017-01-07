@@ -136,3 +136,58 @@ export class UploadMusic extends React.Component {
     )
   }
 }
+
+export class RemoveCritique extends React.Component {
+  render() {
+    const reg = this.props.reg;
+
+    return (
+      <div>
+        <ReduxForm
+          subStore="unit_remove_critique"
+          submitEndpoint={ `/api/units/${reg.unit.slug}/critique/${this.props.event._id}` }
+          submitMethod="DELETE"
+          inModal={ true }
+        >
+          Are you sure you'd like to remove <strong>{ reg.unit.name }</strong> from critique at
+          <strong> { this.props.event.name }</strong>?
+
+          <button type="submit" role="submit" className="btn btn-danger btn-block">
+            Confirm
+          </button>
+        </ReduxForm>
+      </div>
+    )
+  }
+}
+
+export class RegisterCritique extends React.Component {
+  render() {
+    const reg = this.props.reg;
+
+    return (
+      <div>
+        <ReduxForm
+          subStore="unit_register_critique"
+          submitEndpoint={ `/api/units/${reg.unit.slug}/critique/${this.props.event._id}` }
+          submitMethod="POST"
+          inModal={ true }
+        >
+          <p>
+            Are you sure you'd like to register <strong>{ reg.unit.name }</strong> for critique at
+            <strong> { this.props.event.name }</strong>?
+          </p>
+
+          <p>
+            Units which register for critique and do not attend the session will be disqualified from
+            critique for the remainder of the competitive season.
+          </p>
+
+          <button type="submit" role="submit" className="btn btn-success btn-block">
+            Confirm
+          </button>
+        </ReduxForm>
+      </div>
+    )
+  }
+}
