@@ -413,12 +413,6 @@ class _Registration extends React.Component {
     let rows = [ ];
 
     this.props.contents.map(reg => {
-      let missing = _.filter(reg.unit.form_obligations, o => {
-        return o.submitted != true;
-      });
-      missing = _.map(missing, o => o.form.name);
-      missing = _.join(missing, ', ');
-
       rows.push(
         <tr key={ reg._id }>
           <td key={ reg._id + '-name'}>{ reg.unit.name }</td>
@@ -426,7 +420,7 @@ class _Registration extends React.Component {
           <td key={ reg._id + '-time'}>{ reg.performance_time }</td>
           <td key={ reg._id + '-staff'}>{ (reg.unit.plus_pass ? 12 : 7) }</td>
           <td key={ reg._id + '-members'}>{ reg.unit.members }</td>
-          <td key={ reg._id + '-notes'}>{ missing }</td>
+          <td key={ reg._id + '-notes'}>{ reg.missing }</td>
         </tr>
       )
     })

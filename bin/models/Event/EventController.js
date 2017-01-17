@@ -402,6 +402,20 @@ router.get('/:slug/registration', function (req, res) {
       }
     }).sort('performance_time').exec();
   }).then(function (regs) {
+    for (var key in regs) {
+      var missing = _lodash2.default.filter(regs[key].unit.form_obligations, function (o) {
+        return o.submitted != true;
+      });
+      missing = _lodash2.default.map(missing, function (o) {
+        return o.form.name;
+      });
+      missing = _lodash2.default.join(missing, ', ');
+
+      regs[key] = _extends({}, regs[key].toObject(), {
+        missing: missing
+      });
+    }
+
     res.send({
       success: true,
       contents: regs

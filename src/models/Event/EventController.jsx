@@ -443,6 +443,19 @@ router.get('/:slug/registration', (req, res) => {
         .exec()
     })
     .then(regs => {
+      for (let key in regs) {
+        let missing = _.filter(regs[key].unit.form_obligations, o => {
+          return o.submitted != true;
+        });
+        missing = _.map(missing, o => o.form.name);
+        missing = _.join(missing, ', ');
+
+        regs[key] = {
+          ...regs[key].toObject(),
+          missing
+        }
+      }
+
       res.send({
         success: true,
         contents: regs

@@ -950,14 +950,6 @@ var _Registration = function (_React$Component12) {
       var rows = [];
 
       this.props.contents.map(function (reg) {
-        var missing = _lodash2.default.filter(reg.unit.form_obligations, function (o) {
-          return o.submitted != true;
-        });
-        missing = _lodash2.default.map(missing, function (o) {
-          return o.form.name;
-        });
-        missing = _lodash2.default.join(missing, ', ');
-
         rows.push(_react2.default.createElement(
           'tr',
           { key: reg._id },
@@ -989,7 +981,7 @@ var _Registration = function (_React$Component12) {
           _react2.default.createElement(
             'td',
             { key: reg._id + '-notes' },
-            missing
+            reg.missing
           )
         ));
       });
