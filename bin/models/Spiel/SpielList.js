@@ -37,7 +37,7 @@ var SpielList = function (_React$Component) {
   function SpielList() {
     _classCallCheck(this, SpielList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(SpielList).apply(this, arguments));
+    return _possibleConstructorReturn(this, (SpielList.__proto__ || Object.getPrototypeOf(SpielList)).apply(this, arguments));
   }
 
   _createClass(SpielList, [{

@@ -55,7 +55,7 @@ function multerMiddleware(folder) {
 }
 
 function assignObligation(unit_id, form_id) {
-  var due_date = arguments.length <= 2 || arguments[2] === undefined ? _FormModel2.default.DUE_DATE() : arguments[2];
+  var due_date = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _FormModel2.default.DUE_DATE();
 
   return _UnitModel2.default.findOneAndUpdate({ _id: unit_id, 'form_obligations.form': { $ne: form_id } }, {
     $addToSet: { form_obligations: {

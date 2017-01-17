@@ -36,7 +36,7 @@ var UserDropdown = function (_React$Component) {
   function UserDropdown() {
     _classCallCheck(this, UserDropdown);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(UserDropdown).apply(this, arguments));
+    return _possibleConstructorReturn(this, (UserDropdown.__proto__ || Object.getPrototypeOf(UserDropdown)).apply(this, arguments));
   }
 
   _createClass(UserDropdown, [{
@@ -79,7 +79,7 @@ var _NavBar = function (_React$Component2) {
   function _NavBar() {
     _classCallCheck(this, _NavBar);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_NavBar).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_NavBar.__proto__ || Object.getPrototypeOf(_NavBar)).apply(this, arguments));
   }
 
   _createClass(_NavBar, [{

@@ -35,7 +35,7 @@ var JudgeList = function (_React$Component) {
   function JudgeList() {
     _classCallCheck(this, JudgeList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(JudgeList).apply(this, arguments));
+    return _possibleConstructorReturn(this, (JudgeList.__proto__ || Object.getPrototypeOf(JudgeList)).apply(this, arguments));
   }
 
   _createClass(JudgeList, [{

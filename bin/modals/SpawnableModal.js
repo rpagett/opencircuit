@@ -71,7 +71,7 @@ var SpawnableModalTransition = function (_React$Component) {
   function SpawnableModalTransition() {
     _classCallCheck(this, SpawnableModalTransition);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(SpawnableModalTransition).apply(this, arguments));
+    return _possibleConstructorReturn(this, (SpawnableModalTransition.__proto__ || Object.getPrototypeOf(SpawnableModalTransition)).apply(this, arguments));
   }
 
   _createClass(SpawnableModalTransition, [{
@@ -96,7 +96,7 @@ var _SpawnableModal = (_temp = _class = function (_React$Component2) {
   function _SpawnableModal() {
     _classCallCheck(this, _SpawnableModal);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_SpawnableModal).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_SpawnableModal.__proto__ || Object.getPrototypeOf(_SpawnableModal)).apply(this, arguments));
   }
 
   _createClass(_SpawnableModal, [{
@@ -241,7 +241,7 @@ var _LaunchModalButton = (_temp2 = _class2 = function (_React$Component3) {
   function _LaunchModalButton() {
     _classCallCheck(this, _LaunchModalButton);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_LaunchModalButton).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_LaunchModalButton.__proto__ || Object.getPrototypeOf(_LaunchModalButton)).apply(this, arguments));
   }
 
   _createClass(_LaunchModalButton, [{

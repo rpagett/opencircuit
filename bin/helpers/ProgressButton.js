@@ -84,20 +84,19 @@ var ProgressButton = _react2.default.createClass({
     clearTimeout(this._timeout);
   },
   render: function render() {
-    var _props = this.props;
-    var className = _props.className;
-    var classNamespace = _props.classNamespace;
-    var children = _props.children;
-    var type = _props.type;
-    var form = _props.form;
-    var durationError = _props.durationError;
-    var durationSuccess = _props.durationSuccess;
-    var onClick = _props.onClick;
-    var onError = _props.onError;
-    var state = _props.state;
-    var shouldAllowClickOnLoading = _props.shouldAllowClickOnLoading;
-
-    var containerProps = _objectWithoutProperties(_props, ['className', 'classNamespace', 'children', 'type', 'form', 'durationError', 'durationSuccess', 'onClick', 'onError', 'state', 'shouldAllowClickOnLoading']);
+    var _props = this.props,
+        className = _props.className,
+        classNamespace = _props.classNamespace,
+        children = _props.children,
+        type = _props.type,
+        form = _props.form,
+        durationError = _props.durationError,
+        durationSuccess = _props.durationSuccess,
+        onClick = _props.onClick,
+        onError = _props.onError,
+        state = _props.state,
+        shouldAllowClickOnLoading = _props.shouldAllowClickOnLoading,
+        containerProps = _objectWithoutProperties(_props, ['className', 'classNamespace', 'children', 'type', 'form', 'durationError', 'durationSuccess', 'onClick', 'onError', 'state', 'shouldAllowClickOnLoading']);
 
     containerProps.className = classNamespace + 'container ' + this.state.currentState + ' ' + className;
     containerProps.onClick = this.handleClick;

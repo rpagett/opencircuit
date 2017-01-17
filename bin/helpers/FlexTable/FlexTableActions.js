@@ -12,11 +12,9 @@ var _functions = require('../functions');
 
 var fetchContents = exports.fetchContents = function fetchContents(name, endpoint) {
   return function (dispatch, getState) {
-    var _getState = getState();
-
-    var flexTable = _getState.flexTable;
-    var auth = _getState.auth;
-
+    var _getState = getState(),
+        flexTable = _getState.flexTable,
+        auth = _getState.auth;
 
     dispatch(dumpContents(name));
     dispatch(beginLoading());
@@ -44,7 +42,7 @@ var fetchContents = exports.fetchContents = function fetchContents(name, endpoin
 };
 
 function dumpContents() {
-  var name = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+  var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
   if (name == null) {
     var e = new Error('dummy');

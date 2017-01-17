@@ -37,7 +37,7 @@ var FileList = function (_React$Component) {
   function FileList() {
     _classCallCheck(this, FileList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(FileList).apply(this, arguments));
+    return _possibleConstructorReturn(this, (FileList.__proto__ || Object.getPrototypeOf(FileList)).apply(this, arguments));
   }
 
   _createClass(FileList, [{

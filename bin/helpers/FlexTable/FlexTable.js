@@ -46,7 +46,7 @@ var _FlexTable = (_temp = _class = function (_React$Component) {
   function _FlexTable() {
     _classCallCheck(this, _FlexTable);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_FlexTable).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_FlexTable.__proto__ || Object.getPrototypeOf(_FlexTable)).apply(this, arguments));
   }
 
   _createClass(_FlexTable, [{

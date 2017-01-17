@@ -16,7 +16,7 @@ var initialState = {
 var form = function form() {
   var _extends2, _extends3;
 
-  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
 
   switch (action.type) {

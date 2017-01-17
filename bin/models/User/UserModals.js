@@ -29,7 +29,7 @@ var ManageRoles = exports.ManageRoles = function (_React$Component) {
   function ManageRoles() {
     _classCallCheck(this, ManageRoles);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ManageRoles).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ManageRoles.__proto__ || Object.getPrototypeOf(ManageRoles)).apply(this, arguments));
   }
 
   _createClass(ManageRoles, [{

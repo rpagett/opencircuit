@@ -27,7 +27,7 @@ var RegistrationForm = exports.RegistrationForm = function (_React$Component) {
   function RegistrationForm() {
     _classCallCheck(this, RegistrationForm);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(RegistrationForm).apply(this, arguments));
+    return _possibleConstructorReturn(this, (RegistrationForm.__proto__ || Object.getPrototypeOf(RegistrationForm)).apply(this, arguments));
   }
 
   _createClass(RegistrationForm, [{
@@ -71,7 +71,7 @@ var LoginForm = exports.LoginForm = function (_React$Component2) {
   function LoginForm() {
     _classCallCheck(this, LoginForm);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(LoginForm).apply(this, arguments));
+    return _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).apply(this, arguments));
   }
 
   _createClass(LoginForm, [{
@@ -104,7 +104,7 @@ var PasswordRecovery = exports.PasswordRecovery = function (_React$Component3) {
   function PasswordRecovery() {
     _classCallCheck(this, PasswordRecovery);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(PasswordRecovery).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PasswordRecovery.__proto__ || Object.getPrototypeOf(PasswordRecovery)).apply(this, arguments));
   }
 
   _createClass(PasswordRecovery, [{
@@ -136,7 +136,7 @@ var ProcessPasswordRecovery = exports.ProcessPasswordRecovery = function (_React
   function ProcessPasswordRecovery() {
     _classCallCheck(this, ProcessPasswordRecovery);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ProcessPasswordRecovery).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ProcessPasswordRecovery.__proto__ || Object.getPrototypeOf(ProcessPasswordRecovery)).apply(this, arguments));
   }
 
   _createClass(ProcessPasswordRecovery, [{

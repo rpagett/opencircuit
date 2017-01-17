@@ -38,7 +38,7 @@ var _ModelView = (_temp = _class = function (_React$Component) {
   function _ModelView() {
     _classCallCheck(this, _ModelView);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_ModelView).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_ModelView.__proto__ || Object.getPrototypeOf(_ModelView)).apply(this, arguments));
   }
 
   _createClass(_ModelView, [{

@@ -24,7 +24,7 @@ var Footer = function (_React$Component) {
   function Footer() {
     _classCallCheck(this, Footer);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Footer).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
   }
 
   _createClass(Footer, [{

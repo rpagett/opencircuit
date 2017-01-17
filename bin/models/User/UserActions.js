@@ -9,11 +9,9 @@ var _functions = require('../../helpers/functions');
 
 var fetchProfile = exports.fetchProfile = function fetchProfile(email) {
   return function (dispatch, getState) {
-    var _getState = getState();
-
-    var users = _getState.users;
-    var auth = _getState.auth;
-
+    var _getState = getState(),
+        users = _getState.users,
+        auth = _getState.auth;
 
     dispatch(profileBeginLoading());
     dispatch(profileClearErrors());

@@ -35,7 +35,7 @@ var Index = exports.Index = function (_React$Component) {
   function Index() {
     _classCallCheck(this, Index);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Index).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).apply(this, arguments));
   }
 
   _createClass(Index, [{
@@ -112,7 +112,7 @@ var _Quickbooks = function (_React$Component2) {
   function _Quickbooks() {
     _classCallCheck(this, _Quickbooks);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Quickbooks).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_Quickbooks.__proto__ || Object.getPrototypeOf(_Quickbooks)).apply(this, arguments));
   }
 
   _createClass(_Quickbooks, [{
@@ -206,7 +206,7 @@ var Quickbooks = exports.Quickbooks = function (_React$Component3) {
   function Quickbooks() {
     _classCallCheck(this, Quickbooks);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Quickbooks).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Quickbooks.__proto__ || Object.getPrototypeOf(Quickbooks)).apply(this, arguments));
   }
 
   _createClass(Quickbooks, [{
@@ -229,7 +229,7 @@ var _DrawStatus = function (_React$Component4) {
   function _DrawStatus() {
     _classCallCheck(this, _DrawStatus);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_DrawStatus).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_DrawStatus.__proto__ || Object.getPrototypeOf(_DrawStatus)).apply(this, arguments));
   }
 
   _createClass(_DrawStatus, [{
@@ -311,7 +311,7 @@ var DrawStatus = exports.DrawStatus = function (_React$Component5) {
   function DrawStatus() {
     _classCallCheck(this, DrawStatus);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(DrawStatus).apply(this, arguments));
+    return _possibleConstructorReturn(this, (DrawStatus.__proto__ || Object.getPrototypeOf(DrawStatus)).apply(this, arguments));
   }
 
   _createClass(DrawStatus, [{
@@ -334,7 +334,7 @@ var _MailChimp = function (_React$Component6) {
   function _MailChimp() {
     _classCallCheck(this, _MailChimp);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_MailChimp).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_MailChimp.__proto__ || Object.getPrototypeOf(_MailChimp)).apply(this, arguments));
   }
 
   _createClass(_MailChimp, [{
@@ -526,7 +526,7 @@ var MailChimp = exports.MailChimp = function (_React$Component7) {
   function MailChimp() {
     _classCallCheck(this, MailChimp);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(MailChimp).apply(this, arguments));
+    return _possibleConstructorReturn(this, (MailChimp.__proto__ || Object.getPrototypeOf(MailChimp)).apply(this, arguments));
   }
 
   _createClass(MailChimp, [{
@@ -549,7 +549,7 @@ var _Music = function (_React$Component8) {
   function _Music() {
     _classCallCheck(this, _Music);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Music).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_Music.__proto__ || Object.getPrototypeOf(_Music)).apply(this, arguments));
   }
 
   _createClass(_Music, [{
@@ -671,7 +671,7 @@ var Music = exports.Music = function (_React$Component9) {
   function Music() {
     _classCallCheck(this, Music);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Music).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Music.__proto__ || Object.getPrototypeOf(Music)).apply(this, arguments));
   }
 
   _createClass(Music, [{
@@ -694,7 +694,7 @@ var _Spiels = function (_React$Component10) {
   function _Spiels() {
     _classCallCheck(this, _Spiels);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Spiels).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_Spiels.__proto__ || Object.getPrototypeOf(_Spiels)).apply(this, arguments));
   }
 
   _createClass(_Spiels, [{
@@ -816,7 +816,7 @@ var Spiels = exports.Spiels = function (_React$Component11) {
   function Spiels() {
     _classCallCheck(this, Spiels);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Spiels).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Spiels.__proto__ || Object.getPrototypeOf(Spiels)).apply(this, arguments));
   }
 
   _createClass(Spiels, [{

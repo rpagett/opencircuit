@@ -24,7 +24,7 @@ var AppContent = function (_React$Component) {
   function AppContent() {
     _classCallCheck(this, AppContent);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AppContent).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AppContent.__proto__ || Object.getPrototypeOf(AppContent)).apply(this, arguments));
   }
 
   _createClass(AppContent, [{

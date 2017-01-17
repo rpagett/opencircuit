@@ -47,7 +47,7 @@ var Index = exports.Index = function (_React$Component) {
   function Index() {
     _classCallCheck(this, Index);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Index).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).apply(this, arguments));
   }
 
   _createClass(Index, [{
@@ -88,7 +88,7 @@ var New = exports.New = function (_React$Component2) {
   function New() {
     _classCallCheck(this, New);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(New).apply(this, arguments));
+    return _possibleConstructorReturn(this, (New.__proto__ || Object.getPrototypeOf(New)).apply(this, arguments));
   }
 
   _createClass(New, [{
@@ -124,7 +124,7 @@ var Edit = exports.Edit = function (_React$Component3) {
   function Edit() {
     _classCallCheck(this, Edit);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Edit).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Edit.__proto__ || Object.getPrototypeOf(Edit)).apply(this, arguments));
   }
 
   _createClass(Edit, [{
@@ -160,7 +160,7 @@ var _Show = function (_React$Component4) {
   function _Show() {
     _classCallCheck(this, _Show);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Show).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_Show.__proto__ || Object.getPrototypeOf(_Show)).apply(this, arguments));
   }
 
   _createClass(_Show, [{
@@ -189,7 +189,7 @@ var Show = exports.Show = function (_React$Component5) {
   function Show() {
     _classCallCheck(this, Show);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Show).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Show.__proto__ || Object.getPrototypeOf(Show)).apply(this, arguments));
   }
 
   _createClass(Show, [{

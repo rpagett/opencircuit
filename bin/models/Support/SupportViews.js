@@ -27,7 +27,7 @@ var Index = exports.Index = function (_React$Component) {
   function Index() {
     _classCallCheck(this, Index);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Index).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).apply(this, arguments));
   }
 
   _createClass(Index, [{
@@ -81,7 +81,7 @@ var Success = exports.Success = function (_React$Component2) {
   function Success() {
     _classCallCheck(this, Success);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Success).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Success.__proto__ || Object.getPrototypeOf(Success)).apply(this, arguments));
   }
 
   _createClass(Success, [{

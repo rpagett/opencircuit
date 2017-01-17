@@ -25,7 +25,7 @@ var Prop = exports.Prop = function (_React$Component) {
   function Prop() {
     _classCallCheck(this, Prop);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Prop).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Prop.__proto__ || Object.getPrototypeOf(Prop)).apply(this, arguments));
   }
 
   _createClass(Prop, [{
@@ -48,7 +48,7 @@ var Val = exports.Val = function (_React$Component2) {
   function Val() {
     _classCallCheck(this, Val);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Val).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Val.__proto__ || Object.getPrototypeOf(Val)).apply(this, arguments));
   }
 
   _createClass(Val, [{

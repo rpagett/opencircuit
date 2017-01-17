@@ -27,7 +27,7 @@ var LoadingCube = (_temp = _class = function (_React$Component) {
   function LoadingCube() {
     _classCallCheck(this, LoadingCube);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(LoadingCube).apply(this, arguments));
+    return _possibleConstructorReturn(this, (LoadingCube.__proto__ || Object.getPrototypeOf(LoadingCube)).apply(this, arguments));
   }
 
   _createClass(LoadingCube, [{

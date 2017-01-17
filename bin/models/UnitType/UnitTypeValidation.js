@@ -12,7 +12,7 @@ var _indicative2 = _interopRequireDefault(_indicative);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function validateUnitType() {
-  var data = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   var rules = {
     'name': 'required'

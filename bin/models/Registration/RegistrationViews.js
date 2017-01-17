@@ -33,7 +33,7 @@ var Organization = exports.Organization = function (_React$Component) {
   function Organization() {
     _classCallCheck(this, Organization);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Organization).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Organization.__proto__ || Object.getPrototypeOf(Organization)).apply(this, arguments));
   }
 
   _createClass(Organization, [{
@@ -107,7 +107,7 @@ var _DirectRegistration = function (_React$Component2) {
   function _DirectRegistration() {
     _classCallCheck(this, _DirectRegistration);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_DirectRegistration).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_DirectRegistration.__proto__ || Object.getPrototypeOf(_DirectRegistration)).apply(this, arguments));
   }
 
   _createClass(_DirectRegistration, [{
@@ -177,7 +177,7 @@ var DirectRegistration = exports.DirectRegistration = function (_React$Component
   function DirectRegistration() {
     _classCallCheck(this, DirectRegistration);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(DirectRegistration).apply(this, arguments));
+    return _possibleConstructorReturn(this, (DirectRegistration.__proto__ || Object.getPrototypeOf(DirectRegistration)).apply(this, arguments));
   }
 
   _createClass(DirectRegistration, [{
@@ -200,7 +200,7 @@ var _UnitTypes = function (_React$Component4) {
   function _UnitTypes() {
     _classCallCheck(this, _UnitTypes);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_UnitTypes).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_UnitTypes.__proto__ || Object.getPrototypeOf(_UnitTypes)).apply(this, arguments));
   }
 
   _createClass(_UnitTypes, [{
@@ -234,7 +234,7 @@ var Unit = exports.Unit = function (_React$Component5) {
   function Unit() {
     _classCallCheck(this, Unit);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Unit).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Unit.__proto__ || Object.getPrototypeOf(Unit)).apply(this, arguments));
   }
 
   _createClass(Unit, [{
@@ -331,7 +331,7 @@ var _ClassBox = function (_React$Component6) {
   function _ClassBox() {
     _classCallCheck(this, _ClassBox);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_ClassBox).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_ClassBox.__proto__ || Object.getPrototypeOf(_ClassBox)).apply(this, arguments));
   }
 
   _createClass(_ClassBox, [{
@@ -360,7 +360,7 @@ var Details = exports.Details = function (_React$Component7) {
   function Details() {
     _classCallCheck(this, Details);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Details).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Details.__proto__ || Object.getPrototypeOf(Details)).apply(this, arguments));
   }
 
   _createClass(Details, [{
@@ -413,7 +413,7 @@ var _EventBox = function (_React$Component8) {
   function _EventBox() {
     _classCallCheck(this, _EventBox);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_EventBox).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_EventBox.__proto__ || Object.getPrototypeOf(_EventBox)).apply(this, arguments));
   }
 
   _createClass(_EventBox, [{
@@ -435,7 +435,7 @@ var EventRegistration = exports.EventRegistration = function (_React$Component9)
   function EventRegistration() {
     _classCallCheck(this, EventRegistration);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(EventRegistration).apply(this, arguments));
+    return _possibleConstructorReturn(this, (EventRegistration.__proto__ || Object.getPrototypeOf(EventRegistration)).apply(this, arguments));
   }
 
   _createClass(EventRegistration, [{
@@ -477,7 +477,7 @@ var _Confirmation = function (_React$Component10) {
   function _Confirmation() {
     _classCallCheck(this, _Confirmation);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Confirmation).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_Confirmation.__proto__ || Object.getPrototypeOf(_Confirmation)).apply(this, arguments));
   }
 
   _createClass(_Confirmation, [{
@@ -538,7 +538,7 @@ var Confirm = exports.Confirm = function (_React$Component11) {
   function Confirm() {
     _classCallCheck(this, Confirm);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Confirm).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Confirm.__proto__ || Object.getPrototypeOf(Confirm)).apply(this, arguments));
   }
 
   _createClass(Confirm, [{

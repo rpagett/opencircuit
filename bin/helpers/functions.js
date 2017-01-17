@@ -32,7 +32,7 @@ function authConnect(WrappedComponent) {
 }
 
 function fetchAPI(url) {
-  var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   var finalUrl = typeof window === 'undefined' ? process.env.BASE_URL + ':8080' + url : url;
 

@@ -37,7 +37,7 @@ var FormObligationList = function (_React$Component) {
   function FormObligationList() {
     _classCallCheck(this, FormObligationList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(FormObligationList).apply(this, arguments));
+    return _possibleConstructorReturn(this, (FormObligationList.__proto__ || Object.getPrototypeOf(FormObligationList)).apply(this, arguments));
   }
 
   _createClass(FormObligationList, [{

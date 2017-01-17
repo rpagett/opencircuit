@@ -29,7 +29,7 @@ var MiniGravatar = exports.MiniGravatar = (_temp = _class = function (_React$Com
   function MiniGravatar() {
     _classCallCheck(this, MiniGravatar);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(MiniGravatar).apply(this, arguments));
+    return _possibleConstructorReturn(this, (MiniGravatar.__proto__ || Object.getPrototypeOf(MiniGravatar)).apply(this, arguments));
   }
 
   _createClass(MiniGravatar, [{
@@ -55,7 +55,7 @@ var ProfileGravatar = exports.ProfileGravatar = (_temp2 = _class2 = function (_R
   function ProfileGravatar() {
     _classCallCheck(this, ProfileGravatar);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ProfileGravatar).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ProfileGravatar.__proto__ || Object.getPrototypeOf(ProfileGravatar)).apply(this, arguments));
   }
 
   _createClass(ProfileGravatar, [{

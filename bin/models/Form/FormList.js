@@ -37,7 +37,7 @@ var FormList = function (_React$Component) {
   function FormList() {
     _classCallCheck(this, FormList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(FormList).apply(this, arguments));
+    return _possibleConstructorReturn(this, (FormList.__proto__ || Object.getPrototypeOf(FormList)).apply(this, arguments));
   }
 
   _createClass(FormList, [{

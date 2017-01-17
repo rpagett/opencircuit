@@ -27,7 +27,7 @@ var Icon = (_temp = _class = function (_React$Component) {
   function Icon() {
     _classCallCheck(this, Icon);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Icon).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Icon.__proto__ || Object.getPrototypeOf(Icon)).apply(this, arguments));
   }
 
   _createClass(Icon, [{

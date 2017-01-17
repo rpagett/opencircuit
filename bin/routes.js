@@ -140,7 +140,7 @@ function getAppRoutes(store) {
   }
 
   function requiresRole() {
-    var role = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+    var role = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
     var nextState = arguments[1];
     var replace = arguments[2];
 
@@ -320,7 +320,7 @@ var AppRouter = exports.AppRouter = function (_React$Component) {
   function AppRouter() {
     _classCallCheck(this, AppRouter);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AppRouter).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AppRouter.__proto__ || Object.getPrototypeOf(AppRouter)).apply(this, arguments));
   }
 
   _createClass(AppRouter, [{

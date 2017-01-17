@@ -33,7 +33,7 @@ var Login = exports.Login = function (_React$Component) {
   function Login() {
     _classCallCheck(this, Login);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Login).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).apply(this, arguments));
   }
 
   _createClass(Login, [{
@@ -117,7 +117,7 @@ var Register = exports.Register = function (_React$Component2) {
   function Register() {
     _classCallCheck(this, Register);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Register).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Register.__proto__ || Object.getPrototypeOf(Register)).apply(this, arguments));
   }
 
   _createClass(Register, [{
@@ -176,7 +176,7 @@ var Recover = exports.Recover = function (_React$Component3) {
   function Recover() {
     _classCallCheck(this, Recover);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Recover).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Recover.__proto__ || Object.getPrototypeOf(Recover)).apply(this, arguments));
   }
 
   _createClass(Recover, [{
@@ -221,7 +221,7 @@ var ProcessRecovery = exports.ProcessRecovery = function (_React$Component4) {
   function ProcessRecovery() {
     _classCallCheck(this, ProcessRecovery);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ProcessRecovery).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ProcessRecovery.__proto__ || Object.getPrototypeOf(ProcessRecovery)).apply(this, arguments));
   }
 
   _createClass(ProcessRecovery, [{
@@ -266,7 +266,7 @@ var MustConfirm = exports.MustConfirm = function (_React$Component5) {
   function MustConfirm() {
     _classCallCheck(this, MustConfirm);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(MustConfirm).apply(this, arguments));
+    return _possibleConstructorReturn(this, (MustConfirm.__proto__ || Object.getPrototypeOf(MustConfirm)).apply(this, arguments));
   }
 
   _createClass(MustConfirm, [{
@@ -302,7 +302,7 @@ var PostRegister = exports.PostRegister = function (_React$Component6) {
   function PostRegister() {
     _classCallCheck(this, PostRegister);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(PostRegister).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PostRegister.__proto__ || Object.getPrototypeOf(PostRegister)).apply(this, arguments));
   }
 
   _createClass(PostRegister, [{
@@ -338,7 +338,7 @@ var PostRecovery = exports.PostRecovery = function (_React$Component7) {
   function PostRecovery() {
     _classCallCheck(this, PostRecovery);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(PostRecovery).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PostRecovery.__proto__ || Object.getPrototypeOf(PostRecovery)).apply(this, arguments));
   }
 
   _createClass(PostRecovery, [{

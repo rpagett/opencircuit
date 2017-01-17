@@ -24,7 +24,7 @@ var BodyContent = function (_React$Component) {
   function BodyContent() {
     _classCallCheck(this, BodyContent);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(BodyContent).apply(this, arguments));
+    return _possibleConstructorReturn(this, (BodyContent.__proto__ || Object.getPrototypeOf(BodyContent)).apply(this, arguments));
   }
 
   _createClass(BodyContent, [{

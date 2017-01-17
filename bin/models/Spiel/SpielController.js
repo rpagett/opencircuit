@@ -64,10 +64,10 @@ router.route('/:slug').get(function (req, res) {
     }
 
     var spiel = unit.spiel ? unit.spiel : {};
-    var unit_name = spiel.unit_name;
-    var show_title = spiel.show_title;
-    var directors = spiel.directors;
-    var age_outs = spiel.age_outs;
+    var unit_name = spiel.unit_name,
+        show_title = spiel.show_title,
+        directors = spiel.directors,
+        age_outs = spiel.age_outs;
 
 
     res.send({

@@ -40,7 +40,7 @@ var _ContentsView = (_temp = _class = function (_React$Component) {
   function _ContentsView() {
     _classCallCheck(this, _ContentsView);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_ContentsView).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_ContentsView.__proto__ || Object.getPrototypeOf(_ContentsView)).apply(this, arguments));
   }
 
   _createClass(_ContentsView, [{

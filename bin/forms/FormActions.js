@@ -68,9 +68,8 @@ function fetchData(subStore, endpoint) {
       return;
     }
 
-    var _getState = getState();
-
-    var auth = _getState.auth;
+    var _getState = getState(),
+        auth = _getState.auth;
 
     dispatch(beginLoading(subStore));
     (0, _functions.fetchAPI)(endpoint, {
@@ -111,11 +110,9 @@ function submitData(subStore, submitMethod, endpoint) {
     dispatch(beginLoading(subStore));
     dispatch(clearErrors(subStore));
 
-    var _getState2 = getState();
-
-    var form = _getState2.form;
-    var auth = _getState2.auth;
-
+    var _getState2 = getState(),
+        form = _getState2.form,
+        auth = _getState2.auth;
 
     return (0, _functions.fetchAPI)(endpoint, {
       credentials: 'same-origin',

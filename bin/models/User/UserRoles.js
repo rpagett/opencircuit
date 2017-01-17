@@ -65,7 +65,7 @@ var _HasRole = (_temp = _class = function (_React$Component) {
   function _HasRole() {
     _classCallCheck(this, _HasRole);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_HasRole).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_HasRole.__proto__ || Object.getPrototypeOf(_HasRole)).apply(this, arguments));
   }
 
   _createClass(_HasRole, [{
@@ -112,7 +112,7 @@ var _UserOrAdmin = (_temp2 = _class2 = function (_React$Component2) {
   function _UserOrAdmin() {
     _classCallCheck(this, _UserOrAdmin);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_UserOrAdmin).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_UserOrAdmin.__proto__ || Object.getPrototypeOf(_UserOrAdmin)).apply(this, arguments));
   }
 
   _createClass(_UserOrAdmin, [{

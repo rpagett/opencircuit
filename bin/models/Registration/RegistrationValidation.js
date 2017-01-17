@@ -14,7 +14,7 @@ var _indicative2 = _interopRequireDefault(_indicative);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function organization() {
-  var data = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   var rules = {
     'is_school': 'required',
@@ -38,7 +38,7 @@ function organization() {
 }
 
 function unit() {
-  var data = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   var rules = {
     'unit_type': 'required',
@@ -58,7 +58,7 @@ function unit() {
 }
 
 function unitDetails() {
-  var data = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   var rules = {
     'competition_class': 'required'

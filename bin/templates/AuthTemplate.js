@@ -29,7 +29,7 @@ var AuthTemplate = function (_React$Component) {
   function AuthTemplate() {
     _classCallCheck(this, AuthTemplate);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AuthTemplate).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AuthTemplate.__proto__ || Object.getPrototypeOf(AuthTemplate)).apply(this, arguments));
   }
 
   _createClass(AuthTemplate, [{

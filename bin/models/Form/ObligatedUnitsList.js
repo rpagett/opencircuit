@@ -37,7 +37,7 @@ var ObligatedUnitsList = function (_React$Component) {
   function ObligatedUnitsList() {
     _classCallCheck(this, ObligatedUnitsList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ObligatedUnitsList).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ObligatedUnitsList.__proto__ || Object.getPrototypeOf(ObligatedUnitsList)).apply(this, arguments));
   }
 
   _createClass(ObligatedUnitsList, [{

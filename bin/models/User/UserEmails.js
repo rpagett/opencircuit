@@ -30,7 +30,7 @@ var _TestEmail = function (_React$Component) {
   function _TestEmail() {
     _classCallCheck(this, _TestEmail);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_TestEmail).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_TestEmail.__proto__ || Object.getPrototypeOf(_TestEmail)).apply(this, arguments));
   }
 
   _createClass(_TestEmail, [{
@@ -68,7 +68,7 @@ var _ConfirmationEmail = function (_React$Component2) {
   function _ConfirmationEmail() {
     _classCallCheck(this, _ConfirmationEmail);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_ConfirmationEmail).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_ConfirmationEmail.__proto__ || Object.getPrototypeOf(_ConfirmationEmail)).apply(this, arguments));
   }
 
   _createClass(_ConfirmationEmail, [{
@@ -141,7 +141,7 @@ var _RecoveryEmail = function (_React$Component3) {
   function _RecoveryEmail() {
     _classCallCheck(this, _RecoveryEmail);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_RecoveryEmail).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_RecoveryEmail.__proto__ || Object.getPrototypeOf(_RecoveryEmail)).apply(this, arguments));
   }
 
   _createClass(_RecoveryEmail, [{

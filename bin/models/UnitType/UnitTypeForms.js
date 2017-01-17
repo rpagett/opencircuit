@@ -29,7 +29,7 @@ var Edit = exports.Edit = function (_React$Component) {
   function Edit() {
     _classCallCheck(this, Edit);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Edit).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Edit.__proto__ || Object.getPrototypeOf(Edit)).apply(this, arguments));
   }
 
   _createClass(Edit, [{

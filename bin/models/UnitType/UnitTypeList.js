@@ -35,7 +35,7 @@ var UnitTypeList = function (_React$Component) {
   function UnitTypeList() {
     _classCallCheck(this, UnitTypeList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(UnitTypeList).apply(this, arguments));
+    return _possibleConstructorReturn(this, (UnitTypeList.__proto__ || Object.getPrototypeOf(UnitTypeList)).apply(this, arguments));
   }
 
   _createClass(UnitTypeList, [{

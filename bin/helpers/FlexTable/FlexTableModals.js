@@ -27,7 +27,7 @@ var ConfirmDeletion = exports.ConfirmDeletion = function (_React$Component) {
   function ConfirmDeletion() {
     _classCallCheck(this, ConfirmDeletion);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ConfirmDeletion).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ConfirmDeletion.__proto__ || Object.getPrototypeOf(ConfirmDeletion)).apply(this, arguments));
   }
 
   _createClass(ConfirmDeletion, [{

@@ -43,7 +43,7 @@ var FeeList = function (_React$Component) {
   function FeeList() {
     _classCallCheck(this, FeeList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(FeeList).apply(this, arguments));
+    return _possibleConstructorReturn(this, (FeeList.__proto__ || Object.getPrototypeOf(FeeList)).apply(this, arguments));
   }
 
   _createClass(FeeList, [{

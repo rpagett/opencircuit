@@ -52,7 +52,7 @@ var _CreateForm = function (_React$Component) {
   function _CreateForm() {
     _classCallCheck(this, _CreateForm);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_CreateForm).call(this));
+    var _this = _possibleConstructorReturn(this, (_CreateForm.__proto__ || Object.getPrototypeOf(_CreateForm)).call(this));
 
     _this.state = {
       isLoading: false
@@ -67,6 +67,7 @@ var _CreateForm = function (_React$Component) {
     }
 
     //onDrop(files) {
+
   }, {
     key: 'onSubmit',
     value: function onSubmit(e) {
@@ -195,7 +196,7 @@ var _SubmitForm = function (_React$Component2) {
   function _SubmitForm() {
     _classCallCheck(this, _SubmitForm);
 
-    var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(_SubmitForm).call(this));
+    var _this4 = _possibleConstructorReturn(this, (_SubmitForm.__proto__ || Object.getPrototypeOf(_SubmitForm)).call(this));
 
     _this4.state = {
       isLoading: false
@@ -309,7 +310,7 @@ var AssignObligation = exports.AssignObligation = function (_React$Component3) {
   function AssignObligation() {
     _classCallCheck(this, AssignObligation);
 
-    var _this7 = _possibleConstructorReturn(this, Object.getPrototypeOf(AssignObligation).call(this));
+    var _this7 = _possibleConstructorReturn(this, (AssignObligation.__proto__ || Object.getPrototypeOf(AssignObligation)).call(this));
 
     _this7.state = {
       showIndividual: false

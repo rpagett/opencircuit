@@ -57,7 +57,7 @@ var Index = exports.Index = function (_React$Component) {
   function Index() {
     _classCallCheck(this, Index);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Index).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).apply(this, arguments));
   }
 
   _createClass(Index, [{
@@ -85,7 +85,7 @@ var _Preview = function (_React$Component2) {
   function _Preview() {
     _classCallCheck(this, _Preview);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Preview).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_Preview.__proto__ || Object.getPrototypeOf(_Preview)).apply(this, arguments));
   }
 
   _createClass(_Preview, [{
@@ -299,7 +299,7 @@ var Edit = exports.Edit = function (_React$Component3) {
   function Edit() {
     _classCallCheck(this, Edit);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Edit).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Edit.__proto__ || Object.getPrototypeOf(Edit)).apply(this, arguments));
   }
 
   _createClass(Edit, [{
@@ -347,7 +347,7 @@ var Print = function (_React$Component4) {
   function Print() {
     _classCallCheck(this, Print);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Print).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Print.__proto__ || Object.getPrototypeOf(Print)).apply(this, arguments));
   }
 
   _createClass(Print, [{
@@ -538,7 +538,7 @@ var _EventSpiels = function (_React$Component5) {
   function _EventSpiels() {
     _classCallCheck(this, _EventSpiels);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_EventSpiels).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_EventSpiels.__proto__ || Object.getPrototypeOf(_EventSpiels)).apply(this, arguments));
   }
 
   _createClass(_EventSpiels, [{
@@ -578,7 +578,7 @@ var NewPrint = function (_React$Component6) {
   function NewPrint() {
     _classCallCheck(this, NewPrint);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewPrint).apply(this, arguments));
+    return _possibleConstructorReturn(this, (NewPrint.__proto__ || Object.getPrototypeOf(NewPrint)).apply(this, arguments));
   }
 
   _createClass(NewPrint, [{
@@ -788,7 +788,7 @@ var EventSpiels = exports.EventSpiels = function (_React$Component7) {
   function EventSpiels() {
     _classCallCheck(this, EventSpiels);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(EventSpiels).apply(this, arguments));
+    return _possibleConstructorReturn(this, (EventSpiels.__proto__ || Object.getPrototypeOf(EventSpiels)).apply(this, arguments));
   }
 
   _createClass(EventSpiels, [{

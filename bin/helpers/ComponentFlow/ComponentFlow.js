@@ -40,7 +40,7 @@ var _ComponentFlow = (_temp = _class = function (_React$Component) {
   function _ComponentFlow() {
     _classCallCheck(this, _ComponentFlow);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_ComponentFlow).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_ComponentFlow.__proto__ || Object.getPrototypeOf(_ComponentFlow)).apply(this, arguments));
   }
 
   _createClass(_ComponentFlow, [{
@@ -51,9 +51,9 @@ var _ComponentFlow = (_temp = _class = function (_React$Component) {
   }, {
     key: 'selectComponent',
     value: function selectComponent() {
-      var _props = this.props;
-      var flow = _props.flow;
-      var step = _props.step;
+      var _props = this.props,
+          flow = _props.flow,
+          step = _props.step;
 
 
       if (flow[step] && flow[step].component) {
@@ -65,9 +65,9 @@ var _ComponentFlow = (_temp = _class = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _props2 = this.props;
-      var flow = _props2.flow;
-      var step = _props2.step;
+      var _props2 = this.props,
+          flow = _props2.flow,
+          step = _props2.step;
 
       var CurrentComponent = this.selectComponent();
 

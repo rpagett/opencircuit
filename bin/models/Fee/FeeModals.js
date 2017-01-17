@@ -37,7 +37,7 @@ var AdminPayment = exports.AdminPayment = function (_React$Component) {
   function AdminPayment() {
     _classCallCheck(this, AdminPayment);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AdminPayment).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AdminPayment.__proto__ || Object.getPrototypeOf(AdminPayment)).apply(this, arguments));
   }
 
   _createClass(AdminPayment, [{
@@ -77,7 +77,7 @@ var _UserPayment = function (_React$Component2) {
   function _UserPayment() {
     _classCallCheck(this, _UserPayment);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_UserPayment).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_UserPayment.__proto__ || Object.getPrototypeOf(_UserPayment)).apply(this, arguments));
   }
 
   _createClass(_UserPayment, [{
@@ -114,7 +114,7 @@ var UserPayment = exports.UserPayment = function (_React$Component3) {
   function UserPayment() {
     _classCallCheck(this, UserPayment);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(UserPayment).apply(this, arguments));
+    return _possibleConstructorReturn(this, (UserPayment.__proto__ || Object.getPrototypeOf(UserPayment)).apply(this, arguments));
   }
 
   _createClass(UserPayment, [{
@@ -137,7 +137,7 @@ var AssessFee = exports.AssessFee = function (_React$Component4) {
   function AssessFee() {
     _classCallCheck(this, AssessFee);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AssessFee).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AssessFee.__proto__ || Object.getPrototypeOf(AssessFee)).apply(this, arguments));
   }
 
   _createClass(AssessFee, [{
@@ -174,7 +174,7 @@ var GenerateInvoice = exports.GenerateInvoice = function (_React$Component5) {
   function GenerateInvoice() {
     _classCallCheck(this, GenerateInvoice);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(GenerateInvoice).apply(this, arguments));
+    return _possibleConstructorReturn(this, (GenerateInvoice.__proto__ || Object.getPrototypeOf(GenerateInvoice)).apply(this, arguments));
   }
 
   _createClass(GenerateInvoice, [{
@@ -226,7 +226,7 @@ var Payments = exports.Payments = function (_React$Component6) {
   function Payments() {
     _classCallCheck(this, Payments);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Payments).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Payments.__proto__ || Object.getPrototypeOf(Payments)).apply(this, arguments));
   }
 
   _createClass(Payments, [{

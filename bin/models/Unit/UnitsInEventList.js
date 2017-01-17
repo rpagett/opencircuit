@@ -35,7 +35,7 @@ var UnitsInEventList = function (_React$Component) {
   function UnitsInEventList() {
     _classCallCheck(this, UnitsInEventList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(UnitsInEventList).apply(this, arguments));
+    return _possibleConstructorReturn(this, (UnitsInEventList.__proto__ || Object.getPrototypeOf(UnitsInEventList)).apply(this, arguments));
   }
 
   _createClass(UnitsInEventList, [{

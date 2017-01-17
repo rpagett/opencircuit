@@ -71,7 +71,7 @@ var FormError = function (_React$Component) {
   function FormError() {
     _classCallCheck(this, FormError);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(FormError).apply(this, arguments));
+    return _possibleConstructorReturn(this, (FormError.__proto__ || Object.getPrototypeOf(FormError)).apply(this, arguments));
   }
 
   _createClass(FormError, [{
@@ -94,7 +94,7 @@ var _InputWrapper = (_temp = _class = function (_React$Component2) {
   function _InputWrapper() {
     _classCallCheck(this, _InputWrapper);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_InputWrapper).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_InputWrapper.__proto__ || Object.getPrototypeOf(_InputWrapper)).apply(this, arguments));
   }
 
   _createClass(_InputWrapper, [{
@@ -260,7 +260,7 @@ var FormInput = exports.FormInput = function (_React$Component3) {
   function FormInput() {
     _classCallCheck(this, FormInput);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(FormInput).apply(this, arguments));
+    return _possibleConstructorReturn(this, (FormInput.__proto__ || Object.getPrototypeOf(FormInput)).apply(this, arguments));
   }
 
   _createClass(FormInput, [{
@@ -283,7 +283,7 @@ var PhoneInput = exports.PhoneInput = function (_React$Component4) {
   function PhoneInput() {
     _classCallCheck(this, PhoneInput);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(PhoneInput).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PhoneInput.__proto__ || Object.getPrototypeOf(PhoneInput)).apply(this, arguments));
   }
 
   _createClass(PhoneInput, [{
@@ -306,7 +306,7 @@ var PerformanceTime = exports.PerformanceTime = function (_React$Component5) {
   function PerformanceTime() {
     _classCallCheck(this, PerformanceTime);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(PerformanceTime).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PerformanceTime.__proto__ || Object.getPrototypeOf(PerformanceTime)).apply(this, arguments));
   }
 
   _createClass(PerformanceTime, [{
@@ -329,7 +329,7 @@ var _FormStatic = function (_React$Component6) {
   function _FormStatic() {
     _classCallCheck(this, _FormStatic);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_FormStatic).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_FormStatic.__proto__ || Object.getPrototypeOf(_FormStatic)).apply(this, arguments));
   }
 
   _createClass(_FormStatic, [{
@@ -352,7 +352,7 @@ var FormStatic = exports.FormStatic = function (_React$Component7) {
   function FormStatic() {
     _classCallCheck(this, FormStatic);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(FormStatic).apply(this, arguments));
+    return _possibleConstructorReturn(this, (FormStatic.__proto__ || Object.getPrototypeOf(FormStatic)).apply(this, arguments));
   }
 
   _createClass(FormStatic, [{
@@ -377,7 +377,7 @@ var TextArea = exports.TextArea = function (_React$Component8) {
   function TextArea() {
     _classCallCheck(this, TextArea);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(TextArea).apply(this, arguments));
+    return _possibleConstructorReturn(this, (TextArea.__proto__ || Object.getPrototypeOf(TextArea)).apply(this, arguments));
   }
 
   _createClass(TextArea, [{
@@ -400,7 +400,7 @@ var ClassSelect = exports.ClassSelect = (_temp2 = _class2 = function (_React$Com
   function ClassSelect() {
     _classCallCheck(this, ClassSelect);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ClassSelect).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ClassSelect.__proto__ || Object.getPrototypeOf(ClassSelect)).apply(this, arguments));
   }
 
   _createClass(ClassSelect, [{
@@ -446,7 +446,7 @@ var PaymentTypeSelect = exports.PaymentTypeSelect = function (_React$Component10
   function PaymentTypeSelect() {
     _classCallCheck(this, PaymentTypeSelect);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(PaymentTypeSelect).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PaymentTypeSelect.__proto__ || Object.getPrototypeOf(PaymentTypeSelect)).apply(this, arguments));
   }
 
   _createClass(PaymentTypeSelect, [{
@@ -486,7 +486,7 @@ var UnitSelect = exports.UnitSelect = function (_React$Component11) {
   function UnitSelect() {
     _classCallCheck(this, UnitSelect);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(UnitSelect).apply(this, arguments));
+    return _possibleConstructorReturn(this, (UnitSelect.__proto__ || Object.getPrototypeOf(UnitSelect)).apply(this, arguments));
   }
 
   _createClass(UnitSelect, [{
@@ -525,7 +525,7 @@ var FeeCategorySelect = exports.FeeCategorySelect = function (_React$Component12
   function FeeCategorySelect() {
     _classCallCheck(this, FeeCategorySelect);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(FeeCategorySelect).apply(this, arguments));
+    return _possibleConstructorReturn(this, (FeeCategorySelect.__proto__ || Object.getPrototypeOf(FeeCategorySelect)).apply(this, arguments));
   }
 
   _createClass(FeeCategorySelect, [{
@@ -565,7 +565,7 @@ var UnitTypeSelect = exports.UnitTypeSelect = function (_React$Component13) {
   function UnitTypeSelect() {
     _classCallCheck(this, UnitTypeSelect);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(UnitTypeSelect).apply(this, arguments));
+    return _possibleConstructorReturn(this, (UnitTypeSelect.__proto__ || Object.getPrototypeOf(UnitTypeSelect)).apply(this, arguments));
   }
 
   _createClass(UnitTypeSelect, [{
@@ -605,7 +605,7 @@ var UserSelect = exports.UserSelect = function (_React$Component14) {
   function UserSelect() {
     _classCallCheck(this, UserSelect);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(UserSelect).apply(this, arguments));
+    return _possibleConstructorReturn(this, (UserSelect.__proto__ || Object.getPrototypeOf(UserSelect)).apply(this, arguments));
   }
 
   _createClass(UserSelect, [{
@@ -642,7 +642,7 @@ var DaypartSelect = exports.DaypartSelect = function (_React$Component15) {
   function DaypartSelect() {
     _classCallCheck(this, DaypartSelect);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(DaypartSelect).apply(this, arguments));
+    return _possibleConstructorReturn(this, (DaypartSelect.__proto__ || Object.getPrototypeOf(DaypartSelect)).apply(this, arguments));
   }
 
   _createClass(DaypartSelect, [{
@@ -683,7 +683,7 @@ var StateSelect = exports.StateSelect = function (_React$Component16) {
   function StateSelect() {
     _classCallCheck(this, StateSelect);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(StateSelect).apply(this, arguments));
+    return _possibleConstructorReturn(this, (StateSelect.__proto__ || Object.getPrototypeOf(StateSelect)).apply(this, arguments));
   }
 
   _createClass(StateSelect, [{
@@ -716,7 +716,7 @@ var DateTime = exports.DateTime = function (_React$Component17) {
   function DateTime() {
     _classCallCheck(this, DateTime);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(DateTime).apply(this, arguments));
+    return _possibleConstructorReturn(this, (DateTime.__proto__ || Object.getPrototypeOf(DateTime)).apply(this, arguments));
   }
 
   _createClass(DateTime, [{
@@ -746,7 +746,7 @@ var _Checkbox = (_temp3 = _class3 = function (_React$Component18) {
   function _Checkbox() {
     _classCallCheck(this, _Checkbox);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Checkbox).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_Checkbox.__proto__ || Object.getPrototypeOf(_Checkbox)).apply(this, arguments));
   }
 
   _createClass(_Checkbox, [{
@@ -852,7 +852,7 @@ var _Radio = (_temp4 = _class4 = function (_React$Component19) {
   function _Radio() {
     _classCallCheck(this, _Radio);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Radio).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_Radio.__proto__ || Object.getPrototypeOf(_Radio)).apply(this, arguments));
   }
 
   _createClass(_Radio, [{
@@ -921,7 +921,7 @@ var _EventChecks = (_temp5 = _class5 = function (_React$Component20) {
   function _EventChecks() {
     _classCallCheck(this, _EventChecks);
 
-    var _this21 = _possibleConstructorReturn(this, Object.getPrototypeOf(_EventChecks).call(this));
+    var _this21 = _possibleConstructorReturn(this, (_EventChecks.__proto__ || Object.getPrototypeOf(_EventChecks)).call(this));
 
     _this21.state = {
       isLoading: true
@@ -1010,7 +1010,7 @@ var EventChecks = exports.EventChecks = function (_React$Component21) {
   function EventChecks() {
     _classCallCheck(this, EventChecks);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(EventChecks).apply(this, arguments));
+    return _possibleConstructorReturn(this, (EventChecks.__proto__ || Object.getPrototypeOf(EventChecks)).apply(this, arguments));
   }
 
   _createClass(EventChecks, [{
@@ -1035,7 +1035,7 @@ var _ReduxForm = (_temp6 = _class6 = function (_React$Component22) {
   function _ReduxForm() {
     _classCallCheck(this, _ReduxForm);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_ReduxForm).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_ReduxForm.__proto__ || Object.getPrototypeOf(_ReduxForm)).apply(this, arguments));
   }
 
   _createClass(_ReduxForm, [{

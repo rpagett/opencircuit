@@ -10,11 +10,9 @@ var _functions = require('../functions');
 
 function fetchModel(endpoint, subStore) {
   return function (dispatch, getState) {
-    var _getState = getState();
-
-    var modelView = _getState.modelView;
-    var auth = _getState.auth;
-
+    var _getState = getState(),
+        modelView = _getState.modelView,
+        auth = _getState.auth;
 
     dispatch(dumpContents(subStore));
     dispatch(beginLoading(subStore));
@@ -42,7 +40,7 @@ function fetchModel(endpoint, subStore) {
 }
 
 function dumpContents() {
-  var subStore = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+  var subStore = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
   return {
     type: 'MODELVIEW_DUMP_CONTENTS',

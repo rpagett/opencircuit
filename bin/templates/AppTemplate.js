@@ -29,7 +29,7 @@ var AppTemplate = function (_React$Component) {
   function AppTemplate() {
     _classCallCheck(this, AppTemplate);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AppTemplate).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AppTemplate.__proto__ || Object.getPrototypeOf(AppTemplate)).apply(this, arguments));
   }
 
   _createClass(AppTemplate, [{

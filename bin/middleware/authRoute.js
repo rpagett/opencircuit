@@ -46,7 +46,7 @@ function userOrAdmin() {
 }
 
 function hasRole() {
-  var role = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+  var role = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
   return function (req, res, next) {
     var authToken = req.get('Authorization');

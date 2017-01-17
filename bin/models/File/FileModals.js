@@ -33,7 +33,7 @@ var Upload = exports.Upload = function (_React$Component) {
   function Upload() {
     _classCallCheck(this, Upload);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Upload).call(this));
+    var _this = _possibleConstructorReturn(this, (Upload.__proto__ || Object.getPrototypeOf(Upload)).call(this));
 
     _this.state = {
       isLoading: false
@@ -50,6 +50,7 @@ var Upload = exports.Upload = function (_React$Component) {
     }
 
     //onDrop(files) {
+
   }, {
     key: 'onSubmit',
     value: function onSubmit(e) {

@@ -69,7 +69,7 @@ var _FeeBox = function (_React$Component) {
   function _FeeBox() {
     _classCallCheck(this, _FeeBox);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_FeeBox).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_FeeBox.__proto__ || Object.getPrototypeOf(_FeeBox)).apply(this, arguments));
   }
 
   _createClass(_FeeBox, [{
@@ -145,7 +145,7 @@ var _UnitBox = function (_React$Component2) {
   function _UnitBox() {
     _classCallCheck(this, _UnitBox);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_UnitBox).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_UnitBox.__proto__ || Object.getPrototypeOf(_UnitBox)).apply(this, arguments));
   }
 
   _createClass(_UnitBox, [{
@@ -258,7 +258,7 @@ var _FormSummary = function (_React$Component3) {
   function _FormSummary() {
     _classCallCheck(this, _FormSummary);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_FormSummary).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_FormSummary.__proto__ || Object.getPrototypeOf(_FormSummary)).apply(this, arguments));
   }
 
   _createClass(_FormSummary, [{
@@ -299,7 +299,7 @@ var _Home = function (_React$Component4) {
   function _Home() {
     _classCallCheck(this, _Home);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Home).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_Home.__proto__ || Object.getPrototypeOf(_Home)).apply(this, arguments));
   }
 
   _createClass(_Home, [{
@@ -436,7 +436,7 @@ var About = exports.About = function (_React$Component5) {
   function About() {
     _classCallCheck(this, About);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(About).apply(this, arguments));
+    return _possibleConstructorReturn(this, (About.__proto__ || Object.getPrototypeOf(About)).apply(this, arguments));
   }
 
   _createClass(About, [{
@@ -463,7 +463,7 @@ var PageNotFound = exports.PageNotFound = function (_React$Component6) {
   function PageNotFound() {
     _classCallCheck(this, PageNotFound);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(PageNotFound).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PageNotFound.__proto__ || Object.getPrototypeOf(PageNotFound)).apply(this, arguments));
   }
 
   _createClass(PageNotFound, [{
@@ -508,7 +508,7 @@ var ConfirmPayment = exports.ConfirmPayment = function (_React$Component7) {
   function ConfirmPayment() {
     _classCallCheck(this, ConfirmPayment);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ConfirmPayment).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ConfirmPayment.__proto__ || Object.getPrototypeOf(ConfirmPayment)).apply(this, arguments));
   }
 
   _createClass(ConfirmPayment, [{
@@ -553,7 +553,7 @@ var ErrorPayment = exports.ErrorPayment = function (_React$Component8) {
   function ErrorPayment() {
     _classCallCheck(this, ErrorPayment);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ErrorPayment).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ErrorPayment.__proto__ || Object.getPrototypeOf(ErrorPayment)).apply(this, arguments));
   }
 
   _createClass(ErrorPayment, [{

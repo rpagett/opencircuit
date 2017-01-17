@@ -25,7 +25,7 @@ var CircuitLogo = exports.CircuitLogo = function (_React$Component) {
   function CircuitLogo() {
     _classCallCheck(this, CircuitLogo);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(CircuitLogo).apply(this, arguments));
+    return _possibleConstructorReturn(this, (CircuitLogo.__proto__ || Object.getPrototypeOf(CircuitLogo)).apply(this, arguments));
   }
 
   _createClass(CircuitLogo, [{

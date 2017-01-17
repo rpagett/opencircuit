@@ -35,7 +35,7 @@ var OrganizationList = function (_React$Component) {
   function OrganizationList() {
     _classCallCheck(this, OrganizationList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(OrganizationList).apply(this, arguments));
+    return _possibleConstructorReturn(this, (OrganizationList.__proto__ || Object.getPrototypeOf(OrganizationList)).apply(this, arguments));
   }
 
   _createClass(OrganizationList, [{

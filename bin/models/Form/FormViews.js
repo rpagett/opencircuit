@@ -45,7 +45,7 @@ var Index = exports.Index = function (_React$Component) {
   function Index() {
     _classCallCheck(this, Index);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Index).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).apply(this, arguments));
   }
 
   _createClass(Index, [{
@@ -101,7 +101,7 @@ var View = exports.View = function (_React$Component2) {
   function View() {
     _classCallCheck(this, View);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(View).apply(this, arguments));
+    return _possibleConstructorReturn(this, (View.__proto__ || Object.getPrototypeOf(View)).apply(this, arguments));
   }
 
   _createClass(View, [{
@@ -129,7 +129,7 @@ var _Verify = function (_React$Component3) {
   function _Verify() {
     _classCallCheck(this, _Verify);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Verify).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_Verify.__proto__ || Object.getPrototypeOf(_Verify)).apply(this, arguments));
   }
 
   _createClass(_Verify, [{
@@ -238,7 +238,7 @@ var _Review = function (_React$Component4) {
   function _Review() {
     _classCallCheck(this, _Review);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Review).apply(this, arguments));
+    return _possibleConstructorReturn(this, (_Review.__proto__ || Object.getPrototypeOf(_Review)).apply(this, arguments));
   }
 
   _createClass(_Review, [{
@@ -369,7 +369,7 @@ var ReviewList = exports.ReviewList = function (_React$Component5) {
   function ReviewList() {
     _classCallCheck(this, ReviewList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ReviewList).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ReviewList.__proto__ || Object.getPrototypeOf(ReviewList)).apply(this, arguments));
   }
 
   _createClass(ReviewList, [{

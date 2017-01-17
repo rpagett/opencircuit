@@ -35,7 +35,7 @@ var CompClassList = function (_React$Component) {
   function CompClassList() {
     _classCallCheck(this, CompClassList);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(CompClassList).apply(this, arguments));
+    return _possibleConstructorReturn(this, (CompClassList.__proto__ || Object.getPrototypeOf(CompClassList)).apply(this, arguments));
   }
 
   _createClass(CompClassList, [{

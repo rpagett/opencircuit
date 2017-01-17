@@ -73,8 +73,8 @@ function configurePaypal() {
 }
 
 function assessFee(unit_id, amount, category) {
-  var notes = arguments.length <= 3 || arguments[3] === undefined ? '' : arguments[3];
-  var due_date = arguments.length <= 4 || arguments[4] === undefined ? _FeeModel2.default.DUE_DATE() : arguments[4];
+  var notes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+  var due_date = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _FeeModel2.default.DUE_DATE();
 
   var category_obj = {};
 

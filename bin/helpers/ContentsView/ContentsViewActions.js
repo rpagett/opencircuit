@@ -10,10 +10,8 @@ var _functions = require('../functions');
 
 var fetchContents = exports.fetchContents = function fetchContents(endpoint, subStore) {
   return function (dispatch, getState) {
-    var _getState = getState();
-
-    var auth = _getState.auth;
-
+    var _getState = getState(),
+        auth = _getState.auth;
 
     dispatch(dumpContents(subStore));
     dispatch(beginLoading());
@@ -48,7 +46,7 @@ function beginLoading() {
 }
 
 function dumpContents() {
-  var subStore = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+  var subStore = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
   return {
     type: 'CONTENTSVIEW_DUMP_CONTENTS',

@@ -148,7 +148,7 @@ var views = {
 };
 
 function fieldsEmpty(state) {
-  var fields = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
+  var fields = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
   for (var key in fields) {
     if (state[fields[key]] === null) {

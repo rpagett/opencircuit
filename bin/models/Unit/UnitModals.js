@@ -43,7 +43,7 @@ var Reclassify = exports.Reclassify = function (_React$Component) {
   function Reclassify() {
     _classCallCheck(this, Reclassify);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Reclassify).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Reclassify.__proto__ || Object.getPrototypeOf(Reclassify)).apply(this, arguments));
   }
 
   _createClass(Reclassify, [{
@@ -82,7 +82,7 @@ var UploadMusic = exports.UploadMusic = function (_React$Component2) {
   function UploadMusic() {
     _classCallCheck(this, UploadMusic);
 
-    var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(UploadMusic).call(this));
+    var _this2 = _possibleConstructorReturn(this, (UploadMusic.__proto__ || Object.getPrototypeOf(UploadMusic)).call(this));
 
     _this2.state = {
       isLoading: false
@@ -214,7 +214,7 @@ var RemoveCritique = exports.RemoveCritique = function (_React$Component3) {
   function RemoveCritique() {
     _classCallCheck(this, RemoveCritique);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(RemoveCritique).apply(this, arguments));
+    return _possibleConstructorReturn(this, (RemoveCritique.__proto__ || Object.getPrototypeOf(RemoveCritique)).apply(this, arguments));
   }
 
   _createClass(RemoveCritique, [{
@@ -266,7 +266,7 @@ var RegisterCritique = exports.RegisterCritique = function (_React$Component4) {
   function RegisterCritique() {
     _classCallCheck(this, RegisterCritique);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(RegisterCritique).apply(this, arguments));
+    return _possibleConstructorReturn(this, (RegisterCritique.__proto__ || Object.getPrototypeOf(RegisterCritique)).apply(this, arguments));
   }
 
   _createClass(RegisterCritique, [{
