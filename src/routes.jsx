@@ -87,6 +87,9 @@ export function getAppRoutes(store) {
       <Route path="reports/spiels" component={ ReportView.Spiels } />
 
       <Route path="spiels/event/:slug" component={ SpielView.EventSpiels } />
+      <Route path="events/:slug/registration" component={ EventView.Registration } onEnter={ requiresRole.bind(this, UserRoles.CircuitStaff) } />
+      <Route path="events/:slug/lineup" component={ EventView.Lineup } onEnter={ requiresRole.bind(this, UserRoles.CircuitStaff) } />
+      <Route path="events/:slug/critique" component={ EventView.Critique } onEnter={ requiresRole.bind(this, UserRoles.CircuitStaff) } />
 
       <Route path="forms/verify/:unit/:form" component={ FormView.Verify } onEnter={ authOnly } />
       <Route
@@ -123,9 +126,6 @@ export function getAppRoutes(store) {
 
           <Route onEnter={ requiresRole.bind(this, UserRoles.CircuitStaff) }>
             <Route path=":slug/times" component={ EventView.Times } />
-            <Route path=":slug/lineup" component={ EventView.Lineup } />
-            <Route path=":slug/critique" component={ EventView.Critique } />
-            <Route path=":slug/registration" component={ EventView.Registration } />
           </Route>
         </Route>
 
