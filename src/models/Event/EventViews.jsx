@@ -93,10 +93,11 @@ class _Show extends React.Component {
           <Val>{ event.attendance_cap }</Val>
         </div>
 
-        <div className="row">
-          <Prop>Facebook Page</Prop>
-          <Val><a href={ event.facebook_url }>{ event.facebook_url }</a></Val>
-        </div>
+        {( event.facebook_url ?
+          <div className="row">
+            <Prop>Facebook Page</Prop>
+            <Val><a href={ event.facebook_url }>{ event.facebook_url }</a></Val>
+          </div> : <div></div> )}
 
         <div className="row">
           <Prop>Adult Tickets</Prop>

@@ -233,7 +233,7 @@ var _Show = (_temp = _class = function (_React$Component4) {
             event.attendance_cap
           )
         ),
-        _react2.default.createElement(
+        event.facebook_url ? _react2.default.createElement(
           'div',
           { className: 'row' },
           _react2.default.createElement(
@@ -250,7 +250,7 @@ var _Show = (_temp = _class = function (_React$Component4) {
               event.facebook_url
             )
           )
-        ),
+        ) : _react2.default.createElement('div', null),
         _react2.default.createElement(
           'div',
           { className: 'row' },
