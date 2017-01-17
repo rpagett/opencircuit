@@ -48,7 +48,7 @@ export class Edit extends React.Component {
         <FormInput type="number" name="members" label="Member Count" />
 
         <HasRole role={ UserRoles.Administrator }>
-          <UserSelect name="director" label="Director" />
+          { /*<UserSelect name="director" label="Director" /> */ }
           <Checkbox inForm={ true } name="registered" label="Registered" />
         </HasRole>
 

@@ -94,7 +94,6 @@ var Edit = exports.Edit = function (_React$Component2) {
         _react2.default.createElement(
           _UserRoles.HasRole,
           { role: _UserRoles.UserRoles.Administrator },
-          _react2.default.createElement(_components.UserSelect, { name: 'director', label: 'Director' }),
           _react2.default.createElement(_components.Checkbox, { inForm: true, name: 'registered', label: 'Registered' })
         ),
         _react2.default.createElement(
