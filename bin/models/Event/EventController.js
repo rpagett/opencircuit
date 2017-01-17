@@ -384,5 +384,36 @@ router.get('/:slug/critique', function (req, res) {
   });
 });
 
+router.get('/:slug/registration', function (req, res) {
+  _EventModel2.default.findOne({ slug: req.params.slug }, '_id').then(function (event) {
+    if (!event) {
+      throw new Error('Event not found.');
+    }
+
+    return _EventRegistrationModel2.default.find({ event: event._id }).populate({
+      path: 'unit',
+      populate: {
+        path: 'director form_obligations',
+        populate: {
+          path: 'form',
+          model: 'Form',
+          select: 'name'
+        }
+      }
+    }).sort('performance_time').exec();
+  }).then(function (regs) {
+    res.send({
+      success: true,
+      contents: regs
+    });
+  }).catch(function (err) {
+    res.send({
+      success: false,
+      error: err.message
+    });
+    console.error(err);
+  });
+});
+
 exports.default = router;
 module.exports = exports['default'];

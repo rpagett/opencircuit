@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Critique = exports.Lineup = exports.Times = exports.Show = exports.Edit = exports.New = exports.Index = undefined;
+exports.Registration = exports.Critique = exports.Lineup = exports.Times = exports.Show = exports.Edit = exports.New = exports.Index = undefined;
 
 var _class, _temp;
 
@@ -22,6 +22,10 @@ var _reactInputMask2 = _interopRequireDefault(_reactInputMask);
 var _isomorphicFetch = require('isomorphic-fetch');
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _LoadingCube = require('../../helpers/LoadingCube');
 
@@ -414,6 +418,19 @@ var _Show = (_temp = _class = function (_React$Component4) {
                       _reactRouter.Link,
                       { to: '/events/' + event.slug + '/critique', className: 'btn btn-block btn-primary' },
                       'Critique Schedule'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'col-xs-12' },
+                    _react2.default.createElement(
+                      _reactRouter.Link,
+                      { to: '/events/' + event.slug + '/registration', className: 'btn btn-block btn-secondary' },
+                      'Registration Worksheet'
                     )
                   )
                 )
@@ -916,4 +933,177 @@ var Critique = exports.Critique = function (_React$Component11) {
   }]);
 
   return Critique;
+}(_react2.default.Component);
+
+var _Registration = function (_React$Component12) {
+  _inherits(_Registration, _React$Component12);
+
+  function _Registration() {
+    _classCallCheck(this, _Registration);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(_Registration).apply(this, arguments));
+  }
+
+  _createClass(_Registration, [{
+    key: 'render',
+    value: function render() {
+      var rows = [];
+
+      this.props.contents.map(function (reg) {
+        var missing = _lodash2.default.filter(reg.unit.form_obligations, function (o) {
+          return o.submitted != true;
+        });
+        missing = _lodash2.default.map(missing, function (o) {
+          return o.form.name;
+        });
+        missing = _lodash2.default.join(missing, ', ');
+
+        rows.push(_react2.default.createElement(
+          'tr',
+          { key: reg._id },
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-name' },
+            reg.unit.name
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-director' },
+            reg.unit.director.formattedName
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-time' },
+            reg.performance_time
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-staff' },
+            reg.unit.plus_pass ? 12 : 7
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-members' },
+            reg.unit.members
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-notes' },
+            missing
+          )
+        ));
+      });
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          { className: 'page-header' },
+          'Registration Worksheet'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'container-fluid' },
+          _react2.default.createElement(
+            'table',
+            { className: 'table table-responsive' },
+            _react2.default.createElement(
+              'thead',
+              null,
+              _react2.default.createElement(
+                'tr',
+                null,
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Unit'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Director'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Perf. Time'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Staff'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Members'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Notes'
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'tbody',
+              null,
+              rows
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return _Registration;
+}(_react2.default.Component);
+
+var Registration = exports.Registration = function (_React$Component13) {
+  _inherits(Registration, _React$Component13);
+
+  function Registration() {
+    _classCallCheck(this, Registration);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Registration).apply(this, arguments));
+  }
+
+  _createClass(Registration, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_ContentsView2.default, {
+        subStore: 'event_registration',
+        endpoint: '/api/events/' + this.props.params.slug + '/registration',
+        component: _Registration,
+        slug: this.props.params.slug
+      });
+    }
+  }]);
+
+  return Registration;
 }(_react2.default.Component);

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import MaskedInput from 'react-input-mask';
 import fetch from 'isomorphic-fetch';
+import _ from 'lodash';
 
 import LoadingCube from '../../helpers/LoadingCube';
 import ModelView from '../../helpers/ModelView/ModelView';
@@ -168,6 +169,13 @@ class _Show extends React.Component {
                   <div className="col-xs-12 col-sm-6">
                     <Link to={ `/events/${event.slug}/critique` } className="btn btn-block btn-primary">
                       Critique Schedule
+                    </Link>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-xs-12">
+                    <Link to={ `/events/${event.slug}/registration` } className="btn btn-block btn-secondary">
+                      Registration Worksheet
                     </Link>
                   </div>
                 </div>
@@ -393,6 +401,67 @@ export class Critique extends React.Component {
         subStore="event_critique"
         endpoint={ `/api/events/${this.props.params.slug}/critique` }
         component={ _Critique }
+        slug={ this.props.params.slug }
+      />
+    )
+  }
+}
+
+class _Registration extends React.Component {
+  render() {
+    let rows = [ ];
+
+    this.props.contents.map(reg => {
+      let missing = _.filter(reg.unit.form_obligations, o => {
+        return o.submitted != true;
+      });
+      missing = _.map(missing, o => o.form.name);
+      missing = _.join(missing, ', ');
+
+      rows.push(
+        <tr key={ reg._id }>
+          <td key={ reg._id + '-name'}>{ reg.unit.name }</td>
+          <td key={ reg._id + '-director'}>{ reg.unit.director.formattedName }</td>
+          <td key={ reg._id + '-time'}>{ reg.performance_time }</td>
+          <td key={ reg._id + '-staff'}>{ (reg.unit.plus_pass ? 12 : 7) }</td>
+          <td key={ reg._id + '-members'}>{ reg.unit.members }</td>
+          <td key={ reg._id + '-notes'}>{ missing }</td>
+        </tr>
+      )
+    })
+
+    return (
+      <div>
+        <h1 className="page-header">Registration Worksheet</h1>
+        <div className="container-fluid">
+          <table className="table table-responsive">
+            <thead>
+            <tr>
+              <th><strong>Unit</strong></th>
+              <th><strong>Director</strong></th>
+              <th><strong>Perf. Time</strong></th>
+              <th><strong>Staff</strong></th>
+              <th><strong>Members</strong></th>
+              <th><strong>Notes</strong></th>
+            </tr>
+            </thead>
+            <tbody>
+              { rows }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
+  }
+}
+
+export class Registration extends React.Component {
+  render() {
+    return (
+      <ContentsView
+        subStore="event_registration"
+        endpoint={ `/api/events/${this.props.params.slug}/registration` }
+        component={ _Registration }
         slug={ this.props.params.slug }
       />
     )

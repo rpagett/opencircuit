@@ -125,6 +125,7 @@ export function getAppRoutes(store) {
             <Route path=":slug/times" component={ EventView.Times } />
             <Route path=":slug/lineup" component={ EventView.Lineup } />
             <Route path=":slug/critique" component={ EventView.Critique } />
+            <Route path=":slug/registration" component={ EventView.Registration } />
           </Route>
         </Route>
 

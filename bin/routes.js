@@ -214,7 +214,8 @@ function getAppRoutes(store) {
           { onEnter: requiresRole.bind(this, _UserRoles.UserRoles.CircuitStaff) },
           _react2.default.createElement(_reactRouter.Route, { path: ':slug/times', component: EventView.Times }),
           _react2.default.createElement(_reactRouter.Route, { path: ':slug/lineup', component: EventView.Lineup }),
-          _react2.default.createElement(_reactRouter.Route, { path: ':slug/critique', component: EventView.Critique })
+          _react2.default.createElement(_reactRouter.Route, { path: ':slug/critique', component: EventView.Critique }),
+          _react2.default.createElement(_reactRouter.Route, { path: ':slug/registration', component: EventView.Registration })
         )
       ),
       _react2.default.createElement(

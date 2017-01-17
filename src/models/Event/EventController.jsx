@@ -420,4 +420,41 @@ router.get('/:slug/critique', (req, res) => {
     })
 })
 
+router.get('/:slug/registration', (req, res) => {
+  Event.findOne({ slug: req.params.slug }, '_id')
+    .then(event => {
+      if (!event) {
+        throw new Error('Event not found.');
+      }
+
+      return EventRegistration.find({ event: event._id })
+        .populate({
+          path: 'unit',
+          populate: {
+            path: 'director form_obligations',
+            populate: {
+              path: 'form',
+              model: 'Form',
+              select: 'name'
+            }
+          }
+        })
+        .sort('performance_time')
+        .exec()
+    })
+    .then(regs => {
+      res.send({
+        success: true,
+        contents: regs
+      })
+    })
+    .catch(err => {
+      res.send({
+        success: false,
+        error: err.message
+      })
+      console.error(err);
+    })
+})
+
 export default router;
