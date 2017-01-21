@@ -110,9 +110,12 @@ export class Edit extends React.Component {
 
 class Print extends React.Component {
   render() {
-    const unit_name = (this.props.unit_name ? this.props.unit_name : this.props.name);
-    const show_title = (this.props.show_title ? this.props.show_title : '(show title)');
-    const staff = (this.props.directors ? this.props.directors : '(director)');
+    const reg = this.props.reg;
+    const spiel = reg.unit.spiel;
+
+    const unit_name = (spiel && spiel.unit_name ? spiel.unit_name : reg.unit.name);
+    const show_title = (spiel && spiel.show_title ? spiel.show_title : '(show title)');
+    const staff = (spiel && spiel.directors ? spiel.directors : '(director)');
 
     return (
       <div className="offset-xs-1 col-xs-10">
@@ -120,7 +123,7 @@ class Print extends React.Component {
         <center><h6>(When unit crosses timeline)</h6></center>
         <center><h5>
           Ladies and Gentlemen, please welcome from
-          <strong> { this.props.city }, { this.props.state }</strong>,
+          <strong> { reg.unit.organization.city }, { reg.unit.organization.state }</strong>,
         </h5></center>
         <center><h3>{ unit_name }</h3></center>
         <hr />
@@ -130,23 +133,23 @@ class Print extends React.Component {
         <center><h4>
           Performing their program, "{ show_title }",
         </h4></center>
-        <center><strong><h3>
-          { unit_name }
-        </h3></strong></center>
-        <center><h4>
-          You may take the floor in competition!
-        </h4></center>
+        <h4 className="text-center">
+          the Carolina Winter Ensemble Association is proud to present:
+        </h4>
+        <h2 className="unit-name text-center">
+          { unit_name }!
+        </h2>
         <hr />
         <center><strong><h6>( At the obvious conclusion of the program: )</h6></strong></center>
         <center><h4>
-          Ladies and gentlemen, <strong>{unit_name}</strong>, under the direction
+          Ladies and gentlemen, <strong>{ unit_name }</strong>, under the direction
           of <strong>{ staff }</strong>!
         </h4></center>
         <center><h4>
           <strong>{ unit_name }</strong> hopes you enjoyed their program, entitled "{ show_title }".
         </h4></center>
         <center><h4>
-          Hailing from <strong>{ this.props.city }, { this.props.state }</strong>,
+          Hailing from <strong>{ reg.unit.organization.city }, { reg.unit.organization.state }</strong>,
         </h4></center>
         <center><h2><strong>{ unit_name }</strong></h2></center>
       </div>
@@ -157,17 +160,18 @@ class Print extends React.Component {
 class _EventSpiels extends React.Component {
   render() {
     let rows = [ ];
-    this.props.contents.map(unit => {
+    this.props.contents.map(reg => {
       rows.push(
         <div className="container-fluid spiel-box">
           <Print
-            directors={ unit.spiel.directors }
-            show_title={ unit.spiel.show_title }
-            unit_name={ unit.spiel.unit_name }
-            city={ unit.organization.city }
-            state={ unit.organization.state }
-            updated={ unit.spiel.updatedAt }
-            key={ unit._id }
+            reg={ reg }
+            //directors={ unit.spiel.directors }
+            //show_title={ unit.spiel.show_title }
+            //unit_name={ unit.spiel.unit_name }
+            //city={ unit.organization.city }
+            //state={ unit.organization.state }
+            //updated={ unit.spiel.updatedAt }
+            key={ reg.unit._id }
           />
         </div>
       )
@@ -233,12 +237,14 @@ class NewPrint extends React.Component {
               <h4 className="text-center">
                 Performing their program <strong>"{ show_title }"</strong>,
               </h4>
-              <h2 className="unit-name text-center">
-                { unit_name },
-              </h2>
               <h4 className="text-center">
-                You may take the floor in competition!
+                the Carolina Winter Ensemble Association is proud to present:
               </h4>
+              <center>
+                <h2 className="unit-name text-center">
+                  { unit_name }!
+                </h2>
+              </center>
             </div>
           </div>
         </div>

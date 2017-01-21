@@ -375,16 +375,16 @@ router.get('/:slug/spiels', (req, res) => {
     .then(event => {
       return EventRegistration.find({ event: event._id })
         .sort('performance_time')
+        .populate({
+          path: 'unit',
+          // Get friends of friends - populate the 'friends' array for every friend
+          populate: { path: 'director organization' }
+        })
     })
     .then(regs => {
-      const ids = _.map(regs, 'unit');
-      return Unit.find({_id: {$in: ids}, spiel: {$exists: true, $ne: null}}, 'name spiel organization')
-        .populate('organization', 'city state')
-    })
-    .then(units => {
       res.send({
         success: true,
-        contents: units
+        contents: regs
       })
     })
     .catch(err => {

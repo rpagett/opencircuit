@@ -676,6 +676,11 @@ var _Lineup = function (_React$Component8) {
             'td',
             { key: reg._id + '-time' },
             reg.performance_time
+          ),
+          _react2.default.createElement(
+            'td',
+            { key: reg._id + '-crt' },
+            reg.attending_critique ? 'Attending' : ''
           )
         ));
       });
@@ -743,6 +748,15 @@ var _Lineup = function (_React$Component8) {
                     'strong',
                     null,
                     'Time'
+                  )
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Critique'
                   )
                 )
               )

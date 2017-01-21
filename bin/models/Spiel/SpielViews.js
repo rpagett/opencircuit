@@ -353,9 +353,12 @@ var Print = function (_React$Component4) {
   _createClass(Print, [{
     key: 'render',
     value: function render() {
-      var unit_name = this.props.unit_name ? this.props.unit_name : this.props.name;
-      var show_title = this.props.show_title ? this.props.show_title : '(show title)';
-      var staff = this.props.directors ? this.props.directors : '(director)';
+      var reg = this.props.reg;
+      var spiel = reg.unit.spiel;
+
+      var unit_name = spiel && spiel.unit_name ? spiel.unit_name : reg.unit.name;
+      var show_title = spiel && spiel.show_title ? spiel.show_title : '(show title)';
+      var staff = spiel && spiel.directors ? spiel.directors : '(director)';
 
       return _react2.default.createElement(
         'div',
@@ -385,9 +388,9 @@ var Print = function (_React$Component4) {
               'strong',
               null,
               ' ',
-              this.props.city,
+              reg.unit.organization.city,
               ', ',
-              this.props.state
+              reg.unit.organization.state
             ),
             ','
           )
@@ -423,26 +426,15 @@ var Print = function (_React$Component4) {
           )
         ),
         _react2.default.createElement(
-          'center',
-          null,
-          _react2.default.createElement(
-            'strong',
-            null,
-            _react2.default.createElement(
-              'h3',
-              null,
-              unit_name
-            )
-          )
+          'h4',
+          { className: 'text-center' },
+          'the Carolina Winter Ensemble Association is proud to present:'
         ),
         _react2.default.createElement(
-          'center',
-          null,
-          _react2.default.createElement(
-            'h4',
-            null,
-            'You may take the floor in competition!'
-          )
+          'h2',
+          { className: 'unit-name text-center' },
+          unit_name,
+          '!'
         ),
         _react2.default.createElement('hr', null),
         _react2.default.createElement(
@@ -505,9 +497,9 @@ var Print = function (_React$Component4) {
             _react2.default.createElement(
               'strong',
               null,
-              this.props.city,
+              reg.unit.organization.city,
               ', ',
-              this.props.state
+              reg.unit.organization.state
             ),
             ','
           )
@@ -545,18 +537,19 @@ var _EventSpiels = function (_React$Component5) {
     key: 'render',
     value: function render() {
       var rows = [];
-      this.props.contents.map(function (unit) {
+      this.props.contents.map(function (reg) {
         rows.push(_react2.default.createElement(
           'div',
           { className: 'container-fluid spiel-box' },
           _react2.default.createElement(Print, {
-            directors: unit.spiel.directors,
-            show_title: unit.spiel.show_title,
-            unit_name: unit.spiel.unit_name,
-            city: unit.organization.city,
-            state: unit.organization.state,
-            updated: unit.spiel.updatedAt,
-            key: unit._id
+            reg: reg
+            //directors={ unit.spiel.directors }
+            //show_title={ unit.spiel.show_title }
+            //unit_name={ unit.spiel.unit_name }
+            //city={ unit.organization.city }
+            //state={ unit.organization.state }
+            //updated={ unit.spiel.updatedAt }
+            , key: reg.unit._id
           })
         ));
       });
@@ -692,15 +685,19 @@ var NewPrint = function (_React$Component6) {
                 ','
               ),
               _react2.default.createElement(
-                'h2',
-                { className: 'unit-name text-center' },
-                unit_name,
-                ','
-              ),
-              _react2.default.createElement(
                 'h4',
                 { className: 'text-center' },
-                'You may take the floor in competition!'
+                'the Carolina Winter Ensemble Association is proud to present:'
+              ),
+              _react2.default.createElement(
+                'center',
+                null,
+                _react2.default.createElement(
+                  'h2',
+                  { className: 'unit-name text-center' },
+                  unit_name,
+                  '!'
+                )
               )
             )
           )

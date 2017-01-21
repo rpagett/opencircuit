@@ -315,6 +315,7 @@ class _Lineup extends React.Component {
           <td key={ reg._id + '-spiel'}>{ (reg.unit.spiel ? reg.unit.spiel.show_title : 'No Spiel') }</td>
           <td key={ reg._id + '-class'}>{ reg.unit.competition_class.abbreviation.toUpperCase() }</td>
           <td key={ reg._id + '-time'}>{ reg.performance_time }</td>
+          <td key={ reg._id + '-crt'}>{ (reg.attending_critique ? 'Attending' : '') }</td>
         </tr>
       )
     })
@@ -331,6 +332,7 @@ class _Lineup extends React.Component {
                 <th><strong>Title</strong></th>
                 <th><strong>Class</strong></th>
                 <th><strong>Time</strong></th>
+                <th><strong>Critique</strong></th>
               </tr>
             </thead>
             <tbody>

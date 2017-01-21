@@ -348,14 +348,15 @@ router.get('/:slug/lineup', function (req, res) {
 
 router.get('/:slug/spiels', function (req, res) {
   _EventModel2.default.findOne({ slug: req.params.slug }).then(function (event) {
-    return _EventRegistrationModel2.default.find({ event: event._id }).sort('performance_time');
+    return _EventRegistrationModel2.default.find({ event: event._id }).sort('performance_time').populate({
+      path: 'unit',
+      // Get friends of friends - populate the 'friends' array for every friend
+      populate: { path: 'director organization' }
+    });
   }).then(function (regs) {
-    var ids = _lodash2.default.map(regs, 'unit');
-    return _UnitModel2.default.find({ _id: { $in: ids }, spiel: { $exists: true, $ne: null } }, 'name spiel organization').populate('organization', 'city state');
-  }).then(function (units) {
     res.send({
       success: true,
-      contents: units
+      contents: regs
     });
   }).catch(function (err) {
     res.send({
