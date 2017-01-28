@@ -19,6 +19,7 @@ const EventRegistrationSchema = new Mongoose.Schema({
   performance_time: String,
   exhibition: Boolean,
   attending_critique: Boolean,
+  force_allow: Boolean,
 
   score: Number
 }, {
