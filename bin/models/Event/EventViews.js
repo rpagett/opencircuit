@@ -829,7 +829,7 @@ var _Critique = function (_React$Component10) {
           _react2.default.createElement(
             'td',
             { key: reg._id + '-title' },
-            reg.unit.spiel.show_title
+            reg.unit.spiel && reg.unit.spiel.show_title ? reg.unit.spiel.show_title : 'No Title'
           ),
           _react2.default.createElement(
             'td',

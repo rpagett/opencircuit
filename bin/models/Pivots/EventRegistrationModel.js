@@ -32,6 +32,7 @@ var EventRegistrationSchema = new _mongoose2.default.Schema({
   performance_time: String,
   exhibition: Boolean,
   attending_critique: Boolean,
+  force_allow: Boolean,
 
   score: Number
 }, {

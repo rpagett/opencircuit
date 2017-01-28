@@ -366,7 +366,7 @@ class _Critique extends React.Component {
         <tr key={ reg._id }>
           <td key={ reg._id + '-name'}>{ reg.unit.name }</td>
           <td key={ reg._id + '-fname'}>{ reg.unit.director.formattedName }</td>
-          <td key={ reg._id + '-title'}>{ reg.unit.spiel ? reg.unit.spiel.show_title : 'No Title' }</td>
+          <td key={ reg._id + '-title'}>{ ((reg.unit.spiel && reg.unit.spiel.show_title) ? reg.unit.spiel.show_title : 'No Title') }</td>
           <td key={ reg._id + '-class'}>{ reg.unit.competition_class.abbreviation.toUpperCase() }</td>
           <td key={ reg._id + '-time'}>{ reg.performance_time }</td>
         </tr>
