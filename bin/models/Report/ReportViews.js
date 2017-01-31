@@ -408,7 +408,7 @@ var _MailChimp = function (_React$Component6) {
           _react2.default.createElement(
             'td',
             { key: unit._id + 'm' },
-            unit.competition_class.name
+            unit.competition_class ? unit.competition_class.name : 'none'
           ),
           _react2.default.createElement(
             'td',

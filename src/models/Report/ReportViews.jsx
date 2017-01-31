@@ -132,7 +132,7 @@ class _MailChimp extends React.Component {
           <td key={ unit._id + 'j' }>{ unit.organization.zip }</td>
           <td key={ unit._id + 'k' }>{ unit.organization.name }</td>
           <td key={ unit._id + 'l' }>{ unit.unit_type.name }</td>
-          <td key={ unit._id + 'm' }>{ unit.competition_class.name }</td>
+          <td key={ unit._id + 'm' }>{ (unit.competition_class ? unit.competition_class.name : 'none') }</td>
           <td key={ unit._id + 'n' }>{ unit.eventList }</td>
         </tr>
       )
