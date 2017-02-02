@@ -155,6 +155,20 @@ var _Show = exports._Show = function (_React$Component2) {
                 user.zip
               )
             ),
+            user.confirmation_token ? _react2.default.createElement(
+              'div',
+              { className: 'row' },
+              _react2.default.createElement(
+                _ModelInfo.Prop,
+                null,
+                'Confirmation Token'
+              ),
+              _react2.default.createElement(
+                _ModelInfo.Val,
+                null,
+                user.confirmation_token
+              )
+            ) : '',
             _react2.default.createElement(
               'div',
               { className: 'row' },

@@ -53,6 +53,15 @@ export class _Show extends React.Component {
               </Val>
             </div>
 
+            {(user.confirmation_token ?
+              <div className="row">
+                <Prop>Confirmation Token</Prop>
+                <Val>
+                  { user.confirmation_token }
+                </Val>
+              </div>
+             : '')}
+
             <div className="row">
               <div className="pull-xs-center col-xs-12 offset-sm-4 col-sm-4">
                 <Link
