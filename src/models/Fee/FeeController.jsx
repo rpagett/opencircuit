@@ -62,7 +62,7 @@ function assessFee(unit_id, amount, category, notes = '', due_date = Fee.DUE_DAT
       console.log('Assessed a fee of $', fee.amount, 'on', fee.assessed_date,
         '. It is due', fee.due_date);
 
-      Unit.findOneAndUpdate({ _id: unit_id }, { confirmed_paid_date: null }).exec()
+      // Unit.findOneAndUpdate({ _id: unit_id }, { confirmed_paid_date: null }).exec()
     })
     .catch(err => {
       console.log('Error assessing fee.', err.message);

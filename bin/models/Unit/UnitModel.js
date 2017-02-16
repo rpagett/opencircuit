@@ -98,7 +98,7 @@ UnitSchema.virtual('detailsUrl').get(function () {
 });
 
 UnitSchema.statics.fillableFields = function () {
-  return ['name', 'slug', 'members', 'competiton_class', 'image_url'];
+  return ['name', 'slug', 'members', 'competition_class', 'image_url', 'registered', 'plus_pass', 'notes'];
 };
 
 exports.default = _mongoose2.default.model('Unit', UnitSchema);

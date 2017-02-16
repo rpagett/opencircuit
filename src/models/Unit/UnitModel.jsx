@@ -67,7 +67,7 @@ UnitSchema.virtual('detailsUrl').get(function() {
 });
 
 UnitSchema.statics.fillableFields = () => {
-  return ['name', 'slug', 'members', 'competiton_class', 'image_url'];
+  return ['name', 'slug', 'members', 'competition_class', 'image_url', 'registered', 'plus_pass', 'notes'];
 }
 
 export default Mongoose.model('Unit', UnitSchema);
